@@ -98,7 +98,7 @@ dotnet run --project src/SVNRevDesk.Desktop -c Release
 生成两种发布包及 SHA-256 校验文件：
 
 ```powershell
-pwsh ./scripts/Publish-Release.ps1 -Version 1.0.0
+pwsh ./scripts/Publish-Release.ps1 -Version 1.1.0
 ```
 
 测试、目录结构和自动发布流程见 [开发与发布](docs/开发与发布.md)。
