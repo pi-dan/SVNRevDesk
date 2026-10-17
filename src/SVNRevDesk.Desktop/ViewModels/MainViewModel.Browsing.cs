@@ -1,0 +1,189 @@
+using SVNRevDesk.Core.Models;
+using SVNRevDesk.Core.Services;
+
+namespace SVNRevDesk.Desktop.ViewModels;
+
+// Directory caches and cancellable background reads are kept separate from exclusive SVN operations.
+public sealed partial class MainViewModel
+{
+    private sealed record CachedDirectory(RepositorySnapshot Snapshot, IReadOnlyList<BrowserEntry> Entries)
+    {
+        public bool HasServerListing { get; init; } = true;
+    }
+    private sealed class BackgroundRead(string description, bool navigation)
+    {
+        public string Description { get; } = description;
+        public bool Navigation { get; } = navigation;
+        public CancellationTokenSource Cancellation { get; } = new();
+        public Task Task { get; set; } = Task.CompletedTask;
+    }
+
+    private readonly Dictionary<string, CachedDirectory> directoryCache = new(StringComparer.Ordinal);
+    private readonly List<BackgroundRead> backgroundReads = [];
+    private long navigationVersion;
+    private long readStatusVersion;
+    private bool disposed;
+    public bool IsUpdatingTree { get; private set; }
+    public bool IsReading => backgroundReads.Count > 0;
+    public string ReadStatusMessage => backgroundReads.LastOrDefault()?.Description ?? "";
+    public string DirectoryCacheText => directoryCache.TryGetValue(currentRelative, out var cached)
+        ? !cached.HasServerListing ? "本地目录预览 · 服务器列表尚未缓存"
+            : $"目录缓存 r{cached.Snapshot.Revision} · 最近检查 {cached.Snapshot.CheckedAt:yyyy-MM-dd HH:mm:ss}"
+        : "此目录尚无缓存";
+
+    public Task BrowseDirectoryAsync(string relative)
+    {
+        if (IsBusy || disposed || Session == null || Snapshot == null) return Task.CompletedTask;
+        if (directoryCache.TryGetValue(relative, out var cached) && cached.HasServerListing && FindNode(relative) != null)
+        {
+            // A cached switch must not wait for an obsolete slow request, nor interrupt a full refresh.
+            CancelBackgroundReads(navigationOnly: true);
+            readStatusVersion++;
+            StatusMessage = "已显示目录缓存";
+            return NavigateAsync(relative, CancellationToken.None);
+        }
+        CancelBackgroundReads();
+        return StartBackgroundRead("后台读取服务器目录，可继续切换目录", token => NavigateAsync(relative, token), navigation: true);
+    }
+
+    public Task ExpandDirectoryAsync(DirectoryNode node)
+    {
+        if (IsBusy || disposed || node.Loaded || node.IsPlaceholder) return Task.CompletedTask;
+        return StartBackgroundRead("后台读取子目录，可继续浏览", token => LoadChildrenAsync(node, token), navigation: true);
+    }
+
+    public Task RefreshInBackgroundAsync()
+    {
+        if (IsBusy || disposed || Session == null) return Task.CompletedTask;
+        CancelBackgroundReads();
+        return StartBackgroundRead("后台刷新当前目录，可继续浏览", RefreshCurrentDirectoryAsync, navigation: false);
+    }
+
+    public Task RefreshAllInBackgroundAsync()
+    {
+        if (IsBusy || disposed || Session == null) return Task.CompletedTask;
+        CancelBackgroundReads();
+        return StartBackgroundRead("后台检查整个打开范围，可继续浏览", RefreshAllAsync, navigation: false);
+    }
+
+    public Task RefreshPathsInBackgroundAsync(IEnumerable<string> paths)
+    {
+        if (IsBusy || disposed || Session?.LocalRoot == null) return Task.CompletedTask;
+        var changed = paths.ToList();
+        CancelBackgroundReads();
+        return StartBackgroundRead("后台检查变化所在目录，可继续浏览", token => RefreshPathsAsync(changed, token), navigation: false);
+    }
+
+    private Task StartBackgroundRead(string description, Func<CancellationToken, Task> action, bool navigation)
+    {
+        var read = new BackgroundRead(description, navigation);
+        var version = ++readStatusVersion;
+        backgroundReads.Add(read);
+        NotifyReading();
+        read.Task = ExecuteBackgroundReadAsync(read, version, action);
+        return read.Task;
+    }
+
+    private async Task ExecuteBackgroundReadAsync(BackgroundRead read, long version, Func<CancellationToken, Task> action)
+    {
+        try
+        {
+            await action(read.Cancellation.Token);
+            if (version == readStatusVersion && !disposed && !read.Cancellation.IsCancellationRequested)
+                StatusMessage = read.Navigation ? "目录已载入并缓存" : "后台刷新完成";
+        }
+        catch (OperationCanceledException)
+        {
+            if (version == readStatusVersion && !disposed && !IsBusy)
+                StatusMessage = "后台读取已取消，保留已载入的缓存。";
+        }
+        catch (Exception ex)
+        {
+            if (version == readStatusVersion && !disposed)
+                StatusMessage = $"后台读取失败，保留目录缓存：{ex.Message.Split('\n')[0]}";
+            if (!disposed) AddLog(ex.Message);
+        }
+        finally
+        {
+            backgroundReads.Remove(read);
+            read.Cancellation.Dispose();
+            if (!disposed) NotifyReading();
+        }
+    }
+
+    private void CancelBackgroundReads(bool navigationOnly = false)
+    {
+        foreach (var read in backgroundReads.ToList())
+            if (!navigationOnly || read.Navigation) read.Cancellation.Cancel();
+    }
+
+    private async Task StopBackgroundReadsAsync()
+    {
+        readStatusVersion++;
+        CancelBackgroundReads();
+        await Task.WhenAll(backgroundReads.Select(read => read.Task).ToArray());
+    }
+
+    private async Task DisposeRunnerAfterReadsAsync()
+    {
+        await Task.WhenAll(backgroundReads.Select(read => read.Task).ToArray());
+        Runner.Dispose();
+    }
+
+    private void NotifyReading()
+    {
+        Notify(nameof(IsReading));
+        Notify(nameof(ReadStatusMessage));
+        Notify(nameof(CanCancel));
+        Notify(nameof(EmptyStateTitle)); Notify(nameof(EmptyStateDescription));
+    }
+
+    private async Task<IReadOnlyList<BrowserEntry>> ReadCachedDirectoryAsync(RepositorySession session,
+        RepositorySnapshot snapshot, string relative, CancellationToken token)
+    {
+        while (session == Session && !disposed)
+        {
+            token.ThrowIfCancellationRequested();
+            if (directoryCache.TryGetValue(relative, out var cached) && cached.HasServerListing) return cached.Entries;
+            var generation = cacheGeneration;
+            var scope = new DirectoryRefresh(relative);
+            var partial = await FetchDirectorySnapshotAsync(session, scope, token);
+            snapshot = MergeSnapshot(session, Snapshot!, partial, scope);
+            var entries = await FetchDirectoryAsync(session, snapshot, relative, token);
+            token.ThrowIfCancellationRequested();
+            if (session != Session || disposed) return entries;
+            if (generation != cacheGeneration) continue;
+            Snapshot = MergeSnapshot(session, Snapshot!, partial, scope);
+            directoryCache[relative] = new(snapshot, entries);
+            return entries;
+        }
+        return [];
+    }
+
+    // XML parsing and local enumeration can also be costly. Keep service work off the WPF dispatcher.
+    private Task<RepositorySnapshot> FetchSnapshotAsync(RepositorySession session, CancellationToken token) =>
+        Task.Run(() => repository.RefreshAsync(session, token), token);
+
+    private Task<IReadOnlyList<BrowserEntry>> FetchDirectoryAsync(RepositorySession session,
+        RepositorySnapshot snapshot, string relative, CancellationToken token) =>
+        Task.Run(() => repository.ReadDirectoryAsync(session, snapshot, relative, token), token);
+
+    private void ShowDirectory(string relative, DirectoryNode? node, IReadOnlyList<BrowserEntry>? entries, bool updateChildren = true)
+    {
+        currentRelative = relative;
+        SetEntries(entries ?? []);
+        if (updateChildren && node != null && entries != null) UpdateChildren(node, entries);
+        foreach (var other in AllNodes().Where(other => !other.IsPlaceholder)) other.IsSelected = other == node;
+        Notify(nameof(CurrentRelativePathText));
+        Notify(nameof(CurrentPath));
+        Notify(nameof(DirectoryCacheText));
+        Notify(nameof(SnapshotText));
+        Notify(nameof(CanGoParent));
+    }
+
+    private static string ParentDirectory(string relative)
+    {
+        var separator = relative.LastIndexOf('/');
+        return separator < 0 ? "" : relative[..separator];
+    }
+}

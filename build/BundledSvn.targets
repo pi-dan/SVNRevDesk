@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <BundledSvnDirectory>$(MSBuildThisFileDirectory)..\vendor\Subversion\win-x64\</BundledSvnDirectory>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(CopyBundledSvnFiles)' != 'false'">
+    <Content Include="$(BundledSvnDirectory)**\*">
+      <Link>Tools\Svn\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <Target Name="ValidateBundledSvn" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(BundledSvnDirectory)bin\svn.exe')"
+           Text="缺少内置 SVN 客户端。请恢复 vendor/Subversion/win-x64，不要依赖开发电脑上的 SVN 安装目录。" />
+    <ReadLinesFromFile File="$(MSBuildThisFileDirectory)..\vendor\Subversion\win-x64.files">
+      <Output TaskParameter="Lines" ItemName="RequiredBundledSvnFile" />
+    </ReadLinesFromFile>
+    <Error Condition="!Exists('$(BundledSvnDirectory)%(RequiredBundledSvnFile.Identity)')"
+           Text="内置 SVN 文件缺失：%(RequiredBundledSvnFile.Identity)。请恢复 vendor/Subversion/win-x64。" />
+  </Target>
+</Project>

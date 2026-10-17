@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>SVNRevDesk</AssemblyName>
+    <Title>SVNRevDesk</Title>
+    <Product>SVNRevDesk</Product>
+    <Description>SVN 版本工作台</Description>
+    <!-- Stamp each build in China Standard Time so code updates receive a new visible version. -->
+    <BuildTimestamp Condition="'$(BuildTimestamp)' == ''">$([System.DateTime]::UtcNow.AddHours(8).ToString('VyyMMdd.HHmmss'))</BuildTimestamp>
+    <Version Condition="'$(ReleaseVersion)' != ''">$(ReleaseVersion)</Version>
+    <InformationalVersion Condition="'$(ReleaseVersion)' == ''">$(BuildTimestamp)</InformationalVersion>
+    <InformationalVersion Condition="'$(ReleaseVersion)' != ''">$(ReleaseVersion)</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets/AppIcon.ico</ApplicationIcon>
+    <PlatformTarget>x64</PlatformTarget>
+    <SelfContained>false</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <!-- No trimming: WPF uses resource loading and reflection. No extra analyzer package is needed. -->
+    <PublishTrimmed>false</PublishTrimmed>
+    <EnableSingleFileAnalyzer>false</EnableSingleFileAnalyzer>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Only the tray icon uses Windows Forms; keep other UI code unambiguously WPF. -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+    <Resource Include="Assets/AppIcon.ico" />
+    <ProjectReference Include="../SVNRevDesk.Core/SVNRevDesk.Core.csproj" />
+  </ItemGroup>
+  <Import Project="../../build/BundledSvn.targets" />
+  <ItemGroup>
+    <Content Include="../../README.md" Link="README.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
+    <Content Include="../../docs/功能检查.md" Link="docs/功能检查.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+</Project>

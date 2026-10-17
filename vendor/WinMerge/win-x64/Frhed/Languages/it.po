@@ -1,0 +1,2824 @@
+﻿# Released under the "GNU General Public License"
+#
+# Translators:
+# * bovirus
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Frhed (16.10.2025)\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=13216&atid=113216\n"
+"POT-Creation-Date: 2024-02-14 06:39+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: bovirus <bovirus@gmail.com>\n"
+"Language-Team: Italian (bovirus@gmail.com)\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../../FRHED\n"
+"X-Generator: Poedit 3.8\n"
+
+#: heksedit.rc:514
+#: heksedit.rc:530
+#, c-format
+msgid "2"
+msgstr "2"
+
+#: heksedit.rc:513
+#, c-format
+msgid "3"
+msgstr "3"
+
+#: heksedit.rc:512
+#: heksedit.rc:529
+#, c-format
+msgid "4"
+msgstr "4"
+
+#: heksedit.rc:511
+#, c-format
+msgid "5"
+msgstr "5"
+
+#: heksedit.rc:510
+#, c-format
+msgid "6"
+msgstr "6"
+
+#: heksedit.rc:509
+#, c-format
+msgid "7"
+msgstr "7"
+
+#: heksedit.rc:508
+#: heksedit.rc:528
+#, c-format
+msgid "8"
+msgstr "8"
+
+#: heksedit.rc:527
+#, c-format
+msgid "16"
+msgstr "16"
+
+#: heksedit.rc:526
+#, c-format
+msgid "32"
+msgstr "32"
+
+#: heksedit.rc:525
+#, c-format
+msgid "64"
+msgstr "64"
+
+#: heksedit.rc:524
+#, c-format
+msgid "128"
+msgstr "128"
+
+#. LANGUAGE, SUBLANGUAGE
+#: heksedit.rc:5
+#, c-format
+msgid "LANG_ENGLISH, SUBLANG_ENGLISH_US"
+msgstr "LANG_ITALIAN, SUBLANG_ITALIAN"
+
+#: heksedit.rc:12
+#, c-format
+msgid "&File"
+msgstr "&File"
+
+#: heksedit.rc:14
+#, c-format
+msgid "&New\tCtrl+N"
+msgstr "&Nuovo\tCtrl+N"
+
+#: heksedit.rc:15
+#, c-format
+msgid "&Open...\tCtrl+O"
+msgstr "&Apri...\tCtrl+O"
+
+#: heksedit.rc:16
+#, c-format
+msgid "Open pa&rtially...\tAlt+P"
+msgstr "Apri pa&zialmente...\tAlt+P"
+
+#: heksedit.rc:18
+#, c-format
+msgid "&Save\tCtrl+S"
+msgstr "&Salva\tCtrl+S"
+
+#: heksedit.rc:19
+#, c-format
+msgid "Save &As...\tCtrl+J"
+msgstr "Salva &come...\tCtrl+J"
+
+#: heksedit.rc:20
+#, c-format
+msgid "Save selec&tion as...\tCtrl+Shift+O"
+msgstr "Salva selez&ione come...\tCtrl+Maiusc+O"
+
+#: heksedit.rc:22
+#, c-format
+msgid "Re&vert\tCtrl+Shift+R"
+msgstr "Ripristina\tCtrl+Maiusc+R"
+
+#: heksedit.rc:23
+#, c-format
+msgid "&Insert file...\tCtrl+Shift+I"
+msgstr "&Inserisci file...\tCtrl+Maiusc+I"
+
+#: heksedit.rc:24
+#, c-format
+msgid "&Delete file...\tCtrl+Shift+D"
+msgstr "&Elimina file...\tCtrl+Maiusc+D"
+
+#: heksedit.rc:25
+#, c-format
+msgid "Close File\tCtrl+Shift+X"
+msgstr "Chiudi file\tCtrl+Maiusc+X"
+
+#: heksedit.rc:27
+#, c-format
+msgid "&Export as hexdump..."
+msgstr "&Esporta come dump esadecimale..."
+
+#: heksedit.rc:28
+#, c-format
+msgid "I&mport from hexdump...\tCtrl+Shift+H"
+msgstr "I&mporta da dump esadecimale...\tCtrl+Maiusc+H"
+
+#: heksedit.rc:40
+#, c-format
+msgid "E&xit\tAlt+F4"
+msgstr "E&sci\tAlt+F4"
+
+#: heksedit.rc:42
+#, c-format
+msgid "&Disk"
+msgstr "&Disco"
+
+#: heksedit.rc:44
+#, c-format
+msgid "&Open drive..."
+msgstr "Apri &unità..."
+
+#: heksedit.rc:45
+#, c-format
+msgid "&Close drive"
+msgstr "&Chiudi unità"
+
+#: heksedit.rc:47
+#: heksedit.rc:190
+#, c-format
+msgid "Goto &First Sector"
+msgstr "Via al &primo settore"
+
+#: heksedit.rc:48
+#, c-format
+msgid "Goto &Next Sector\tCtrl+Shift+PgDn"
+msgstr "Vai al prossi&mo settore\tCtrl+Maiusc+PagGiù"
+
+#: heksedit.rc:49
+#, c-format
+msgid "Goto &Previous Sector\tCtrl+Shift+PgUp"
+msgstr "Vai al &prossimo settore\tCtrl+Maiusc+PagSu"
+
+#: heksedit.rc:51
+#: heksedit.rc:193
+#, c-format
+msgid "Goto &Last Sector"
+msgstr "Vai all'u&ltimo settore"
+
+#: heksedit.rc:53
+#: heksedit.rc:195
+#, c-format
+msgid "Goto &Sector #..."
+msgstr "Via al &settore #..."
+
+#: heksedit.rc:55
+#, c-format
+msgid "&Edit"
+msgstr "&Modifica"
+
+#: heksedit.rc:57
+#, c-format
+msgid "&Undo\tCtrl+Z"
+msgstr "Ann&ulla azione\tCtr+Z"
+
+#: heksedit.rc:58
+#, c-format
+msgid "&Redo\tCtrl+Y"
+msgstr "&Ripeti azione\tCtrl+Y"
+
+#: heksedit.rc:60
+#: heksedit.rc:177
+#, c-format
+msgid "Cu&t...\tCtrl+X"
+msgstr "&Taglia...\tCtrl+X"
+
+#: heksedit.rc:61
+#: heksedit.rc:178
+#, c-format
+msgid "&Copy...\tCtrl+C"
+msgstr "&Copia...\tCtrl+C"
+
+#: heksedit.rc:62
+#: heksedit.rc:179
+#, c-format
+msgid "&Paste...\tCtrl+V"
+msgstr "&Incolla...\tCtrl+Y"
+
+#: heksedit.rc:63
+#, c-format
+msgid "Paste &with dialog...\tCtrl+Shift+V"
+msgstr "Incolla &con finestra di dialogo...\tCtrl+Maiusc+V"
+
+#: heksedit.rc:64
+#, c-format
+msgid "&Move/Copy bytes...\tCtrl+Alt+M"
+msgstr "&Sposta/copia byte…\tCtrl+Alt+M"
+
+#: heksedit.rc:65
+#, c-format
+msgid "Reverse bytes...\tCtrl+Alt+R"
+msgstr "Inverti byte…\tCtrl+Alt+R"
+
+#: heksedit.rc:66
+#, c-format
+msgid "&Append...\tCtrl+P"
+msgstr "&Appendi...\tCtrl+P"
+
+#: heksedit.rc:67
+#: heksedit.rc:180
+#, c-format
+msgid "&Delete\tDel"
+msgstr "&Elimina\tCanc"
+
+#: heksedit.rc:68
+#, c-format
+msgid "&Select all\tCtrl+A"
+msgstr "&Seleziona tutto\tCtrl+A"
+
+#: heksedit.rc:69
+#, c-format
+msgid "Select &block...\tCtrl+E"
+msgstr "Seleziona &blocco...\tCtrl+E"
+
+#: heksedit.rc:70
+#, c-format
+msgid "&Fill selection...\tCtrl+Shift+F"
+msgstr "&Riempi selezione…\tCtrl+Maiusc+F"
+
+#: heksedit.rc:72
+#, c-format
+msgid "Toggle h&ex/character editing\tTAB"
+msgstr "Abilita/disabilita modifica h&ex/carattere\tTAB"
+
+#: heksedit.rc:73
+#, c-format
+msgid "Toggle keyboard I&nsert/Overwrite mode\tIns"
+msgstr "Abilita/disabilita modo i&nserimento/sovrascrittura\tIns"
+
+#: heksedit.rc:75
+#, c-format
+msgid "Read-only mode\tAlt+R"
+msgstr "Modo sola lettura\tAlt+R"
+
+#: heksedit.rc:77
+#, c-format
+msgid "&Find and Replace"
+msgstr "Tro&va e sostituisci"
+
+#: heksedit.rc:79
+#: heksedit.rc:182
+#, c-format
+msgid "&Find...\tCtrl+F"
+msgstr "&Trova...\tCtrl+F"
+
+#: heksedit.rc:80
+#, c-format
+msgid "&Replace...\tCtrl+H"
+msgstr "&Sostituisci…\tCtrl+H"
+
+#: heksedit.rc:81
+#, c-format
+msgid "Find &next\tF3"
+msgstr "Trova su&ccessivo\tF3"
+
+#: heksedit.rc:82
+#, c-format
+msgid "Find &previous\tShift+F3"
+msgstr "Trova &precedente\tMaiusc+F3"
+
+#: heksedit.rc:84
+#: heksedit.rc:186
+#, c-format
+msgid "&Go To...\tCtrl+G"
+msgstr "&Vai a...\tCtrl+G"
+
+#: heksedit.rc:86
+#, c-format
+msgid "Enter decimal &value...\tCtrl+D"
+msgstr "Inserisci &valore decimale...\tCtrl+D"
+
+#: heksedit.rc:88
+#, c-format
+msgid "Man&ipulate bits...\tCtrl+B"
+msgstr "Man&ipola bit…\tCtrl+B"
+
+#: heksedit.rc:89
+#, c-format
+msgid "C&ompare from current offset...\tCtrl+M"
+msgstr "Compara dall'offset attuale…\\Ctrl+M"
+
+#: heksedit.rc:91
+#, c-format
+msgid "Get f&loating point value...\tCtrl+L"
+msgstr "Ottieni valore attuale f&luttuante...\tCtrl+L"
+
+#: heksedit.rc:92
+#, c-format
+msgid "File properties...\tAlt+Enter"
+msgstr "Proprietà file...\tAlt+Invio"
+
+#: heksedit.rc:93
+#, c-format
+msgid "Appl&y template...\tAlt+T"
+msgstr "Applica modello…\tAlt+M"
+
+#: heksedit.rc:94
+#, c-format
+msgid "Open in text editor\tF5"
+msgstr "Apri in editor testo\tF5"
+
+#: heksedit.rc:96
+#, c-format
+msgid "&View"
+msgstr "&Visualizza"
+
+#: heksedit.rc:98
+#, c-format
+msgid "Scroll &left\tCtrl+Arrow Left"
+msgstr "Scorrimento a &sinistra\tCtrl+Freccia sinistra"
+
+#: heksedit.rc:99
+#, c-format
+msgid "Scroll &right\tCtrl+Arrow Right"
+msgstr "Scorrimento a dest&ra\tCtrl+Freccia destra"
+
+#: heksedit.rc:100
+#, c-format
+msgid "Scroll &up\tCtrl+Arrow Up"
+msgstr "Scorrimento in &alto\tCtrl+Freccia su"
+
+#: heksedit.rc:101
+#, c-format
+msgid "Scroll &down\tCtrl+Arrow Down"
+msgstr "Scorrimento in &basso\tCtrl+Freccia giù"
+
+#: heksedit.rc:102
+#, c-format
+msgid "Scroll up a page\tCtrl+Page Up"
+msgstr "Scorrimento una pagina in su\tCtrl+Pagina su"
+
+#: heksedit.rc:103
+#, c-format
+msgid "Scroll down a page\tCtrl+Page Down"
+msgstr "Scorrimento una pagina giù\tCtrl+Pagina giù"
+
+#: heksedit.rc:105
+#, c-format
+msgid "Zoom in\tCtrl++"
+msgstr "Zoom+\tCtrl++"
+
+#: heksedit.rc:106
+#, c-format
+msgid "Zoom out\tCtrl+-"
+msgstr "Zoom-\tCtrl+-"
+
+#: heksedit.rc:107
+#, c-format
+msgid "Zoom normal\tCtrl+*"
+msgstr "Zoom normale\tCtrl+*"
+
+#: heksedit.rc:109
+#, c-format
+msgid "&Options"
+msgstr "&Opzioni"
+
+#: heksedit.rc:111
+#, c-format
+msgid "&View settings...\tCtrl+I"
+msgstr "Visualizza impostazioni…\\Ctrl+I"
+
+#: heksedit.rc:112
+#, c-format
+msgid "&Color settings"
+msgstr "Impostazioni &colori"
+
+#: heksedit.rc:114
+#, c-format
+msgid "&Text color...\tCtrl+T"
+msgstr "Colore &testo...\tCtrl+T"
+
+#: heksedit.rc:115
+#, c-format
+msgid "&Background color...\tCtrl+K"
+msgstr "Colore &sfondo...\tCtrl+K"
+
+#: heksedit.rc:116
+#, c-format
+msgid "Separator color...\tCtrl+Q"
+msgstr "Colore separatore…\\Ctrl+Q"
+
+#: heksedit.rc:117
+#, c-format
+msgid "Selection text color...\tCtrl+Shift+T"
+msgstr "Colore testo selezionato…\\Ctrl+Maiusc+T"
+
+#: heksedit.rc:119
+#, c-format
+msgid "Selection background color...\tCtrl+Shift+K"
+msgstr "Colore sfondo selezione…\tCtrl+Maiusc+K"
+
+#: heksedit.rc:121
+#, c-format
+msgid "Bookmark color...\tCtrl+Shift+B"
+msgstr "Colore preferito…\tCtrl+Maiusc+B"
+
+#: heksedit.rc:123
+#, c-format
+msgid "Reset colors to standard...\tCtrl+Shift+S"
+msgstr "Ripristina colori predefiniti…\\Ctrl+Maiusc+S"
+
+#: heksedit.rc:125
+#, c-format
+msgid "&Adopt OS colour scheme...\tCtrl+Shift+A"
+msgstr "&Adotta schema colore so...\tCtrl+Maiusc+A"
+
+#: heksedit.rc:128
+#, c-format
+msgid "C&haracter set...\tCtrl+R"
+msgstr "Set c&aratteri…\tCtrl+R"
+
+#: heksedit.rc:129
+#, c-format
+msgid "B&inary mode...\tCtrl+Shift+Y"
+msgstr "Modo b&inario...\tCtrl+Maiusc+Y"
+
+#: heksedit.rc:130
+#, c-format
+msgid "&OLE Drag-drop...\tCtrl+Alt+O"
+msgstr "Drag and drop &OLE...\tCtrl+Alt+O"
+
+#: heksedit.rc:131
+#, c-format
+msgid "Make backups\tCtrl+Shift+M"
+msgstr "Crea backup\tCtrl+Maiusc+M"
+
+#: heksedit.rc:133
+#, c-format
+msgid "&Registry"
+msgstr "&Registro"
+
+#: heksedit.rc:135
+#, c-format
+msgid "In &all context menu"
+msgstr "In tutti i menu contestu&ali"
+
+#: heksedit.rc:136
+#, c-format
+msgid "In &unknown context menu"
+msgstr "In menu contestuale sconosci&uto"
+
+#: heksedit.rc:137
+#, c-format
+msgid "Is &default in unknown context"
+msgstr "È pre&definito in contesto sconosciuto"
+
+#: heksedit.rc:138
+#, c-format
+msgid "&Save ini when required"
+msgstr "&Salva ini quando richiesto"
+
+#: heksedit.rc:139
+#, c-format
+msgid "Change &instance..."
+msgstr "Modifica &istanza..."
+
+#: heksedit.rc:140
+#, c-format
+msgid "S&hortcuts to Frhed..."
+msgstr "&Collegamento a Frhed..."
+
+#: heksedit.rc:142
+#, c-format
+msgid "&Bookmarks"
+msgstr "&Preferiti"
+
+#: heksedit.rc:144
+#, c-format
+msgid "&Add bookmark...\tCtrl+W"
+msgstr "&Aggiungi preferito…\tCtrl+W"
+
+#: heksedit.rc:145
+#, c-format
+msgid "&Remove bookmark...\tAlt+W"
+msgstr "&Rimuovi preferito…\tAlt+W"
+
+#: heksedit.rc:146
+#, c-format
+msgid "&Clear all bookmarks\tCtrl+Shift+W"
+msgstr "&Cancella tutti i preferiti\tCtrl+Maiusc+W"
+
+#: heksedit.rc:158
+#, c-format
+msgid "&Misc"
+msgstr "&Varie"
+
+#: heksedit.rc:160
+#, c-format
+msgid "Goto DLL e&xport names..."
+msgstr "Vai a nomi e&sportazione DLL..."
+
+#: heksedit.rc:161
+#, c-format
+msgid "Goto DLL import names..."
+msgstr "Vai a nomi importazione DLL..."
+
+#: heksedit.rc:163
+#, c-format
+msgid "Encode / Decode..."
+msgstr "Codifica/decodifica..."
+
+#: heksedit.rc:165
+#, c-format
+msgid "&Help"
+msgstr "&Aiuto"
+
+#: heksedit.rc:167
+#, c-format
+msgid "&Help topics...\tF1"
+msgstr "&Argomenti guida in linea…\tF1"
+
+#: heksedit.rc:169
+#, c-format
+msgid "&About Frhed..."
+msgstr "&Info su Frhed..."
+
+#: heksedit.rc:183
+#, c-format
+msgid "Replace...\tCtrl+H"
+msgstr "Sostituisci...\tCtrl+H"
+
+#: heksedit.rc:184
+#, c-format
+msgid "Find next\tF3"
+msgstr "Trova successivo\tF3"
+
+#: heksedit.rc:185
+#, c-format
+msgid "Find previous\tShift+F3"
+msgstr "Trova precedente\tMaiusc+F3"
+
+#: heksedit.rc:191
+#, c-format
+msgid "Goto &Next Sector"
+msgstr "Vai al settore successi&vo"
+
+#: heksedit.rc:192
+#, c-format
+msgid "Goto &Previous Sector"
+msgstr "Vai al settore &precedente"
+
+#: heksedit.rc:298
+#, c-format
+msgid "Go to Offset"
+msgstr "Vai all'offset"
+
+#: heksedit.rc:301
+#, c-format
+msgid "Start with \"+\" or \"-\" (minus) for relative jump."
+msgstr "Inizia con \"+\" o \"-\" (meno) per il salto relativo."
+
+#: heksedit.rc:303
+#, c-format
+msgid "Prefix offset with \"x\" to indicate hex notation."
+msgstr "Prefisso offset con \"X\" per indicare la notazione esadecimale."
+
+#: heksedit.rc:306
+#: heksedit.rc:347
+#: heksedit.rc:367
+#: heksedit.rc:387
+#: heksedit.rc:412
+#: heksedit.rc:430
+#: heksedit.rc:448
+#: heksedit.rc:486
+#: heksedit.rc:498
+#: heksedit.rc:533
+#: heksedit.rc:549
+#: heksedit.rc:563
+#: heksedit.rc:577
+#: heksedit.rc:593
+#: heksedit.rc:606
+#: heksedit.rc:652
+#: heksedit.rc:675
+#: heksedit.rc:689
+#: heksedit.rc:750
+#: heksedit.rc:772
+#: heksedit.rc:793
+#: heksedit.rc:819
+#: heksedit.rc:877
+#: heksedit.rc:898
+#: heksedit.rc:946
+#: heksedit.rc:977
+#, c-format
+msgid "OK"
+msgstr "OK"
+
+#: heksedit.rc:307
+#: heksedit.rc:325
+#: heksedit.rc:368
+#: heksedit.rc:388
+#: heksedit.rc:413
+#: heksedit.rc:431
+#: heksedit.rc:449
+#: heksedit.rc:487
+#: heksedit.rc:499
+#: heksedit.rc:534
+#: heksedit.rc:550
+#: heksedit.rc:564
+#: heksedit.rc:578
+#: heksedit.rc:594
+#: heksedit.rc:607
+#: heksedit.rc:622
+#: heksedit.rc:634
+#: heksedit.rc:653
+#: heksedit.rc:676
+#: heksedit.rc:690
+#: heksedit.rc:716
+#: heksedit.rc:751
+#: heksedit.rc:773
+#: heksedit.rc:794
+#: heksedit.rc:806
+#: heksedit.rc:820
+#: heksedit.rc:878
+#: heksedit.rc:899
+#: heksedit.rc:947
+#: heksedit.rc:960
+#: heksedit.rc:978
+#: heksedit.rc:1332
+#, c-format
+msgid "Cancel"
+msgstr "Annulla"
+
+#: heksedit.rc:313
+#: heksedit.rc:324
+#: heksedit.rc:996
+#, c-format
+msgid "Find"
+msgstr "Trova"
+
+#: heksedit.rc:316
+#, c-format
+msgid "&Find what:"
+msgstr "Tro&va questo:"
+
+#: heksedit.rc:318
+#, c-format
+msgid "Please refer to the online help's Using the Special Syntax section for searching for binary values."
+msgstr "Per la ricerca di valori binari fai riferimento alla sezione 'Uso della sintassi speciale' della guida in linea."
+
+#: heksedit.rc:319
+#, c-format
+msgid "Direction"
+msgstr "Direzione"
+
+#: heksedit.rc:320
+#, c-format
+msgid "&Up"
+msgstr "S&u"
+
+#: heksedit.rc:321
+#, c-format
+msgid "&Down"
+msgstr "&Giù"
+
+#: heksedit.rc:322
+#, c-format
+msgid "Match &case"
+msgstr "Corrispondenza maiuscolo/minuscolo"
+
+#: heksedit.rc:323
+#, c-format
+msgid "U&nicode"
+msgstr "U&nicode"
+
+#: heksedit.rc:331
+#, c-format
+msgid "About Frhed"
+msgstr "Info su Frhed"
+
+#: heksedit.rc:335
+#, c-format
+msgid "Frhed - Free hex editor"
+msgstr "Frhed - Free hex editor"
+
+#: heksedit.rc:338
+#, c-format
+msgid "(c) Raihan Kibria 2000"
+msgstr "(c) Raihan Kibria 2000"
+
+#: heksedit.rc:339
+#, c-format
+msgid "All rights reserved."
+msgstr "Tutti i diritti riservati."
+
+#: heksedit.rc:340
+#, c-format
+msgid "Contributors are listed in Contributors.txt."
+msgstr "I collaboratori sono elencati in Contributors.txt."
+
+#: heksedit.rc:342
+#, c-format
+msgid "Open contributors list"
+msgstr "Apri elenco contributori"
+
+#: heksedit.rc:343
+#, c-format
+msgid "Homepage"
+msgstr "Sito web"
+
+#: heksedit.rc:345
+#, c-format
+msgid "Open Frhed's homepage in browser"
+msgstr "Apri sito web Frhed nel browser"
+
+#: heksedit.rc:353
+#, c-format
+msgid "Export Hexdump"
+msgstr "Esporta dump esadecimale"
+
+#: heksedit.rc:356
+#, c-format
+msgid "Start at offset:"
+msgstr "Avvio all'offset:"
+
+#: heksedit.rc:358
+#, c-format
+msgid "End at offset:"
+msgstr "Fine all'offset:"
+
+#: heksedit.rc:360
+#, c-format
+msgid "Export to"
+msgstr "Esporta in"
+
+#: heksedit.rc:361
+#, c-format
+msgid "File"
+msgstr "File"
+
+#: heksedit.rc:362
+#, c-format
+msgid "Clipboard"
+msgstr "Appunti"
+
+#: heksedit.rc:363
+#, c-format
+msgid "Type"
+msgstr "Tipo"
+
+#: heksedit.rc:364
+#, c-format
+msgid "Frhed display as text"
+msgstr "Visualizza Frhed come testo"
+
+#: heksedit.rc:365
+#, c-format
+msgid "Just hex digits on a line"
+msgstr "Solo cifre esadecimali in una riga"
+
+#: heksedit.rc:366
+#, c-format
+msgid "Frhed display as RTF"
+msgstr "Visualizza Frhed come RTF"
+
+#: heksedit.rc:374
+#, c-format
+msgid "Enter decimal value"
+msgstr "Inserisci valore decimale"
+
+#: heksedit.rc:377
+#, c-format
+msgid "Enter decimal value:"
+msgstr "Inserisci valore decimale:"
+
+#: heksedit.rc:379
+#, c-format
+msgid "At offset:"
+msgstr "All'offset:"
+
+#: heksedit.rc:381
+#, c-format
+msgid "Number of times:"
+msgstr "Numero di volte:"
+
+#: heksedit.rc:383
+#, c-format
+msgid "Size of Value:"
+msgstr "Dimensione Valore:"
+
+#: heksedit.rc:384
+#, c-format
+msgid "Byte (8 bit)"
+msgstr "Byte (8 bit)"
+
+#: heksedit.rc:385
+#, c-format
+msgid "Word (16 bit)"
+msgstr "Parola (16bit)"
+
+#: heksedit.rc:386
+#, c-format
+msgid "Double word (32 bit)"
+msgstr "Doppia parola (32 bit)"
+
+#: heksedit.rc:394
+#, c-format
+msgid "Paste with dialogue"
+msgstr "Incolla con finestra di dialogo"
+
+#: heksedit.rc:397
+#, c-format
+msgid "Clipboard content (text):"
+msgstr "Contenuto appunti (testo):"
+
+#: heksedit.rc:400
+#: heksedit.rc:662
+#, c-format
+msgid "Paste mode"
+msgstr "Modo incolla"
+
+#: heksedit.rc:401
+#: heksedit.rc:663
+#, c-format
+msgid "Overwrite"
+msgstr "Sovrascrivi"
+
+#: heksedit.rc:403
+#: heksedit.rc:664
+#, c-format
+msgid "Insert"
+msgstr "Inserisci"
+
+#: heksedit.rc:405
+#: heksedit.rc:665
+#, c-format
+msgid "Paste data how many times:"
+msgstr "Incolla i dati quante volte:"
+
+#: heksedit.rc:407
+#: heksedit.rc:669
+#, c-format
+msgid "Paste coded binary values as text"
+msgstr "Incolla i valori binari codificati come testo"
+
+#: heksedit.rc:409
+#, c-format
+msgid "Skip how many bytes between inserts/overwrites"
+msgstr "Salta il numero di byte tra inserimenti/sovrascritture"
+
+#: heksedit.rc:419
+#: heksedit.rc:1000
+#, c-format
+msgid "Cut"
+msgstr "Taglia"
+
+#: heksedit.rc:422
+#, c-format
+msgid "Start cutting at offset:"
+msgstr "Inizia a tagliare all'offset:"
+
+#: heksedit.rc:424
+#, c-format
+msgid "Cut how many bytes"
+msgstr "Taglia quanti byte"
+
+#: heksedit.rc:425
+#, c-format
+msgid "Cut up to and including offset:"
+msgstr "Taglia fino a incluso offset:"
+
+#: heksedit.rc:427
+#, c-format
+msgid "Number of bytes to cut:"
+msgstr "Numero byte da tagliare:"
+
+#: heksedit.rc:437
+#: heksedit.rc:865
+#: heksedit.rc:896
+#: heksedit.rc:997
+#: heksedit.rc:1331
+#, c-format
+msgid "Copy"
+msgstr "Copia"
+
+#: heksedit.rc:440
+#, c-format
+msgid "Start copying at offset:"
+msgstr "Inizia a copiare all'offset:"
+
+#: heksedit.rc:442
+#, c-format
+msgid "Copy how many bytes"
+msgstr "Copia quanti byte"
+
+#: heksedit.rc:443
+#, c-format
+msgid "Copy up to and including offset:"
+msgstr "Copia fino a includendo offset:"
+
+#: heksedit.rc:445
+#, c-format
+msgid "Number of bytes to copy:"
+msgstr "Numero byte da copiare:"
+
+#: heksedit.rc:455
+#, c-format
+msgid "View Settings"
+msgstr "Visualizza impostazioni"
+
+#: heksedit.rc:458
+#, c-format
+msgid "Number of bytes to display per line:"
+msgstr "Numero di byte da visualizzare per riga:"
+
+#: heksedit.rc:461
+#, c-format
+msgid "Automatically adjust number of bytes per line (uncheck this if you want Frhed to use your own choice for bytes per line)"
+msgstr "Regola automaticamente numero byte per riga (deseleziona questo se vuoi che frhed usi la propria scelta byte per riga)"
+
+#: heksedit.rc:464
+#, c-format
+msgid "Display length of offset in how many characters:"
+msgstr "Visualizza lunghezza offset in quanti caratteri:"
+
+#: heksedit.rc:467
+#, c-format
+msgid "Adjust offset length to that of the max offset"
+msgstr "Regolare lunghezza offset sull'offset massimo"
+
+#: heksedit.rc:470
+#, c-format
+msgid "Display values at caret position as:"
+msgstr "Visualizza valori posizione cursore come:"
+
+#: heksedit.rc:472
+#, c-format
+msgid "unsigned"
+msgstr "non firmato"
+
+#: heksedit.rc:474
+#, c-format
+msgid "signed"
+msgstr "firmato"
+
+#: heksedit.rc:476
+#, c-format
+msgid "Set read-only mode on opening files"
+msgstr "Imposta modalità sola lettura per l'apertura dei file"
+
+#: heksedit.rc:479
+#, c-format
+msgid "Path and filename of the text editor to call:"
+msgstr "Percorso e nome file editor di testo da eseguire:"
+
+#: heksedit.rc:482
+#, c-format
+msgid "Browse..."
+msgstr "Sfoglia..."
+
+#: heksedit.rc:483
+#, c-format
+msgid "Language:"
+msgstr "Lingua:"
+
+#: heksedit.rc:493
+#, c-format
+msgid "Append"
+msgstr "Appendi"
+
+#: heksedit.rc:496
+#, c-format
+msgid "Bytes to append to the end of the file:"
+msgstr "Byte da aggiungere alla fine del file:"
+
+#: heksedit.rc:504
+#, c-format
+msgid "Manipulate Bits"
+msgstr "Manipola bit"
+
+#: heksedit.rc:540
+#, c-format
+msgid "Character Set"
+msgstr "Set caratteri"
+
+#: heksedit.rc:543
+#, c-format
+msgid "Choose character set"
+msgstr "Scegli set caratteri"
+
+#: heksedit.rc:544
+#: heksedit.rc:1024
+#, c-format
+msgid "ANSI"
+msgstr "ANSI"
+
+#: heksedit.rc:546
+#: heksedit.rc:1025
+#, c-format
+msgid "OEM"
+msgstr "OEM"
+
+#: heksedit.rc:547
+#, c-format
+msgid "Font size in points:"
+msgstr "Dimensione font in punti:"
+
+#: heksedit.rc:556
+#, c-format
+msgid "Choose area of difference to display"
+msgstr "Scegli l'area della differenza da visualizzare"
+
+#: heksedit.rc:559
+#, c-format
+msgid "file_sizes"
+msgstr "file_sizes"
+
+#: heksedit.rc:560
+#, c-format
+msgid "number_of_diffs"
+msgstr "numero_di_diff"
+
+#: heksedit.rc:565
+#, c-format
+msgid "Copy above list"
+msgstr "Copia elenco soprastante"
+
+#: heksedit.rc:571
+#, c-format
+msgid "Binary Mode"
+msgstr "Modo binario"
+
+#: heksedit.rc:574
+#, c-format
+msgid "Choose binary mode"
+msgstr "Scegli modo binario"
+
+#: heksedit.rc:575
+#, c-format
+msgid "Little-endian (Intel)"
+msgstr "Little-endian (Intel)"
+
+#: heksedit.rc:576
+#, c-format
+msgid "Big-endian (Motorola)"
+msgstr "Big-endian (Motorola)"
+
+#: heksedit.rc:584
+#, c-format
+msgid "Select Block"
+msgstr "Seleziona blocco"
+
+#: heksedit.rc:587
+#, c-format
+msgid "Start of selection (prefix x for hex):"
+msgstr "Inizio selezione (prefisso x per esadecimale):"
+
+#: heksedit.rc:590
+#, c-format
+msgid "End of selection (prefix x for hex):"
+msgstr "Fine selezione (prefisso X per esadecimale):"
+
+#: heksedit.rc:599
+#, c-format
+msgid "Reverse Bytes"
+msgstr "Byte invertiti"
+
+#: heksedit.rc:602
+#, c-format
+msgid "Offset of first byte:"
+msgstr "Offset del primo byte:"
+
+#: heksedit.rc:604
+#, c-format
+msgid "Offset of last byte:"
+msgstr "Offset dell'ultimo byte:"
+
+#: heksedit.rc:613
+#, c-format
+msgid "Add Bookmark"
+msgstr "Aggiungi prefereito"
+
+#: heksedit.rc:616
+#, c-format
+msgid "Offset (prefix x for hex):"
+msgstr "Offset (prefisso x per esadecimale):"
+
+#: heksedit.rc:619
+#, c-format
+msgid "Name:"
+msgstr "Nome:"
+
+#: heksedit.rc:621
+#, c-format
+msgid "Add"
+msgstr "Aggiungi"
+
+#: heksedit.rc:628
+#, c-format
+msgid "Remove Bookmark"
+msgstr "Rimuovi segnalibro"
+
+#: heksedit.rc:633
+#, c-format
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: heksedit.rc:640
+#, c-format
+msgid "Open partially"
+msgstr "Apri parzialamente"
+
+#: heksedit.rc:643
+#, c-format
+msgid "Start opening partially"
+msgstr "Avvia apertura parziale"
+
+#: heksedit.rc:644
+#, c-format
+msgid "&At offset from the beginning of file (prefix x for hex):"
+msgstr "&All'offset dall'inizio del file (prefisso X per esadecimale):"
+
+#: heksedit.rc:646
+#, c-format
+msgid "&From end of file"
+msgstr "Dalla &fine del file"
+
+#: heksedit.rc:648
+#, c-format
+msgid "&How many bytes:"
+msgstr "&Quanti byte:"
+
+#: heksedit.rc:650
+#, c-format
+msgid "&Display offsets relative to start of file (or start of loaded block)"
+msgstr "Visualizza offset relativi all'inizio &del file (o inizio del blocco caricato)"
+
+#: heksedit.rc:659
+#: heksedit.rc:998
+#, c-format
+msgid "Paste"
+msgstr "Incolla"
+
+#: heksedit.rc:667
+#, c-format
+msgid "Bytes to skip between inserts/overwrites:"
+msgstr "Byte da saltare tra inserimenti/sovrascrittura:"
+
+#: heksedit.rc:671
+#, c-format
+msgid "Clipboard format to use:"
+msgstr "Formato appunti da usare:"
+
+#: heksedit.rc:673
+#, c-format
+msgid "Refresh"
+msgstr "Aggiorna"
+
+#: heksedit.rc:674
+#, c-format
+msgid ""
+"- CF_TEXT was used by previous versions of Frhed\n"
+"- Those starting w CF_ are standard formats && others are registered/private ones\n"
+"- Some formats may have been synthesized from the original."
+msgstr ""
+"- CF_TEXT è stato usato dalle versioni precedenti di Frhed\n"
+"- Quelli che iniziano w CF_ sono formati standard e gli altri sono registrati/privati\n"
+"- Alcuni formati potrebbero essere stati sintetizzati dall'originale."
+
+#: heksedit.rc:682
+#, c-format
+msgid "Template"
+msgstr "Modello"
+
+#: heksedit.rc:685
+#, c-format
+msgid "Result of template application:"
+msgstr "Risultato applicazione modello:"
+
+#: heksedit.rc:696
+#: heksedit.rc:715
+#: heksedit.rc:1005
+#, c-format
+msgid "Replace"
+msgstr "Sostituisci"
+
+#: heksedit.rc:699
+#, c-format
+msgid "Find what:"
+msgstr "Trova questo:"
+
+#: heksedit.rc:702
+#, c-format
+msgid "Find next"
+msgstr "Trova successivo"
+
+#: heksedit.rc:703
+#, c-format
+msgid "Find previous"
+msgstr "Trova precedente"
+
+#: heksedit.rc:704
+#, c-format
+msgid "Match case"
+msgstr "Corrispondenza maiuscole/minuscole"
+
+#: heksedit.rc:706
+#, c-format
+msgid "Replace with:"
+msgstr "Sostituisci con:"
+
+#: heksedit.rc:708
+#, c-format
+msgid "Replace all..."
+msgstr "Sostituisci tutto..."
+
+#: heksedit.rc:709
+#, c-format
+msgid "... following occurrences"
+msgstr "... occorrenze successive"
+
+#: heksedit.rc:711
+#, c-format
+msgid "... previous occurrences"
+msgstr "... occorrenze precedenti"
+
+#: heksedit.rc:713
+#, c-format
+msgid "Use special syntax"
+msgstr "Usa sintassi speciale"
+
+#: heksedit.rc:721
+#, c-format
+msgid "Fill Selection"
+msgstr "Riempi selezione"
+
+#: heksedit.rc:724
+#, c-format
+msgid "Fill from:"
+msgstr "Riempi da:"
+
+#: heksedit.rc:726
+#: heksedit.rc:1298
+#, c-format
+msgid "File:"
+msgstr "File:"
+
+#: heksedit.rc:728
+#, c-format
+msgid "&Browse..."
+msgstr "&Sfoglia..."
+
+#: heksedit.rc:729
+#, c-format
+msgid "Hex:"
+msgstr "Hex.:"
+
+#: heksedit.rc:731
+#, c-format
+msgid "Selection"
+msgstr "Selezione"
+
+#: heksedit.rc:732
+#, c-format
+msgid "Start:"
+msgstr "Inizio:"
+
+#: heksedit.rc:734
+#, c-format
+msgid "End:"
+msgstr "Fine:"
+
+#: heksedit.rc:736
+#, c-format
+msgid "Size:"
+msgstr "Dimensione:"
+
+#: heksedit.rc:738
+#: heksedit.rc:920
+#, c-format
+msgid "Input"
+msgstr "Input"
+
+#: heksedit.rc:739
+#, c-format
+msgid "Size of input:"
+msgstr "Dimensione input:"
+
+#: heksedit.rc:741
+#, c-format
+msgid "# Times input fits:"
+msgstr "# Adatta input tempo:"
+
+#: heksedit.rc:743
+#, c-format
+msgid "Remainder:"
+msgstr "Resto:"
+
+#: heksedit.rc:745
+#, c-format
+msgid "Assignment operator"
+msgstr "Operatore assegnazione"
+
+#: heksedit.rc:746
+#, c-format
+msgid "Assign (=)"
+msgstr "Assegna (=)"
+
+#: heksedit.rc:747
+#, c-format
+msgid "OR (|=)"
+msgstr "OR (|=)"
+
+#: heksedit.rc:748
+#, c-format
+msgid "AND (&&=)"
+msgstr "E (&&=)"
+
+#: heksedit.rc:749
+#, c-format
+msgid "XOR (^=)"
+msgstr "XOR (^=)"
+
+#: heksedit.rc:757
+#, c-format
+msgid "Change Instance"
+msgstr "Modifica istanza"
+
+#: heksedit.rc:760
+#, c-format
+msgid "Load the following instance data:"
+msgstr "Carica i seguenti dati istanza:"
+
+#: heksedit.rc:766
+#, c-format
+msgid "and save (when quiting) to this instance data:"
+msgstr "e salva (quando esci) in questi dati istanza:"
+
+#: heksedit.rc:774
+#, c-format
+msgid "Remember that if any instance of Frhed is running on the same instance data as this one it will overwrite the data of this one if it exits last.  Unless, that is, that the option to save ini data to the registry on exit is disabled)"
+msgstr "Ricorda che se qualsiasi istanza di Frhed è in esecuzione sugli stessi dati di istanza di questa, sovrascriverà i dati di questa se esce per ultima.  A meno che l'opzione per salvare i dati ini nel registro all'uscita sia disabilitata)"
+
+#: heksedit.rc:781
+#, c-format
+msgid "Encode / Decode Data"
+msgstr "Codifica/decodifica dati"
+
+#: heksedit.rc:784
+#, c-format
+msgid "Algorithms:"
+msgstr "Algoritmi:"
+
+#: heksedit.rc:787
+#, c-format
+msgid "Arguments:"
+msgstr "Argomenti:"
+
+#: heksedit.rc:789
+#, c-format
+msgid "Encode"
+msgstr "Codifica"
+
+#: heksedit.rc:791
+#, c-format
+msgid "Decode"
+msgstr "Decodifica"
+
+#: heksedit.rc:800
+#, c-format
+msgid "Open Drive"
+msgstr "Apri unità"
+
+#: heksedit.rc:804
+#, c-format
+msgid "NOTE: Frhed allows only reading the drive data. Changing and saving the drive data is not possible."
+msgstr "NOTA: Frhed consente solo la lettura dei dati dell'unità. Non è possibile modificare e salvare i dati dell'unità."
+
+#: heksedit.rc:805
+#: heksedit.rc:959
+#: heksedit.rc:989
+#, c-format
+msgid "Open"
+msgstr "Apri"
+
+#: heksedit.rc:812
+#, c-format
+msgid "Go to Track"
+msgstr "Vai alla traccia"
+
+#: heksedit.rc:815
+#, c-format
+msgid "Drive Information:"
+msgstr "Info unità:"
+
+#: heksedit.rc:817
+#, c-format
+msgid "&Go to track:"
+msgstr "&Vai alla traccia:"
+
+#: heksedit.rc:826
+#, c-format
+msgid "Shortcuts"
+msgstr "Collegamenti"
+
+#: heksedit.rc:829
+#, c-format
+msgid "Paths of shortcuts to Frhed:"
+msgstr "Percorsi collegamenti a Frhed:"
+
+#: heksedit.rc:830
+#, c-format
+msgid "Links to Frhed"
+msgstr "Collegamenti a Frhed"
+
+#: heksedit.rc:833
+#, c-format
+msgid "&Find links to any Frhed.exe, fix them and list them here."
+msgstr "Trova collegamenti a qualsiasi &Frhed.exe, correggili ed elencali qui."
+
+#: heksedit.rc:836
+#, c-format
+msgid "Create link in/on:"
+msgstr "Crea collegamento in/on:"
+
+#: heksedit.rc:837
+#, c-format
+msgid "&Desktop"
+msgstr "&Desktop"
+
+#: heksedit.rc:839
+#, c-format
+msgid "S&tart Menu"
+msgstr "Menu S&tart"
+
+#: heksedit.rc:841
+#, c-format
+msgid "&Send To"
+msgstr "&Invia a"
+
+#: heksedit.rc:843
+#, c-format
+msgid "&Programs"
+msgstr "&Programmi"
+
+#: heksedit.rc:845
+#, c-format
+msgid "Link management:"
+msgstr "Gestione collegamento:"
+
+#: heksedit.rc:846
+#, c-format
+msgid "<< &Add..."
+msgstr "<< &Aggiungi..."
+
+#: heksedit.rc:847
+#, c-format
+msgid "&Update list"
+msgstr "Elenco a&ggiornamento"
+
+#: heksedit.rc:849
+#, c-format
+msgid ">> &Delete"
+msgstr ">> &Elimina"
+
+#: heksedit.rc:850
+#, c-format
+msgid "&Move"
+msgstr "&Sposta"
+
+#: heksedit.rc:852
+#, c-format
+msgid "&Reload"
+msgstr "&Ricarica"
+
+#: heksedit.rc:853
+#, c-format
+msgid "&Close"
+msgstr "&Chiudi"
+
+#: heksedit.rc:859
+#, c-format
+msgid "Move/Copy bytes"
+msgstr "Sposta/copia byte"
+
+#: heksedit.rc:862
+#, c-format
+msgid "Operation:"
+msgstr "Operazione:"
+
+#: heksedit.rc:863
+#, c-format
+msgid "Start with (-) for negative length or movement backwards. Prefix with x for hex notation."
+msgstr "Inizia con (-) per lunghezza negativa o movimento all'indietro. Prefisso con x per la notazione esadecimale."
+
+#: heksedit.rc:864
+#: heksedit.rc:894
+#: heksedit.rc:1330
+#, c-format
+msgid "Move"
+msgstr "Sposta"
+
+#: heksedit.rc:866
+#, c-format
+msgid "Begin of the block:"
+msgstr "All'inizio del blocco:"
+
+#: heksedit.rc:868
+#, c-format
+msgid "End of the block:"
+msgstr "Fine del blocco:"
+
+#: heksedit.rc:870
+#, c-format
+msgid "Offset"
+msgstr "Offset"
+
+#: heksedit.rc:871
+#, c-format
+msgid "Length"
+msgstr "Lunghezza"
+
+#: heksedit.rc:872
+#, c-format
+msgid "Target:"
+msgstr "Obiettivo:"
+
+#: heksedit.rc:874
+#, c-format
+msgid "Bytes forward"
+msgstr "Byte in avanti"
+
+#: heksedit.rc:875
+#, c-format
+msgid "First byte offset"
+msgstr "Offset primo byte"
+
+#: heksedit.rc:876
+#, c-format
+msgid "Last byte offset"
+msgstr "Offset ultimo byte"
+
+#: heksedit.rc:884
+#, c-format
+msgid "Drag-drop"
+msgstr "Drag-drop"
+
+#: heksedit.rc:887
+#, c-format
+msgid "Clipboard format[s] to use:"
+msgstr "Formato appunti da usare:"
+
+#: heksedit.rc:891
+#, c-format
+msgid "Up"
+msgstr "Su"
+
+#: heksedit.rc:892
+#, c-format
+msgid "Down"
+msgstr "Giù"
+
+#: heksedit.rc:893
+#, c-format
+msgid "Data:"
+msgstr "Dati:"
+
+#: heksedit.rc:905
+#, c-format
+msgid "OLE Drag-drop options"
+msgstr "Opzioni OLE drag-drop"
+
+#: heksedit.rc:908
+#, c-format
+msgid "General"
+msgstr "Generale"
+
+#: heksedit.rc:909
+#, c-format
+msgid "Enable drop input"
+msgstr "Abilita rilascia input"
+
+#: heksedit.rc:911
+#, c-format
+msgid "Enable drag output"
+msgstr "Abilita trascina output"
+
+#: heksedit.rc:913
+#, c-format
+msgid "Enable scroll-delaying for drag-drop"
+msgstr "Abilita ritardo scorrimento per il drag-drop"
+
+#: heksedit.rc:915
+#, c-format
+msgid "Enable scroll-delaying for selecting"
+msgstr "Abilita selezione scorrimento per la selezione"
+
+#: heksedit.rc:917
+#, c-format
+msgid "Always give the opportunity to change between move and copy after a drop."
+msgstr "Quando rilasci dai sempre l'opportunità di scegliere tra spostamento e copia."
+
+#: heksedit.rc:921
+#, c-format
+msgid "CF_HDROP opens the files dropped."
+msgstr "CF_HDROP apre i file rilasciati."
+
+#: heksedit.rc:923
+#, c-format
+msgid "Drop \"BinaryData\" if present"
+msgstr "Rilascia \"dati binari\" se disponibili"
+
+#: heksedit.rc:926
+#, c-format
+msgid "Drop CF_TEXT if present"
+msgstr "Rilascia CF_TEXT se presente"
+
+#: heksedit.rc:929
+#, c-format
+msgid "Output"
+msgstr "Output"
+
+#: heksedit.rc:930
+#, c-format
+msgid "Drag \"BinaryData\""
+msgstr "Trascina \"dati binari\""
+
+#: heksedit.rc:933
+#, c-format
+msgid "Drag CF_TEXT as:"
+msgstr "Trascina CF_TEXT come:"
+
+#: heksedit.rc:936
+#, c-format
+msgid "Hexdump"
+msgstr "Dump hex"
+
+#: heksedit.rc:938
+#, c-format
+msgid "Special syntax (<bh:ff>...)"
+msgstr "Sintassi speciale (<bh:ff>...)"
+
+#: heksedit.rc:940
+#, c-format
+msgid "display (else digits)"
+msgstr "display (anche cifre)"
+
+#: heksedit.rc:943
+#, c-format
+msgid "Drag \"Rich Text Format\" (as hexdump)"
+msgstr "Trascina \"formato Rich Text\" (come dump esadecimale)"
+
+#: heksedit.rc:953
+#, c-format
+msgid "Multiple files dropped"
+msgstr "Scartati byte multipli"
+
+#: heksedit.rc:956
+#, c-format
+msgid "Select the file to open:"
+msgstr "Seleziona il file da aprire:"
+
+#: heksedit.rc:966
+#, c-format
+msgid "Delete"
+msgstr "Elimina"
+
+#: heksedit.rc:969
+#, c-format
+msgid "Start deleting at offset:"
+msgstr "Inizio eliminazione all'offset:"
+
+#: heksedit.rc:971
+#, c-format
+msgid "Delete how many bytes"
+msgstr "Elimina quanti byte"
+
+#: heksedit.rc:972
+#, c-format
+msgid "Delete up to and including offset:"
+msgstr "Elimina fino a incluso offset:"
+
+#: heksedit.rc:974
+#, c-format
+msgid "Number of bytes to delete:"
+msgstr "Numero byte da eliminare:"
+
+#: heksedit.rc:990
+#, c-format
+msgid "New"
+msgstr "Nuovo"
+
+#: heksedit.rc:995
+#, c-format
+msgid "Save"
+msgstr "Salva"
+
+#: heksedit.rc:999
+#, c-format
+msgid "Help"
+msgstr "Aiuto"
+
+#: heksedit.rc:1010
+#, c-format
+msgid "Goto next sector"
+msgstr "Vai al settore successivo"
+
+#: heksedit.rc:1011
+#, c-format
+msgid "Goto previous sector"
+msgstr "Vai al settore precedente"
+
+#: heksedit.rc:1012
+#, c-format
+msgid "Goto first sector"
+msgstr "Vai al primo settore"
+
+#: heksedit.rc:1013
+#, c-format
+msgid "Goto last sector"
+msgstr "Vai all'ultimo settore"
+
+#: heksedit.rc:1019
+#, c-format
+msgid "Frhed"
+msgstr "Frhed"
+
+#: heksedit.rc:1020
+#, c-format
+msgid "Version %u.%u.%u"
+msgstr "Versione %u.%u.%u"
+
+#: heksedit.rc:1021
+#, c-format
+msgid "%d) 0x%zx=%zu to 0x%zx=%zu (%zu bytes)"
+msgstr "%d) 0x%zx=%zu to 0x%zx=%zu (%zu byte)"
+
+#: heksedit.rc:1022
+#, c-format
+msgid "All Files (*.*)|*.*|"
+msgstr "Tutti i file (*.*)|*.*|"
+
+#: heksedit.rc:1023
+#, c-format
+msgid "Untitled"
+msgstr "Senza titolo"
+
+#: heksedit.rc:1026
+#, c-format
+msgid "READ"
+msgstr "LETTURA"
+
+#: heksedit.rc:1027
+#, c-format
+msgid "OVR"
+msgstr "SVR"
+
+#: heksedit.rc:1028
+#, c-format
+msgid "INS"
+msgstr "INS"
+
+#: heksedit.rc:1029
+#: heksedit.rc:1290
+#, c-format
+msgid "L"
+msgstr "L"
+
+#: heksedit.rc:1030
+#: heksedit.rc:1287
+#, c-format
+msgid "B"
+msgstr "B"
+
+#: heksedit.rc:1031
+#, c-format
+msgid ""
+"You are trying to open a link file.\n"
+"Click on Yes if you want to open the file linked to,\n"
+"or click on No if you want to open the link file itself.\n"
+"Choose Cancel if you want to abort opening."
+msgstr ""
+"Stai tentando di aprire un file collegamento.\n"
+"Seleziona 'Sì' se vuoi aprire il file collegato,\n"
+"o seleziona 'No' se vuoi aprire il file collegamento stesso.\n"
+"Se vuoi interrompere l'apertura seleziona 'Annulla'."
+
+#: heksedit.rc:1037
+#, c-format
+msgid "Start offset not recognized."
+msgstr "Offset iniziale non riconosciuto."
+
+#: heksedit.rc:1038
+#, c-format
+msgid "End offset not recognized."
+msgstr "Offset finale non riconosciuto."
+
+#: heksedit.rc:1039
+#, c-format
+msgid "Offset not recognized."
+msgstr "Offset non riconosciuto."
+
+#: heksedit.rc:1045
+#, c-format
+msgid "Error while reading from file."
+msgstr "Errore durante la lettura dal file."
+
+#: heksedit.rc:1046
+#, c-format
+msgid "Not enough memory."
+msgstr "Memoria insufficiente."
+
+#: heksedit.rc:1047
+#, c-format
+msgid "Number of bytes not recognized."
+msgstr "Numero byte non riconosciuti."
+
+#: heksedit.rc:1048
+#, c-format
+msgid "Error opening file."
+msgstr "Errore apertura file."
+
+#: heksedit.rc:1049
+#, c-format
+msgid "Not enough memory to load file."
+msgstr "Memoria insufficiente per caricare il file."
+
+#: heksedit.rc:1050
+#, c-format
+msgid "Could not save the file."
+msgstr "Impossibile salvare il file."
+
+#: heksedit.rc:1051
+#, c-format
+msgid ""
+"Could not backup file!\n"
+"Backup aborted, Save continuing."
+msgstr ""
+"Impossibile creare il backup del file!\n"
+"Backup interrotto, salva continuando."
+
+#: heksedit.rc:1052
+#, c-format
+msgid "Could not save partially opened file."
+msgstr "Impossibile salvare il file parzialmente aperto."
+
+#: heksedit.rc:1053
+#, c-format
+msgid "Could not move data in the file."
+msgstr "Impossibile spostare i dati nel file."
+
+#: heksedit.rc:1054
+#, c-format
+msgid "Could not resize the file."
+msgstr "Impossibile ridimensionare il file."
+
+#: heksedit.rc:1055
+#, c-format
+msgid "Could not seek in file."
+msgstr "Impossibile cercare nel file."
+
+#: heksedit.rc:1056
+#, c-format
+msgid "Could not write data to file."
+msgstr "Impossibile scrivere i dati nel file."
+
+#: heksedit.rc:1057
+#, c-format
+msgid ""
+"Help file\n"
+"%s\n"
+"not found!"
+msgstr ""
+"File della Guida in linea\n"
+"%s\n"
+"non trovato!"
+
+#: heksedit.rc:1058
+#, c-format
+msgid "Error code 0x%x occurred while opening file %s."
+msgstr "Si è verificato il codice errore 0x %x durante l'apertura del file %s."
+
+#: heksedit.rc:1059
+#, c-format
+msgid "Could not save preferences to registry."
+msgstr "Impossibile salvare le preferenze nel registro."
+
+#: heksedit.rc:1060
+#, c-format
+msgid "File is empty."
+msgstr "Il file è vuoto."
+
+#: heksedit.rc:1061
+#, c-format
+msgid "An error occurred when calling the text editor."
+msgstr "Si è verificato un errore nel richiamare l'editor di testo."
+
+#: heksedit.rc:1062
+#, c-format
+msgid "Could not insert data."
+msgstr "Impossibile inserire i dati."
+
+#: heksedit.rc:1063
+#, c-format
+msgid "Error checking file size"
+msgstr "Errore durante la verifica della dimensione file"
+
+#: heksedit.rc:1064
+#, c-format
+msgid "No data present. Cannot continue!"
+msgstr "Nessun dato presente. Impossibile continuare!"
+
+#: heksedit.rc:1065
+#, c-format
+msgid ""
+"Could not get text from the file.\n"
+"Cannot continue!"
+msgstr ""
+"Impossibile ottenere il testo dal file.\n"
+"Non è possibile continuare!"
+
+#: heksedit.rc:1071
+#, c-format
+msgid "KB"
+msgstr "KB"
+
+#: heksedit.rc:1072
+#, c-format
+msgid "MB"
+msgstr "MB"
+
+#: heksedit.rc:1073
+#, c-format
+msgid "GB"
+msgstr "GB"
+
+#: heksedit.rc:1074
+#, c-format
+msgid "TB"
+msgstr "TB"
+
+#: heksedit.rc:1080
+#, c-format
+msgid "Could not open the browser."
+msgstr "Impossibile aprire il browser."
+
+#: heksedit.rc:1081
+#, c-format
+msgid ""
+"File\n"
+"%s\n"
+"not found!"
+msgstr ""
+"File\n"
+"%s\n"
+"non trovato!"
+
+#: heksedit.rc:1087
+#, c-format
+msgid "Can not set bookmark at that position."
+msgstr "Impossibile impostare un segnalibro in quella posizione."
+
+#: heksedit.rc:1088
+#, c-format
+msgid "There already is a bookmark on that position."
+msgstr "Esiste già un segnalibro in quella posizione."
+
+#: heksedit.rc:1089
+#, c-format
+msgid "Can not set bookmark in empty file."
+msgstr "Impossibile impostare il segnalibro in un file vuoto."
+
+#: heksedit.rc:1090
+#, c-format
+msgid "Can not set any more bookmarks."
+msgstr "Impossibile impostare altri segnalibri."
+
+#: heksedit.rc:1091
+#, c-format
+msgid "Bookmark points to invalid position."
+msgstr "Il segnalibro punta ad una posizione non valida."
+
+#: heksedit.rc:1092
+#, c-format
+msgid "No bookmarks to remove."
+msgstr "Nessun segnalibro da rimuovere."
+
+#: heksedit.rc:1093
+#, c-format
+msgid "Remove all bookmarks?"
+msgstr "Vuoi rimuovere tutti i segnalibri?"
+
+#: heksedit.rc:1099
+#, c-format
+msgid "Number of bytes to append not recognized."
+msgstr "Numero byte da aggiungere non riconosciuto."
+
+#: heksedit.rc:1100
+#, c-format
+msgid "Not enough memory for appending."
+msgstr "Memoria insufficiente per l'aggiunta."
+
+#: heksedit.rc:1106
+#, c-format
+msgid "Offset: 0x%zx = %zd"
+msgstr "Offset: 0x%zx = %zd"
+
+#: heksedit.rc:1107
+#, c-format
+msgid "Value: 0x%02x, %d signed, %u unsigned."
+msgstr "Valore: 0x%02x, %d firmato, %u non firmato."
+
+#: heksedit.rc:1113
+#, c-format
+msgid "Choose file to compare with"
+msgstr "Scegli il file da confrontare con"
+
+#: heksedit.rc:1114
+#, c-format
+msgid "Error while opening file."
+msgstr "Errore nell'apertura del file."
+
+#: heksedit.rc:1115
+#, c-format
+msgid "%d areas of difference found."
+msgstr "Riscontrate %d aree di differenze."
+
+#: heksedit.rc:1116
+#, c-format
+msgid "Remaining loaded data size: %lld, size of file on disk: %lld."
+msgstr "Dimensione rimenante dati caricati: %lld, dimensione file nel disco: %lld."
+
+#: heksedit.rc:1117
+#, c-format
+msgid "Data matches exactly."
+msgstr "I dati corrispondono esattamente."
+
+#: heksedit.rc:1123
+#, c-format
+msgid "Cannot get access to clipboard."
+msgstr "Impossibile accedere agli appunti."
+
+#: heksedit.rc:1124
+#, c-format
+msgid "Cannot lock clipboard."
+msgstr "Impossibile bloccare gli appunti."
+
+#: heksedit.rc:1125
+#: heksedit.rc:1136
+#, c-format
+msgid "Not enough memory for copying."
+msgstr "Memoria insufficiente per la copia."
+
+#: heksedit.rc:1126
+#, c-format
+msgid ""
+"\n"
+"Do you want the above output to be copied to the clipboard?\n"
+msgstr ""
+"\n"
+"Vuoi copiare l'output qui sopra negli appunti?\n"
+
+#: heksedit.rc:1127
+#, c-format
+msgid "You need to select a clipboard format to use."
+msgstr "È necessario selezionare un formato appunti da utilizzare."
+
+#: heksedit.rc:1128
+#, c-format
+msgid ""
+"Could not get text from the clipboard.\n"
+"Cannot continue!"
+msgstr ""
+"Impossibile ottenere il testo dagli appunti.\n"
+"Non è possibile continuare!"
+
+#: heksedit.rc:1129
+#, c-format
+msgid ""
+"There is text on the clipboard.\n"
+"Do you want to import from\n"
+"the clipboard instead of a file?"
+msgstr ""
+"C'è del testo negli appunti.\n"
+"Vuoi importare dagli appunti\n"
+"invece che da un file?"
+
+#: heksedit.rc:1135
+#, c-format
+msgid "Can't copy more bytes than are present."
+msgstr "Impossibile copiare più byte di quanto ne siano presenti."
+
+#: heksedit.rc:1142
+#, c-format
+msgid "Can't cut more bytes than are present."
+msgstr "Impossibile tagliare più byte di quanto ne siano presenti."
+
+#: heksedit.rc:1143
+#, c-format
+msgid "Not enough memory for cutting to clipboard."
+msgstr "Memoria insufficiente per tagliare negli appunti."
+
+#: heksedit.rc:1144
+#, c-format
+msgid "Could not cut the data."
+msgstr "Impossibile tagliare i dati."
+
+#: heksedit.rc:1150
+#, c-format
+msgid "Can't delete more bytes than are present."
+msgstr "Impossibile eliminare più byte di quanto ne siano presenti."
+
+#: heksedit.rc:1151
+#, c-format
+msgid "Could not delete data."
+msgstr "Impossibile eliminare i dati."
+
+#: heksedit.rc:1157
+#, c-format
+msgid "Decimal value not recognized."
+msgstr "Valore decimale non riconosciuto."
+
+#: heksedit.rc:1158
+#, c-format
+msgid "Number of times not recognized."
+msgstr "Numero di volte non riconosciuto."
+
+#: heksedit.rc:1159
+#, c-format
+msgid "Invalid start offset."
+msgstr "Offset iniziale non valido."
+
+#: heksedit.rc:1160
+#, c-format
+msgid "Not enough space for writing decimal values."
+msgstr "Spazio insufficiente per scrivere valori decimali."
+
+#: heksedit.rc:1166
+#, c-format
+msgid "Number of times to paste must be at least 1."
+msgstr "Il numero di volte da incollare deve essere almeno 1."
+
+#: heksedit.rc:1167
+#, c-format
+msgid "Tried to paste zero-length array."
+msgstr "Hai tentato di incollare un array di lunghezza zero."
+
+#: heksedit.rc:1168
+#, c-format
+msgid "Not enough memory for inserting."
+msgstr "Memoria insufficiente per l'inserimento."
+
+#: heksedit.rc:1169
+#, c-format
+msgid "Not enough space for overwriting."
+msgstr "Spazio insufficiente per la sovrascrittura."
+
+#: heksedit.rc:1175
+#, c-format
+msgid "Can't fill a selection with a file of zero size."
+msgstr "Impossibile riempire una selezione con un file di dimensione zero."
+
+#: heksedit.rc:1176
+#, c-format
+msgid "Can't fill a selection with a string of zero size."
+msgstr "Impossibile riempire una selezione con una stringa di dimensione zero."
+
+#: heksedit.rc:1177
+#, c-format
+msgid "Too many bytes to fill with or some other error."
+msgstr "Troppi byte da riempire o qualche altro errore."
+
+#: heksedit.rc:1183
+#, c-format
+msgid "You have chosen an offset but it is negative, which is invalid."
+msgstr "Hai scelto un offset ma è negativo, il che non è valido."
+
+#: heksedit.rc:1184
+#, c-format
+msgid "The target value is invalid."
+msgstr "Il valore destinazione non è valido."
+
+#: heksedit.rc:1185
+#, c-format
+msgid "Cannot move/copy a block of zero length."
+msgstr "Impossibile spostare/copiare un blocco di lunghezza zero."
+
+#: heksedit.rc:1186
+#, c-format
+msgid "The chosen block extends into non-existent data."
+msgstr "Il blocco scelto si estende in dati inesistenti."
+
+#: heksedit.rc:1187
+#, c-format
+msgid "The block was not moved!"
+msgstr "Il blocco non è stato spostato!"
+
+#: heksedit.rc:1188
+#, c-format
+msgid "Cannot move/copy the block outside the data."
+msgstr "Impossibile spostare/copiare il blocco al di fuori dei dati."
+
+#: heksedit.rc:1194
+#, c-format
+msgid "&Size of file: %lld bytes. Load how many bytes:"
+msgstr "Dimen&sione file: %lld byte. Quanti byte caricare:"
+
+#: heksedit.rc:1195
+#, c-format
+msgid "Cannot open more than 2 GB of data."
+msgstr "Impossibile aprire più di 2 GB di dati."
+
+#: heksedit.rc:1196
+#, c-format
+msgid "Specified number of bytes to load greater than file size."
+msgstr "Numero byte specificato da caricare maggiore della dimensione del file."
+
+#: heksedit.rc:1197
+#, c-format
+msgid "Too many bytes to load."
+msgstr "Troppi byte da caricare."
+
+#: heksedit.rc:1203
+#, c-format
+msgid "Cannot reverse single byte."
+msgstr "Impossibile invertire singolo byte."
+
+#: heksedit.rc:1204
+#, c-format
+msgid "The chosen block extends into non-existent data. The offsets will be shifted to correct positions."
+msgstr "Il blocco scelto si estende in dati inesistenti. Gli offset verranno spostati nelle posizioni corrette."
+
+#: heksedit.rc:1210
+#, c-format
+msgid "Link names are \"Frhed.lnk\""
+msgstr "I nomi dei collegamenti sono \"Frhed.lnk\""
+
+#: heksedit.rc:1211
+#, c-format
+msgid "This folder already contains a file called \"Frhed.lnk\""
+msgstr "Questa cartella contiene già un file chiamato \"Frhed.lnk\""
+
+#: heksedit.rc:1212
+#, c-format
+msgid "\"Frhed.lnk\" can be added to this folder."
+msgstr "\"Frhed.lnk\" può essere aggiunto a questa cartella."
+
+#: heksedit.rc:1213
+#, c-format
+msgid "\"Frhed.lnk\" cannot be added to this folder."
+msgstr "\"Frhed.lnk\" non può essere aggiunto a questa cartella."
+
+#: heksedit.rc:1214
+#, c-format
+msgid "Frhed can start searching here."
+msgstr "Frhed può iniziare la ricerca qui."
+
+#: heksedit.rc:1215
+#, c-format
+msgid "Frhed cannot start the search from here."
+msgstr "Frhed non può avviare la ricerca da qui."
+
+#: heksedit.rc:1216
+#, c-format
+msgid "Could not save shortcut entries."
+msgstr "Impossibile salvare le voci di scelta rapida."
+
+#: heksedit.rc:1217
+#, c-format
+msgid "Cannot move more than 1 link at a time."
+msgstr "Impossibile spostare più di 1 collegamento alla volta."
+
+#: heksedit.rc:1218
+#, c-format
+msgid "No link selected to move."
+msgstr "Nessun collegamento selezionato da spostare."
+
+#: heksedit.rc:1219
+#, c-format
+msgid "Couldn't find the selected item."
+msgstr "Impossibile trovare l'elemento selezionato."
+
+#: heksedit.rc:1220
+#, c-format
+msgid "Place a link to Frhed in..."
+msgstr "Inserisci un collegamento a Frhed in..."
+
+#: heksedit.rc:1221
+#, c-format
+msgid "Move the link to Frhed to..."
+msgstr "Sposta il collegamento a Frhed in..."
+
+#: heksedit.rc:1222
+#, c-format
+msgid "There is already a link in that folder."
+msgstr "C'è già un collegamento in quella cartella."
+
+#: heksedit.rc:1223
+#, c-format
+msgid ""
+"Existing links to old versions of Frhed will be updated to this version.\n"
+"Are you sure you want to continue?"
+msgstr ""
+"I collegamenti esistenti alle vecchie versioni di Frhed saranno aggiornati a questa versione.\n"
+"Vuoi continuare?"
+
+#: heksedit.rc:1224
+#, c-format
+msgid "Pick a folder to start searching in."
+msgstr "Scegli una cartella in cui iniziare la ricerca."
+
+#: heksedit.rc:1225
+#, c-format
+msgid "No links selected to delete."
+msgstr "Nessun collegamento selezionato da eliminare."
+
+#: heksedit.rc:1231
+#, c-format
+msgid "Selection too large."
+msgstr "La selezione è troppo grande."
+
+#: heksedit.rc:1232
+#, c-format
+msgid "Could not find data."
+msgstr "Impossibile trovare i dati."
+
+#: heksedit.rc:1233
+#, c-format
+msgid "Findstring is zero bytes long."
+msgstr "La stringa da cercare è lunga zero byte."
+
+#: heksedit.rc:1234
+#, c-format
+msgid "Could not find any more occurrences."
+msgstr "Non sono disponibili ulteriori occorrenze."
+
+#: heksedit.rc:1235
+#, c-format
+msgid "String to find not specified."
+msgstr "Stringa da cercare non specificata."
+
+#: heksedit.rc:1241
+#, c-format
+msgid "You need to have Administrator privileges for getting list of drives."
+msgstr "Per ottenere l'elenco delle unità è necessario disporre dei privilegi di amministratore."
+
+#: heksedit.rc:1242
+#, c-format
+msgid "Unable to open drive."
+msgstr "Impossibile aprire l'unità."
+
+#: heksedit.rc:1243
+#, c-format
+msgid "Cylinders"
+msgstr "Cilindri"
+
+#: heksedit.rc:1244
+#, c-format
+msgid "Sectors"
+msgstr "Settori"
+
+#: heksedit.rc:1245
+#, c-format
+msgid "Tracks per cylinder"
+msgstr "Tracce per cilindro"
+
+#: heksedit.rc:1246
+#, c-format
+msgid "Sectors per track"
+msgstr "Settori per traccia"
+
+#: heksedit.rc:1247
+#, c-format
+msgid "Bytes per sector"
+msgstr "Byte per settore"
+
+#: heksedit.rc:1248
+#, c-format
+msgid "Total size in bytes"
+msgstr "Dimensione totale in byte"
+
+#: heksedit.rc:1249
+#, c-format
+msgid "%s:Sector %I64d"
+msgstr "%s:Settore %I64d"
+
+#: heksedit.rc:1250
+#, c-format
+msgid "Drive %d, Partition %d (%s)"
+msgstr "Unità %d, partizione %d (%s)"
+
+#: heksedit.rc:1251
+#, c-format
+msgid "Drive %d (%s)"
+msgstr "Unità %d ( %s)"
+
+#: heksedit.rc:1257
+#, c-format
+msgid ""
+"Not enough memory to import data.\n"
+"Cannot continue!\n"
+"Do you want to keep what has been found so far?"
+msgstr ""
+"Memoria insufficiente per importare i dati.\n"
+"Impossibile continuare!\n"
+"Vuoi conservare quanto trovato finora?"
+
+#: heksedit.rc:1258
+#, c-format
+msgid ""
+"The first offset found was 0x%llx, which is greater than zero.\n"
+"Do you want to insert %lld null bytes at the start of the data?"
+msgstr ""
+"Il primo offset trovato è stato 0x%llx, ovvero maggiore di zero.\n"
+"Vuoi inserire %lld byte nulli all'inizio dei dati?"
+
+#: heksedit.rc:1259
+#, c-format
+msgid ""
+"Invalid offset found.\n"
+"Ignore further invalid offsets?"
+msgstr ""
+"Trovato offset non valido.\n"
+"Vuoi ignorare ulteriori offset non validi?"
+
+#: heksedit.rc:1260
+#, c-format
+msgid ""
+"Character data does not agree with hex data.\n"
+"Ignore further mismatched data?\n"
+"NB: Hex data will be used when ignoring."
+msgstr ""
+"I dati caratteri non corrispondono ai dati esadecimali.\n"
+"Vuoi ignorare ulteriori dati non corrispondenti?\n"
+"NB: verranno usati i dati esadecimali al posto dei dati ignorati."
+
+#: heksedit.rc:1261
+#, c-format
+msgid ""
+"Illegal character in hex data.\n"
+"Cannot continue!\n"
+"Do you want to keep what has been found so far?"
+msgstr ""
+"Carattere non valido nei dati esadecimali.\n"
+"Impossibile continuare!\n"
+"Vuoi conservare quanto trovato finora?"
+
+#: heksedit.rc:1262
+#, c-format
+msgid ""
+"Unexpected end of data found.\n"
+"Cannot continue!\n"
+"Do you want to keep what has been found so far?"
+msgstr ""
+"È stata trovata la fine imprevista dei dati.\n"
+"Impossibile continuare!\n"
+"Vuoi conservare quanto trovato finora?"
+
+#: heksedit.rc:1263
+#, c-format
+msgid ""
+"Does this data have the same format as the Frhed display?\n"
+"This data contains "
+msgstr ""
+"Questi dati hanno lo stesso formato del display FRHED?\n"
+"Questi dati contengono "
+
+#: heksedit.rc:1264
+#, c-format
+msgid "characters other than whitespace and hexdigits (like Frhed display)."
+msgstr "caratteri diversi da spazi bianchi e cifre esadecimali (come display frhed)."
+
+#: heksedit.rc:1265
+#, c-format
+msgid "only whitespace and hexdigits (unlike Frhed display)."
+msgstr "solo spazi bianchi e cifre esadecimali (a differenza della visualizzazione Frhed)."
+
+#: heksedit.rc:1271
+#, c-format
+msgid "Data to replace must be selected."
+msgstr "I dati da sostituire devono essere selezionati."
+
+#: heksedit.rc:1272
+#, c-format
+msgid "Could not delete selected data."
+msgstr "Impossibile eliminare i dati selezionati."
+
+#: heksedit.rc:1273
+#, c-format
+msgid "Replacing failed."
+msgstr "Sostituzione non riuscita."
+
+#: heksedit.rc:1274
+#, c-format
+msgid "Could not translate text to binary."
+msgstr "Impossibile tradurre il testo in binario."
+
+#: heksedit.rc:1275
+#, c-format
+msgid "To-replace and replace-with data are same."
+msgstr "'Da sostituire' e 'Sostituire con' hanno gli stessi valori."
+
+#: heksedit.rc:1276
+#, c-format
+msgid "%d occurrences replaced."
+msgstr "%d occorrenze sostituite."
+
+#: heksedit.rc:1277
+#, c-format
+msgid "Could not use selection as replace target."
+msgstr "Impossibile usare la selezione come sostituto destinazione."
+
+#: heksedit.rc:1283
+#, c-format
+msgid "Selected: Offset %zd=0x%zx to %zd=0x%zx (%zd byte(s))"
+msgstr "Offset selezionato %zd=0x%zx to %zd=0x%zx (%zd byte)"
+
+#: heksedit.rc:1284
+#, c-format
+msgid "Offset %zd=0x%zx"
+msgstr "Offset %zd=0x%zx"
+
+#: heksedit.rc:1285
+#, c-format
+msgid "Bits"
+msgstr "Bit"
+
+#: heksedit.rc:1286
+#, c-format
+msgid "Unsigned"
+msgstr "Non firmato"
+
+#: heksedit.rc:1288
+#, c-format
+msgid "END"
+msgstr "FINE"
+
+#: heksedit.rc:1289
+#, c-format
+msgid "W"
+msgstr "W"
+
+#: heksedit.rc:1291
+#, c-format
+msgid "Signed"
+msgstr "Firmato"
+
+#: heksedit.rc:1292
+#, c-format
+msgid "Size"
+msgstr "Dimensione"
+
+#: heksedit.rc:1299
+#, c-format
+msgid "Template file:"
+msgstr "File modello:"
+
+#: heksedit.rc:1300
+#, c-format
+msgid "Applied at offset:"
+msgstr "Applica all'offset:"
+
+#: heksedit.rc:1301
+#, c-format
+msgid "= %d (signed) = %u (unsigned) = 0x%x = '%c'"
+msgstr "= %d (firmati) = %u (non firmati) = 0x%x = '%c'"
+
+#: heksedit.rc:1302
+#: heksedit.rc:1305
+#: heksedit.rc:1307
+#, c-format
+msgid "= %d (signed) = %u (unsigned) = 0x%x"
+msgstr "= %d (firmati) = %u (non firmati) = 0x%x"
+
+#: heksedit.rc:1303
+#, c-format
+msgid "ERROR: not enough space for byte-size data."
+msgstr "ERRORE: spazio insufficiente per i dati dimensioni byte."
+
+#: heksedit.rc:1304
+#, c-format
+msgid "ERROR: missing variable name."
+msgstr "ERRORE: nome variabile mancante."
+
+#: heksedit.rc:1306
+#, c-format
+msgid "ERROR: not enough space for WORD-size data."
+msgstr "ERRORE: spazio insufficiente per i dati dimensioni WORD."
+
+#: heksedit.rc:1308
+#, c-format
+msgid "ERROR: not enough space for DWORD-size data."
+msgstr "ERRORE: spazio insufficiente per i dati di dimensioni DWORD."
+
+#: heksedit.rc:1309
+#, c-format
+msgid "= %f = 0x%x"
+msgstr "= %f = 0x%x"
+
+#: heksedit.rc:1310
+#, c-format
+msgid "ERROR: not enough space for float-size data."
+msgstr "ERRORE: spazio insufficiente per i dati di dimensioni floating."
+
+#: heksedit.rc:1311
+#, c-format
+msgid "= %g"
+msgstr "= %g"
+
+#: heksedit.rc:1312
+#, c-format
+msgid "ERROR: not enough space for double-size data."
+msgstr "ERRORE: spazio insufficiente per i dati a doppia dimensione."
+
+#: heksedit.rc:1313
+#, c-format
+msgid "ERROR: Unknown variable type:"
+msgstr "ERRORE: tipo variabile sconosciuto:"
+
+#: heksedit.rc:1319
+#, c-format
+msgid "-> Length of template = %zu bytes."
+msgstr "-> Dimensione modello = %zu byte."
+
+#: heksedit.rc:1320
+#, c-format
+msgid "Template files (*.tpl)\0*.tpl\0\0"
+msgstr "File modello (*.tpl)\0*.tpl\0\0"
+
+#: heksedit.rc:1321
+#, c-format
+msgid "Choose template file"
+msgstr "Scegli file modello"
+
+#: heksedit.rc:1322
+#, c-format
+msgid "Could not open template file %s."
+msgstr "Impossibile aprire il file modello %s."
+
+#: heksedit.rc:1323
+#, c-format
+msgid "Could not load template from file %s."
+msgstr "Impossibile caricare il modello dal file %s."
+
+#: heksedit.rc:1329
+#, c-format
+msgid "Select an item to move."
+msgstr "Seleziona un elemento da spostare."
+
+#: heksedit.rc:1333
+#, c-format
+msgid "No data to insert"
+msgstr "Nessun dato da inserire"
+
+#: heksedit.rc:1334
+#, c-format
+msgid "TYMED_ISTORAGE is not supported for drag-drop."
+msgstr "Per il trascinamento non è supportato TYMED_ISTORAGE."
+
+#: heksedit.rc:1340
+#, c-format
+msgid ""
+"Float size value:\n"
+"%g\n"
+msgstr ""
+"Valore dimensione in virgola mobile:\n"
+"%g\n"
+
+#: heksedit.rc:1341
+#, c-format
+msgid "Not enough space for float size value.\n"
+msgstr "Spazio insufficiente per il valore della dimensione virgola mobile.\n"
+
+#: heksedit.rc:1342
+#, c-format
+msgid ""
+"\n"
+"Double size value:\n"
+"%g\n"
+msgstr ""
+"\n"
+"Valore doppia dimensione:\n"
+"%g\n"
+
+#: heksedit.rc:1343
+#, c-format
+msgid ""
+"\n"
+"Not enough space for double size value.\n"
+msgstr ""
+"\n"
+"Spazio insufficiente per il valore doppia dimensione.\n"
+
+#: heksedit.rc:1344
+#, c-format
+msgid "File name and path: "
+msgstr "Nome e percorso file: "
+
+#: heksedit.rc:1345
+#, c-format
+msgid ""
+"\n"
+"Partially opened at offset 0x%zx = %zd.\n"
+"Number of bytes read: %zd = %zd kilobytes.\n"
+msgstr ""
+"\n"
+"Parzialmente aperto all'offset 0x %zx = %zd.\n"
+"Numero  byte letti: %zd = %zd kilobyte.\n"
+
+#: heksedit.rc:1346
+#, c-format
+msgid ""
+"\n"
+"File size: %zu bytes = %zu kilobytes.\n"
+msgstr ""
+"\n"
+"Dimensione file: %zu byte = %zu kilobyte.\n"
+
+#: heksedit.rc:1347
+#, c-format
+msgid ""
+"\n"
+"Number of hexdump lines: %zu.\n"
+msgstr ""
+"\n"
+"Numero linee hexdump: %zu.\n"
+
+#: heksedit.rc:1348
+#, c-format
+msgid "This file could not be accessed and will be removed from the MRU list."
+msgstr "Non è stato possibile accedere a questo file e quindi il file verrà rimosso dall'elenco MRU."
+
+#: heksedit.rc:1349
+#, c-format
+msgid "Really reset colors to default values?"
+msgstr "Vuoi ripristinare i colori ai valori predefiniti?"
+
+#: heksedit.rc:1350
+#, c-format
+msgid "Are you sure you want to delete this file?"
+msgstr "Vuoi eliminare questo file?"
+
+#: heksedit.rc:1351
+#, c-format
+msgid "Could not delete file."
+msgstr "Impossibile eliminare il file."
+
+#: heksedit.rc:1352
+#, c-format
+msgid "Really adopt the operating system colour scheme?"
+msgstr "Vuoi usare la combinazione di colori del sistema operativo?"
+
+#: heksedit.rc:1358
+#, c-format
+msgid "Do you want to save your changes?"
+msgstr "Vuoi salvare le modifiche?"
+
+#: heksedit.rc:1364
+#, c-format
+msgid "Hexdump saved."
+msgstr "Dump esadecimale salvato."
+
+#: heksedit.rc:1365
+#, c-format
+msgid "Could not save Hexdump."
+msgstr "Impossibile salvare dump esadecimale."
+
+#: heksedit.rc:1366
+#, c-format
+msgid "Not enough memory for copying hexdump to clipboard."
+msgstr "Memoria insufficiente per copiare il dump esadecimale negli appunti."
+
+#: heksedit.rc:1367
+#, c-format
+msgid "Could not copy hexdump to clipboard."
+msgstr "Impossibile copiare dump esadecimale negli appunti."
+
+#: heksedit.rc:1368
+#, c-format
+msgid "Hex Dump files(*.txt,*.hex)|*.txt;*.hex|All Files (*.*)|*.*|"
+msgstr "File dump esadecimale (*.txt,*.hex)|*.txt;*.hex|Tutti i file (*.*)|*.*|"
+

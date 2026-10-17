@@ -1,0 +1,62 @@
+﻿# This file is from WinMerge <https://winmerge.org/>
+# Released under the "GNU General Public License"
+#
+# Translator:
+# Hugo Carvalho <hugokarvalho@hotmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WinMerge Shell Extension\n"
+"Report-Msgid-Bugs-To: https://github.com/WinMerge/winmerge/issues\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-02-28 14:48+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese <winmerge-translate@lists.sourceforge.net>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../../ShellExtension/Languages\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#, c-format
+msgid "AFX_TARG_ENU"
+msgstr "AFX_TARG_PTG"
+
+#, c-format
+msgid "LANG_ENGLISH, SUBLANG_ENGLISH_US"
+msgstr "LANG_PORTUGUESE, SUBLANG_PORTUGUESE"
+
+#, c-format
+msgid "ShellExtension"
+msgstr "ShellExtension"
+
+#, c-format
+msgid "Win&Merge"
+msgstr "Win&Merge"
+
+#, c-format
+msgid "Compare &As"
+msgstr "Comparar c&omo"
+
+#, c-format
+msgid "&Compare"
+msgstr "&Comparar"
+
+#, c-format
+msgid "Compare&..."
+msgstr "Comparar&..."
+
+#, c-format
+msgid "Select &Left"
+msgstr "Selecionar à &esquerda"
+
+#, c-format
+msgid "Select &Middle"
+msgstr "Selecionar o do &meio"
+
+#, c-format
+msgid "Re-select &Left"
+msgstr "Selecionar novamente à &esquerda"

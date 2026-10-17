@@ -1,0 +1,183 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Shared vector document shape. All icons scale without a bitmap or font dependency. -->
+  <DrawingGroup x:Key="FileDocumentBase">
+    <GeometryDrawing Brush="#FAFCFF" Geometry="M4,2 L14,2 20,8 20,22 4,22 Z">
+      <GeometryDrawing.Pen><Pen Brush="#9AAABD" Thickness="1" /></GeometryDrawing.Pen>
+    </GeometryDrawing>
+    <GeometryDrawing Brush="#E5ECF5" Geometry="M14,2 L14,8 20,8 Z">
+      <GeometryDrawing.Pen><Pen Brush="#9AAABD" Thickness="1" /></GeometryDrawing.Pen>
+    </GeometryDrawing>
+  </DrawingGroup>
+
+  <DrawingImage x:Key="FileIconFolder">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="#E4AD39" Geometry="M2,5 L9,5 11,7 22,7 22,21 2,21 Z" />
+        <GeometryDrawing Brush="#F6C75A" Geometry="M2,9 L22,9 22,21 2,21 Z">
+          <GeometryDrawing.Pen><Pen Brush="#D6A136" Thickness="1" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconFolderOpen">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="#E4AD39" Geometry="M2,5 L9,5 11,7 21,7 21,21 2,21 Z" />
+        <GeometryDrawing Brush="#F8D477" Geometry="M5,10 L23,10 20,21 2,21 Z">
+          <GeometryDrawing.Pen><Pen Brush="#D6A136" Thickness="1" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <DrawingImage x:Key="FileIconUnknown">
+    <DrawingImage.Drawing><DrawingGroup><StaticResource ResourceKey="FileDocumentBase" /></DrawingGroup></DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconText">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Geometry="M7,11 L17,11 M7,14 L17,14 M7,17 L14,17">
+          <GeometryDrawing.Pen><Pen Brush="#627C9A" Thickness="1.5" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#3CA578" Geometry="M6,18 L10,12 13,16 16,13 18,18 Z" />
+        <GeometryDrawing Brush="#E7B24B"><GeometryDrawing.Geometry><EllipseGeometry Center="8,9" RadiusX="1.6" RadiusY="1.6" /></GeometryDrawing.Geometry></GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconArchive">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="#F4C86D" Geometry="M3,4 L21,4 21,22 3,22 Z">
+          <GeometryDrawing.Pen><Pen Brush="#B98832" Thickness="1" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="#BE8934" Geometry="M3,4 L21,4 21,8 3,8 Z" />
+        <GeometryDrawing Brush="#765D3C" Geometry="M10,4 L12,4 12,7 10,7 Z M12,7 L14,7 14,10 12,10 Z M10,10 L12,10 12,13 10,13 Z M12,13 L14,13 14,16 12,16 Z M10,16 L14,16 14,20 10,20 Z" />
+        <GeometryDrawing Brush="#F4C86D" Geometry="M11,17 L13,17 13,19 11,19 Z" />
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <DrawingImage x:Key="FileIconWord">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#2A6BC3" Geometry="M2,10 L18,10 18,21 2,21 Z" />
+        <GeometryDrawing Geometry="M5,13 L6.5,18 9,14 11.5,18 13,13">
+          <GeometryDrawing.Pen><Pen Brush="White" Thickness="1.6" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconExcel">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#278454" Geometry="M2,10 L18,10 18,21 2,21 Z" />
+        <GeometryDrawing Geometry="M6,13 L12,18 M12,13 L6,18">
+          <GeometryDrawing.Pen><Pen Brush="White" Thickness="1.8" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconPowerPoint">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#D06B3D" Geometry="M2,10 L18,10 18,21 2,21 Z" />
+        <GeometryDrawing Geometry="M7,19 L7,12 L11,12 Q14,12 14,14.5 Q14,17 11,17 L7,17">
+          <GeometryDrawing.Pen><Pen Brush="White" Thickness="1.6" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconPdf">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#D94B53" Geometry="M2,10 L18,10 18,21 2,21 Z" />
+        <GeometryDrawing Geometry="M6,18 Q13,6 12,13 Q11,18 6,18 Q11,15 16,18 M11,13 L14,18">
+          <GeometryDrawing.Pen><Pen Brush="White" Thickness="1.1" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconCode">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Geometry="M9,11 L5,15 9,19 M15,11 L19,15 15,19 M13,11 L11,19">
+          <GeometryDrawing.Pen><Pen Brush="#8760BE" Thickness="1.5" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconConfiguration">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#627C9A" Geometry="M10,10 L14,10 14.5,12 17,13 18,16 16,18 15,20 11,20 10,18 7,17 7,14 9,12 Z" />
+        <GeometryDrawing Brush="#FAFCFF"><GeometryDrawing.Geometry><EllipseGeometry Center="12.5,15" RadiusX="2" RadiusY="2" /></GeometryDrawing.Geometry></GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <DrawingImage x:Key="FileIconAudio">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Brush="#BE589C" Geometry="M11,9 L17,7 17,17 15.5,17 15.5,10 12.5,11 12.5,19 11,19 Z" />
+        <GeometryDrawing Brush="#BE589C"><GeometryDrawing.Geometry><EllipseGeometry Center="9.5,19" RadiusX="3" RadiusY="2" /></GeometryDrawing.Geometry></GeometryDrawing>
+        <GeometryDrawing Brush="#BE589C"><GeometryDrawing.Geometry><EllipseGeometry Center="14,17" RadiusX="3" RadiusY="2" /></GeometryDrawing.Geometry></GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconVideo">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="#7863AE" Geometry="M2,4 L22,4 22,21 2,21 Z" />
+        <GeometryDrawing Brush="#C6BBE2" Geometry="M3,5 L5,5 5,7 3,7 Z M19,5 L21,5 21,7 19,7 Z M3,18 L5,18 5,20 3,20 Z M19,18 L21,18 21,20 19,20 Z" />
+        <GeometryDrawing Brush="White" Geometry="M9,8 L16,12.5 9,17 Z" />
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconApplication">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="#F2F8FA" Geometry="M2,4 L22,4 22,21 2,21 Z">
+          <GeometryDrawing.Pen><Pen Brush="#528D9C" Thickness="1" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="#528D9C" Geometry="M2,4 L22,4 22,9 2,9 Z" />
+        <GeometryDrawing Brush="#83B6C3" Geometry="M5,12 L10,12 10,18 5,18 Z M13,12 L19,12 19,14 13,14 Z M13,16 L19,16 19,18 13,18 Z" />
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconDatabase">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing Brush="#8C74B5" Geometry="M4,6 C4,1 20,1 20,6 L20,19 C20,24 4,24 4,19 Z" />
+        <GeometryDrawing Geometry="M4,6 C4,11 20,11 20,6 M4,12 C4,17 20,17 20,12 M4,18 C4,23 20,23 20,18">
+          <GeometryDrawing.Pen><Pen Brush="#DDD3ED" Thickness="1.2" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <DrawingImage x:Key="FileIconFont">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <StaticResource ResourceKey="FileDocumentBase" />
+        <GeometryDrawing Geometry="M6,19 L10,10 14,19 M7.5,16 L12.5,16 M14,15 Q19,12 18,17 L18,19 M18,16 Q13,16 15,19 Q17,20 18,18">
+          <GeometryDrawing.Pen><Pen Brush="#3F597A" Thickness="1.4" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+</ResourceDictionary>

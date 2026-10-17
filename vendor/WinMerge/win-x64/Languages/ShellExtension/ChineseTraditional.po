@@ -1,0 +1,59 @@
+﻿# This file is from WinMerge <https://winmerge.org/>
+# Released under the "GNU General Public License"
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WinMerge Shell Extension\n"
+"Report-Msgid-Bugs-To: https://github.com/WinMerge/winmerge/issues\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: SiderealArt <admin@siderealart.me>\n"
+"Language-Team: ChineseTraditional <winmerge-translate@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ../../ShellExtension/Languages\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_TW\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#, c-format
+msgid "AFX_TARG_ENU"
+msgstr "AFX_TARG_CHT"
+
+#, c-format
+msgid "LANG_ENGLISH, SUBLANG_ENGLISH_US"
+msgstr "LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL"
+
+#, c-format
+msgid "ShellExtension"
+msgstr "系統介面延伸"
+
+#, c-format
+msgid "Win&Merge"
+msgstr "Win&Merge"
+
+#, c-format
+msgid "Compare &As"
+msgstr "比較為(&A)"
+
+#, c-format
+msgid "&Compare"
+msgstr "比較 (&C)"
+
+#, c-format
+msgid "Compare&..."
+msgstr "比較&..."
+
+#, c-format
+msgid "Select &Left"
+msgstr "選擇左側 (&L)"
+
+#, c-format
+msgid "Select &Middle"
+msgstr "選擇中間 (&M)"
+
+#, c-format
+msgid "Re-select &Left"
+msgstr "重新選擇左側 (&L)"

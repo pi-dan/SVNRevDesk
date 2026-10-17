@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <BundledWinMergeDirectory>$(MSBuildThisFileDirectory)..\vendor\WinMerge\win-x64\</BundledWinMergeDirectory>
+    <BundledWinMergeArchive>$(BaseIntermediateOutputPath)$(Configuration)\$(TargetFramework)\BundledWinMerge.zip</BundledWinMergeArchive>
+  </PropertyGroup>
+  <ItemGroup>
+    <BundledWinMergeSourceFile Include="$(BundledWinMergeDirectory)**\*" />
+    <EmbeddedResource Include="$(BundledWinMergeArchive)" LogicalName="SVNRevDesk.BundledWinMerge.zip" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)..\vendor\WinMerge\win-x64.sha256.json"
+                      LogicalName="SVNRevDesk.BundledWinMerge.manifest.json" />
+  </ItemGroup>
+  <Target Name="ValidateBundledWinMerge" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(BundledWinMergeDirectory)WinMergeU.exe')"
+           Text="缺少内置 WinMerge。请恢复 vendor/WinMerge/win-x64。" />
+    <ReadLinesFromFile File="$(MSBuildThisFileDirectory)..\vendor\WinMerge\win-x64.files">
+      <Output TaskParameter="Lines" ItemName="RequiredBundledWinMergeFile" />
+    </ReadLinesFromFile>
+    <Error Condition="!Exists('$(BundledWinMergeDirectory)%(RequiredBundledWinMergeFile.Identity)')"
+           Text="内置 WinMerge 文件缺失：%(RequiredBundledWinMergeFile.Identity)。请恢复完整分发包。" />
+  </Target>
+  <Target Name="CreateBundledWinMergeArchive" BeforeTargets="PrepareResources"
+          DependsOnTargets="ValidateBundledWinMerge"
+          Inputs="@(BundledWinMergeSourceFile);$(MSBuildThisFileFullPath)"
+          Outputs="$(BundledWinMergeArchive)">
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(BundledWinMergeArchive)'))" />
+    <ZipDirectory SourceDirectory="$(BundledWinMergeDirectory)" DestinationFile="$(BundledWinMergeArchive)" Overwrite="true" />
+    <ItemGroup><FileWrites Include="$(BundledWinMergeArchive)" /></ItemGroup>
+  </Target>
+</Project>

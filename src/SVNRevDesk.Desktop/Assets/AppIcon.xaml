@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Folder and three revision nodes; keep the silhouette readable at 16 pixels. -->
+  <DrawingImage x:Key="AppIcon">
+    <DrawingImage.Drawing>
+      <DrawingGroup>
+        <GeometryDrawing>
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+              <GradientStop Color="#338ADB" Offset="0" />
+              <GradientStop Color="#174D96" Offset="1" />
+            </LinearGradientBrush>
+          </GeometryDrawing.Brush>
+          <GeometryDrawing.Geometry><RectangleGeometry Rect="12,12,232,232" RadiusX="48" RadiusY="48" /></GeometryDrawing.Geometry>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="#E8AE3E" Geometry="M44,99 Q44,89 54,89 L89,89 106,106 199,106 Q209,106 209,116 L209,193 Q209,203 199,203 L54,203 Q44,203 44,193 Z" />
+        <GeometryDrawing Geometry="M44,124 L209,124 209,193 Q209,203 199,203 L54,203 Q44,203 44,193 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Color="#FFE090" Offset="0" />
+              <GradientStop Color="#F5BE51" Offset="1" />
+            </LinearGradientBrush>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M119,178 L119,82 M119,147 C119,126 181,151 181,108">
+          <GeometryDrawing.Pen><Pen Brush="#1958A5" Thickness="19" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M119,178 L119,82 M119,147 C119,126 181,151 181,108">
+          <GeometryDrawing.Pen><Pen Brush="#FFFFFF" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="#FFFFFF">
+          <GeometryDrawing.Geometry><EllipseGeometry Center="119,82" RadiusX="14" RadiusY="14" /></GeometryDrawing.Geometry>
+          <GeometryDrawing.Pen><Pen Brush="#1958A5" Thickness="6" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="#FFFFFF">
+          <GeometryDrawing.Geometry><EllipseGeometry Center="119,178" RadiusX="14" RadiusY="14" /></GeometryDrawing.Geometry>
+          <GeometryDrawing.Pen><Pen Brush="#1958A5" Thickness="6" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="#65D7E4">
+          <GeometryDrawing.Geometry><EllipseGeometry Center="181,108" RadiusX="14" RadiusY="14" /></GeometryDrawing.Geometry>
+          <GeometryDrawing.Pen><Pen Brush="#1958A5" Thickness="6" /></GeometryDrawing.Pen>
+        </GeometryDrawing>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+</ResourceDictionary>

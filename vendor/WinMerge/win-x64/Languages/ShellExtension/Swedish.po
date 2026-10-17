@@ -1,0 +1,58 @@
+﻿# This file is from WinMerge <https://winmerge.org/>
+# Released under the "GNU General Public License"
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WinMerge Shell Extension\n"
+"Report-Msgid-Bugs-To: https://github.com/WinMerge/winmerge/issues\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: pgert <pgert@yahoo.se>\n"
+"Language-Team: Swedish <winmerge-translate@lists.sourceforge.net>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../../ShellExtension/Languages\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#, c-format
+msgid "AFX_TARG_ENU"
+msgstr "AFX_TARG_SVE"
+
+#, c-format
+msgid "LANG_ENGLISH, SUBLANG_ENGLISH_US"
+msgstr "LANG_SWEDISH, SUBLANG_DEFAULT"
+
+#, c-format
+msgid "ShellExtension"
+msgstr "ShellExtension"
+
+#, c-format
+msgid "Win&Merge"
+msgstr "WinMerge"
+
+#, c-format
+msgid "Compare &As"
+msgstr "Jämför som"
+
+#, c-format
+msgid "&Compare"
+msgstr "Jämför"
+
+#, c-format
+msgid "Compare&..."
+msgstr "Jämför..."
+
+#, c-format
+msgid "Select &Left"
+msgstr "Välj Vänster"
+
+#, c-format
+msgid "Select &Middle"
+msgstr "Välj Mitter"
+
+#, c-format
+msgid "Re-select &Left"
+msgstr "Åter-välj Vänster"

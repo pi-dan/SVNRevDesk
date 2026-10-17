@@ -1,0 +1,74 @@
+<Window x:Class="SVNRevDesk.Desktop.Views.CommitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:SVNRevDesk.Desktop.Converters"
+        Title="提交" Icon="../Assets/AppIcon.ico" Width="980" Height="710" MinWidth="760" MinHeight="550"
+        WindowStartupLocation="CenterOwner">
+  <Window.Resources>
+    <converters:FileIconConverter x:Key="FileIconConverter" />
+  </Window.Resources>
+  <Border Padding="20" Background="{StaticResource PageBackground}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="130" />
+      <RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <StackPanel Margin="0,0,0,14">
+      <DockPanel><TextBlock Text="提交至：" FontWeight="SemiBold" />
+        <TextBlock Text="{Binding Destination}" ToolTip="{Binding Destination}" TextTrimming="CharacterEllipsis" Foreground="{StaticResource AccentBrush}" />
+      </DockPanel>
+      <TextBlock Text="{Binding LocalRoot}" ToolTip="{Binding LocalRoot}" TextTrimming="CharacterEllipsis"
+                 Foreground="{StaticResource MutedText}" FontSize="12" Margin="0,5,0,0" />
+    </StackPanel>
+    <TextBlock Grid.Row="1" Text="提交说明（可选）" FontWeight="SemiBold" Margin="0,0,0,7" />
+    <TextBox x:Name="MessageBox" Grid.Row="2" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
+             AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top" />
+    <DockPanel Grid.Row="3" Margin="0,16,0,8" LastChildFill="True">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+        <Button Content="全选" Click="SelectAll_Click" /><Button Content="取消全选" Click="ClearSelection_Click" />
+        <Button Content="已版本控制" Click="SelectVersioned_Click" /><Button Content="未版本控制" Click="SelectUnversioned_Click" />
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center">
+        <TextBlock Text="变更列表" FontWeight="SemiBold" />
+      </StackPanel>
+    </DockPanel>
+    <DataGrid x:Name="ChangesGrid" Grid.Row="4" ItemsSource="{Binding ItemsView}" SelectionMode="Extended"
+              RowHeight="36" CanUserReorderColumns="False" EnableColumnVirtualization="False">
+      <DataGrid.RowStyle><Style TargetType="DataGridRow" BasedOn="{StaticResource FileRowStyle}">
+        <Setter Property="ToolTip" Value="{Binding Change.Detail, Converter={StaticResource ToolTipTextConverter}}" />
+      </Style></DataGrid.RowStyle>
+      <DataGrid.Columns>
+        <DataGridTemplateColumn Header="提交" Width="56" CanUserSort="False">
+          <DataGridTemplateColumn.CellTemplate><DataTemplate>
+            <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding Change.CanCommit}" HorizontalAlignment="Center" ToolTip="{Binding Change.Detail, Converter={StaticResource ToolTipTextConverter}}" />
+          </DataTemplate></DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="路径" Width="*" MinWidth="220" SortMemberPath="Change.RelativePath">
+          <DataGridTemplateColumn.CellTemplate><DataTemplate>
+            <DockPanel LastChildFill="True" ToolTip="{Binding Change.Path}">
+              <Image Source="{Binding Change, Converter={StaticResource FileIconConverter}}" Width="20" Height="20" Margin="0,0,8,0" />
+              <TextBlock Text="{Binding Change.RelativePath}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+            </DockPanel>
+          </DataTemplate></DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn Header="扩展名" Binding="{Binding Change.Extension}" Width="74" />
+        <DataGridTextColumn Header="状态" Binding="{Binding Change.StateText}" Width="118" />
+        <DataGridTextColumn Header="属性状态" Binding="{Binding Change.PropertyText}" Width="88" />
+        <DataGridTextColumn Header="本地锁定人" Binding="{Binding Change.LockOwner}" Width="112" />
+      </DataGrid.Columns>
+    </DataGrid>
+    <DockPanel Grid.Row="5" Margin="0,10,0,0">
+      <CheckBox Content="显示未版本控制文件" IsChecked="{Binding ShowUnversioned}" Margin="0,0,16,0" />
+      <TextBlock Text="{Binding SelectionText}" Foreground="{StaticResource MutedText}" FontSize="12" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" />
+    </DockPanel>
+    <TextBlock Grid.Row="6" Text="勾选的未版本控制项目会自动添加；移动会关联原位置与新位置一起提交。缺失或冲突项目需先处理。"
+               Foreground="{StaticResource MutedText}" TextWrapping="Wrap" Margin="0,8,0,0" FontSize="12" />
+    <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+      <Button x:Name="SubmitButton" Content="提交" IsDefault="True" IsEnabled="{Binding CanSubmit}"
+              Style="{StaticResource PrimaryButton}" MinWidth="90" Click="Submit_Click" />
+      <Button Content="取消" IsCancel="True" MinWidth="90" />
+    </StackPanel>
+  </Grid>
+  </Border>
+</Window>

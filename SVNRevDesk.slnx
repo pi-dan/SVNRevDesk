@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SVNRevDesk.Core/SVNRevDesk.Core.csproj" />
+    <Project Path="src/SVNRevDesk.Desktop/SVNRevDesk.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SVNRevDesk.IntegrationTests/SVNRevDesk.IntegrationTests.csproj" />
+    <Project Path="tests/SVNRevDesk.UiSmokeTests/SVNRevDesk.UiSmokeTests.csproj" />
+  </Folder>
+</Solution>

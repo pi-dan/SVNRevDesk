@@ -1,0 +1,17 @@
+* text=auto
+*.cs text eol=crlf
+*.xaml text eol=crlf
+*.csproj text eol=crlf
+*.props text eol=crlf
+*.targets text eol=crlf
+*.ps1 text eol=crlf
+*.md text eol=lf
+*.yml text eol=lf
+*.exe binary
+*.dll binary
+*.ico binary
+*.png binary
+*.zip binary
+*.7z binary
+# These files are verified byte-for-byte against the bundled SHA-256 manifests.
+vendor/** -text

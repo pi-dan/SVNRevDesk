@@ -1,0 +1,17 @@
+**/bin/
+**/obj/
+.build/
+.vs/
+*.user
+*.suo
+artifacts/
+
+# Portable application data (may contain local paths or SVN credentials).
+/settings.json
+/Cache/
+/Backups/
+/Temp/
+/SvnConfig/
+/Tools/
+/local-ignores.json
+*.log

@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <CopyBundledSvnFiles>false</CopyBundledSvnFiles>
+    <BundledSvnArchive>$(BaseIntermediateOutputPath)$(Configuration)\$(TargetFramework)\BundledSvn.zip</BundledSvnArchive>
+  </PropertyGroup>
+  <Import Project="BundledSvn.targets" />
+  <ItemGroup>
+    <BundledSvnSourceFile Include="$(BundledSvnDirectory)**\*" />
+    <EmbeddedResource Include="$(BundledSvnArchive)" LogicalName="SVNRevDesk.BundledSvn.zip" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)..\vendor\Subversion\win-x64.sha256.json"
+                      LogicalName="SVNRevDesk.BundledSvn.manifest.json" />
+  </ItemGroup>
+  <Target Name="CreateBundledSvnArchive" BeforeTargets="PrepareResources"
+          DependsOnTargets="ValidateBundledSvn"
+          Inputs="@(BundledSvnSourceFile);$(MSBuildThisFileFullPath)"
+          Outputs="$(BundledSvnArchive)">
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(BundledSvnArchive)'))" />
+    <ZipDirectory SourceDirectory="$(BundledSvnDirectory)" DestinationFile="$(BundledSvnArchive)" Overwrite="true" />
+    <ItemGroup>
+      <FileWrites Include="$(BundledSvnArchive)" />
+    </ItemGroup>
+  </Target>
+</Project>

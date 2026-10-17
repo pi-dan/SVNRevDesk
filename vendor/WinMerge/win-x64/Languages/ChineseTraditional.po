@@ -1,0 +1,6276 @@
+﻿# Released under the "GNU General Public License"
+#
+# Translators:
+# * Koko <kokokoko at giga.net.tw>
+# * wck3 <wck3171 at pchome.com.tw>
+# * Calvin Lin <ylin77 at gmail.com>
+# * Enfeng Tsao <admin at siderealart.me>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WinMerge\n"
+"Report-Msgid-Bugs-To: https://github.com/WinMerge/winmerge/issues/\n"
+"POT-Creation-Date: 2026-07-26 02:22+0000\n"
+"PO-Revision-Date: 2026-08-03 16:19+0800\n"
+"Last-Translator: 昇 <love80312@gmail.com>\n"
+"Language-Team: ChineseTraditional <winmerge-translate@lists.sourceforge.net>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ../../Src\n"
+"X-Generator: Poedit 3.9\n"
+
+msgid "LANG_ENGLISH, SUBLANG_ENGLISH_US"
+msgstr "LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL"
+
+msgid "Copy to Middle"
+msgstr "複製到中間"
+
+msgid "C&opy to Right\tAlt+Right"
+msgstr "複製到右側  (&O)\tAlt+Right"
+
+msgid "Copy from Middle"
+msgstr "從中間複製"
+
+msgid "Copy fro&m Right\tAlt+Shift+Left"
+msgstr "從右側複製 (&M)\tAlt+Shift+Left"
+
+msgid "Cop&y to Left\tAlt+Left"
+msgstr "複製到左側 (&Y)\tAlt+Left"
+
+msgid "Copy &from Left\tAlt+Shift+Right"
+msgstr "從左側複製 (&F)\tAlt+Shift+Right"
+
+msgid "Copy Selected Lines to Middle"
+msgstr "複製所選行到中間"
+
+msgid "Copy Selected Lines to Right"
+msgstr "將所選行複製到右側"
+
+msgid "Copy Selected Lines from Middle"
+msgstr "複製（中間）已選取行"
+
+msgid "Copy Selected Lines from Right"
+msgstr "複製（右側）已選取行"
+
+msgid "Copy Selected Lines to Left"
+msgstr "將所選行複製到左側"
+
+msgid "Copy Selected Lines from Left"
+msgstr "複製（左側）已選取行"
+
+msgid "Copy Selected Diff (Left) to Clipboard\tCtrl+&1"
+msgstr "複製（左側）已選取差異 到剪貼簿\tCtrl+&1"
+
+msgid "Copy Selected Diff (Right) to Clipboard\tCtrl+&2"
+msgstr "複製（右側）已選取差異 到剪貼簿\tCtrl+&2"
+
+msgid "Copy Selected Diff (Middle) to Clipboard\tCtrl+&2"
+msgstr "複製（中間）已選取差異 到剪貼簿\tCtrl+&2"
+
+msgid "Copy Selected Diff (Right) to Clipboard\tCtrl+&3"
+msgstr "複製（右側）已選取差異 到剪貼簿\tCtrl+&3"
+
+msgid "Select Line &Difference\tF4"
+msgstr "選取行內差異 (&D)\tF4"
+
+msgid "Add to &Filters"
+msgstr "新增至篩選器 (&F)"
+
+msgid "Add to &Display Filter"
+msgstr "新增至顯示篩選器 (&L)"
+
+msgid "Add to &Line Filters"
+msgstr "新增至行篩選器 (&L)"
+
+msgid "Add to Substitution &Filters"
+msgstr "將此變動加入替代篩選器 (&F)"
+
+msgid "&Undo"
+msgstr "復原 (&U)"
+
+msgid "&Redo"
+msgstr "取消復原 (&R)"
+
+msgid "Cu&t"
+msgstr "剪下 (&T)"
+
+msgid "&Copy"
+msgstr "複製 (&C)"
+
+msgid "&Paste"
+msgstr "貼上 (&P)"
+
+msgid "&Scripts"
+msgstr "指令碼 (&S)"
+
+msgid "< Empty >"
+msgstr "< 空 >"
+
+msgid "&Go to...\tCtrl+G"
+msgstr "跳至... (&G)\tCtrl+G"
+
+msgid "Go to &Definition\tF12"
+msgstr "跳至定義 (&D)\tF12"
+
+msgid "Go to Moved Line Between Left and Middle\tCtrl+Shift+G"
+msgstr "跳至左側和中間已移位的行\tCtrl+Shift+G"
+
+msgid "Go to Moved Line Between Middle and Right\tCtrl+Alt+G"
+msgstr "跳至中間和右側已移位的行\tCtrl+Alt+G"
+
+msgid "Op&en"
+msgstr "開啟 (&E)"
+
+msgid "With &Registered Application"
+msgstr "使用已註冊應用程式 (&R)"
+
+msgid "With &External Editor\tCtrl+Alt+E"
+msgstr "使用外部編輯器 (&E)\tCtrl+Alt+E"
+
+msgid "&With..."
+msgstr "使用... (&W)"
+
+msgid "Open &Parent Folder..."
+msgstr "開啟上層資料夾... (&P)"
+
+msgid "S&hell Menu"
+msgstr "右鍵選單 (&H)"
+
+msgid "Use First Line as Headers"
+msgstr "使用第一行作為標題行"
+
+msgid "Auto-Fit All Columns"
+msgstr "自動調整所有欄位寬度"
+
+msgid "&Filter by This Column"
+msgstr "依此欄篩選(&F)"
+
+msgid "&Text..."
+msgstr "文字... (&T)"
+
+msgid "&Number..."
+msgstr "數字... (&N)"
+
+msgid "&Date/Time..."
+msgstr "日期/時間... (&D)"
+
+msgid "View &Differences"
+msgstr "檢視差異 (&D)"
+
+msgid "Diff &Block Size"
+msgstr "差異區塊大小 (&B)"
+
+msgid "&Ignore Color Difference"
+msgstr "忽略色彩差異 (&I)"
+
+msgid "Ins&ertion/Deletion Detection"
+msgstr "插入/刪除 偵測 (&E)"
+
+msgid "&None"
+msgstr "關閉 (&N)"
+
+msgid "&Vertical"
+msgstr "垂直 (&V)"
+
+msgid "&Horizontal"
+msgstr "水平 (&H)"
+
+msgid "&Previous Page"
+msgstr "前一頁 (&P)"
+
+msgid "&Next Page"
+msgstr "後一頁 (&N)"
+
+msgid "&Active Pane"
+msgstr "啟動框 (&A)"
+
+msgid "Rotate &Right 90deg"
+msgstr "向右旋轉 90 度 (&R)"
+
+msgid "Rotate &Left 90deg"
+msgstr "向左旋轉 90 度 (&L)"
+
+msgid "Flip V&ertically"
+msgstr "垂直翻轉 (&E)"
+
+msgid "Flip H&orizontally"
+msgstr "水平翻轉 (&O)"
+
+msgid "&Zoom"
+msgstr "縮放 (&Z)"
+
+msgid "Zoom &In\tCtrl++"
+msgstr "放大 (&I)\tCtrl++"
+
+msgid "Zoom &Out\tCtrl+-"
+msgstr "縮小 (&O)\tCtrl+-"
+
+msgid "&Normal\tCtrl+*"
+msgstr "恢復原始 (&N)\tCtrl+*"
+
+msgid "&Overlay"
+msgstr "覆蓋 (&O)"
+
+msgid "&Alpha Blend"
+msgstr "透明效果 (&A)"
+
+msgid "Alpha &Blend Animation"
+msgstr "透明動畫 (&B)"
+
+msgid "Dragging &Mode"
+msgstr "拖動模式 (&M)"
+
+msgid "&Move"
+msgstr "移動 (&M)"
+
+msgid "&Adjust Offset"
+msgstr "調整誤差 (&A)"
+
+msgid "&Vertical Wipe"
+msgstr "垂直抹除 (&V)"
+
+msgid "&Horizontal Wipe"
+msgstr "水平抹除 (&H)"
+
+msgid "Rectangle &Select"
+msgstr "矩形選取 (&S)"
+
+msgid "&Set Background Color"
+msgstr "設定背景顏色 (&S)"
+
+msgid "&Vector Image Scaling"
+msgstr "向量圖縮放 (&V)"
+
+msgid "&Animation Settings"
+msgstr "動畫設定 (&A)"
+
+msgid "&Blink Interval"
+msgstr "閃爍間隔 (&B)"
+
+msgid "&Overlay Animation Interval"
+msgstr "動畫圖層間隔 (&O)"
+
+msgid "Compare Extracted &Text from Images"
+msgstr "比對從圖片中擷取的文字 (&T)"
+
+msgid "Co&mpare"
+msgstr "比對 (&M)"
+
+msgid "&Screenshots"
+msgstr "截圖 (&S)"
+
+msgid "&Full Size Screenshots"
+msgstr "完整尺寸截圖 (&F)"
+
+msgid "&HTMLs"
+msgstr "HTML檔案 (&H)"
+
+msgid "&Texts"
+msgstr "文字檔 (&T)"
+
+msgid "&Resource Trees"
+msgstr "資源樹 (&R)"
+
+msgid "&Size"
+msgstr "大小 (&S)"
+
+msgid "Fit to Window"
+msgstr "自適應視窗 (&F)"
+
+msgid "&Event Sync"
+msgstr "事件同步 (&E)"
+
+msgid "&Enabled"
+msgstr "已啟用 (&E)"
+
+msgid "&Scroll"
+msgstr "捲動 (&S)"
+
+msgid "&Click"
+msgstr "點擊 (&C)"
+
+msgid "&Input"
+msgstr "輸入 (&I)"
+
+msgid "&Go Back/Forward"
+msgstr "返回/前進 (&G)"
+
+msgid "Clear &Browsing Data"
+msgstr "清除瀏覽資料 (&B)"
+
+msgid "&Disk Cache"
+msgstr "磁碟快取 (&D)"
+
+msgid "&Cookies"
+msgstr "Cookies (&C)"
+
+msgid "&Browsing History"
+msgstr "瀏覽紀錄 (&B)"
+
+msgid "&All Profiles"
+msgstr "所有配置檔 (&A)"
+
+msgid "&File"
+msgstr "檔案 (&F)"
+
+msgid "&New"
+msgstr "新增 (&N)"
+
+msgid "&Text"
+msgstr "文字 (&T)"
+
+msgid "T&able"
+msgstr "表格 (&A)"
+
+msgid "&Binary"
+msgstr "二進位 (&B)"
+
+msgid "&Image"
+msgstr "圖片 (&I)"
+
+msgid "&Webpage"
+msgstr "網頁 (&W)"
+
+msgid "&Folder"
+msgstr "資料夾 (&F)"
+
+msgid "New (&3 panes)"
+msgstr "新增三方比對 (&3)"
+
+msgid "&Open...\tCtrl+O"
+msgstr "開啟... (&O)\tCtrl+O"
+
+msgid "Open Conflic&t File..."
+msgstr "開啟衝突檔... (&T)"
+
+msgid "Open C&lipboard"
+msgstr "開啟剪貼簿 (&L)"
+
+msgid "Open Pro&ject...\tCtrl+J"
+msgstr "開啟專案... (&J)\tCtrl+J"
+
+msgid "Sa&ve Project..."
+msgstr "儲存專案... (&V)"
+
+msgid "Recent Projects"
+msgstr "最近開啟的專案"
+
+msgid "Recent F&iles or Folders"
+msgstr "最近開啟檔案或資料夾 (&I)"
+
+msgid "E&xit\tCtrl+Q"
+msgstr "結束 (&X)\tCtrl+Q"
+
+msgid "&Edit"
+msgstr "編輯 (&E)"
+
+msgid "&Paste\tCtrl+V"
+msgstr "貼上 (&P)\tCtrl+V"
+
+msgid "&Options...\tCtrl+,"
+msgstr "選項... (&O)\tCtrl+,"
+
+msgid "&View"
+msgstr "檢視 (&V)"
+
+msgid "Ta&b Bar"
+msgstr "分頁欄 (&B)"
+
+msgid "&View Tab Bar"
+msgstr "檢視分頁欄 (&V)"
+
+msgid "&On Title Bar"
+msgstr "標題列置頂 (&O)"
+
+msgid "&Toolbar"
+msgstr "工具列 (&T)"
+
+msgid "&Small"
+msgstr "小圖示 (&S)"
+
+msgid "&Medium"
+msgstr "中圖示 (&M)"
+
+msgid "&Big"
+msgstr "大圖示 (&B)"
+
+msgid "&Huge"
+msgstr "超大圖示 (&H)"
+
+msgid "Men&u Bar"
+msgstr "選單列 (&U)"
+
+msgid "&Output Pane"
+msgstr "輸出窗格 (&O)"
+
+msgid "&Status Bar"
+msgstr "狀態列 (&S)"
+
+msgid "&Tools"
+msgstr "工具 (&T)"
+
+msgid "&Filters..."
+msgstr "篩選器... (&F)"
+
+msgid "&Generate Patch..."
+msgstr "產生修補檔... (&G)"
+
+msgid "&Plugins"
+msgstr "擴充功能 (&P)"
+
+msgid "P&lugin Settings..."
+msgstr "擴充功能設定... (&L)"
+
+msgid "Ma&nual Prediffer"
+msgstr "手動化預差異器 (&N)"
+
+msgid "A&utomatic Prediffer"
+msgstr "自動化預差異器 (&U)"
+
+msgid "&Manual Unpacking"
+msgstr "手動化解包裝 (&M)"
+
+# "自動解壓縮 (&A)"
+msgid "&Automatic Unpacking"
+msgstr "自動化解包裝 (&A)"
+
+msgid "&Reload Plugins"
+msgstr "重新讀取擴充功能 (&R)"
+
+msgid "&Window"
+msgstr "視窗 (&W)"
+
+msgid "Cl&ose\tCtrl+W"
+msgstr "關閉 (&O)\tCtrl+W"
+
+msgid "Clo&se All"
+msgstr "關閉全部 (&S)"
+
+msgid "Change &Pane\tF6"
+msgstr "切換窗格 (&P)\tF6"
+
+msgid "Tile &Horizontally"
+msgstr "水平並排 (&H)"
+
+msgid "Tile &Vertically"
+msgstr "垂直並排 (&V)"
+
+msgid "&Cascade"
+msgstr "重疊顯示 (&C)"
+
+msgid "&Help"
+msgstr "說明 (&H)"
+
+msgid "&WinMerge Help\tF1"
+msgstr "WinMerge 說明 (&W)\tF1"
+
+msgid "R&elease Notes"
+msgstr "版本資訊 (&E)"
+
+msgid "&Translations"
+msgstr "翻譯 (&T)"
+
+msgid "C&onfiguration"
+msgstr "組態 (&O)"
+
+msgid "&GNU General Public License"
+msgstr "GNU 公共授權證 (&G)"
+
+msgid "&About WinMerge..."
+msgstr "關於 WinMerge... (&A)"
+
+msgid "&Read-Only"
+msgstr "唯讀 (&R)"
+
+msgid "L&eft Read-Only"
+msgstr "左側唯讀 (&E)"
+
+msgid "M&iddle Read-Only"
+msgstr "中間唯讀 (&I)"
+
+msgid "Ri&ght Read-Only"
+msgstr "右側唯讀 (&G)"
+
+msgid "&File Encoding..."
+msgstr "檔案編碼... (&F)"
+
+msgid "Select &All\tCtrl+A"
+msgstr "全選 (&A)\tCtrl+A"
+
+msgid "Show &Identical Items"
+msgstr "顯示相同項目 (&I)"
+
+msgid "Show &Different Items"
+msgstr "顯示差異項目 (&D)"
+
+msgid "Show L&eft Unique Items"
+msgstr "顯示左側獨有項目 (&E)"
+
+msgid "Show Midd&le Unique Items"
+msgstr "顯示中間獨有項目 (&L)"
+
+msgid "Show Ri&ght Unique Items"
+msgstr "顯示右側獨有項目 (&G)"
+
+msgid "Show S&kipped Items"
+msgstr "顯示略過的項目 (&K)"
+
+msgid "S&how Binary Files"
+msgstr "顯示二進位檔 (&H)"
+
+msgid "&3-way Compare"
+msgstr "&3 向比對"
+
+msgid "Show &Left Only Different Items"
+msgstr "顯示僅在左側不同的項目 (&L)"
+
+msgid "Show &Middle Only Different Items"
+msgstr "顯示僅在中間不同的項目 (&M)"
+
+msgid "Show &Right Only Different Items"
+msgstr "顯示僅在右側不同的項目 (&R)"
+
+msgid "Show L&eft Only Missing Items"
+msgstr "顯示僅在左側缺少的項目 (&L)"
+
+msgid "Show Mi&ddle Only Missing Items"
+msgstr "顯示僅在中間缺少的項目 (&M)"
+
+msgid "Show Rig&ht Only Missing Items"
+msgstr "顯示僅在右側缺少的項目 (&R)"
+
+msgid "Show Hidd&en Items"
+msgstr "顯示隱藏項目 (&E)"
+
+msgid "Tree &Mode"
+msgstr "樹狀模式 (&M)"
+
+msgid "E&xpand Subfolders"
+msgstr "展開子資料夾 (&X)"
+
+msgid "&All Subfolders"
+msgstr "所有子資料夾 (&A)"
+
+msgid "&Different Subfolders"
+msgstr "不同子資料夾 (&D)"
+
+msgid "&Identical Subfolders"
+msgstr "相同子資料夾 (&I)"
+
+msgid "&Collapse All Subfolders"
+msgstr "收合所有子資料夾 (&C)"
+
+msgid "Show &Empty Folders"
+msgstr "顯示空資料夾 (&E)"
+
+msgid "Select &Font..."
+msgstr "選取字型... (&F)"
+
+msgid "Use Default Font"
+msgstr "使用預設字型"
+
+msgid "Sw&ap Panes"
+msgstr "窗格對調 (&A)"
+
+msgid "Swap &1st | 2nd"
+msgstr "將第 1 和第 2 對調 (&1)"
+
+msgid "Swap &2nd | 3rd"
+msgstr "將第 2 和第 3 對調 (&2)"
+
+msgid "Swap 1st | &3rd"
+msgstr "將第 1 和第 3 對調 (&3)"
+
+msgid "Displa&y Filter Bar\tCtrl+Shift+L"
+msgstr "顯示篩選欄 (&Y)\tCtrl+Shift+L"
+
+msgid "Com&pare Statistics..."
+msgstr "統計比對結果 (&P)"
+
+msgid "Refresh\tF5"
+msgstr "重新整理\tF5"
+
+msgid "&Refresh Selected\tCtrl+F5"
+msgstr "重新整理已選取項 (&R)\tCtrl+F5"
+
+msgid "&Merge"
+msgstr "合併 (&M)"
+
+msgid "Co&mpare\tEnter"
+msgstr "比對 (&M)\tEnter"
+
+msgid "&Next Difference\tAlt+Down"
+msgstr "下一個差異 (&N)\tAlt+Down"
+
+msgid "&Previous Difference\tAlt+Up"
+msgstr "上一個差異 (&P)\tAlt+Up"
+
+msgid "&First Difference\tAlt+Home"
+msgstr "首個差異 (&F)\tAlt+Home"
+
+msgid "&Current Difference\tAlt+Enter"
+msgstr "目前差異 (&C)\tAlt+Enter"
+
+msgid "&Last Difference\tAlt+End"
+msgstr "最後一個差異 (&L)\tAlt+End"
+
+msgid "Copy to &Right\tAlt+Right"
+msgstr "複製到右側 (&R)\tAlt+Right"
+
+msgid "Copy to L&eft\tAlt+Left"
+msgstr "複製到左側 (&E)\tAlt+Left"
+
+msgid "&Delete\tDel"
+msgstr "刪除 (&D)\tDel"
+
+msgid "&Customize Columns..."
+msgstr "自訂欄位... (&C)"
+
+msgid "Generate &Report..."
+msgstr "產生報告... (&R)"
+
+msgid "&Edit with Unpacker..."
+msgstr "使用解包裝器來編輯 (&E)"
+
+msgid "&Save\tCtrl+S"
+msgstr "儲存 (&S)\tCtrl+S"
+
+msgid "Sav&e"
+msgstr "儲存 (&E)"
+
+msgid "Save &Left"
+msgstr "儲存左側 (&L)"
+
+msgid "Save &Middle"
+msgstr "儲存中間 (&M)"
+
+msgid "Save &Right"
+msgstr "儲存右側 (&R)"
+
+msgid "Save &As"
+msgstr "儲存為 (&A)"
+
+msgid "Save &Left As..."
+msgstr "儲存左側為... (&L)"
+
+msgid "Save &Middle As..."
+msgstr "儲存中間為... (&M)"
+
+msgid "Save &Right As..."
+msgstr "儲存右側為... (&R)"
+
+msgid "&Print...\tCtrl+P"
+msgstr "列印... (&P)\tCtrl+P"
+
+msgid "Page Set&up..."
+msgstr "設定列印格式... (&U)"
+
+msgid "Print Previe&w..."
+msgstr "預覽列印... (&R)"
+
+msgid "&Convert Line Endings to"
+msgstr "轉換換行符號為 (&C)"
+
+msgid "Mer&ge Mode\tF9"
+msgstr "合併模式 (&G)\tF9"
+
+msgid "Reloa&d\tCtrl+F5"
+msgstr "重新載入 (&D)\tCtrl+F5"
+
+msgid "Reco&mpare As"
+msgstr "重新比對 (&M)"
+
+msgid "A&rchive"
+msgstr "封存檔 (&R)"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "復原 (&U)\tCtrl+Z"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "取消復原 (&R)\tCtrl+Y"
+
+msgid "Cu&t\tCtrl+X"
+msgstr "剪下 (&U)\tCtrl+X"
+
+msgid "&Copy\tCtrl+C"
+msgstr "複製 (&C)\tCtrl+C"
+
+msgid "F&ind...\tCtrl+F"
+msgstr "尋找... (&I)\tCtrl+F"
+
+msgid "Repla&ce...\tCtrl+H"
+msgstr "取代... (&C)\tCtrl+H"
+
+msgid "&Marker...\tCtrl+Shift+M"
+msgstr "標記... (&M)\tCtrl+Shift+M"
+
+msgid "Advanced"
+msgstr "進階"
+
+msgid "&Copy With Line Numbers\tCtrl+Shift+C"
+msgstr "連同行號複製 (&C)\tCtrl+Shift+C"
+
+msgid "&Bookmarks"
+msgstr "書籤 (&B)"
+
+msgid "&Toggle Bookmark\tCtrl+F2"
+msgstr "放置/清除書籤 (&T)\tCtrl+F2"
+
+msgid "&Next Bookmark\tF2"
+msgstr "下一書籤 (&N)\tF2"
+
+msgid "&Previous Bookmark\tShift+F2"
+msgstr "上一書籤 (&P)\tShift+F2"
+
+msgid "&Clear All Bookmarks"
+msgstr "清除全部書籤 (&C)"
+
+msgid "Syntax Highlight"
+msgstr "語法高亮顯著提示"
+
+msgid "&Diff Context"
+msgstr "差異上下文 (&D)"
+
+msgid "&All Lines"
+msgstr "全部行 (&A)"
+
+msgid "&0 Lines"
+msgstr "0行 (&0)"
+
+msgid "&1 Line"
+msgstr "1行 (&1)"
+
+msgid "&3 Lines"
+msgstr "3行 (&3)"
+
+msgid "&5 Lines"
+msgstr "5行 (&5)"
+
+msgid "&7 Lines"
+msgstr "7行 (&7)"
+
+msgid "&9 Lines"
+msgstr "9行 (&9)"
+
+msgid "&Toggle All and 0-9 Lines\tCtrl+D"
+msgstr "切換全部行和 0-9 行 (&T)\tCtrl+D"
+
+msgid "&Invert (Hide Different Lines)"
+msgstr "隱藏差異行 (&I)"
+
+msgid "&Lock Panes"
+msgstr "鎖住窗格 (&L)"
+
+msgid "&View Whitespace"
+msgstr "檢視空白字元 (&V)"
+
+msgid "View E&OL"
+msgstr "檢視換行符號 (&O)"
+
+msgid "Vie&w Line Differences"
+msgstr "檢視行內差異 (&W)"
+
+msgid "View Line &Numbers"
+msgstr "檢視行號 (&N)"
+
+msgid "View &Margins"
+msgstr "檢視頁邊 (&M)"
+
+msgid "View To&p Margins"
+msgstr "檢視上邊界 (&p)"
+
+msgid "W&rap Lines"
+msgstr "自動換行 (&R)"
+
+msgid "Split V&ertically"
+msgstr "垂直分割 (&E)"
+
+# I would suggest "Microview Pane"
+# 差異窗格 (&P)
+msgid "Diff &Pane"
+msgstr "差異面板 (&P)"
+
+# I would suggest "Macroview Pane".
+msgid "Lo&cation Pane"
+msgstr "位置窗格 (&P)"
+
+msgid "Output Pane"
+msgstr "輸出窗格"
+
+msgid "Ne&xt Conflict\tAlt+Shift+Down"
+msgstr "下一個衝突 (&X)\tAlt+Shift+Down"
+
+msgid "Pre&vious Conflict\tAlt+Shift+Up"
+msgstr "上一個衝突 (&V)\tAlt+Shift+Up"
+
+msgid "A&dvanced"
+msgstr "進階 (&D)"
+
+msgid "Next Difference (Left/Middle)\tAlt+1"
+msgstr "下一個差異（左側/中間）\tAlt+1"
+
+msgid "Previous Difference (Left/Middle)\tAlt+Shift+1"
+msgstr "上一個差異（左側/中間）\tAlt+Shift+1"
+
+msgid "Next Difference (Left/Right)\tAlt+2"
+msgstr "下一個差異（左側/右側）\tAlt+2"
+
+msgid "Previous Difference (Left/Right)\tAlt+Shift+2"
+msgstr "上一個差異（左側/右側）\tAlt+Shift+2"
+
+msgid "Next Difference (Middle/Right)\tAlt+3"
+msgstr "下一個差異（中間/右側）\tAlt+3"
+
+msgid "Previous Difference (Middle/Right)\tAlt+Shift+3"
+msgstr "上一個差異（中間/右側）\tAlt+Shift+3"
+
+msgid "Next Left-Only Difference\tAlt+7"
+msgstr "下一個只存在左側的差異\tAlt+7"
+
+msgid "Previous Left-Only Difference\tAlt+Shift+7"
+msgstr "上一個只存在左側的差異\tAlt+Shift+7"
+
+msgid "Next Middle-Only Difference\tAlt+8"
+msgstr "下一個只存在中間的差異\tAlt+8"
+
+msgid "Previous Middle-Only Difference\tAlt+Shift+8"
+msgstr "上一個只存在中間的差異\tAlt+Shift+8"
+
+msgid "Next Right-Only Difference\tAlt+9"
+msgstr "下一個只存在右側的差異\tAlt+9"
+
+msgid "Previous Right-Only Difference\tAlt+Shift+9"
+msgstr "上一個只存在右側的差異\tAlt+Shift+9"
+
+msgid "Copy from &Left to"
+msgstr "從左側複製至 (&L)"
+
+msgid "&Middle"
+msgstr "中間 (&M)"
+
+msgid "&Right"
+msgstr "右側 (&R)"
+
+msgid "Copy from &Middle to"
+msgstr "從中間複製至 (&M)"
+
+msgid "&Left"
+msgstr "左側 (&L)"
+
+msgid "Copy from &Right to"
+msgstr "從右側複製至 (&R)"
+
+msgid "Copy Selected Lines from Le&ft to"
+msgstr "將左側所選行複製至 (&F)"
+
+msgid "Copy Selected Lines from Mi&ddle to"
+msgstr "將中間所選行複製至 (&D)"
+
+msgid "Copy Selected Lines from Ri&ght to"
+msgstr "將右側所選行複製至 (&G)"
+
+msgid "Copy from Left\tAlt+Shift+Right"
+msgstr "從左側複製\tAlt+Shift+Right"
+
+msgid "Copy from Right\tAlt+Shift+Left"
+msgstr "從右側複製\tAlt+Shift+Right"
+
+msgid "C&opy to Right and Advance\tCtrl+Alt+Right"
+msgstr "複製到右側後到下一個 (&O)\tCtrl+Alt+Right"
+
+msgid "Copy &to Left and Advance\tCtrl+Alt+Left"
+msgstr "複製到左側後到下一個 (&T)\tCtrl+Alt+Left"
+
+msgid "Copy &All to Right"
+msgstr "全部複製到右側 (&A)"
+
+msgid "Cop&y All to Left"
+msgstr "全部複製到左側 (&Y)"
+
+msgid "A&uto Merge\tCtrl+Alt+M"
+msgstr "自動合併 (&U)\tCtrl+Alt+M"
+
+msgid "Add &Synchronization Point\tAlt+S"
+msgstr "新增同步點 (&S)\tAlt+S"
+
+msgid "Clear Sync&hronization Points"
+msgstr "清除同步點 (&H)"
+
+msgid "Generate &Archive..."
+msgstr "封存檔產生器 (&H)"
+
+msgid "Unpac&ker"
+msgstr "解包裝器 (&K)"
+
+msgid "&Prediffer"
+msgstr "預差異器 (&P)"
+
+msgid "Apply Pre&differ..."
+msgstr "應用預差異器... (&d)"
+
+msgid "&Transform with Editor Script..."
+msgstr "使用編輯器指令碼轉換... (&T)"
+
+msgid "Scripts for &Copying"
+msgstr "複製指令碼 (&C)"
+
+msgid "Select &Editor Script..."
+msgstr "選取編輯器指令碼... (&E)"
+
+msgid "Sp&lit"
+msgstr "分割 (&L)"
+
+msgid "Comp&are"
+msgstr "比對 (&A)"
+
+msgid "Compar&e with Renamed/Moved Items"
+msgstr "比對已重新命名/已移動之項目 (&E)"
+
+msgid "Compare in New &Window"
+msgstr "在新視窗中比對 (&W)"
+
+msgid "Compare Non-hor&izontally..."
+msgstr "非水平比對... (&I)"
+
+msgid "Compare Non-hor&izontally"
+msgstr "非水平比對 (&I)"
+
+msgid "First &Left with Second Left"
+msgstr "第一個左側項目和第二個左側項目 (&L)"
+
+msgid "First &Right with Second Right"
+msgstr "第一個右側項目和第二個右側項目 (&R)"
+
+msgid "&First Left with Second Right"
+msgstr "第一個左側項目和第二個右側項目 (&F)"
+
+msgid "&Second Left with First Right"
+msgstr "第二個左側項目和第一個右側項目 (&S)"
+
+msgid "Co&mpare As"
+msgstr "比對為 (&M)"
+
+#, c-format
+msgid "Left to Middle (%1 of %2)"
+msgstr "左側到中間 (%1／%2)"
+
+#, c-format
+msgid "Left to Right (%1 of %2)"
+msgstr "左側到右側 (%1／%2)"
+
+#, c-format
+msgid "Left to... (%1 of %2)"
+msgstr "左側到... (%1／%2)"
+
+#, c-format
+msgid "Middle to Left (%1 of %2)"
+msgstr "中間到左側 (%1／%2)"
+
+#, c-format
+msgid "Middle to Right (%1 of %2)"
+msgstr "中間到右側 (%1／%2)"
+
+#, c-format
+msgid "Middle to... (%1 of %2)"
+msgstr "中間到... (%1／%2)"
+
+#, c-format
+msgid "Right to Middle (%1 of %2)"
+msgstr "右側到中間 (%1／%2)"
+
+#, c-format
+msgid "Right to Left (%1 of %2)"
+msgstr "右側到左側 (%1／%2)"
+
+#, c-format
+msgid "Right to... (%1 of %2)"
+msgstr "右側到... (%1／%2)"
+
+msgid "&Delete"
+msgstr "刪除 (&D)"
+
+msgid "&Both"
+msgstr "兩邊 (&B)"
+
+msgid "&All"
+msgstr "全部 (&A)"
+
+msgid "&Selection"
+msgstr "選取區 (&S)"
+
+msgid "Re&name"
+msgstr "重新命名 (&N)"
+
+msgid "&Hide Items"
+msgstr "隱藏檔案 (&H)"
+
+msgid "&Open Left"
+msgstr "開啟左側 (&O)"
+
+msgid "Open Midd&le"
+msgstr "開啟中間 (&L)"
+
+msgid "O&pen Right"
+msgstr "開啟右側 (&P)"
+
+msgid "Cop&y Paths"
+msgstr "複製路徑 (&Y)"
+
+#, c-format
+msgid "Left (%1 of %2)"
+msgstr "左側 (%1／%2)"
+
+#, c-format
+msgid "Middle (%1 of %2)"
+msgstr "中間 (%1／%2)"
+
+#, c-format
+msgid "Right (%1 of %2)"
+msgstr "右側 (%1／%2)"
+
+#, c-format
+msgid "Both (%1 of %2)"
+msgstr "兩邊 (%1／%2)"
+
+#, c-format
+msgid "All (%1 of %2)"
+msgstr "全部 (%1／%2)"
+
+msgid "Copy &Filenames"
+msgstr "複製檔名 (&F)"
+
+msgid "Copy Items to Clip&board"
+msgstr "複製項目到剪貼簿 (&B)"
+
+msgid "Copy All Di&splayed Columns"
+msgstr "複製所有顯示的欄位 (&s)"
+
+msgid "&Zip"
+msgstr "Zip (&Z)"
+
+#, c-format
+msgid "Both to... (%1 of %2)"
+msgstr "兩邊到... (%1／%2)"
+
+#, c-format
+msgid "All to... (%1 of %2)"
+msgstr "全部到... (%1／%2)"
+
+#, c-format
+msgid "Differences to... (%1 of %2)"
+msgstr "差異到... (%1／%2)"
+
+msgid "Left Shell Menu"
+msgstr "左側介面選單"
+
+msgid "Middle Shell Menu"
+msgstr "中間介面選單"
+
+msgid "Right Shell Menu"
+msgstr "右側介面選單"
+
+msgid "Both Shell Menu"
+msgstr "雙邊右鍵選單"
+
+msgid "All Shell Menu"
+msgstr "所有右鍵選單"
+
+msgid "Copy"
+msgstr "複製"
+
+msgid "&Copy Full Path"
+msgstr "複製完整路徑 (&C)"
+
+msgid "Copy &Filename"
+msgstr "複製檔名 (&F)"
+
+msgid "&Edit Caption\tF2"
+msgstr "編輯標題 (&E)\tF2"
+
+msgid "Edit &Path\tCtrl+L"
+msgstr "編輯路徑 (&P)\tCtrl+L"
+
+msgid "&Open..."
+msgstr "開啟... (&O)"
+
+msgid "Unpacker Settings"
+msgstr "解包裝器設定"
+
+msgid "<None>"
+msgstr "<無>"
+
+msgid "<Automatic>"
+msgstr "<自動>"
+
+msgid "&Select..."
+msgstr "選取... (&S)"
+
+msgid "Prediffer Settings"
+msgstr "預差異器設定"
+
+msgid "G&o to Diff"
+msgstr "跳至差異 (&O)"
+
+msgid "Move Cursor on &Click"
+msgstr "點擊時移動游標 (&C)"
+
+msgid "&No Moved Blocks"
+msgstr "無移位區塊 (&N)"
+
+msgid "&All Moved Blocks"
+msgstr "所有移位區塊 (&A)"
+
+msgid "W&hitespaces"
+msgstr "空格 (&H)"
+
+msgid "Com&pare"
+msgstr "比對之 (&P)"
+
+msgid "I&gnore Changes"
+msgstr "忽略其變更 (&G)"
+
+msgid "Ig&nore All"
+msgstr "忽略全部 (&N)"
+
+msgid "Ignore Blan&k Lines"
+msgstr "忽略空白行 (&K)"
+
+msgid "Ignore &Case"
+msgstr "忽略大小寫 (&C)"
+
+msgid "Igno&re EOL Differences (Windows/Unix/Mac)"
+msgstr "忽略 EOL 差異（Windows/Unix/Mac）(&R)"
+
+msgid "Ignore Codepage &Differences"
+msgstr "忽略字碼頁不同 (&D)"
+
+msgid "Ignore Num&bers"
+msgstr "忽略數字 (&B)"
+
+msgid "Ignore C&omment Differences"
+msgstr "忽略註解差異 (&O)"
+
+msgid "Ignore &Missing Trailing EOL"
+msgstr "忽略缺失的行尾換行符號 (&M)"
+
+msgid "Ignore Line &Breaks (Treat as Spaces)"
+msgstr "忽略換行（視為空格） (&B)"
+
+msgid "&Include Subfolders"
+msgstr "包括子資料夾 (&I)"
+
+msgid "&Compare Method"
+msgstr "檔案比對方式 (&C)"
+
+msgid "Full Contents"
+msgstr "完整內容"
+
+msgid "Quick Contents"
+msgstr "快速內容"
+
+msgid "Binary Contents"
+msgstr "二進位內容"
+
+msgid "Modified Date"
+msgstr "修改日期"
+
+msgid "Modified Date and Size"
+msgstr "修改日期與大小"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Existence"
+msgstr "存在"
+
+msgid "&Load Project..."
+msgstr "讀取專案... (&L)"
+
+msgid "${*} - All Arguments"
+msgstr "${*} - 所有引數"
+
+msgid "${1} - First Argument"
+msgstr "${1} - 第一個引數"
+
+msgid "${2} - Second Argument"
+msgstr "${2} - 第二個引數"
+
+msgid "${3} - Third Argument"
+msgstr "${3} - 第三個引數"
+
+msgid "${4} - Fourth Argument"
+msgstr "${4} - 第四個引數"
+
+msgid "${5} - Fifth Argument"
+msgstr "${5} - 第五個引數"
+
+msgid "${6} - Sixth Argument"
+msgstr "${6} - 第六個引數"
+
+msgid "${7} - Seventh Argument"
+msgstr "${7} - 第七個引數"
+
+msgid "${8} - Eighth Argument"
+msgstr "${8} - 第八個引數"
+
+msgid "${9} - Ninth Argument"
+msgstr "${9} - 第九個引數"
+
+msgid "${SRC_FILE} - Source File"
+msgstr "${SRC_FILE} - 來源檔案"
+
+msgid "${SRC_FOLDER} - Source Folder"
+msgstr "${SRC_FOLDER} - 來源資料夾"
+
+msgid "${SRC_URL} - Source URL"
+msgstr "${SRC_URL} - 來源網址"
+
+msgid "${SRC_URL_PROTOCOL} - Source URL Protocol"
+msgstr "${SRC_URL_PROTOCOL} - 來源網址協定"
+
+msgid "${SRC_URL_SUFFIX} - Source URL Suffix"
+msgstr "${SRC_URL_SUFFIX} - 來源網址尾碼"
+
+msgid "${DST_FILE} - Destination File"
+msgstr "${DST_FILE} - 目的檔案"
+
+msgid "${DST_FOLDER} - Destination Folder"
+msgstr "${DST_FOLDER} - 目的資料夾"
+
+msgid "${DST_URL} - Destination URL"
+msgstr "${DST_URL} - 目的網址"
+
+msgid "${DST_URL_PROTOCOL} - Destination URL Protocol"
+msgstr "${DST_URL_PROTOCOL} - 目的網址協定"
+
+msgid "${DST_URL_SUFFIX} - Destination URL Suffix"
+msgstr "${DST_URL_SUFFIX} - 目的網址尾碼"
+
+msgid "${WINMERGE_HOME} - WinMerge Home Directory"
+msgstr "${WINMERGE_HOME} - WinMerge 主目錄"
+
+msgid "${SCRIPT_FILE} - Script File"
+msgstr "${SCRIPT_FILE} - 指令碼檔案"
+
+msgid "Add &Unpacker Plugin..."
+msgstr "新增解包裝器擴充功能... (&U)"
+
+msgid "Add &Prediffer Plugin..."
+msgstr "新增預差異器擴充功能... (&P)"
+
+msgid "&Duplicate Plugin..."
+msgstr "複製擴充功能... (&D)"
+
+msgid "Clear &All"
+msgstr "全部清除 (&A)"
+
+msgid "&Clear All"
+msgstr "全部清除 (&C)"
+
+msgid "Remove Last Filter &Group"
+msgstr "刪除最後一個篩選器組 (&G)"
+
+msgid "R&eset to Default (*.*)"
+msgstr "重設為預設值 (&E) (*.*)"
+
+msgid "Add E&xclude File"
+msgstr "新增排除檔案 (&X)"
+
+msgid "&System Files"
+msgstr "系統檔案 (&S)"
+
+msgid "&Editor Backup Files"
+msgstr "編輯器備份檔案 (&E)"
+
+msgid "&Compiled Binary Files"
+msgstr "已編譯二進位檔 (&C)"
+
+msgid "&Log Files"
+msgstr "日誌檔 (&L)"
+
+msgid "&Temporary or Cache Files"
+msgstr "臨時檔案或快取檔案 (&T)"
+
+msgid "Add Excl&ude Folder"
+msgstr "新增排除資料夾 (&U)"
+
+msgid "&Version Control"
+msgstr "版本控制 (&V)"
+
+msgid "&Build Artifacts"
+msgstr "建構產出物 (&B)"
+
+msgid "&IDE"
+msgstr "IDE (&I)"
+
+msgid "Add &File Condition"
+msgstr "新增檔案條件 (&F)"
+
+msgid "File &Size"
+msgstr "檔案大小 (&S)"
+
+msgid "Less than 1KB"
+msgstr "小於1KB"
+
+msgid "1KB or more"
+msgstr "1KB 以上"
+
+msgid "Less than 10KB"
+msgstr "小於10KB"
+
+msgid "10KB or more"
+msgstr "10KB 以上"
+
+msgid "Less than 100KB"
+msgstr "小於100KB"
+
+msgid "100KB or more"
+msgstr "100KB 以上"
+
+msgid "Less than 1MB"
+msgstr "小於 1MB"
+
+msgid "1MB or more"
+msgstr "1MB 以上"
+
+msgid "Less than 10MB"
+msgstr "小於 10MB"
+
+msgid "10MB or more"
+msgstr "10MB 以上"
+
+msgid "Less than 100MB"
+msgstr "小於 100MB"
+
+msgid "100MB or more"
+msgstr "100MB 以上"
+
+msgid "Less than 1GB"
+msgstr "小於 1GB"
+
+msgid "1GB or more"
+msgstr "1GB 以上"
+
+msgid "Custom Range..."
+msgstr "自訂範圍..."
+
+msgid "&Last Modified"
+msgstr "上次修改時間 (&L)"
+
+msgid "&Hour"
+msgstr "小時 (&H)"
+
+msgid "More than 1 hour ago"
+msgstr "1個多小時前"
+
+msgid "Within 1 hour"
+msgstr "1小時內"
+
+msgid "&Day"
+msgstr "日 (&D)"
+
+msgid "Before today"
+msgstr "今天之前"
+
+msgid "Today"
+msgstr "本日"
+
+msgid "Before yesterday"
+msgstr "昨天之前"
+
+msgid "Yesterday"
+msgstr "昨天"
+
+msgid "Since yesterday"
+msgstr "自昨天以來"
+
+msgid "&Week"
+msgstr "星期 (&W)"
+
+msgid "Before this week"
+msgstr "本週之前"
+
+msgid "This week"
+msgstr "本週"
+
+msgid "Before last week"
+msgstr "上週之前"
+
+msgid "Last week"
+msgstr "上個星期"
+
+msgid "Since last week"
+msgstr "自上週以來"
+
+msgid "&Month"
+msgstr "月份 (&M)"
+
+msgid "Before this month"
+msgstr "本月之前"
+
+msgid "This month"
+msgstr "本月"
+
+msgid "Before last month"
+msgstr "上月之前"
+
+msgid "Last month"
+msgstr "上個月"
+
+msgid "Since last month"
+msgstr "自上個月以來"
+
+msgid "&Year"
+msgstr "年 (&Y)"
+
+msgid "Before this year"
+msgstr "今年之前"
+
+msgid "This year"
+msgstr "本年"
+
+msgid "Before last year"
+msgstr "去年之前"
+
+msgid "Last year"
+msgstr "去年"
+
+msgid "Since last year"
+msgstr "自去年以來"
+
+msgid "&Custom Range..."
+msgstr "自訂範圍... (&C)"
+
+msgid "&Attributes"
+msgstr "屬性 (&A)"
+
+msgid "Read-only files"
+msgstr "唯獨檔"
+
+msgid "Not read-only files"
+msgstr "非唯讀檔"
+
+msgid "Hidden files"
+msgstr "隱藏檔案"
+
+msgid "Not hidden files"
+msgstr "非隱藏檔"
+
+msgid "System files"
+msgstr "系統檔"
+
+msgid "Not system files"
+msgstr "非系統檔"
+
+msgid "File &Content"
+msgstr "檔案內容 (&C)"
+
+msgid "Contains string..."
+msgstr "包含字串..."
+
+msgid "Does not contain string..."
+msgstr "不包含字串..."
+
+msgid "First line contains string..."
+msgstr "第一行包含字串..."
+
+msgid "First line does not contain string..."
+msgstr "第一行不包含字串..."
+
+msgid "First 10 lines contain string..."
+msgstr "前 10 行包含字串..."
+
+msgid "First 10 lines do not contain string..."
+msgstr "前 10 行不包含字串..."
+
+msgid "Last 10 lines contain string..."
+msgstr "最後 10 行包含字串..."
+
+msgid "Last 10 lines do not contain string..."
+msgstr "最後 10 行不包含字串..."
+
+msgid "Last line contains string..."
+msgstr "最後一行包含字串..."
+
+msgid "Last line does not contain string..."
+msgstr "最後一行不包含字串..."
+
+msgid "&Line Count"
+msgstr "行數 (&L)"
+
+msgid "Less than 10"
+msgstr "小於 10"
+
+msgid "10 or more"
+msgstr "10 以上"
+
+msgid "Less than 100"
+msgstr "小於 100"
+
+msgid "100 or more"
+msgstr "100 以上"
+
+msgid "Less than 1000"
+msgstr "小於 1000"
+
+msgid "1000 or more"
+msgstr "1000 以上"
+
+msgid "Less than 10000"
+msgstr "小於 10000"
+
+msgid "10000 or more"
+msgstr "10000 以上"
+
+msgid "Less than 100000"
+msgstr "小於 100000"
+
+msgid "100000 or more"
+msgstr "100000 以上"
+
+msgid "Additional &Properties..."
+msgstr "額外屬性... (&P)"
+
+msgid "Add F&older Condition"
+msgstr "新增資料夾條件 (&O)"
+
+msgid "&Files"
+msgstr "檔案 (&F)"
+
+msgid "0 files"
+msgstr "0 個檔案"
+
+msgid "1 file or more"
+msgstr "1 個檔案以上"
+
+msgid "&Items"
+msgstr "項目 (&I)"
+
+msgid "0 items"
+msgstr "0 個項目"
+
+msgid "1 item or more"
+msgstr "1 個項目以上"
+
+msgid "&Total Size"
+msgstr "總容量 (&T)"
+
+msgid "&Recursive"
+msgstr "遞迴 (&R)"
+
+msgid "Target: &Any (Left/Middle/Right)"
+msgstr "目標：任意（左/中/右） (&A)"
+
+msgid "Target: &Left"
+msgstr "目標：左 (&L)"
+
+msgid "Target: &Middle"
+msgstr "目標：中 (&M)"
+
+msgid "Target: &Right"
+msgstr "目標：右 (&R)"
+
+msgid "Add &Difference Condition"
+msgstr "新增差異條件 (&D)"
+
+msgid "Equal"
+msgstr "相等"
+
+msgid "Not Equal"
+msgstr "不相等"
+
+msgid "Less Than"
+msgstr "小於"
+
+msgid "Less Than or Equal to"
+msgstr "小於或等於"
+
+msgid "Greater Than"
+msgstr "大於"
+
+msgid "Greater Than or Equal to"
+msgstr "大於或等於"
+
+msgid "Less than 10B"
+msgstr "小於 10B"
+
+msgid "10B or more"
+msgstr "10B 以上"
+
+msgid "Less than 100B"
+msgstr "小於 100B"
+
+msgid "100B or more"
+msgstr "100B 以上"
+
+msgid "Less than 1 second"
+msgstr "小於 1秒"
+
+msgid "1 second or more"
+msgstr "1秒或更久"
+
+msgid "Less than 1 minute"
+msgstr "小於 1分鐘"
+
+msgid "1 minute or more"
+msgstr "1分鐘或更久"
+
+msgid "Less than 1 hour"
+msgstr "小於 1小時"
+
+msgid "1 hour or more"
+msgstr "1小時或更久"
+
+msgid "Less than 1 day"
+msgstr "少於1天"
+
+msgid "1 day or more"
+msgstr "1天或以上"
+
+msgid "Less than 1 week"
+msgstr "不到1週"
+
+msgid "1 week or more"
+msgstr "1週或以上"
+
+msgid "Target: &Left and Right"
+msgstr "目標：左側與右側 (&L)"
+
+msgid "Target: Left and &Middle"
+msgstr "目標：中間與左側 (&M)"
+
+msgid "Target: Middle and &Right"
+msgstr "目標：中間與右側 (&R)"
+
+msgid "Target: &All"
+msgstr "目標：全部 (&A)"
+
+msgid "Binary files only"
+msgstr "僅二進位檔"
+
+msgid "Text files only"
+msgstr "僅文字檔案"
+
+msgid "None"
+msgstr "無"
+
+msgid "Mixed"
+msgstr "混合"
+
+msgid "&Clear conditions"
+msgstr "清除條件 (&C)"
+
+msgid "Compare &Size"
+msgstr "比對大小 (&S)"
+
+msgid "Compare &Date"
+msgstr "比對日期 (&D)"
+
+msgid "Compare &Attributes"
+msgstr "比對屬性 (&A)"
+
+msgid "Compare C&ontents"
+msgstr "比對內容 (&O)"
+
+msgid "&Clear Keys"
+msgstr "清除鍵 (&C)"
+
+msgid "&Name"
+msgstr "名稱 (&N)"
+
+msgid "&Base name (without extension)"
+msgstr "基本名稱（不含副檔名） (&B)"
+
+msgid "Normalized &Unicode Name"
+msgstr "已規範化 Unicode 名稱 (&U)"
+
+msgid "&Relative Path"
+msgstr "相對路徑 (&R)"
+
+msgid "&Date"
+msgstr "日期 (&D)"
+
+msgid "&Hash (MD5)"
+msgstr "哈希(MD5) (&H)"
+
+msgid "Insert &replace() Function"
+msgstr "插入 replace()函數 (&R)"
+
+msgid "Insert rege&xReplace() Function"
+msgstr "插入 regexReplace()函數 (&X)"
+
+msgid "Replace &Lists"
+msgstr "取代清單 (&L)"
+
+msgid "&Create String Replace List and Insert..."
+msgstr "建立字串取代清單並插入... (&C)"
+
+msgid "Create &Regex Replace List and Insert..."
+msgstr "建立正規表示式取代清單並插入... (&R)"
+
+msgid "&String Replace Lists"
+msgstr "字串取代清單 (&S)"
+
+msgid "Re&gex Replace Lists"
+msgstr "正規表示式取代清單(&G)"
+
+msgid "Open String Replace Lists Folder..."
+msgstr "開啟字串取代清單資料夾..."
+
+msgid "Open Regex Replace Lists Folder..."
+msgstr "開啟正規表示式取代清單資料夾..."
+
+msgid "Match &case"
+msgstr "區分大小寫 (&C)"
+
+msgid "Text &Normalization"
+msgstr "文本規範化 (&N)"
+
+msgid "&Lowercase"
+msgstr "小寫 (&L)"
+
+msgid "&Uppercase"
+msgstr "大寫 (&U)"
+
+msgid "&Half-width"
+msgstr "半寬 (&H)"
+
+msgid "&Full-width"
+msgstr "全寬 (&F)"
+
+msgid "&Chinese Conversion"
+msgstr "中文轉換 (&C)"
+
+msgid "&Simplified Chinese"
+msgstr "簡體中文 (&S)"
+
+msgid "&Traditional Chinese"
+msgstr "正體中文 (&T)"
+
+msgid "&Japanese Conversion"
+msgstr "日文轉換 (&J)"
+
+msgid "&Hiragana"
+msgstr "平假名 (&H)"
+
+msgid "&Katakana"
+msgstr "片假名 (&K)"
+
+msgid "Normalize &Unicode"
+msgstr "標準化 Unicode (&U)"
+
+msgid "Add L&ine Condition"
+msgstr "新增行條件 (&I)"
+
+msgid "L&ine Text..."
+msgstr "行文本... (&I)"
+
+msgid "&Column"
+msgstr "欄位 (&C)"
+
+msgid "Column: &1"
+msgstr "欄位：&1"
+
+msgid "Column: &2"
+msgstr "欄位：&2"
+
+msgid "Column: &3"
+msgstr "欄位：&3"
+
+msgid "Column: &4"
+msgstr "欄位：&4"
+
+msgid "Column: &5"
+msgstr "欄位：&5"
+
+msgid "Column: &6"
+msgstr "欄位：&6"
+
+msgid "Column: &7"
+msgstr "欄位：&7"
+
+msgid "Column: &8"
+msgstr "欄位：&8"
+
+msgid "Column: &9"
+msgstr "欄位：&9"
+
+msgid "Column: 1&0"
+msgstr "欄位：1&0"
+
+msgid "Line L&ength..."
+msgstr "每行長度... (&E)"
+
+msgid "&Word Count..."
+msgstr "字數統計... (&W)"
+
+msgid "Line &Number"
+msgstr "行號 (&N)"
+
+msgid "&Odd Lines"
+msgstr "奇數行 (&O)"
+
+msgid "&Even Lines"
+msgstr "偶數行(&E)"
+
+msgid "Line &Status"
+msgstr "行狀態 (&S)"
+
+msgid "Different"
+msgstr "不同"
+
+msgid "Identical"
+msgstr "完全相同"
+
+msgid "Trivial"
+msgstr "瑣碎"
+
+msgid "Exists"
+msgstr "存在"
+
+msgid "Missing"
+msgstr "遺失了"
+
+msgid "Moved"
+msgstr "已移動"
+
+msgid "Bookmarked"
+msgstr "已收藏"
+
+msgid "&EOL"
+msgstr "換行符號 (&E)"
+
+msgid "L&ine Text"
+msgstr "行文本 (&I)"
+
+msgid "&Number"
+msgstr "數字 (&N)"
+
+msgid "&Date/Time"
+msgstr "日期/時間 (&D)"
+
+msgid "Line L&ength"
+msgstr "每行長度 (&E)"
+
+msgid "&Transform Line/Column"
+msgstr "轉換行/列 (&T)"
+
+msgid "&Trim"
+msgstr "修剪空白 (&T)"
+
+msgid "Normalize &Whitespace"
+msgstr "標準化空白字元 (&W)"
+
+msgid "&Replace"
+msgstr "取代 (&R)"
+
+msgid "Reg&ex Replace"
+msgstr "正規表示式取代(&E)"
+
+msgid "&Refine Current Filter"
+msgstr "細化目前篩選器(&R)"
+
+msgid "Add Con&text Lines"
+msgstr "加入上下文字行 (&T)"
+
+msgid "Filter by &Occurrence"
+msgstr "依出現次數/位置篩選 (&O)"
+
+msgid "&First"
+msgstr "第一個 (&F)"
+
+msgid "&Last"
+msgstr "最後一個 (&L)"
+
+msgid "First &5 Matches"
+msgstr "前 5 個符合項(&5)"
+
+msgid "After First &5"
+msgstr "前 5 個符合項之後(&5)"
+
+msgid "By &Block"
+msgstr "依區塊(&B)"
+
+msgid "&Range"
+msgstr "範圍(&R)"
+
+msgid "&Inside..."
+msgstr "內部... (&I)"
+
+msgid "&Outside..."
+msgstr "外部... (&O)"
+
+msgid "Create &Range"
+msgstr "建立範圍 (&R)"
+
+msgid "Combine: A&ND"
+msgstr "組合方式：AND (&N)"
+
+msgid "Combine: &OR"
+msgstr "組合方式：OR (&O)"
+
+msgid "About WinMerge"
+msgstr "關於 WinMerge"
+
+msgid "Visit the WinMerge Homepage!"
+msgstr "拜訪 WinMerge 首頁！"
+
+msgid "OK"
+msgstr "確定"
+
+msgid "Contributors"
+msgstr "貢獻者"
+
+msgid "Select Files or Folders"
+msgstr "選取檔案或資料夾"
+
+msgid "&1st File or Folder"
+msgstr "第 &1 檔案或資料夾"
+
+msgid "Re&ad-only"
+msgstr "唯讀 (&A)"
+
+msgid "Swap 1st | 2nd"
+msgstr "將第一和第二對調"
+
+msgid "&Browse..."
+msgstr "瀏覽... (&B)"
+
+msgid "&2nd File or Folder"
+msgstr "第 &2 檔案或資料夾"
+
+msgid "Rea&d-only"
+msgstr "唯讀 (&D)"
+
+msgid "Swap 2nd | 3rd"
+msgstr "將第二和第三對調"
+
+msgid "B&rowse..."
+msgstr "瀏覽... (&R)"
+
+msgid "&3rd File or Folder (Optional)"
+msgstr "第 &3 檔案或資料夾 (可選)"
+
+msgid "Read-o&nly"
+msgstr "唯讀 (&N)"
+
+msgid "Swap 1st | 3rd"
+msgstr "將第一和第三對調"
+
+msgid "Browse..."
+msgstr "瀏覽..."
+
+msgid " Folder: Filter"
+msgstr "資料夾：篩選器"
+
+msgid "&Include subfolders"
+msgstr "包括子資料夾 (&I)"
+
+msgid " File: Prediffer Plugin"
+msgstr "檔案: 預差異器擴充功能"
+
+msgid " File: Unpacker Plugin"
+msgstr "檔案: 解包裝器擴充功能"
+
+msgid "Se&lect..."
+msgstr "選擇... (&L)"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Status:"
+msgstr "狀態："
+
+msgid "Help"
+msgstr "說明"
+
+msgid "&Options..."
+msgstr "選項... (&O)"
+
+msgid "Find"
+msgstr "尋找"
+
+msgid "Fi&nd what:"
+msgstr "尋找 (&N)："
+
+msgid "Match &whole word only"
+msgstr "只匹配完整單詞 (&W)"
+
+msgid "Regular &expression"
+msgstr "正規表示式 (&E)"
+
+msgid "D&on't wrap end of file"
+msgstr "至檔尾不折返 (&O)"
+
+msgid "&Don't close this dialog"
+msgstr "不要關閉此對話框 (&D)"
+
+msgid "&Find Next"
+msgstr "找下一個 (&F)"
+
+msgid "Find &Prev"
+msgstr "找上一個 (&P)"
+
+msgid "Replace"
+msgstr "取代"
+
+msgid "Re&place with:"
+msgstr "取代為 (&P)："
+
+msgid "&Don't wrap at end of file"
+msgstr "至檔尾不折返 (&D)"
+
+msgid "Replace in"
+msgstr "取代於"
+
+msgid "Wh&ole file"
+msgstr "整個檔案 (&O)"
+
+msgid "Find Pre&v"
+msgstr "找上一個 (&V)"
+
+msgid "Replace &All"
+msgstr "全部取代 (&A)"
+
+msgid "Markers"
+msgstr "標記"
+
+msgid "Enable &markers"
+msgstr "開啟標記 (&M)"
+
+msgid "New"
+msgstr "新增"
+
+msgid "&Background color:"
+msgstr "背景顏色 (&B)："
+
+msgid "&Ok"
+msgstr "確定 (&O)"
+
+msgid "&Apply"
+msgstr "應用 (&A)"
+
+msgid "Line Filters"
+msgstr "行篩選器"
+
+msgid "Enable Line Filters"
+msgstr "啟用行篩選器"
+
+msgid "Regular Expressions (one per line):"
+msgstr "正規表示式 (每行一式)："
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Substitution Filters"
+msgstr "替代篩選器"
+
+msgid ""
+"Changes to the listed pairs below will be ignored or marked as insignificant. "
+"Patches are unaffected."
+msgstr "列表中列出的配對將被忽略或標記為無關緊要的變更。修補程式不受影響。"
+
+msgid "Enable"
+msgstr "啟用"
+
+msgid "Add"
+msgstr "新增"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Options"
+msgstr "選項"
+
+msgid "Import..."
+msgstr "匯入..."
+
+msgid "Export..."
+msgstr "匯出..."
+
+msgid "General"
+msgstr "一般"
+
+msgid "Automatically &scroll to first difference"
+msgstr "自動捲至首個差異 (&S)"
+
+msgid "Automatically s&croll to first inline difference"
+msgstr "自動捲至首個行內差異 (&C)"
+
+msgid "Cl&ose windows with 'Esc':"
+msgstr "按【Esc】關閉視窗 (&O):"
+
+msgid "&Automatically verify paths in Open dialog"
+msgstr "於「開啟」對話方塊自動檢驗路徑 (&A)"
+
+msgid "Single instance mode:"
+msgstr "單一執行個體模式："
+
+msgid "As&k when closing multiple windows"
+msgstr "關閉多個視窗時詢問 (&K)"
+
+# "比對時計入檔案時間 (&P)"
+msgid "&Preserve file time in file compare"
+msgstr "比對檔案時保留檔案時間 (&P)"
+
+msgid "Show \"Select Files or Folders\" dialog on startup"
+msgstr "啟動時顯示「選擇檔案或資料夾」對話方塊"
+
+msgid "Close \"Select Files or Folders\" dialog on clicking Compare button"
+msgstr "點擊比對按鈕後關閉「選擇檔案或資料夾」對話框"
+
+msgid "Op&en dialog Auto completion:"
+msgstr "開啟對話框自動補全(&E):"
+
+msgid "Auto-&reload modified files:"
+msgstr "自動重新讀取已修改的檔案(&R)："
+
+msgid "Language:"
+msgstr "語言："
+
+msgid "Defaults"
+msgstr "預設值"
+
+msgid "Colors"
+msgstr "色彩"
+
+msgid "Color &mode:"
+msgstr "色彩配置 (&M)："
+
+msgid "&Light mode scheme:"
+msgstr "亮色模式主題 (&L)："
+
+msgid "&Dark mode scheme:"
+msgstr "暗色模式主題 (&D)："
+
+msgid "Your custom schemes"
+msgstr "您的自訂主題"
+
+msgid "&Save current scheme..."
+msgstr "儲存目前主題... (&S)"
+
+msgid "Delete &current scheme..."
+msgstr "刪除目前主題... (&C)"
+
+msgid "Background"
+msgstr "背景"
+
+msgid "Deleted"
+msgstr "被刪除"
+
+msgid "Text"
+msgstr "文字色"
+
+msgid "Difference:"
+msgstr "差異區塊："
+
+msgid "Selected Difference:"
+msgstr "已選取的差異區塊："
+
+msgid "Ignored Difference:"
+msgstr "忽略的差異區塊："
+
+msgid "Moved:"
+msgstr "移位區塊："
+
+msgid "Selected Moved:"
+msgstr "已選取的移位區塊："
+
+msgid "Same As Next (3 panes):"
+msgstr "和下一個相同 (3方比對):"
+
+msgid "Same As Next (Selected):"
+msgstr "和下一個相同 (已選取):"
+
+msgid "Word Difference:"
+msgstr "詞彙差異："
+
+msgid "Selected Word Diff:"
+msgstr "已選取的字的差異："
+
+msgid "Dialog"
+msgstr "對話"
+
+msgid "Keywords:"
+msgstr "關鍵字："
+
+msgid "Function names:"
+msgstr "函數名："
+
+msgid "Comments:"
+msgstr "註解："
+
+msgid "Numbers:"
+msgstr "數字："
+
+msgid "Operators:"
+msgstr "運算子："
+
+msgid "Strings:"
+msgstr "字串："
+
+msgid "Preprocessor:"
+msgstr "預先處理器："
+
+msgid "User 1:"
+msgstr "使用者 1："
+
+msgid "User 2:"
+msgstr "使用者 2："
+
+msgid "Bold"
+msgstr "粗體"
+
+msgid "&Use customized text colors"
+msgstr "使用自訂文字色彩 (&U)"
+
+msgid "Whitespace:"
+msgstr "空白字元："
+
+msgid "Regular text:"
+msgstr "一般文本："
+
+msgid "Selection:"
+msgstr "選取："
+
+msgid "Margin:"
+msgstr "邊距："
+
+msgid "Search Marker:"
+msgstr "搜尋標記："
+
+msgid "User Defined Marker 1:"
+msgstr "使用者自定義標記1："
+
+msgid "User Defined Marker 2:"
+msgstr "使用者自定義標記2："
+
+msgid "User Defined Marker 3:"
+msgstr "使用者自定義標記3："
+
+msgid "&Use folder compare colors"
+msgstr "使用資料夾比對顏色 (&U)"
+
+msgid "Items equal:"
+msgstr "相同項目："
+
+msgid "Items different:"
+msgstr "差異項目："
+
+msgid "Items missing:"
+msgstr "遺失的項目："
+
+msgid "Items filtered:"
+msgstr "篩選後項目："
+
+msgid "&Use custom system colors"
+msgstr "使用自訂系統顏色 (&U)"
+
+msgid "System"
+msgstr "系統"
+
+msgid "&Use Recycle Bin"
+msgstr "使用資源回收筒 (&U)"
+
+msgid "&External editor:"
+msgstr "外部編輯器 (&E)："
+
+msgid "&Store user data in:"
+msgstr "將使用者資料儲存在(&S)："
+
+msgid "&Filter folder:"
+msgstr "資料夾篩選器 (&F)："
+
+msgid "Temporary files folder"
+msgstr "暫存檔資料夾"
+
+msgid "S&ystem temp folder"
+msgstr "系統的暫存資料夾 (&Y)"
+
+msgid "C&ustom folder:"
+msgstr "自訂資料夾 (&U)："
+
+msgid "Br&owse..."
+msgstr "瀏覽... (&O)"
+
+msgid "Compare"
+msgstr "比對"
+
+msgid "Whitespaces"
+msgstr "空白字元"
+
+msgid "&Compare"
+msgstr "比對 (&C)"
+
+msgid "&Ignore change"
+msgstr "忽略更改 (&I)"
+
+msgid "I&gnore all"
+msgstr "全部忽略 (&G)"
+
+msgid "Ignore blan&k lines"
+msgstr "忽略空行 (&K)"
+
+msgid "Ignore &case"
+msgstr "忽略大小寫 (&C)"
+
+msgid "Igno&re EOL differences (Windows/Unix/Mac)"
+msgstr "忽略 EOL 差異（Windows/Unix/Mac）(&R)"
+
+msgid "Ignore num&bers"
+msgstr "忽略數字 (&B)"
+
+msgid "Ignore codepage &differences"
+msgstr "忽略字碼頁差異 (&D)"
+
+msgid "Ignore c&omment differences"
+msgstr "忽略註解差異 (&O)"
+
+msgid "Ignore &missing trailing EOL"
+msgstr "忽略缺失的行尾換行符號 (&M)"
+
+msgid "Ignore line &breaks (treat as spaces)"
+msgstr "忽略換行（視為空格） (&B)"
+
+msgid "E&nable moved block detection"
+msgstr "啟用移位區塊偵測 (&N)"
+
+msgid "Align &similar lines"
+msgstr "相似行對齊 (&S)"
+
+msgid "Diff &algorithm:"
+msgstr "差異比對演算法 (&A)："
+
+msgid "Enable indent &heuristic"
+msgstr "啟用縮排啟發式演算法 (&H)"
+
+msgid "Completely unhighlight the ignored differences"
+msgstr "完全取消對已忽略差異的高亮顯著提示"
+
+msgid "Editor"
+msgstr "編輯器"
+
+msgid "&Highlight syntax"
+msgstr "語法高亮顯著提示 (&H)"
+
+msgid "Highlight &mode:"
+msgstr "高亮顯著模式 (&M)"
+
+msgid "&Preserve original EOL"
+msgstr "保留原始 EOL (&P)"
+
+msgid "Tabs"
+msgstr "定位字元（Tab）"
+
+msgid "&Tab size:"
+msgstr "定位字元（Tab）大小 (&T)："
+
+msgid "&Insert tabs"
+msgstr "插入定位字元（Tab） (&I)"
+
+msgid "Insert &spaces"
+msgstr "插入空格 (&S)"
+
+msgid "&Rendering mode:"
+msgstr "渲染模式 (&R)："
+
+msgid "&Automatic rescan"
+msgstr "自動重新掃描 (&A)"
+
+msgid "Copy &granularity for selected differences:"
+msgstr "複製所選差異的精細度 (&G):"
+
+msgid "Line Difference Coloring"
+msgstr "行內差異著色"
+
+msgid "View line differences"
+msgstr "檢視行內差異"
+
+msgid "&Character-level"
+msgstr "字元階層 (&C)"
+
+msgid "&Word-level:"
+msgstr "字階層 (&W)："
+
+msgid "W&ord break characters:"
+msgstr "斷句字元 (&O)："
+
+msgid ""
+"Some messages can be hidden by the user. Press Reset to make all messages "
+"visible again."
+msgstr ""
+"WinMerge 部分訊息可由使用者隱藏。\n"
+"按下「重設」按鈕可使所有訊息再次可見。"
+
+msgid "Reset"
+msgstr "重設"
+
+msgid "Patch Generator"
+msgstr "修補檔產生器"
+
+msgid "Comparisons to include:"
+msgstr "比對項目包括："
+
+msgid "File&1:"
+msgstr "檔案1 (&1)："
+
+msgid "File&2:"
+msgstr "檔案2 (&2)："
+
+msgid "&Swap"
+msgstr "對調 (&S)"
+
+msgid "&Copy to clipboard"
+msgstr "複製到剪貼簿 (&C)"
+
+msgid "&Append to existing file"
+msgstr "附加到現有檔案 (&A)"
+
+msgid "&Result:"
+msgstr "結果 (&R)："
+
+msgid "Bro&wse..."
+msgstr "瀏覽... (&W)"
+
+msgid "&Format"
+msgstr "格式 (&F)"
+
+msgid "St&yle:"
+msgstr "樣式 (&Y)："
+
+msgid "&Context:"
+msgstr "上下文 (&C)："
+
+msgid "Inclu&de command line"
+msgstr "包括命令列 (&D)"
+
+msgid "Open in e&xternal editor"
+msgstr "開啟外部編輯器 (&X)"
+
+msgid "Display Columns"
+msgstr "顯示欄位"
+
+msgid "Move &Up"
+msgstr "上移 (&U)"
+
+msgid "Move &Down"
+msgstr "下移 (&D)"
+
+msgid "&Additional Properties"
+msgstr "額外屬性 (&A)"
+
+msgid "Additional Properties"
+msgstr "額外屬性"
+
+msgid "Select Plugin"
+msgstr "選擇擴充功能"
+
+msgid "Plugin &name:"
+msgstr "擴充功能名稱 (&N)："
+
+msgid "&Target files:"
+msgstr "目標檔案 (&T)："
+
+msgid "Extensions list:"
+msgstr "副檔名清單："
+
+msgid "Description:"
+msgstr "描述："
+
+msgid "Default arguments:"
+msgstr "預設引數："
+
+msgid "Display all plugins (Ignore extension)"
+msgstr "顯示所有擴充功能 (忽略副檔名)"
+
+msgid "&Open files in same window type after unpacking"
+msgstr "解包裝後在同類型視窗開啟檔案 (&O)"
+
+msgid "&Plugin pipeline:"
+msgstr "擴充功能處理序 (&P)："
+
+msgid "&Alias..."
+msgstr "別名... (&A)"
+
+msgid "Stop"
+msgstr "停止"
+
+msgid "Pause"
+msgstr "暫停"
+
+msgid "Continue"
+msgstr "繼續"
+
+msgid "C&PU cores to use:"
+msgstr "使用的 CPU 核心數量 (&N)："
+
+msgid "Items total:"
+msgstr "項目總數："
+
+msgid "Items compared:"
+msgstr "比對過的項目："
+
+msgid "&Close"
+msgstr "關閉 (&C)"
+
+msgid "Go to"
+msgstr "跳至"
+
+msgid "G&o to:"
+msgstr "跳至 (&O)："
+
+msgid "File"
+msgstr "檔案"
+
+msgid "Go to what"
+msgstr "跳至哪"
+
+msgid "Li&ne"
+msgstr "行 (&N)"
+
+msgid "&Difference"
+msgstr "差異 (&D)"
+
+msgid "&Go to"
+msgstr "跳至 (&G)"
+
+msgid "File Filters"
+msgstr "檔案篩選器"
+
+msgid "&Mask / Filter Expression"
+msgstr "遮罩/篩選表示式 (&M)"
+
+msgid "Preset &Filters"
+msgstr "預設篩選器 (&F)"
+
+msgid "Test..."
+msgstr "測試..."
+
+msgid "Install..."
+msgstr "安裝..."
+
+msgid "New..."
+msgstr "新增..."
+
+msgid "Edit..."
+msgstr "編輯..."
+
+msgid "Delete..."
+msgstr "刪除..."
+
+msgid "Filter Condition"
+msgstr "篩選條件"
+
+msgid "&Left-hand side:"
+msgstr "左側 (&L)："
+
+msgid "&Operator:"
+msgstr "運算子 (&O)："
+
+msgid "&Right-hand side:"
+msgstr "右側 (&R)："
+
+msgid "Expression:"
+msgstr "表示式:"
+
+msgid "Filter by Comparison Result"
+msgstr "依比對結果篩選"
+
+msgid "&Include"
+msgstr "包括 (&I)"
+
+msgid "&Exclude"
+msgstr "排除 (&E)"
+
+msgid "Comparison Results"
+msgstr "比對結果"
+
+msgid "Left only"
+msgstr "僅左側"
+
+msgid "Right only"
+msgstr "僅右側"
+
+msgid "Skipped"
+msgstr "已跳過"
+
+msgid "Middle only"
+msgstr "僅中間"
+
+msgid "Left only (different)"
+msgstr "僅左側 (有差異)"
+
+msgid "Middle only (different)"
+msgstr "僅中間 (有差異)"
+
+msgid "Right only (different)"
+msgstr "僅右側 (有差異)"
+
+msgid "Left only (missing)"
+msgstr "僅左側 (遺失)"
+
+msgid "Middle only (missing)"
+msgstr "僅中間 (遺失)"
+
+msgid "Right only (missing)"
+msgstr "僅右側 (遺失)"
+
+msgid "Match Inside/Outside Filter Expressions"
+msgstr "符合內部／外部篩選條件的表示式"
+
+msgid "&Start filter:"
+msgstr "起始篩選器(&S)："
+
+msgid "&End filter:"
+msgstr "結束篩選器(&E)："
+
+msgid "Lines between start and end filter matches will be included."
+msgstr "將包括起始與結束間的符合篩選項目行"
+
+msgid "Codepage"
+msgstr "字碼頁"
+
+msgid "Default Codepage"
+msgstr "預設字碼頁"
+
+msgid "Select the default codepage for non-Unicode files:"
+msgstr "選取非 Unicode 檔案的預設字碼頁："
+
+msgid "System codepage"
+msgstr "系統用的字碼頁"
+
+msgid "According to WinMerge User Interface"
+msgstr "WinMerge 使用者介面用的字碼頁"
+
+msgid "Custom codepage:"
+msgstr "自訂字碼頁："
+
+msgid ""
+"Detect codepage for: .html, .rc, .xml\n"
+"Restart required."
+msgstr ""
+"偵測以下檔案的字碼頁：.html, .rc, .xml\n"
+"需要重新啟動程式。"
+
+msgid ""
+"Detect codepage for files with mlang.dll\n"
+"Restart required."
+msgstr ""
+"使用 mlang.dll 偵測檔案的字碼頁\n"
+"需要重新啟動程式。"
+
+msgid "Archive Support"
+msgstr "支援封存檔"
+
+msgid "&Enable archive file support"
+msgstr "啟用封存檔支援 (&E)"
+
+msgid "&Detect archive type from file signature"
+msgstr "從檔案簽章偵測封存檔類型 (&D)"
+
+msgid "Items saved to or restored from the project file:"
+msgstr "已儲存至或從專案檔案還原的項目："
+
+msgid "Save Modified Files?"
+msgstr "儲存修改的檔案？"
+
+msgid "Left side file"
+msgstr "左側檔案"
+
+msgid "&Save changes"
+msgstr "儲存變更 (&S)"
+
+msgid "&Discard changes"
+msgstr "放棄變更 (&D)"
+
+msgid "Middle side file"
+msgstr "中間檔案"
+
+msgid "Sa&ve changes"
+msgstr "儲存變更 (&V)"
+
+msgid "Discard c&hanges"
+msgstr "放棄變更 (&H)"
+
+msgid "Right side file"
+msgstr "右側檔案"
+
+msgid "S&ave changes"
+msgstr "儲存變更 (&A)"
+
+msgid "Dis&card changes"
+msgstr "放棄變更 (&C)"
+
+msgid "Disca&rd All"
+msgstr "放棄全部 (&R)"
+
+msgid "Folder Compare Report"
+msgstr "比對目錄後的報告"
+
+msgid "Report &file:"
+msgstr "報告檔案 (&F)："
+
+msgid "&Style:"
+msgstr "樣式 (&S)："
+
+msgid "&Include file compare report"
+msgstr "包括檔案比對報告 (&I)"
+
+msgid "Open report after &generating"
+msgstr "產生完開啟報告(&G)"
+
+msgid "File Compare Report"
+msgstr "檔案比對報告"
+
+msgid "&Include all image pages"
+msgstr "包括所有圖片頁面 (&I)"
+
+msgid "\\u24D8 The report uses the current comparison settings."
+msgstr "\\u24D8 此報告將採用目前的比對設定。"
+
+msgid "Archive Generator"
+msgstr "封存檔產生器"
+
+msgid "Archive &file:"
+msgstr "封存檔案 (&F)："
+
+msgid "Include &report"
+msgstr "包括報告 (&R)"
+
+msgid "Include &patch"
+msgstr "包括修補檔 (&P)"
+
+msgid "Include pro&ject"
+msgstr "包括專案 (&J)"
+
+msgid "Shared or Private Filter"
+msgstr "共用或個人篩選器"
+
+msgid "What type of filter do you want?"
+msgstr "您要建立哪種篩選器？"
+
+msgid "Shared Filter (for all users)"
+msgstr "共用篩選器 (適用所有使用者)"
+
+msgid "Private Filter (current user only)"
+msgstr "個人篩選器(僅適用現在使用者)"
+
+msgid "Compare Statistics"
+msgstr "比對後的統計"
+
+msgid "Folders:"
+msgstr "資料夾："
+
+msgid "Files:"
+msgstr "檔案："
+
+msgid "Binary:"
+msgstr "二進位："
+
+msgid "Unique"
+msgstr "獨有"
+
+msgid "Left:"
+msgstr "左側："
+
+msgid "Right:"
+msgstr "右側："
+
+msgid "Total:"
+msgstr "總計："
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Middle:"
+msgstr "中間："
+
+msgid "Missing Left:"
+msgstr "遺失左側："
+
+msgid "Missing Middle:"
+msgstr "遺失中間："
+
+msgid "Missing Right:"
+msgstr "遺失右側："
+
+msgid "Affects"
+msgstr "影響"
+
+msgid "(Affects)"
+msgstr "(影響)"
+
+msgid "Select Codepage for"
+msgstr "選取以下項目的字碼頁"
+
+msgid "&File Loading:"
+msgstr "檔案讀取時 (&F)："
+
+msgid "File &Saving:"
+msgstr "檔案儲存時 (&S)："
+
+msgid "&Use same codepage for both"
+msgstr "兩檔都用相同的字碼頁 (&U)"
+
+msgid "&Cancel"
+msgstr "取消 (&C)"
+
+msgid "Test Filter"
+msgstr "測試篩選器"
+
+msgid "Testing filter:"
+msgstr "測試篩選器："
+
+msgid "&Enter text to test:"
+msgstr "輸入文字以做測試 (&E)："
+
+msgid "&Folder Name"
+msgstr "資料夾名稱 (&F)"
+
+msgid "Result:"
+msgstr "結果："
+
+msgid "&Test"
+msgstr "測試 (&T)"
+
+msgid "Table"
+msgstr "表格"
+
+msgid "File type"
+msgstr "檔案類型"
+
+msgid "&CSV"
+msgstr "&CSV"
+
+msgid "&TSV"
+msgstr "&TSV"
+
+msgid "Custom &Delimiter-Separated Values"
+msgstr "被分隔符號分隔的自訂數值 (&E)"
+
+msgid "D&elimiter character:"
+msgstr "分隔字元 (&E)："
+
+msgid "&Allow newlines in quotes"
+msgstr "允許引號中的新行字元 (&A)"
+
+msgid "&Quote character:"
+msgstr "引號字元 (&Q)："
+
+msgid "Backup Files"
+msgstr "備份檔案"
+
+msgid "Create backup files for:"
+msgstr "產生備份檔於："
+
+msgid "&Folder compare"
+msgstr "比對資料夾時 (&F)"
+
+msgid "Fil&e compare"
+msgstr "比對檔案時 (&E)"
+
+msgid "Create backup files in:"
+msgstr "產生備份檔至："
+
+msgid "&Original file's folder"
+msgstr "原始檔的資料夾 (&O)"
+
+msgid "&Global backup folder:"
+msgstr "總的備份資料夾 (&G)："
+
+msgid "Backup filename:"
+msgstr "備份檔檔名："
+
+msgid "&Append .bak extension"
+msgstr "附加 .bak 副檔名 (&A)"
+
+msgid "A&ppend timestamp"
+msgstr "附上時間戳記 (&P)"
+
+msgid "Confirm Copy"
+msgstr "確認複製"
+
+msgid "Are you sure you want to copy XXX items?"
+msgstr "確定要複製 XXX 項目？"
+
+msgid "From left"
+msgstr "從左側"
+
+msgid "To right"
+msgstr "到右側"
+
+msgid "Don't ask this &question again."
+msgstr "不要再詢問此問題 (&Q)"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+msgid "Plugins"
+msgstr "擴充功能"
+
+msgid "&Enable plugins"
+msgstr "啟用擴充功能 (&E)"
+
+msgid "Plugin &type:"
+msgstr "擴充功能類型 (&T):"
+
+msgid "File filters:"
+msgstr "檔案篩選器："
+
+msgid "&Plugin arguments:"
+msgstr "擴充功能引數 (&P)："
+
+msgid "Enable &automatic unpacking/prediffing"
+msgstr "啟用擴充功能的自動化解包裝/預先差異化功能 (&A)"
+
+msgid "Shell Integration"
+msgstr "併入檔案總管介面"
+
+msgid "Explorer"
+msgstr "檔案總管"
+
+msgid "&Add to context menu"
+msgstr "加到右鍵選單 (&A)"
+
+msgid "E&nable advanced menu"
+msgstr "啟用進階選單 (&N)"
+
+msgid "Enable &Compare As menu"
+msgstr "啟用「作為比對」選單 (&C)"
+
+msgid "&Register Shell Extension"
+msgstr "註冊右鍵選單 (&R)"
+
+msgid "&Unregister Shell Extension"
+msgstr "註銷右鍵選單 (&U)"
+
+msgid "Register Shell Extension for Current User &Only"
+msgstr "僅為目前使用者註冊右鍵選單 (&O)"
+
+msgid "Unregister Shell Extension for Current User On&ly"
+msgstr "僅為目前使用者取消註冊右鍵選單 (&L)"
+
+msgid "Register Shell Extension for &Windows 11"
+msgstr "為 &Windows 11 及以上版本註冊右鍵選單"
+
+msgid "Unregister Shell Extension for W&indows 11"
+msgstr "為 &Windows 11 及以上版本取消註冊右鍵選單"
+
+msgid "Jump List"
+msgstr "跳轉列表"
+
+msgid "Clear all recent items"
+msgstr "清除所有最近的項目"
+
+msgctxt "Options dialog|Categories"
+msgid "Folder"
+msgstr "資料夾"
+
+msgid "&Compare method:"
+msgstr "檔案比對方式 (&C)："
+
+msgid "S&top after first difference"
+msgstr "在首個差異停止 (&T)"
+
+msgid "Ign&ore time differences less than 3 seconds"
+msgstr "如兩檔案之修改時間間隔少於三秒，則忽略此差異 (&O)"
+
+msgid "Expand subfolders &after comparison:"
+msgstr "展開子資料夾並進行比對："
+
+msgid "Include &unique subfolders contents"
+msgstr "包括獨一子資料夾內容 (&U)"
+
+msgid "Ignore &reparse points"
+msgstr "忽略重新分析點 (&R)"
+
+msgid "Switch to &quick compare when size exceeds (MB):"
+msgstr "當大小超過以下ＭＢ限制時，切換為快速比對 (&Q)："
+
+msgid "Switch to &binary compare when size exceeds (MB):"
+msgstr "當大小超過以下ＭＢ限制時，切換為二進位比對 (&B)："
+
+msgid "Additional comparison condi&tions:"
+msgstr "額外的比對條件(&t)："
+
+msgid "&Rename/move detection:"
+msgstr "重新命名/移動 偵測(&R)："
+
+msgid "Rename/move detection &keys:"
+msgstr "重新命名/移動 偵測鍵(&K)："
+
+msgid "M&erge renames and moves:"
+msgstr "合併重新命名與移動(&E)："
+
+msgid "File patterns:"
+msgstr "檔案的樣式："
+
+msgid "Custom Delimiter-Separated Values"
+msgstr "自訂分隔符號分隔值"
+
+msgctxt "Options dialog|Categories"
+msgid "Binary"
+msgstr "二進位"
+
+msgid "Binary file &patterns:"
+msgstr "二進位檔案的樣式 (&P)："
+
+msgid "Frhed settings"
+msgstr "Frhed 設定"
+
+msgid "View &Settings..."
+msgstr "顯示設定... (&S)"
+
+msgid "&Binary Mode..."
+msgstr "二進位模式... (&B)"
+
+msgid "&Character Set..."
+msgstr "字元設定... (&C)"
+
+msgid "Image"
+msgstr "圖片"
+
+msgid "Image file &patterns:"
+msgstr "圖片檔案的樣式 (&P)："
+
+msgid "&Enable image compare in folder compare"
+msgstr "在資料夾比對中啟用圖片比對 (&E)"
+
+msgid "OCR result:"
+msgstr "OCR 結果："
+
+msgid "Webpage"
+msgstr "網頁"
+
+msgid "URL pattern to &include (Regular expression):"
+msgstr "要包括的 URL樣式（正規表示式） (&I)："
+
+msgid "URL pattern to &exclude (Regular expression):"
+msgstr "要排除的 URL樣式（正規表示式） (&E)："
+
+msgid "&User data folder location:"
+msgstr "使用者資料夾位置 (&U)："
+
+msgid "&Separate user data folders for each pane"
+msgstr "每個面板使用單獨的使用者資料夾 (&S)"
+
+msgid "&Hex View"
+msgstr "二進位顯示 (&H)"
+
+msgid "Edit Plugin"
+msgstr "編輯擴充功能"
+
+msgid "&Category:"
+msgstr "類別 (&C)："
+
+msgid "&Menu caption:"
+msgstr "選單標題 (&M):"
+
+msgid "&Window type:"
+msgstr "視窗類型 (&W)："
+
+msgid "&Unpacked file extension:"
+msgstr "解包後的檔案副檔名 (&U):"
+
+msgid "&Require arguments"
+msgstr "需要引數 (&R)"
+
+msgid "&Generate editor script"
+msgstr "產生編輯器指令碼 (&G)"
+
+msgid "Command &line:"
+msgstr "命令列 (&L)："
+
+msgid "&Script file extension:"
+msgstr "指令碼檔案副檔名 (&C):"
+
+msgid "Script &body:"
+msgstr "指令碼主體 (&B):"
+
+msgid "Font"
+msgstr "字型"
+
+msgid "&Font:"
+msgstr "字型 (&F)："
+
+msgid "Font st&yle:"
+msgstr "字型樣式 (&Y)："
+
+msgid "&Size:"
+msgstr "大小 (&S)："
+
+msgid "Effects"
+msgstr "影響"
+
+msgid "Stri&keout"
+msgstr "刪除 (&k)"
+
+msgid "&Underline"
+msgstr "加底線 (&U)"
+
+msgid "&Color:"
+msgstr "色彩 (&C)："
+
+msgid "Sample"
+msgstr "範例"
+
+msgid "AaBbYyZz"
+msgstr "AaBbYyZz"
+
+msgid "Sc&ript:"
+msgstr "字型集 (&R)："
+
+msgid "<A>Show more fonts</A>"
+msgstr "<A>顯示更多字型</A>"
+
+msgid "EXT"
+msgstr "EXT"
+
+msgid "CAP"
+msgstr "CAP"
+
+msgid "NUM"
+msgstr "NUM"
+
+msgid "SCRL"
+msgstr "SCRL"
+
+msgid "OVR"
+msgstr "OVR"
+
+msgid "REC"
+msgstr "REC"
+
+msgid ""
+"\n"
+"New Documents (Ctrl+N)"
+msgstr ""
+"\n"
+"新增文檔 (Ctrl+N)"
+
+msgid ""
+"\n"
+"Open (Ctrl+O)"
+msgstr ""
+"\n"
+"開啟 (Ctrl+O)"
+
+msgid ""
+"\n"
+"Save (Ctrl+S)"
+msgstr ""
+"\n"
+"儲存 (Ctrl+S)"
+
+msgid "Unknown error opening project file."
+msgstr "開啟專案檔時發生不明錯誤。"
+
+msgid "Unknown error saving project file."
+msgstr "儲存專案檔時發生不明錯誤。"
+
+msgid "Project file loaded."
+msgstr "專案檔案已讀取。"
+
+msgid "Project file saved."
+msgstr "專案檔案已儲存。"
+
+#, c-format
+msgid ""
+"This project file contains plugins with custom arguments:\n"
+"\n"
+"%1\n"
+"These arguments may affect plugin behavior or execute external programs.\n"
+"\n"
+"Do you want to open this project file?"
+msgstr ""
+"此專案檔案包含帶有自訂引數的擴充功能：\n"
+"\n"
+"%1\n"
+"這些引數可能會影響擴充功能的行為，或執行外部程式。\n"
+"\n"
+"您確定要開啟此專案檔案嗎？"
+
+msgid ""
+"\n"
+"Undo (Ctrl+Z)"
+msgstr ""
+"\n"
+"復原 (Ctrl+Z)"
+
+msgid ""
+"\n"
+"Redo (Ctrl+Y)"
+msgstr ""
+"\n"
+"取消復原 (Ctrl+Y)"
+
+msgid ""
+"\n"
+"FileCompare\n"
+"\n"
+"\n"
+"\n"
+"WinMerge.FileCompare\n"
+"WinMerge File Compare"
+msgstr ""
+"\n"
+"FileCompare\n"
+"\n"
+"\n"
+"\n"
+"WinMerge.FileCompare\n"
+"WinMerge 資料夾比對"
+
+msgid ""
+"\n"
+"FolderCompare\n"
+"\n"
+"\n"
+"\n"
+"WinMerge.FolderCompare\n"
+"WinMerge Folder Compare"
+msgstr ""
+"\n"
+"FolderCompare\n"
+"\n"
+"\n"
+"\n"
+"WinMerge.FolderCompare\n"
+"WinMerge 資料夾比對"
+
+msgid ""
+"WinMerge comes with ABSOLUTELY NO WARRANTY. It is free software and can be "
+"redistributed under the conditions of the GNU General Public License - see the "
+"Help menu for details."
+msgstr ""
+"WinMerge 不附帶任何保證。這是一款自由軟體，可依照 GNU 通用公共授權條款（GPL）的"
+"條件進行再散佈。詳情請參閱「說明」選單。"
+
+msgid "&Abort"
+msgstr "中斷 (&A)"
+
+msgid "&Retry"
+msgstr "重試 (&R)"
+
+msgid "&Ignore"
+msgstr "忽略 (&I)"
+
+msgid "Ignore &all"
+msgstr "全部忽略 (&A)"
+
+msgid "&Yes"
+msgstr "是 (&Y)"
+
+msgid "Yes to &all"
+msgstr "全部皆是 (&A)"
+
+msgid "&No"
+msgstr "否 (&N)"
+
+msgid "No to a&ll"
+msgstr "全部皆否 (&L)"
+
+msgid "&Continue"
+msgstr "繼續 (&C)"
+
+msgid "&Skip"
+msgstr "略過 (&S)"
+
+msgid "Skip &all"
+msgstr "全部略過 (&A)"
+
+msgid "Don't display this &message again."
+msgstr "不要再顯示此訊息 (&M)"
+
+msgid ""
+"To make this message box visible, press Reset on the Message Boxes page in "
+"Options."
+msgstr ""
+"若要再次顯示此訊息方塊，請在「選項」對話框的「訊息方塊」頁面上按下重設按鈕。"
+
+msgid "Compare/Merge"
+msgstr "比對/合併"
+
+msgid "Syntax"
+msgstr "語法"
+
+msgid "Color Schemes"
+msgstr "色彩主題"
+
+msgid "Folder Compare"
+msgstr "資料夾比對"
+
+msgid "Project"
+msgstr "專案"
+
+msgid "Differences"
+msgstr "差異"
+
+msgid "Message Boxes"
+msgstr "訊息對話框"
+
+msgid "To:"
+msgstr "到："
+
+msgid "From left:"
+msgstr "從左側："
+
+msgid "To left:"
+msgstr "到左側："
+
+msgid "From right:"
+msgstr "從右側："
+
+msgid "To right:"
+msgstr "到右側："
+
+msgid "From middle:"
+msgstr "從中間："
+
+msgid "To middle:"
+msgstr "至中間："
+
+#, c-format
+msgid "Version %1"
+msgstr "版本 %1"
+
+#, c-format
+msgid "Options (%1)"
+msgstr "選項 (%1)"
+
+msgid "All message boxes are now displayed again."
+msgstr "所有訊息對話框會重新再顯示。"
+
+#, c-format
+msgid "Tab size value is out of range. Please use 1 - %1."
+msgstr ""
+"定位字元Ｔａｂ大小值超出範圍。\n"
+"請使用 1 - %1。"
+
+msgid "Open"
+msgstr "開啟"
+
+msgid "Programs|*.exe;*.bat;*.cmd|All Files (*.*)|*.*||"
+msgstr "程式|*.exe;*.bat;*.cmd|所有檔案 (*.*)|*.*||"
+
+msgid "All Files (*.*)|*.*||"
+msgstr "所有檔案 (*.*)|*.*||"
+
+msgid "WinMerge Project Files (*.WinMerge)|*.WinMerge||"
+msgstr "WinMerge 專案檔 (*.WinMerge)|*.WinMerge||"
+
+msgid "Options files (*.ini)|*.ini|All Files (*.*)|*.*||"
+msgstr "選項檔 (*.ini)|*.ini|所有檔案 (*.*)|*.*||"
+
+msgid "Tab-Separated Values (*.tsv;*.txt)|*.tsv;*.txt|All Files (*.*)|*.*||"
+msgstr "定位字元分隔值(*.tsv;*.txt)|*.tsv;*.txt|所有檔案 (*.*)|*.*||"
+
+msgid ""
+"ZIP Files (*.zip)|*.zip|7z Files (*.7z)|*.7z|TAR Files (*.tar)|*.tar|All Files "
+"(*.*)|*.*||"
+msgstr ""
+"ZIP檔 (*.zip)|*.zip|7z Files (*.7z)|*.7z|TAR Files (*.tar)|*.tar|所有檔案 "
+"(*.*)|*.*||"
+
+msgid ""
+"Text Files (*.csv;*.asc;*.rpt;*.txt)|*.csv;*.asc;*.rpt;*.txt|All Files (*.*)|"
+"*.*||"
+msgstr ""
+"Text檔 (*.csv;*.asc;*.rpt;*.txt)|*.csv;*.asc;*.rpt;*.txt|所有檔案 (*.*)|*.*||"
+
+msgid "HTML Files (*.htm,*.html)|*.htm;*.html|All Files (*.*)|*.*||"
+msgstr "HTML檔 (*.htm,*.html)|*.htm;*.html|所有檔案 (*.*)|*.*||"
+
+msgid "XML Files (*.xml)|*.xml|All Files (*.*)|*.*||"
+msgstr "XML檔 (*.xml)|*.xml|所有檔案 (*.*)|*.*||"
+
+msgid "Do not expand"
+msgstr "不要展開"
+
+msgid "Expand all subfolders"
+msgstr "展開所有子資料夾"
+
+msgid "Expand different subfolders"
+msgstr "展開不同的子資料夾"
+
+msgid "Expand identical subfolders"
+msgstr "展開相同的子資料夾"
+
+msgid "File Type"
+msgstr "檔案類型"
+
+msgid "Extension"
+msgstr "副檔名"
+
+msgid "Message"
+msgstr "訊息"
+
+msgid "Answer"
+msgstr "回答"
+
+msgid "Item"
+msgstr "項目"
+
+msgid "Load"
+msgstr "讀取"
+
+msgid "Save"
+msgstr "儲存"
+
+msgid "Include Subfolders"
+msgstr "包括子資料夾"
+
+msgid "Compare Options"
+msgstr "比對選項"
+
+msgid "Hidden Items"
+msgstr "隱藏的項目"
+
+msgid "Name"
+msgstr "名稱"
+
+msgid "Location"
+msgstr "位置"
+
+msgid "Filters"
+msgstr "篩選器"
+
+msgid "[F] "
+msgstr "[F] "
+
+msgid "Description"
+msgstr "描述"
+
+# I suggest "Add new filter filename" instead. For it must not select a name, rather give one.
+msgid "Select Filename for New Filter"
+msgstr "建立新篩選器檔名"
+
+msgid "File Filters (*.flt)|*.flt|All Files (*.*)|*.*||"
+msgstr "檔案篩選器 (*.flt)|*.flt|所有檔案 (*.*)|*.*||"
+
+#, c-format
+msgid ""
+"Cannot find filter template!\n"
+"\n"
+"Copy %1 to WinMerge/Filters Folder:\n"
+"%2."
+msgstr ""
+"找不到檔案篩選器樣板檔！\n"
+"\n"
+"請複製檔案 %1 到 WinMerge/檔案篩選器-資料夾：\n"
+"%2。"
+
+#, c-format
+msgid ""
+"Cannot copy filter template:\n"
+"%1\n"
+"\n"
+"Make sure the folder exists and is writable."
+msgstr ""
+"無法複製檔案篩選器樣板檔到檔案篩選器資料夾：\n"
+"%1\n"
+"\n"
+"請確定有該資料夾，而且允許寫入。"
+
+msgid ""
+"User's filter folder is not defined!\n"
+"\n"
+"Select filter folder in Options/System."
+msgstr ""
+"尚未定義使用者的檔案篩選器資料夾！\n"
+"\n"
+"請於「選項/系統」中選定檔案篩選器資料夾。"
+
+#, c-format
+msgid ""
+"Failed to delete filter:\n"
+"%1\n"
+"\n"
+"File may be read-only."
+msgstr ""
+"刪除這篩選器失敗：\n"
+"%1\n"
+"\n"
+"它是唯讀檔。"
+
+msgid "Locate Filter File to Install"
+msgstr "找到檔案篩選器檔以安裝"
+
+msgid ""
+"Installing filter file failed.\n"
+"\n"
+"Could not copy new filter to folder."
+msgstr ""
+"無法安裝檔案篩選器檔。\n"
+"\n"
+"不能複製新篩選器檔到檔案篩選器資料夾。"
+
+msgid "Filter file exists. Overwrite?"
+msgstr "篩選器檔案已存在。要覆蓋嗎？"
+
+msgid "Regular expression"
+msgstr "正規表示式"
+
+msgid ""
+"Filters updated. Refresh all open folder compares?\n"
+"\n"
+"Select 'No' to refresh later."
+msgstr ""
+"篩選器已更新。想重新整理所有進行中的資料夾比對嗎？\n"
+"\n"
+"選擇『否』可稍後再重新整理。"
+
+msgid "Folder Comparison Results"
+msgstr "資料夾比對結果"
+
+msgid "File Comparison"
+msgstr "檔案比對中"
+
+msgid "Untitled Left"
+msgstr "未設標題的左側"
+
+msgid "Untitled Middle"
+msgstr "未設標題的中間"
+
+msgid "Untitled Right"
+msgstr "未設標題的右側"
+
+msgid "Base File"
+msgstr "基礎檔案"
+
+msgid "Theirs File"
+msgstr "他們的檔案"
+
+msgid "Mine File"
+msgstr "我的檔案"
+
+msgid "Original File"
+msgstr "原始檔案"
+
+#, c-format
+msgid "Ln: %s  Col: %d/%d  Ch: %d/%d  EOL: %s"
+msgstr "行: %s  列: %d/%d  字元: %d/%d  EOL: %s"
+
+#, c-format
+msgid "Line: %s"
+msgstr "行： %s"
+
+#, c-format
+msgid "Ln: %s  Col: %d/%d  Ch: %d/%d"
+msgstr "行: %s  列: %d/%d  字元: %d/%d"
+
+#, c-format
+msgid "  Sel: %d | %d"
+msgstr "  選取：%d 行| %d 字元"
+
+msgid "Merge"
+msgstr "合併"
+
+#, c-format
+msgid "Difference %1 of %2"
+msgstr "%2 個差異中 第 %1 個"
+
+#, c-format
+msgid "%1 Differences Found"
+msgstr "找到 %1 個差異"
+
+msgid "1 Difference Found"
+msgstr "找到 1 個差異"
+
+#, c-format
+msgid "%1 Errors Found"
+msgstr "發現 %1 個錯誤"
+
+msgid "1 Error Found"
+msgstr "發現 1 個錯誤"
+
+msgid "RO"
+msgstr "唯讀"
+
+#, c-format
+msgid "Item %1 of %2"
+msgstr "%2 個項目之 第 %1"
+
+#, c-format
+msgid "Items: %1"
+msgstr "項目：%1"
+
+msgid "Comparing items..."
+msgstr "比對項目中..."
+
+#, c-format
+msgid "%.1f[items/sec]"
+msgstr "%.1f[項目/秒]"
+
+msgid "Select two existing folders/files to compare."
+msgstr "選取兩個現存資料夾或檔案做比對。"
+
+msgid "Folder Selection"
+msgstr "資料夾選取"
+
+msgid "Select two (or three) folders/files to compare."
+msgstr "選取兩個 (或三個) 檔案或資料夾做比對。"
+
+msgid "Left (1st) path is invalid!"
+msgstr "左側 (第一) 路徑無效！"
+
+msgid "Middle (2nd) path is invalid!"
+msgstr "中間 (第二) 路徑無效！"
+
+msgid "Right (2nd) path is invalid!"
+msgstr "右側 (第二) 路徑無效！"
+
+msgid "Right (3rd) path is invalid!"
+msgstr "右側 (第三) 路徑無效！"
+
+msgid "Both paths are invalid!"
+msgstr "兩邊路徑無效！"
+
+msgid "Left (1st) and Middle (2nd) paths are invalid!"
+msgstr "左側 (第一) 及中間 (第二) 路徑無效！"
+
+msgid "Left (1st) and Right (3rd) paths are invalid!"
+msgstr "左側 (第一) 及右側 (第三) 路徑無效！"
+
+msgid "Middle (2nd) and Right (3rd) paths are invalid!"
+msgstr "中間 (第二) 及右側 (第三) 路徑無效！"
+
+msgid "All paths are invalid!"
+msgstr "所有路徑無效！"
+
+msgid "Only enabled for file comparisons"
+msgstr "僅為檔案比對啟用"
+
+msgid "Cannot compare file and folder!"
+msgstr "無法比對檔案和資料夾！"
+
+#, c-format
+msgid "File not found: %1"
+msgstr "找不到檔案：%1"
+
+#, c-format
+msgid "Folder not found: %1"
+msgstr "找不到資料夾：%1"
+
+#, c-format
+msgid "File not unpacked: %1"
+msgstr "檔案未解包：%1"
+
+#, c-format
+msgid ""
+"Cannot open file\n"
+"%1\n"
+"\n"
+"%2"
+msgstr ""
+"無法開啟檔案\n"
+"%1\n"
+"\n"
+"%2"
+
+msgid "Failed to parse conflict file."
+msgstr "無法解析衝突檔。"
+
+#, c-format
+msgid ""
+"The file\n"
+"%1\n"
+"is not a conflict file."
+msgstr ""
+"檔案\n"
+"%1\n"
+"不是衝突檔。"
+
+msgid ""
+"Comparing large files requires significant memory.\n"
+"Show only comparison results (not file contents)?"
+msgstr ""
+"比對大檔案需要大量的記憶體。\n"
+"是否僅顯示比對結果（不顯示檔案內容）？"
+
+msgid "Save As"
+msgstr "另存新檔"
+
+#, c-format
+msgid "Save changes to %1?"
+msgstr "儲存更改到 %1？"
+
+#, c-format
+msgid "%1 is read-only. Override? Or 'No' to save as new filename?"
+msgstr "%1 是唯讀檔。要強制覆蓋嗎？或選擇「否」另存新檔？"
+
+msgid "Error backing up file"
+msgstr "備份檔案時發生錯誤"
+
+#, c-format
+msgid ""
+"Unable to backup original file:\n"
+"%1\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+"無法備份原始的檔案：\n"
+"%1\n"
+"\n"
+"仍舊繼續嗎？"
+
+#, c-format
+msgid ""
+"Saving file failed.\n"
+"%1\n"
+"%2\n"
+"\t- Use different filename (OK)\n"
+"\t- Abort (Cancel)?"
+msgstr ""
+"儲存檔案時失敗。\n"
+"%1\n"
+"%2\n"
+"\t- 存為不同檔名 (確定)\n"
+"\t- 中斷 (取消)？"
+
+#, c-format
+msgid ""
+"Plugin '%2' cannot pack changes to left file into '%1'.\n"
+"\n"
+"Original unchanged. Save unpacked version?"
+msgstr ""
+"擴充功能「%2」無法將您對左側檔案的變更包裝回「%1」。\n"
+"\n"
+"原始檔未變更。\n"
+"是否儲存解包後的版本？"
+
+#, c-format
+msgid ""
+"Plugin '%2' cannot pack changes to middle file into '%1'.\n"
+"\n"
+"Original unchanged. Save unpacked version?"
+msgstr ""
+"擴充功能「%2」無法將您對中間檔案的變更包裝回到「%1」。\n"
+"\n"
+"原始檔未變更。\n"
+"是否儲存解包後的版本？"
+
+#, c-format
+msgid ""
+"Plugin '%2' cannot pack changes to right file into '%1'.\n"
+"\n"
+"Original unchanged. Save unpacked version?"
+msgstr ""
+"擴充功能「%2」無法將您對右側檔案的變更包裝回「%1」。\n"
+"\n"
+"原始檔未變更。\n"
+"是否儲存解包後的版本？"
+
+#, c-format
+msgid ""
+"Another application updated\n"
+"%1\n"
+"since WinMerge loaded it.\n"
+"\n"
+"Overwrite?"
+msgstr ""
+"自 WinMerge 讀取後，\n"
+"%1\n"
+"又被另一程式更新過。\n"
+"\n"
+"是否覆蓋為更新後檔案？"
+
+#, c-format
+msgid ""
+"%1\n"
+"is read-only. Override?"
+msgstr ""
+"%1\n"
+"是唯讀檔。要強制覆蓋嗎？"
+
+#, c-format
+msgid ""
+"Another application updated\n"
+"%1\n"
+"since last scan.\n"
+"\n"
+"Reload?"
+msgstr ""
+"WinMerge上次掃描過檔案\n"
+"%1\n"
+"後，另一程式又再更新它。\n"
+"\n"
+"要重新讀取嗎？"
+
+msgid "Save Left File As"
+msgstr "儲存左側檔案為"
+
+msgid "Save Middle File As"
+msgstr "儲存中間檔案為"
+
+msgid "Save Right File As"
+msgstr "儲存右側檔案為"
+
+#, c-format
+msgid ""
+"File\n"
+"%1\n"
+"not found. Save a copy to continue."
+msgstr ""
+"檔案\n"
+"%1\n"
+"消失。請儲存檔案副本再繼續。"
+
+msgid ""
+"Cannot merge unsynched documents.\n"
+"\n"
+"Refresh before continuing."
+msgstr ""
+"無法合併未同步的文檔。\n"
+"\n"
+"請在繼續之前先重新整理。"
+
+msgid "Break at whitespace"
+msgstr "空白字元處斷行"
+
+msgid "Break at whitespace or punctuation"
+msgstr "在空白字元或標點符號處斷行"
+
+msgid "Copy to &Middle\tAlt+Right"
+msgstr "複製到中間 (&M)\tAlt+Right"
+
+msgid "Copy to &Middle\tAlt+Left"
+msgstr "複製到中間 (&M)\tAlt+Left"
+
+msgid "Copy from Middle\tAlt+Shift+Right"
+msgstr "從中間複製\tAlt+Shift+Right"
+
+msgid "Copy from Middle\tAlt+Shift+Left"
+msgstr "從中間複製\tAlt+Shift+Left"
+
+msgid "Copy to Middle and Advance\tCtrl+Alt+Right"
+msgstr "複製至中間並前進\tCtrl+Alt+Right"
+
+msgid "Copy to Middle and Advance\tCtrl+Alt+Left"
+msgstr "複製至中間並前進\tCtrl+Alt+Left"
+
+msgid "Copy All to Middle"
+msgstr "全部複製到中間"
+
+#, c-format
+msgid "Right to Left (%1)"
+msgstr "右側到左側 (%1)"
+
+#, c-format
+msgid "Right to Middle (%1)"
+msgstr "右側到中間 (%1)"
+
+#, c-format
+msgid "Middle to Left (%1)"
+msgstr "中間到左側 (%1)"
+
+#, c-format
+msgid "Middle to Right (%1)"
+msgstr "中間到右側 (%1)"
+
+#, c-format
+msgid "Left to Right (%1)"
+msgstr "左側到右側 (%1)"
+
+#, c-format
+msgid "Left to Middle (%1)"
+msgstr "左側到中間 (%1)"
+
+#, c-format
+msgid "Left to... (%1)"
+msgstr "左側到... (%1)"
+
+#, c-format
+msgid "Middle to... (%1)"
+msgstr "中間到... (%1)"
+
+#, c-format
+msgid "Right to... (%1)"
+msgstr "右側到... (%1)"
+
+#, c-format
+msgid "Both to... (%1)"
+msgstr "兩邊到... (%1)"
+
+#, c-format
+msgid "All to... (%1)"
+msgstr "全部到... (%1)"
+
+#, c-format
+msgid "Differences to... (%1)"
+msgstr "差異到... (%1)"
+
+msgid ""
+"Some selected items are identical or skipped.\n"
+"Process only items with differences?"
+msgstr ""
+"部分選取的項目完全相同或已被略過。\n"
+"僅處理有差異的項目？"
+
+#, c-format
+msgid "Left (%1)"
+msgstr "左側 (%1)"
+
+#, c-format
+msgid "Middle (%1)"
+msgstr "中間 (%1)"
+
+#, c-format
+msgid "Right (%1)"
+msgstr "右側 (%1)"
+
+#, c-format
+msgid "Both (%1)"
+msgstr "兩邊 (%1)"
+
+#, c-format
+msgid "All (%1)"
+msgstr "全部 (%1)"
+
+msgid "Left Side - Select Destination Folder:"
+msgstr "左側 - 選取目標資料夾："
+
+msgid "Middle Side - Select Destination Folder:"
+msgstr "中間 - 選取目標資料夾："
+
+msgid "Right Side - Select Destination Folder:"
+msgstr "右側 - 選取目標資料夾："
+
+#, c-format
+msgid "(%1 Files Affected)"
+msgstr "(%1 受影響檔案)"
+
+#, c-format
+msgid "(%1 of %2 Files Affected)"
+msgstr "(%2 受影響檔案之 %1)"
+
+#, c-format
+msgid ""
+"Are you sure you want to delete\n"
+"\n"
+"%1 ?"
+msgstr ""
+"確定要刪除\n"
+"\n"
+"%1？"
+
+msgid "Are you sure you want to copy?"
+msgstr "確定要複製？"
+
+#, c-format
+msgid "Are you sure you want to copy %d items?"
+msgstr "確定要複製 %d 項目？"
+
+#, c-format
+msgid ""
+"Operation aborted!\n"
+"\n"
+"Folder contents changed, path\n"
+"%1\n"
+"not found.\n"
+"\n"
+"Refresh the compare."
+msgstr ""
+"操作已中斷！\n"
+"\n"
+"資料夾內容已變更，找不到路徑：\n"
+"%1\n"
+"\n"
+"請重新整理再比對。"
+
+msgid "Are you sure you want to move?"
+msgstr "確定要移除？"
+
+#, c-format
+msgid "Are you sure you want to move %d items?"
+msgstr "確定要移除 %d 項目？"
+
+msgid "Confirm Move"
+msgstr "確認移除"
+
+msgid "Close the folder comparison window?"
+msgstr "您要關閉一個正在比對資料夾的視窗，您確定要關閉視窗嗎？"
+
+msgid "Close the folder comparison window, which took a long time?"
+msgstr "關閉資料夾比對視窗嗎？，花了很長時間哦!?"
+
+msgid "The file or folder name is invalid."
+msgstr "檔案或資料夾名稱無效。"
+
+#, c-format
+msgid "Failed to execute external editor: %1"
+msgstr "無法執行外部編輯器 %1"
+
+msgid "Unknown archive format"
+msgstr "未知封存檔格式"
+
+msgid ""
+"Failed to extract archive.\n"
+"Compare as text file?"
+msgstr ""
+"解壓縮封存檔失敗。\n"
+"要改以文字檔比對嗎？"
+
+msgid "Filename"
+msgstr "檔案名稱"
+
+msgctxt "DirView|ColumnHeader"
+msgid "Folder"
+msgstr "資料夾"
+
+msgid "Comparison Result"
+msgstr "比對結果"
+
+msgid "Left Date"
+msgstr "左側日期"
+
+msgid "Right Date"
+msgstr "右側日期"
+
+msgid "Middle Date"
+msgstr "中間日期"
+
+msgid "Left Size"
+msgstr "左側大小"
+
+msgid "Right Size"
+msgstr "右側大小"
+
+msgid "Middle Size"
+msgstr "中間大小"
+
+msgid "Right Size (Short)"
+msgstr "右側大小 (簡式)"
+
+msgid "Left Size (Short)"
+msgstr "左側大小 (簡式)"
+
+msgid "Middle Size (Short)"
+msgstr "中間大小 (簡式)"
+
+msgid "Left Creation Time"
+msgstr "左側建立時間"
+
+msgid "Right Creation Time"
+msgstr "右側建立時間"
+
+msgid "Middle Creation Time"
+msgstr "中間建立時間"
+
+msgid "Newer File"
+msgstr "較新檔案"
+
+msgid "Left File Version"
+msgstr "左側檔案版本"
+
+msgid "Right File Version"
+msgstr "右側檔案版本"
+
+msgid "Middle File Version"
+msgstr "中間檔案版本"
+
+msgid "Short Result"
+msgstr "簡式結果"
+
+msgid "Left Attributes"
+msgstr "左側屬性"
+
+msgid "Right Attributes"
+msgstr "右側屬性"
+
+msgid "Middle Attributes"
+msgstr "中間屬性"
+
+msgid "Left EOL"
+msgstr "左側 EOL"
+
+msgid "Middle EOL"
+msgstr "中間 EOL"
+
+msgid "Right EOL"
+msgstr "右側 EOL"
+
+msgid "Left Encoding"
+msgstr "左側編碼"
+
+msgid "Right Encoding"
+msgstr "右側編碼"
+
+msgid "Middle Encoding"
+msgstr "中間編碼"
+
+msgid "Ignored Diff"
+msgstr "忽略的差異"
+
+msgctxt "DirView|ColumnHeader"
+msgid "Binary"
+msgstr "二進位"
+
+msgid "Unpacker"
+msgstr "解包裝器"
+
+msgid "Prediffer"
+msgstr "預差異器"
+
+msgid "Left"
+msgstr "左側"
+
+msgid "Middle"
+msgstr "中間"
+
+msgid "Right"
+msgstr "右側"
+
+msgid "Diff"
+msgstr "差異"
+
+msgid "Left Duplicate Count"
+msgstr "左側重複數"
+
+msgid "Right Duplicate Count"
+msgstr "右側重複數"
+
+msgid "Middle Duplicate Count"
+msgstr "中間重複數"
+
+msgid "Move"
+msgstr "移動"
+
+msgid "Audio"
+msgstr "音訊"
+
+msgid "Calendar"
+msgstr "日曆"
+
+msgid "Communication"
+msgstr "通訊"
+
+msgid "Contact"
+msgstr "聯絡人"
+
+msgid "Devices"
+msgstr "裝置"
+
+msgid "Document"
+msgstr "文件"
+
+msgid "Home"
+msgstr "主頁"
+
+msgid "Journal"
+msgstr "日誌"
+
+msgid "Link"
+msgstr "連結"
+
+msgid "Media"
+msgstr "媒體"
+
+msgid "Music"
+msgstr "音樂"
+
+msgid "Note"
+msgstr "筆記"
+
+msgid "Photo"
+msgstr "照片"
+
+msgid "RecordedTV"
+msgstr "RecordedTV"
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid "Security"
+msgstr "安全性"
+
+msgid "Software"
+msgstr "軟體"
+
+msgid "Task"
+msgstr "工作"
+
+msgid "Video"
+msgstr "影片"
+
+msgid "Hash"
+msgstr "雜湊"
+
+msgid "Unable to compare files"
+msgstr "無法比對檔案"
+
+msgid "Item aborted"
+msgstr "項目已中斷"
+
+msgid "File skipped"
+msgstr "略過的檔案"
+
+msgid "Folder skipped"
+msgstr "略過的資料夾"
+
+#, c-format
+msgid "Left only: %1"
+msgstr "僅左側：%1"
+
+#, c-format
+msgid "Middle only: %1"
+msgstr "僅中間：%1"
+
+#, c-format
+msgid "Right only: %1"
+msgstr "僅右側：%1"
+
+#, c-format
+msgid "Does not exist in %1"
+msgstr "在 %1 中不存在"
+
+msgid "Binary files are identical"
+msgstr "二進位檔完全相同"
+
+msgid "Binary files are different"
+msgstr "二進位檔有差異"
+
+msgid "Files are different"
+msgstr "檔案有差異"
+
+msgid "Folders are different"
+msgstr "資料夾有差異"
+
+msgid "Left Only"
+msgstr "僅左側"
+
+msgid "Right Only"
+msgstr "僅右側"
+
+msgid "Middle Only"
+msgstr "僅中間"
+
+msgid "No item in left"
+msgstr "左側無項目"
+
+msgid "No item in right"
+msgstr "右側無項目"
+
+msgid "No item in middle"
+msgstr "中間無項目"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Text files are identical"
+msgstr "文字檔內容完全相同"
+
+msgid " (Middle and right are identical)"
+msgstr " (中間和右側內容完全相同)"
+
+msgid " (Left and right are identical)"
+msgstr " (左側和右側內容完全相同)"
+
+msgid " (Left and middle are identical)"
+msgstr " (左側和中間內容完全相同)"
+
+msgid " (paths differ)"
+msgstr "（路徑不同）"
+
+msgid "Text files are different"
+msgstr "文字檔內容有差異"
+
+msgid "Image files are identical"
+msgstr "圖片檔完全相同"
+
+msgid "Image files are different"
+msgstr "圖片檔有差異"
+
+#, c-format
+msgid "Files are different (expr: %1)"
+msgstr "檔案有差異（表示式：%1）"
+
+#, c-format
+msgid "Group%d"
+msgstr "群組%d"
+
+msgctxt "Options dialog|Compare|Folder|Detect renames and moves"
+msgid "Disabled"
+msgstr "已停用"
+
+msgid "Detect renames"
+msgstr "偵測重新命名"
+
+msgid "Detect renames and moves"
+msgstr "偵測重新命名與移動"
+
+msgid "Merge renames"
+msgstr "合併重新命名"
+
+msgid "Merge renames and moves"
+msgstr "合併重新命名與移動"
+
+msgid "Renamed"
+msgstr "已重新命名"
+
+msgid "Renamed/Moved"
+msgstr "已重新命名/已移動"
+
+#, c-format
+msgid "(%1 items)"
+msgstr "(%1 個項目)"
+
+#, c-format
+msgid "%1 (set %2): "
+msgstr "%1 (組合 %2):"
+
+msgid ""
+"Some moved items have been merged.\n"
+"In Tree Mode, these items may appear in positions that do not reflect the "
+"actual folder structure, which can be confusing.\n"
+"Switch to Flat Mode?"
+msgstr ""
+"部分移動的項目已合併。\n"
+"在樹狀模式下，這些項目可能會顯示在無法反映實際資料夾結構的位置，從而造成混"
+"淆。\n"
+"是否切換至平坦模式？"
+
+#, c-format
+msgid "Elapsed time: %ld ms"
+msgstr "經過時間： %ld 毫秒"
+
+msgid "1 item selected"
+msgstr "已選取 1 個項目"
+
+#, c-format
+msgid "%1 items selected"
+msgstr "已選取 %1 個項目"
+
+msgid "Filename or folder name."
+msgstr "檔案名稱或資料夾名稱。"
+
+msgid "Subfolder name when subfolders are included."
+msgstr "包括子資料夾時的子資料夾名稱。"
+
+msgid "Comparison result, long form."
+msgstr "比對結果（詳細形式）。"
+
+msgid "Left side modification date."
+msgstr "左側修改日期。"
+
+msgid "Right side modification date."
+msgstr "左側修改日期。"
+
+msgid "Middle side modification date."
+msgstr "中間修改日期。"
+
+msgid "File's extension."
+msgstr "副檔名。"
+
+msgid "Left file size in bytes."
+msgstr "左側檔案位元組大小。"
+
+msgid "Right file size in bytes."
+msgstr "右側檔案位元組大小。"
+
+msgid "Middle file size in bytes."
+msgstr "中間檔案位元組大小。"
+
+msgid "Left file size abbreviated."
+msgstr "左側檔案簡式大小。"
+
+msgid "Right file size abbreviated."
+msgstr "右側檔案簡式大小。"
+
+msgid "Middle file size abbreviated."
+msgstr "中間檔案簡式大小。"
+
+msgid "Left side creation time."
+msgstr "左側建立時間。"
+
+msgid "Right side creation time."
+msgstr "右側建立時間。"
+
+msgid "Middle side creation time."
+msgstr "中間建立時間。"
+
+msgid "Tells which side has newer modification date."
+msgstr "告知哪邊有較新的修改日期。"
+
+msgid "Left side file version, only for some file types."
+msgstr "左側檔案版本，僅適用某些檔案類型。"
+
+msgid "Right side file version, only for some file types."
+msgstr "右側檔案版本，僅適用某些檔案類型。"
+
+msgid "Middle side file version, only for some file types."
+msgstr "中間檔案版本，僅適用某些檔案類型。"
+
+msgid "Short comparison result."
+msgstr "短式比對結果。"
+
+msgid "Left side attributes."
+msgstr "左側屬性。"
+
+msgid "Right side attributes."
+msgstr "右側屬性。"
+
+msgid "Middle side attributes."
+msgstr "中間屬性。"
+
+msgid "Left side file EOL type."
+msgstr "左側檔案的換行符號類型。"
+
+msgid "Right side file EOL type."
+msgstr "右側檔案的換行符號類型。"
+
+msgid "Middle side file EOL type."
+msgstr "中間檔案的換行符號類型。"
+
+msgid "Left side encoding."
+msgstr "左側編碼。"
+
+msgid "Right side encoding."
+msgstr "右側編碼。"
+
+msgid "Middle side encoding."
+msgstr "中間編碼。"
+
+msgid "Number of ignored differences in file. Ignored and cannot be merged."
+msgstr "檔案中已忽略的差異數量。已忽略且無法合併。"
+
+msgid "Number of differences in file (excluding ignored)."
+msgstr "檔案中的差異數量 (不含已忽略)。"
+
+msgid "Shows an asterisk (*) if the file is binary."
+msgstr "是二進位檔，就顯示星號 (*)"
+
+msgid "Unpacker plugin name or pipeline."
+msgstr "解包裝器擴充功能名稱或處理序。"
+
+msgid "Prediffer plugin name or pipeline."
+msgstr "預差異器擴充功能名稱或處理序。"
+
+#, c-format
+msgid "Compare %1 with %2"
+msgstr "比對 %1 和 %2"
+
+#, c-format
+msgid "Compare %1 with %2 and %3"
+msgstr "比對 %1 和 %2 與 %3"
+
+msgid "Comma-separated list"
+msgstr "逗號分隔列表"
+
+msgid "Tab-separated list"
+msgstr "定位字元（Tab）分隔列表"
+
+msgid "Simple HTML"
+msgstr "簡易 HTML"
+
+msgid "Simple XML"
+msgstr "簡易 XML"
+
+msgid "Report file already exists. Overwrite?"
+msgstr "報告檔案已存在。要覆蓋嗎？"
+
+#, c-format
+msgid ""
+"Error creating the report:\n"
+"%1"
+msgstr ""
+"產生報告時發生錯誤：\n"
+"%1"
+
+msgid "Report created successfully."
+msgstr "成功產生報告。"
+
+msgid "Cannot add a synchronization point at this line."
+msgstr "無法在此行新增同步點。"
+
+msgid "Same file is opened in both panes."
+msgstr "相同檔案開啟到兩邊。"
+
+msgid "Selected files are identical."
+msgstr "所選檔案完全相同。"
+
+msgid ""
+"Selected files are identical (with current settings).\r\n"
+"Checking binary identity..."
+msgstr ""
+"所選檔案完全相同（使用目前設定）。\r\n"
+"正在檢查二進位一致性..."
+
+msgid ""
+"Selected files are identical (with current settings).\r\n"
+"But binary comparison failed."
+msgstr ""
+"所選檔案完全相同（使用目前設定）。\r\n"
+"但二進位比對失敗。"
+
+msgid "Selected files are identical (binary match)."
+msgstr "所選檔案完全相同（二進位符合）。"
+
+msgid ""
+"Selected files are identical (with current settings).\r\n"
+"But differ at the binary level."
+msgstr ""
+"所選檔案完全相同（使用目前設定）。\r\n"
+"但在二進位層級上有差異。"
+
+msgid "An error occurred while comparing files."
+msgstr "比對檔案時發生錯誤。"
+
+msgid "Could not create temporary files. Check your temporary path settings."
+msgstr "無法建立暫存檔案。請檢查暫存路徑之設定。"
+
+msgid ""
+"Files use different EOL.\n"
+"\n"
+"Treat all EOL as equivalent?\n"
+"\n"
+"Set 'Ignore EOL differences (Windows/Unix/Mac)' in Compare section of Options."
+msgstr ""
+"檔案使用的是不同的 EOL。\n"
+"\n"
+"要將所有 EOL 視為相同嗎？\n"
+"\n"
+"您可以在「選項」的「比對」區塊中，設定「忽略 EOL 差異（Windows/Unix/Mac）」。"
+
+msgid "Selected folder is invalid."
+msgstr "所選的資料夾無效。"
+
+msgid "Cannot open a binary file in Editor."
+msgstr "編輯器不能開啟二進位檔。"
+
+#, c-format
+msgid ""
+"Create matching folder:\n"
+"%1\n"
+"on the other side and open?"
+msgstr ""
+"是否要在另一側建立對應的資料夾：\n"
+"%1\n"
+"並將其開啟？"
+
+msgid "Copy all differences to other file?"
+msgstr "您確定要將所有差異複製到另一個檔案嗎？"
+
+msgid "Move to next file?"
+msgstr "您要移動到下一個檔案嗎？"
+
+msgid "Move to previous file?"
+msgstr "您要移動到上一個檔案嗎？"
+
+msgid "Move to next page?"
+msgstr "您要移動到下一頁嗎？"
+
+msgid "Move to previous page?"
+msgstr "您要移動到上一頁嗎？"
+
+msgid "Move to first file?"
+msgstr "您要移動到首個檔案嗎？"
+
+msgid "Move to last file?"
+msgstr "您要移動到最後一個檔案嗎？"
+
+#, c-format
+msgid ""
+"Different codepages: left (cp%d), right (cp%d).\n"
+"Display in codepage (better display) or default Windows codepage (safer "
+"merging)?\n"
+"(Recommended: default Windows codepage)"
+msgstr ""
+"不同的字碼頁：左側(cp%d)、右側(cp%d)。\n"
+"要用個別字碼頁顯示 (顯示效果較佳)還是用預設的 Windows 字碼頁顯示 (合併較安"
+"全)？\n"
+"要使用相同的預設 windows 字碼頁去看兩邊嗎？(建議)"
+
+msgid "Information lost due to encoding errors: both files"
+msgstr "因編碼問題導致內容無法正常呈現：兩個檔案皆如此"
+
+msgid "Information lost due to encoding errors: first file"
+msgstr "因編碼問題導致內容無法正常呈現：第一個檔案"
+
+msgid "Information lost due to encoding errors: second file"
+msgstr "因編碼問題導致內容無法正常呈現：第二個檔案"
+
+msgid "Information lost due to encoding errors: third file"
+msgstr "因編碼問題導致內容無法正常呈現：第三個檔案"
+
+msgid "No difference"
+msgstr "無差異"
+
+msgid "Line difference"
+msgstr "行內差異"
+
+#, c-format
+msgid "Replaced %1 string(s)."
+msgstr "已取代 %1 個字串。"
+
+#, c-format
+msgid "Cannot find string \"%s\"."
+msgstr "找不到 \"%s\" 字串。"
+
+msgid "Entering Merge Mode. Press F9 to turn off."
+msgstr "您已經進入合併模式。如果您想要關閉合併模式，請按 F9。"
+
+#, c-format
+msgid ""
+"Automatic merges: %1\n"
+"Unresolved conflicts: %2"
+msgstr ""
+"自動合併差異數目： %1\n"
+"未解決衝突數目： %2"
+
+msgid "Codepage change merged."
+msgstr "字碼頁變更已合併。"
+
+msgid "Codepage changes are conflicting."
+msgstr "字碼頁變更存在衝突。"
+
+msgid "EOL change merged."
+msgstr "換行符號變更已合併。"
+
+msgid "EOL changes are conflicting."
+msgstr "換行符號變更發生衝突。"
+
+# also refer to line 5584
+msgid "Location Pane"
+msgstr "位置窗格"
+
+# also refer to line 5578
+# 差異窗格
+msgid "Diff Pane"
+msgstr "差異面板"
+
+msgid "Patch file written."
+msgstr "已寫入修補檔案。"
+
+msgid "Patch file already exists. Overwrite?"
+msgstr "修補檔案已存在。要覆蓋嗎？"
+
+#, c-format
+msgid "[%1 files selected]"
+msgstr "[%1 個檔案已選取]"
+
+msgid "Normal"
+msgstr "一般"
+
+msgid "Context"
+msgstr "脈絡"
+
+msgid "Unified"
+msgstr "同一化"
+
+#, c-format
+msgid "Could not write to file %1."
+msgstr "無法寫入到檔案 %1。"
+
+#, c-format
+msgid "Output path is not absolute: %1"
+msgstr "指定的輸出路徑不是絕對路徑：%1"
+
+msgid "Specify an output file."
+msgstr "指定一個輸出檔。"
+
+msgid "Cannot create patch from binary files."
+msgstr "無法從二進位檔建立修補檔。"
+
+msgid ""
+"Save all files first.\n"
+"\n"
+"Creating a patch requires no unsaved changes."
+msgstr ""
+"請先儲存所有檔案。\n"
+"\n"
+"建補綴檔前得先儲存檔內所有異動。"
+
+msgid "Folder does not exist."
+msgstr "資料夾不存在。"
+
+msgid "Archive file written."
+msgstr "已寫入封存檔案。"
+
+msgid ""
+"Save all files first.\n"
+"\n"
+"Creating an archive requires no unsaved changes."
+msgstr ""
+"請先儲存所有檔案。\n"
+"\n"
+"建立封存檔前不能有未儲存的變更。"
+
+msgid ""
+"Archive support not enabled.\n"
+"7-Zip and/or Merge7z*.dll not found.\n"
+"See manual for archive support."
+msgstr ""
+"未啟用封存檔支援。\n"
+"找不到 7-Zip 及/或 Merge7z*.dll。\n"
+"請參閱手冊以取得封存檔支援說明。"
+
+msgid "Select file for export"
+msgstr "選取檔案以匯出"
+
+msgid "Select file for import"
+msgstr "選取檔案以匯入"
+
+msgid "Options imported from file."
+msgstr "從檔案匯入選項。"
+
+msgid "Options exported to file."
+msgstr "匯出選項到檔案。"
+
+msgid "Failed to import options from file."
+msgstr "無法從檔案匯入選項。"
+
+msgid "Failed to write options to file."
+msgstr "無法匯出選項到檔案。"
+
+msgid ""
+"Close multiple compare windows?\n"
+"\n"
+"Continue?"
+msgstr ""
+"將關閉多個比對視窗。\n"
+"\n"
+"要繼續嗎？"
+
+msgctxt "EOL Type"
+msgid "Binary"
+msgstr "二進位"
+
+#, c-format
+msgid "Marker Color %d"
+msgstr "標記顏色 %d"
+
+msgid "New Pattern"
+msgstr "新的樣式"
+
+msgid "Type"
+msgstr "類型"
+
+# What does "Editor script" mean? Perhaps "editing scripts" or "scripts to edit"?
+msgid "Editor script"
+msgstr "編輯器指令碼"
+
+msgid ""
+"\n"
+"Difference in Current Line (F4)"
+msgstr ""
+"\n"
+"選取行內差異 (F4)"
+
+msgid ""
+"\n"
+"Options"
+msgstr ""
+"\n"
+"選項"
+
+msgid ""
+"\n"
+"Refresh (F5)"
+msgstr ""
+"\n"
+"重新整理 (F5)"
+
+msgid ""
+"\n"
+"Previous Difference (Alt+Up)"
+msgstr ""
+"\n"
+"上一個差異 (Alt+Up)"
+
+msgid ""
+"\n"
+"Next Difference (Alt+Down)"
+msgstr ""
+"\n"
+"下一個差異 (Alt+Down)"
+
+msgid ""
+"\n"
+"Previous Conflict (Alt+Shift+Up)"
+msgstr ""
+"\n"
+"上一個衝突 (Alt+Shift+Up)"
+
+msgid ""
+"\n"
+"Next Conflict (Alt+Shift+Down)"
+msgstr ""
+"\n"
+"下一個衝突 (Alt+Shift+Down)"
+
+msgid ""
+"\n"
+"First Difference (Alt+Home)"
+msgstr ""
+"\n"
+"首個差異 (Alt+Home)"
+
+msgid ""
+"\n"
+"Current Difference (Alt+Enter)"
+msgstr ""
+"\n"
+"目前差異 (Alt+Enter)"
+
+msgid ""
+"\n"
+"Last Difference (Alt+End)"
+msgstr ""
+"\n"
+"最後一個差異 (Alt+End)"
+
+msgid ""
+"\n"
+"Copy to Right (Alt+Right)"
+msgstr ""
+"\n"
+"複製到右側 (Alt+Right)"
+
+msgid ""
+"\n"
+"Copy to Left (Alt+Left)"
+msgstr ""
+"\n"
+"複製到左側 (Alt+Left)"
+
+msgid ""
+"\n"
+"Copy to Right and Advance (Ctrl+Alt+Right)"
+msgstr ""
+"\n"
+"複製到右側後到下一個 (Ctrl+Alt+Right)"
+
+msgid ""
+"\n"
+"Copy to Left and Advance (Ctrl+Alt+Left)"
+msgstr ""
+"\n"
+"複製到左側後到下一個 (Ctrl+Alt+Left)"
+
+msgid ""
+"\n"
+"Copy All to Right"
+msgstr ""
+"\n"
+"全部複製到右側"
+
+msgid ""
+"\n"
+"Copy All to Left"
+msgstr ""
+"\n"
+"全部複製到左側"
+
+msgid ""
+"\n"
+"Auto Merge (Ctrl+Alt+M)"
+msgstr ""
+"\n"
+"自動合併 (Ctrl+Alt+M)"
+
+msgid ""
+"\n"
+"First File"
+msgstr ""
+"\n"
+"首個檔案"
+
+msgid ""
+"\n"
+"Next File (Ctrl+F8)"
+msgstr ""
+"\n"
+"下個檔案 (Ctrl+F8)"
+
+msgid ""
+"\n"
+"Last File"
+msgstr ""
+"\n"
+"最後一個檔案"
+
+msgid ""
+"\n"
+"Previous File (Ctrl+F7)"
+msgstr ""
+"\n"
+"上個檔案 (Ctrl+F7)"
+
+msgid "Adapted unpacker applied to both files (one needs extension)."
+msgstr "適用的解包裝器已應用至兩個檔案 (其中一個需要副檔名)。"
+
+msgid "No Prediffer (Normal)"
+msgstr "不要預差異器 (常態)"
+
+msgid "Suggested Plugins"
+msgstr "建議的擴充功能"
+
+msgid "All Plugins"
+msgstr "所有擴充功能"
+
+#, c-format
+msgid "Private Build: %1"
+msgstr "私人編譯：%1"
+
+msgid " - All rights reserved."
+msgstr "- 版權所有。"
+
+msgid "Plugin Settings"
+msgstr "擴充功能設定"
+
+msgid "WSH not found - .sct scripts disabled"
+msgstr "找不到 WSH - 停用 .sct 指令碼"
+
+#, c-format
+msgid "G&o to Line %1"
+msgstr "跳至 第 %1 行 (&O)"
+
+msgid "Go to Moved Line\tCtrl+Shift+G"
+msgstr "跳至已移位的行\tCtrl+Shift+G"
+
+msgctxt "Options dialog|General|Open dialog Auto completion"
+msgid "Disabled"
+msgstr "已停用"
+
+msgid "From file system"
+msgstr "從檔案系統"
+
+msgid "From Most Recently Used list"
+msgstr "從最近使用清單"
+
+msgid "No Highlighting"
+msgstr "無高亮顯著提示"
+
+msgid "Portable Object"
+msgstr "PO檔"
+
+msgid "Resources"
+msgstr "資源檔"
+
+msgid "Shell"
+msgstr "命令殼層(Shell)"
+
+msgid "Close &Left Tabs"
+msgstr "關閉左側分頁 (&L)"
+
+msgid "Close R&ight Tabs"
+msgstr "關閉右側分頁 (&I)"
+
+msgid "Close &Other Tabs"
+msgstr "關閉其他分頁 (&O)"
+
+msgid "Enable &Auto Max Width"
+msgstr "開啟自動最大寬度 (&A)"
+
+msgid "We&bpage"
+msgstr "網頁 (&B)"
+
+msgid "W&rap Text"
+msgstr "自動換行 (&R)"
+
+#, c-format
+msgid "%1 is not installed."
+msgstr "未安裝 %1。"
+
+#, c-format
+msgid "%1 does not exist. Create it?"
+msgstr "%1不存在，您想要建立它嗎？"
+
+msgid "Failed to create folder."
+msgstr "建立資料夾失敗。"
+
+msgid ""
+"Parameters:\n"
+"$file: Current file path\n"
+"$linenum: Current cursor line number"
+msgstr ""
+"您可以指定下列參數到路徑：\n"
+"$file: 現在檔案路徑\n"
+"$linenum: 現在游標行號"
+
+msgid "default"
+msgstr "預設"
+
+msgid "minimal"
+msgstr "極簡"
+
+msgid "patience"
+msgstr "耐心"
+
+msgid "histogram"
+msgstr "長條圖"
+
+msgid "none"
+msgstr "無"
+
+msgid "GDI"
+msgstr "GDI"
+
+msgid "DirectWrite Default"
+msgstr "DirectWrite 預設值"
+
+msgid "DirectWrite Aliased"
+msgstr "DirectWrite 鋸齒"
+
+msgid "DirectWrite GDI Classic"
+msgstr "DirectWrite GDI 傳統"
+
+msgid "DirectWrite GDI Natural"
+msgstr "DirectWrite GDI 自然"
+
+msgid "DirectWrite Natural"
+msgstr "DirectWrite 自然"
+
+msgid "DirectWrite Natural Symmetric"
+msgstr "DirectWrite 自然對稱"
+
+msgctxt "Options dialog|General|Close windows with Esc"
+msgid "Disabled"
+msgstr "已停用"
+
+msgid "MDI child window or main window"
+msgstr "MDI 子視窗或主視窗"
+
+msgid "MDI child window only"
+msgstr "僅 MDI 子視窗"
+
+msgid "Close main window if only one MDI child window"
+msgstr "如果只剩下一個 MDI 子視窗，則關閉主視窗"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Diff"
+msgstr "差異"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Highlight"
+msgstr "高亮顯著提示"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Blink"
+msgstr "閃爍"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Block Size"
+msgstr "區塊大小"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Block Alpha"
+msgstr "區塊透明度"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "CD Threshold"
+msgstr "顏色差異閾值"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Ins/Del Detection"
+msgstr "插入/刪除 偵測"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "None"
+msgstr "無"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Vertical"
+msgstr "垂直"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Horizontal"
+msgstr "水平"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Overlay"
+msgstr "重疊"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Alpha"
+msgstr "透明度"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "XOR"
+msgstr "XOR"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Alpha Blend"
+msgstr "透明合成"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Alpha Animation"
+msgstr "透明動畫"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Zoom"
+msgstr "縮放"
+
+msgctxt "ImgMergeFrame|LocationPane"
+msgid "Page:"
+msgstr "頁面："
+
+#, c-format
+msgid "Pt: (%d, %d)  RGBA: (%d, %d, %d, %d)  "
+msgstr "Pt：(%d, %d)  RGBA：(%d, %d, %d, %d)  "
+
+#, c-format
+msgid "Dist: %g  "
+msgstr "距離：%g  "
+
+#, c-format
+msgid "Dist: %g, %g  "
+msgstr "距離：%g, %g  "
+
+#, c-format
+msgid "Page: %d/%d  Zoom: %d%%  %dx%dpx  %dbpp  "
+msgstr "頁面：%d/%d  縮放：%d%%  %dx%dpx  %dbpp  "
+
+#, c-format
+msgid "Rc: (%d, %d)  "
+msgstr "Rc：(%d, %d)  "
+
+#, c-format
+msgid "Flipped: %s  "
+msgstr "翻轉：%s"
+
+#, c-format
+msgid "Rotated: %d  "
+msgstr "旋轉：%d"
+
+msgid "All pages"
+msgstr "所有頁面"
+
+msgid "<Edit here>"
+msgstr "<在此編輯>"
+
+msgid "No differences found to select"
+msgstr "找不到要選擇的差異"
+
+msgid "No differences found to add as substitution filter"
+msgstr "找不到要新增為替代篩選器的差異"
+
+msgid "The pair is already in the Substitution Filters list"
+msgstr "該配對已存在於替代篩選器列表中"
+
+msgid "Add this change to Substitution Filters?"
+msgstr "要將將此變動加入替代篩選器嗎？"
+
+msgid "Text only"
+msgstr "僅文字"
+
+msgid "Line-by-line position and text"
+msgstr "逐行位置和文字"
+
+msgid "Word-by-word position and text"
+msgstr "逐字位置和文字"
+
+msgid "AppData (Roaming) folder"
+msgstr "AppData (Roaming) 資料夾"
+
+msgid "Install folder"
+msgstr "安裝資料夾"
+
+msgid "Documents folder"
+msgstr "文件資料夾"
+
+msgctxt "Options dialog|General|Single instance mode"
+msgid "Disabled"
+msgstr "已停用"
+
+msgid "Allow only one instance to run"
+msgstr "只允許執行唯一程式"
+
+msgid "Clipboard &History"
+msgstr "剪貼簿歷史紀錄 (&H)"
+
+msgid "Allow only one instance; wait for termination"
+msgstr "只允許執行唯一程式；並等待終止"
+
+msgctxt "Options dialog|General|Auto-reload modified files"
+msgid "Disabled"
+msgstr "已停用"
+
+msgid "Only on window activated"
+msgstr "僅在視窗啟用時"
+
+msgid "Immediately"
+msgstr "立即"
+
+msgid "Al&l"
+msgstr "全部 (&L)"
+
+msgid "&Others"
+msgstr "其他 (&O)"
+
+#, c-format
+msgid "Missing plugin name in pipeline: %1"
+msgstr "處理序缺少擴充功能名稱：%1"
+
+#, c-format
+msgid "Missing quote in plugin pipeline: %1"
+msgstr "擴充功能處理序中缺少引號：%1"
+
+#, c-format
+msgid "Plugin name '%1' already exists."
+msgstr "擴充功能名稱「%1」已經存在。"
+
+msgid "Specify plugin arguments"
+msgstr "指定擴充功能引數"
+
+#, c-format
+msgid "Plugin not found or invalid: %1"
+msgstr "擴充功能未找到或無效：%1"
+
+#, c-format
+msgid "'%1' is not an unpacker plugin"
+msgstr "「%1」非解包裝器擴充功能"
+
+#, c-format
+msgid "'%1' is not a prediffer plugin"
+msgstr "「%1」不是預差異器擴充功能"
+
+#, c-format
+msgid "Error prediffing '%1' with '%2'. Prediffing disabled."
+msgstr "使用擴充功能「%2」預先差異化檔案「%1」時發生錯誤。預先差異化將不再應用。"
+
+#, c-format
+msgid "Circular reference in plugin pipeline: %1"
+msgstr "擴充功能處理序中出現循環參照：%1"
+
+msgid "URL Handler"
+msgstr "URL 處理程序"
+
+msgid "File Unpacker"
+msgstr "檔案解包裝器"
+
+msgid "File or Folder Unpacker"
+msgstr "檔案或資料夾解包裝器"
+
+msgid "Alias for Unpacker"
+msgstr "解包裝器的別名"
+
+msgid "Alias for Prediffer"
+msgstr "預差異器的別名"
+
+msgid "Alias for Editor script"
+msgstr "編輯器指令碼的別名"
+
+#, c-format
+msgid "Alias for plugin pipeline '%1'"
+msgstr "擴充功能處理序「%1」的別名"
+
+msgid "New plugin description"
+msgstr "新擴充功能描述"
+
+msgid "All"
+msgstr "全"
+
+msgid "1st"
+msgstr "第一"
+
+msgid "2nd"
+msgstr "第二"
+
+msgid "3rd"
+msgstr "第三"
+
+msgid "1st and 2nd"
+msgstr "第一和第二"
+
+msgid "1st and 3rd"
+msgstr "第一和第三"
+
+msgid "2nd and 3rd"
+msgstr "第二和第三"
+
+msgid "Filter applied"
+msgstr "已應用篩選器"
+
+#, c-format
+msgid "Compare %1"
+msgstr "比對 %1"
+
+msgid "&Filter by This Column..."
+msgstr "依此欄篩選... (&F)"
+
+#, c-format
+msgid "Clipboard at %s"
+msgstr "於 %s 的剪貼簿"
+
+msgid ""
+"Clipboard history disabled.\r\n"
+"Enable: Windows logo key + V, then Turn on."
+msgstr ""
+"剪貼簿歷史記錄已停用。\r\n"
+"要啟用剪貼簿歷史記錄，請按下 Windows 徽標鍵 + V，然後點選「開啟」按鈕。"
+
+msgid "This system does not support clipboard history."
+msgstr "此系統不支援剪貼簿歷史紀錄。"
+
+msgid "32-bit WinMerge does not support Clipboard Compare"
+msgstr "32 位元版本的 WinMerge 不支援剪貼簿比對"
+
+msgid "WebView2 runtime not installed. Download it?"
+msgstr "尚未安裝 WebView2 執行階段。是否要下載安裝？"
+
+msgid "New Text Compare"
+msgstr "新文字比對"
+
+msgid "New Table Compare"
+msgstr "新表格比對"
+
+msgid "New Binary Compare"
+msgstr "新二進位比對"
+
+msgid "New Image Compare"
+msgstr "新圖片比對"
+
+msgid "New Webpage Compare"
+msgstr "新網頁比對"
+
+msgid "New Folder Compare"
+msgstr "新增資料夾比對"
+
+msgid "Clipboard Compare"
+msgstr "剪貼簿比對"
+
+msgid "&Print..."
+msgstr "列印... (&P)"
+
+msgid "Pre&v Page"
+msgstr "上一頁 (&V)"
+
+msgid "&Two Page"
+msgstr "雙頁 (&T)"
+
+msgid "&One Page"
+msgstr "單頁 (&O)"
+
+msgid "Zoom &In"
+msgstr "放大 (&I)"
+
+msgid "Zoom &Out"
+msgstr "縮小 (&O)"
+
+msgid "Comparing..."
+msgstr "正在比對..."
+
+msgid "Zoom:"
+msgstr "縮放："
+
+msgid "Diff hunk"
+msgstr "差異區塊"
+
+msgid "Inline diff"
+msgstr "行內差異"
+
+msgid "Line"
+msgstr "行"
+
+msgid "Character"
+msgstr "字元"
+
+msgid ""
+"\n"
+"Previous Difference (Alt+Up)\n"
+"(Right Button+Wheel Up)\n"
+"(Alt+Wheel Up)"
+msgstr ""
+"\n"
+"上一個差異 (Alt+Up)\n"
+"(滑鼠右鍵+滾輪上滾)\n"
+"(Alt+滾輪上滾)"
+
+msgid ""
+"\n"
+"Next Difference (Alt+Down)\n"
+"(Right Button+Wheel Down)\n"
+"(Alt+Wheel Down)"
+msgstr ""
+"\n"
+"下一個差異 (Alt+Down)\n"
+"(滑鼠右鍵+滾輪下滾)\n"
+"(Alt+滾輪下滾)"
+
+msgid ""
+"\n"
+"Copy to Right (Alt+Right)\n"
+"(Right Button+Wheel Right)\n"
+"(Alt+Wheel Right)\n"
+"(Alt+Shift+Wheel Down)"
+msgstr ""
+"\n"
+"複製到右側 (Alt+Right)\n"
+"(滑鼠右鍵+滾輪右滾)\n"
+"(Alt+滾輪右滾)\n"
+"(Alt+Shift+滾輪下滾)"
+
+msgid ""
+"\n"
+"Copy to Left (Alt+Left)\n"
+"(Right Button+Wheel Left)\n"
+"(Alt+Wheel Left)\n"
+"(Alt+Shift+Wheel Up)"
+msgstr ""
+"\n"
+"複製到左側 (Alt+Left)\n"
+"(滑鼠右鍵+滾輪左滾)\n"
+"(Alt+滾輪左滾)\n"
+"(Alt+Shift+滾輪上滾)"
+
+msgid ""
+"\n"
+"Copy to Right and Advance (Ctrl+Alt+Right)\n"
+"(Ctrl+Alt+Wheel Right)\n"
+"(Ctrl+Alt+Shift+Wheel Down)"
+msgstr ""
+"\n"
+"複製到右側後到下一個 (Ctrl+Alt+Right)\n"
+"(Ctrl+Alt+滾輪右滾)\n"
+"(Ctrl+Alt+Shift+滾輪下滾)"
+
+msgid ""
+"\n"
+"Copy to Left and Advance (Ctrl+Alt+Left)\n"
+"(Ctrl+Alt+Wheel Left)\n"
+"(Ctrl+Alt+Shift+Wheel Up)"
+msgstr ""
+"\n"
+"複製到左側後到下一個 (Ctrl+Alt+Left)\n"
+"(Ctrl+Alt+滾輪左滾)\n"
+"(Ctrl+Alt+Shift+滾輪上滾)"
+
+#, c-format
+msgid "Comparing %1 with %2"
+msgstr "正在比對 %1 與 %2"
+
+#, c-format
+msgid "Comparing %1 with %2 and %3"
+msgstr "正在比對 %1 與 %2 及 %3"
+
+msgid "Comparison completed"
+msgstr "比對完成"
+
+#, c-format
+msgid "Failed to compare %1 with %2: "
+msgstr "無法比對 %1 與 %2："
+
+#, c-format
+msgid "Failed to compare %1 with %2 and %3: "
+msgstr "無法比對 %1 與 %2 及 %3："
+
+msgid "File saved"
+msgstr "檔案已儲存"
+
+msgid "Copying files..."
+msgstr "正在複製檔案..."
+
+msgid "Moving files..."
+msgstr "正在移動檔案..."
+
+msgid "Deleting files..."
+msgstr "正在刪除檔案..."
+
+msgid "Recycle Bin"
+msgstr "回收站"
+
+msgid "Permanently deleted"
+msgstr "永久刪除"
+
+msgid "File operation completed successfully"
+msgstr "檔案操作已成功完成"
+
+msgid "File operation canceled"
+msgstr "檔案操作已取消"
+
+msgid "No error"
+msgstr "無錯誤"
+
+msgid "Filter expression is empty"
+msgstr "篩選表示式為空"
+
+msgid "Unknown character in filter expression"
+msgstr "篩選表示式中存在未知字符"
+
+msgid "Unterminated string literal"
+msgstr "未終止的字串文字"
+
+msgid "Syntax error in filter expression"
+msgstr "篩選表示式中的語法錯誤"
+
+msgid "Failed to parse filter expression"
+msgstr "解析篩選表示式失敗"
+
+msgid "Invalid literal value"
+msgstr "無效的文字值"
+
+msgid "Invalid regular expression"
+msgstr "無效的正規表示式"
+
+msgid "Undefined identifier"
+msgstr "未定義標識符"
+
+msgid "Invalid number of arguments"
+msgstr "引數數量無效"
+
+msgid "Filter name not found"
+msgstr "未找到篩選器名稱"
+
+msgid "Division by zero in filter expression"
+msgstr "篩選表示式中除以零"
+
+msgid "Unknown error"
+msgstr "未知錯誤"
+
+msgid "Invalid property name"
+msgstr "無效的屬性名稱"
+
+msgid "Invalid directive"
+msgstr "無效指令"
+
+msgid "Equals"
+msgstr "等於"
+
+msgid "Does not equal"
+msgstr "不等於"
+
+msgid "Less than"
+msgstr "小於"
+
+msgid "Less than or equal to"
+msgstr "小於或等於"
+
+msgid "Greater than or equal to"
+msgstr "大於或等於"
+
+msgid "Greater than"
+msgstr "大於"
+
+msgid "Between"
+msgstr "介於"
+
+msgid "Not Between"
+msgstr "不介於"
+
+msgid "Contains"
+msgstr "包括"
+
+msgid "Not Contains"
+msgstr "不包括"
+
+msgid "Contains (regex)"
+msgstr "包括（正規表示式）"
+
+msgid "Not Contains (regex)"
+msgstr "不包括（正規表示式）"
+
+msgid "Match (wildcard)"
+msgstr "符合 (萬用字元)"
+
+msgid "Not match (wildcard)"
+msgstr "不符合 (萬用字元)"
+
+msgid "Match (regex)"
+msgstr "符合 (正規表示式)"
+
+msgid "Not match (regex)"
+msgstr "不符合 (正規表示式)"
+
+msgid "Light"
+msgstr "亮色"
+
+msgid "Dark"
+msgstr "暗色"
+
+msgid "Follow system"
+msgstr "遵循系統"
+
+#, c-format
+msgid "e.g. %1"
+msgstr "例:%1"
+
+msgid "WinMerge detected a previous crash. Please report this if possible."
+msgstr "WinMerge 偵測到上一次執行時發生損毀。如果可以的話，請協助回報此問題。"
+
+msgid ""
+"# Regex replacement list\r\n"
+"# Format: regex<TAB>replacement\r\n"
+"# Backreferences like $1, $2 are supported\r\n"
+"\r\n"
+"(\\d{4})-(\\d{2})-(\\d{2})\t$1_$2_$3\r\n"
+msgstr ""
+"# 正規表示式取代清單\r\n"
+"# 格式：正規表示式<TAB>取代目標\r\n"
+"# 支援如 $1、$2 的反向引用\r\n"
+"\r\n"
+"(\\d{4})-(\\d{2})-(\\d{2})\t$1_$2_$3\r\n"
+
+msgid ""
+"# Replacement list\r\n"
+"# Format: search<TAB>replacement\r\n"
+"# Lines starting with # are ignored\r\n"
+"\r\n"
+"from1\tto1\r\n"
+"from2\tto2\r\n"
+msgstr ""
+"# 取代清單\r\n"
+"# 格式：搜尋目標<TAB>取代目標\r\n"
+"# 以 # 開頭的行將被忽略\r\n"
+"\r\n"
+"from1\tto1\r\n"
+"from2\tto2\r\n"
+
+msgid "Built-in only"
+msgstr "僅內建"
+
+msgid "Built-in first"
+msgstr "內建優先"
+
+msgid "Tree-sitter first"
+msgstr "Tree-sitter 優先"
+
+msgid "Tree-sitter only"
+msgstr "僅 Tree-sitter"
+
+msgid "Prettification"
+msgstr "排版美化"
+
+msgid "Content Extraction"
+msgstr "擷取內容"
+
+msgid "Preview"
+msgstr "預覽"
+
+msgid "Data Query"
+msgstr "資料查詢"
+
+msgid "Validation"
+msgstr "驗證"
+
+msgid "Decompilation"
+msgstr "反編譯"
+
+msgid "URL Handling"
+msgstr "URL 處理"
+
+msgid "Decoding / Encoding"
+msgstr "解碼／編碼"
+
+msgid "Make Uppercase"
+msgstr "轉換成大寫"
+
+msgid "Make Lowercase"
+msgstr "轉換成小寫"
+
+msgid "Remove Duplicate Lines"
+msgstr "移除重複行"
+
+msgid "Count Duplicate Lines"
+msgstr "統計重複行"
+
+msgid "Sort Lines Ascending"
+msgstr "按行升序排序"
+
+msgid "Sort Lines Descending"
+msgstr "按行降序排序"
+
+msgid "Reverse Columns"
+msgstr "顛倒欄"
+
+msgid "Reverse Lines"
+msgstr "顛倒行"
+
+msgid "Replace..."
+msgstr "取代..."
+
+msgid "Apply Filter Command..."
+msgstr "應用篩選器命令..."
+
+msgid "Tokenize..."
+msgstr "標記化..."
+
+msgid "Trim Spaces"
+msgstr "修剪空格"
+
+msgid "Select Columns..."
+msgstr "選取欄..."
+
+msgid "Select Lines..."
+msgstr "選取行..."
+
+msgid "Insert Date"
+msgstr "插入日期"
+
+msgid "Insert Time"
+msgstr "插入時間"
+
+msgid "Apply Patch..."
+msgstr "應用修補檔..."
+
+msgid "Ignore Columns"
+msgstr "忽略欄"
+
+msgid "Ignore Comments (C-Family Languages)"
+msgstr "忽略註解 (C 語言家族)"
+
+msgid "Ignore CSV Fields"
+msgstr "忽略 CSV 欄位"
+
+msgid "Ignore TSV Fields"
+msgstr "忽略 TSV 欄位"
+
+msgid "Ignore Leading Line Numbers"
+msgstr "忽略開頭行號"
+
+msgid "Apply Prediff Substitution Filters"
+msgstr "應用預差異化替代篩選器"
+
+msgid "Prettify HTML"
+msgstr "美化 HTML"
+
+msgid "Prettify JSON"
+msgstr "美化 JSON"
+
+msgid "Prettify XML"
+msgstr "美化 XML"
+
+msgid "Prettify YAML"
+msgstr "美化 YAML"
+
+msgid "Prettify PO"
+msgstr "美化 PO 檔"
+
+msgid "Preview Graphviz"
+msgstr "預覽 Graphviz"
+
+msgid "Preview Markdown"
+msgstr "預覽 Markdown"
+
+msgid "Preview PlantUML"
+msgstr "預覽 PlantUML"
+
+msgid "Query CSV Data..."
+msgstr "查詢 CSV 資料..."
+
+msgid "Query TSV Data..."
+msgstr "查詢 TSV 資料..."
+
+msgid "Query JSON Data..."
+msgstr "查詢 JSON 資料..."
+
+msgid "Query YAML Data..."
+msgstr "查詢 YAML 資料..."
+
+msgid "Validate HTML"
+msgstr "驗證 HTML"
+
+msgid "Validate PO"
+msgstr "驗證 PO 檔"
+
+msgid "Disassemble JVM Bytecode"
+msgstr "反組譯 JVM 位元組碼"
+
+msgid "Disassemble IL Code"
+msgstr "反組譯中間語言"
+
+msgid "Disassemble Native Code"
+msgstr "反組譯機器碼"
+
+msgid "Convert Text with AI..."
+msgstr "使用 AI 轉換文字..."
+
+msgid "Unescape Java properties files"
+msgstr "取消轉義 Java 屬性文件"
+
+msgid "Decompile Java (CFR)"
+msgstr "反編譯 Java (CFR)"
+
+msgid "Make characters uppercase"
+msgstr "字元轉換成大寫"
+
+msgid "Make characters lowercase"
+msgstr "字元轉換成小寫"
+
+msgid "Remove duplicate lines"
+msgstr "移除重複行"
+
+msgid "Count duplicate lines"
+msgstr "統計重複行"
+
+msgid "Sort lines ascending"
+msgstr "按行升序排序"
+
+msgid "Sort lines descending"
+msgstr "按行降序排序"
+
+msgid "Reverse columns"
+msgstr "顛倒欄"
+
+msgid "Reverse lines"
+msgstr "顛倒行"
+
+msgid ""
+"Replace text.\r\n"
+"Usage: Replace [-i] [-e] FIND REPLACE\r\n"
+" or: Replace -s\r\n"
+" FIND - text to find\r\n"
+" REPLACE - text to replace\r\n"
+" -i - ignore case (only for -e)\r\n"
+" -e - regex\r\n"
+" -s - use Substitution Filters"
+msgstr ""
+"取代文字。\r\n"
+"用法：Replace [-i] [-e] FIND REPLACE\r\n"
+"或：Replace -s\r\n"
+"FIND - 要尋找的文字\r\n"
+"REPLACE - 要取代的文字\r\n"
+"-i - 忽略大小寫（僅適用於 -e）\r\n"
+"-e - 正規表示式\r\n"
+"-s - 使用取代篩選器"
+
+#, c-format
+msgid ""
+"Apply filter. \r\n"
+"Usage: ExecFilterCommand COMMAND\r\n"
+" COMMAND - command to execute. %1 = filename."
+msgstr ""
+"應用篩選器。\r\n"
+"用法：ExecFilterCommand COMMAND\r\n"
+" COMMAND - 要執行的命令。%1 = 檔名。"
+
+msgid ""
+"Tokenize. \r\n"
+"Usage: Tokenize PATTERNS\r\n"
+" PATTERNS - regex (e.g. [^\\w]+)"
+msgstr ""
+"選取的文字進行分詞 (Tokenize)。\r\n"
+"用法：Tokenize PATTERNS\r\n"
+" PATTERNS - 用於分詞的正規表示式。（例如：[^\\w]+）"
+
+msgid "Trim spaces"
+msgstr "修剪空格"
+
+msgid ""
+"Select columns.\r\n"
+"Usage: SelectColumns RANGES\r\n"
+" or: SelectColumns [-v] [-i] [-g] -e PATTERNS\r\n"
+" RANGES - column ranges (-3,5-10,30-)\r\n"
+" PATTERNS - regex\r\n"
+" -v - select non-matching\r\n"
+" -i - ignore case\r\n"
+" -g - enable global flag\r\n"
+" -e - use PATTERNS"
+msgstr ""
+"選取欄位。\r\n"
+"用法：SelectColumns RANGES\r\n"
+" 或：SelectColumns [-v] [-i] [-g] -e PATTERNS\r\n"
+" RANGES - 欄位範圍 (-3,5-10,30-)\r\n"
+" PATTERNS - 正則表達式\r\n"
+" -v - 選取不比對的項目\r\n"
+" -i - 忽略大小寫\r\n"
+" -g - 啟用全域標記\r\n"
+" -e - 使用 PATTERNS 進行匹配"
+
+msgid ""
+"Select lines.\r\n"
+"Usage: SelectLines RANGES\r\n"
+" or: SelectLines [-v] [-i] -e PATTERNS\r\n"
+" RANGES - line ranges (-3,5-10,30-)\r\n"
+" PATTERNS - regex\r\n"
+" -v - select non-matching\r\n"
+" -i - ignore case\r\n"
+" -e - use PATTERNS"
+msgstr ""
+"選取行數。\r\n"
+"用法：SelectLines RANGES\r\n"
+" 或：SelectLines [-v] [-i] -e PATTERNS\r\n"
+" RANGES - 行數範圍 (-3,5-10,30-)\r\n"
+" PATTERNS - 正則表達式\r\n"
+" -v - 選取不比對的項目\r\n"
+" -i - 忽略大小寫\r\n"
+" -e - 使用 PATTERNS 進行匹配"
+
+msgid ""
+"HTML Prettier (tidy-html5).\r\n"
+"Arguments: tidy command line options."
+msgstr ""
+"HTML 美化器 (tidy-html5)。\r\n"
+"引數：tidy 命令列選項。"
+
+msgid ""
+"JSON Prettier (jq).\r\n"
+"Arguments: jq filter/command line options."
+msgstr ""
+"JSON 美化器 (jq)。\r\n"
+"引數：jq 篩選器/命令列選項。"
+
+msgid ""
+"XML Prettier (tidy-html5).\r\n"
+"Arguments: tidy command line options."
+msgstr ""
+"XML 美化器 (tidy-html5)。\r\n"
+"引數：tidy 命令列選項。"
+
+msgid ""
+"YAML Prettier (yq).\r\n"
+"Arguments: yq filter/command line options."
+msgstr ""
+"YAML 美化器 (yq)。\r\n"
+"引數：yq 篩選器/命令列選項。"
+
+msgid ""
+"PO Prettier (gettext msgcat).\r\n"
+"Arguments: msgcat command line options."
+msgstr ""
+"PO 美化器 (gettext msgcat)。\r\n"
+"引數：msgcat 命令列選項。"
+
+msgid ""
+"Graphviz Previewer.\r\n"
+"Arguments: dot command line options."
+msgstr ""
+"Graphviz 預覽器。\r\n"
+"引數：dot 命令列選項。"
+
+msgid ""
+"Markdown Previewer.\r\n"
+"Arguments: md2html command line options."
+msgstr ""
+"Markdown 預覽器。\r\n"
+"引數：md2html 命令列選項。"
+
+msgid ""
+"PlantUML Previewer.\r\n"
+"Arguments: plantuml.jar command line options."
+msgstr ""
+"PlantUML 預覽器。\r\n"
+"引數：plantuml.jar 命令列選項。"
+
+msgid ""
+"CSV Querier (q).\r\n"
+"Arguments: SQL statement/q command line options."
+msgstr ""
+"CSV 查詢器 (q)。\r\n"
+"引數：SQL 語句/q 命令列選項。"
+
+msgid ""
+"TSV Querier (q).\r\n"
+"Arguments: SQL statement/q command line options."
+msgstr ""
+"TSV 查詢器 (q)。\r\n"
+"引數：SQL 語句/q 命令列選項。"
+
+msgid ""
+"JSON Querier (jq).\r\n"
+"Arguments: jq filter/command line options."
+msgstr ""
+"JSON 查詢器 (jq)。\r\n"
+"引數：jq 篩選器/命令列選項。"
+
+msgid ""
+"YAML Querier (yq).\r\n"
+"Arguments: yq filter/command line options."
+msgstr ""
+"YAML 查詢器 (yq)。\r\n"
+"引數：yq 篩選器/命令列選項。"
+
+msgid ""
+"HTML Validator (tidy-html5).\r\n"
+"Arguments: tidy command line options."
+msgstr ""
+"HTML 驗證器 (tidy-html5)。\r\n"
+"引數：引數：tidy 命令列選項。"
+
+msgid ""
+"PO Validator (gettext msgfmt).\r\n"
+"Arguments: msgfmt command line options."
+msgstr ""
+"PO 驗證器 (gettext msgfmt)。\r\n"
+"引數：msgfmt 命令列選項。"
+
+msgid ""
+"JVM bytecode disassembler (javap).\r\n"
+"Arguments: javap command line options."
+msgstr ""
+"JVM 位元組碼反組譯器 (javap)。\r\n"
+"引數：javap 命令列選項。"
+
+msgid ""
+"IL disassembler (ildasm).\r\n"
+"Arguments: ildasm command line options."
+msgstr ""
+"IL 反組譯器 (ildasm)。\r\n"
+"引數：ildasm 命令列選項。"
+
+msgid ""
+"Native code disassembler (dumpbin).\r\n"
+"Arguments: dumpbin command line options."
+msgstr ""
+"原生碼反組譯器 (dumpbin)。\r\n"
+"引數：dumpbin 命令列選項。"
+
+msgid ""
+"Content extractor (Apache Tika).\r\n"
+"Arguments: tika-app.jar command line options."
+msgstr ""
+"內容擷取器 (Apache Tika)。\r\n"
+"引數：tika-app.jar 命令列選項。"
+
+msgid "Apply patch (GNU patch)"
+msgstr "應用修補檔 (GNU patch)"
+
+msgid "Display MS Excel text content"
+msgstr "顯示 MS Excel 檔案的文字內容"
+
+msgid "Display MS PowerPoint text content"
+msgstr "顯示 MS PowerPoint 檔案的文字內容"
+
+msgid "Display MS Visio text content"
+msgstr "顯示 MS Visio 檔案的文字內容"
+
+msgid "Display MS Word text content"
+msgstr "顯示 MS Word 檔案的文字內容"
+
+msgid "Ignore columns - list from plugin name/argument"
+msgstr "忽略直欄 - 來自擴充功能名稱/引數的清單"
+
+msgid "Ignore C, C++, PHP, and JavaScript comments (//... and /* ... */)."
+msgstr "該擴充功能忽略C、C++、PHP和JavaScript檔案中的註解 (//... 和 / ... */)。"
+
+msgid "Ignore fields - list from plugin name/argument"
+msgstr "忽略欄位 - 來自擴充功能名稱/引數的清單"
+
+msgid "Ignore leading line numbers (e.g., NC, BASIC)."
+msgstr "忽略開頭的行號 (例如 NC、BASIC)。"
+
+msgid "Prediff Line Filter"
+msgstr "預差異化行篩選器"
+
+msgid "Date and time insertion"
+msgstr "插入日期和時間"
+
+msgid ""
+"HTTP URL Scheme Handler (curl).\r\n"
+"Arguments: curl command line options."
+msgstr ""
+"HTTP URL 配置處理器 (curl)。\r\n"
+"引數：curl 命令列選項。"
+
+msgid ""
+"Windows Registry URL Scheme Handler.\r\n"
+"Arguments: reg.exe command line options."
+msgstr ""
+"Windows 登錄檔 URL 配置處理器。\r\n"
+"引數：reg.exe 命令列選項。"
+
+msgid "Basic text functions"
+msgstr "基本文字功能"
+
+msgid "AI-assisted text conversion"
+msgstr "AI輔助文字轉換功能"
+
+msgid ""
+"Text converter (OpenAI API).\r\n"
+"Usage: AIConvertText PROMPT"
+msgstr ""
+"文字轉換器（OpenAI API）。\r\n"
+"用法：AIConvertText PROMPT"
+
+msgid "Unescape and display escaped Java properties files."
+msgstr "將已轉義的 Java 屬性檔案還原並顯示。"
+
+msgid ""
+"Java decompiler (CFR).\r\n"
+"Decompiles .class files into readable Java source code.\r\n"
+"Arguments: CFR command line options."
+msgstr ""
+"Java 反編譯器 (CFR)。\r\n"
+"將 .class 檔案反編譯為可讀的 Java 原始碼。\r\n"
+"引數：CFR 命令列選項。"
+
+msgid ""
+"Clipboard URL Scheme Handler (cliphcat).\r\n"
+"Arguments: cliphcat command line options."
+msgstr ""
+"剪貼簿 URL 配置處理器 (cliphcat)。\r\n"
+"引數：cliphcat 命令列選項。"
+
+msgid "CompareMSExcelFiles.sct WinMerge Plugin Options"
+msgstr "CompareMSExcelFiles.sct WinMerge 擴充功能選項"
+
+msgid "Extract workbook data to multiple files"
+msgstr "將活頁簿資料擷取至多個檔案"
+
+msgid "Update external references (links)"
+msgstr "更新外部參照 (連結)"
+
+msgid "Compare document properties"
+msgstr "比對文件屬性"
+
+msgid "Compare names"
+msgstr "比對名稱"
+
+msgid "Compare cell values"
+msgstr "比對儲存格值"
+
+msgid "Compare worksheets as image (very slow)"
+msgstr "將工作表以圖片方式進行比對（非常慢）"
+
+msgid " - Image split size: "
+msgstr "- 圖像分割大小："
+
+msgid "Compare worksheets as HTML"
+msgstr "將工作表以 HTML檔案 方式進行比對"
+
+msgid "Compare formulas"
+msgstr "比對公式"
+
+msgid "Compare texts in shapes"
+msgstr "比對圖形中的文字"
+
+msgid "Compare headers and footers"
+msgstr "比對頁首和頁尾"
+
+msgid ""
+"Cannot get Macros.\r\n"
+"Enable 'Trust access to Visual Basic Project' in MS Office Macro Security."
+msgstr ""
+"無法取得巨集。\r\n"
+"請在 MS Office 巨集安全性中啟用「信任對 VBA 專案物件模型的存取」。"
+
+msgid "Replace line breaks in formulas with spaces"
+msgstr "將公式中的換行替換為空格"
+
+msgid "Include sheet order number in filename"
+msgstr "在檔名中包括工作表順序編號"
+
+msgid "Compare VBA macros"
+msgstr "比對 VBA 巨集"
+
+msgid "CompareMSWordFiles.sct WinMerge Plugin Options"
+msgstr "CompareMSWordFiles.sct WinMerge 擴充功能選項"
+
+msgid "Extract document data to multiple files"
+msgstr "將文檔資料擷取至多個檔案"
+
+msgid "Compare bookmarks"
+msgstr "比對書籤"
+
+msgid "Compare text contents of documents"
+msgstr "比對文檔的文字內容"
+
+msgid "Compare documents as HTML file (very slow)"
+msgstr "將文檔以 HTML檔案 方式進行比對（非常慢）"
+
+msgid "CompareMSPowerPointFiles.sct WinMerge Plugin Options"
+msgstr "CompareMSPowerPointFiles.sct WinMerge 擴充功能選項"
+
+msgid "Extract slide data to multiple files"
+msgstr "將簡報資料擷取至多個檔案"
+
+msgid "Compare slides as image (very slow)"
+msgstr "將簡報以圖片方式進行比對（非常慢）"
+
+msgid "Compare texts in notes page"
+msgstr "比對備註頁面中的文字"
+
+msgid "CompareMSVisioFiles.sct WinMerge Plugin Options"
+msgstr "CompareMSVisioFiles.sct WinMerge 擴充功能選項"
+
+msgid "Extract page data to multiple files"
+msgstr "將頁面資料擷取至多個檔案"
+
+msgid "Compare pages as image (very slow)"
+msgstr "將頁面以圖片方式進行比對（非常慢）"
+
+msgid "PrediffLineFilter.sct WinMerge Plugin Options"
+msgstr "PrediffLineFilter.sct WinMerge 擴充功能選項"
+
+msgid "Delete"
+msgstr "刪除"
+
+msgid "Enabled"
+msgstr "已啟用"
+
+msgid "Ignore Case"
+msgstr "忽略大小寫"
+
+msgid "Use RegExp"
+msgstr "使用正規表示式"
+
+msgid "Find what"
+msgstr "尋找內容"
+
+msgid "Replace with"
+msgstr "取代為"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid ""
+"Column Ranges to Ignore:\n"
+"e.g.) 3,10-20,32-33\n"
+msgstr ""
+"要忽略的欄位範圍：\n"
+" 例如) 3,10-20,32-33\n"
+
+#, c-format
+msgid "Enter filename for patch '%1'"
+msgstr "輸入修補檔「%1」的檔名"
+
+#, c-format
+msgid "File '%1' does not exist"
+msgstr "檔案「%1」不存在"
+
+msgid "Enter command line arguments for patch"
+msgstr "輸入修補檔的命令列引數"
+
+#, c-format
+msgid "Enter folder name for patch '%1'"
+msgstr "輸入修補檔「%1」的資料夾名稱"
+
+#, c-format
+msgid "Folder '%1' does not exist"
+msgstr "資料夾「%1」不存在"
+
+msgid "Do not use '-p0' for patch files with absolute paths"
+msgstr "包含絕對路徑的修補檔請勿使用 '-p0'"
+
+msgid "AI.sct WinMerge Plugin Options"
+msgstr "AI.sct WinMerge 擴充功能選項"
+
+msgid "Enter prompt"
+msgstr "輸入提示詞"
+
+#, c-format
+msgid ""
+"Enter OpenAI API key.\r\n"
+"- Requires OpenAI registration (fees may apply).\r\n"
+"- Key stored in env var %1."
+msgstr ""
+"輸入您的 OpenAI API 金鑰。 \r\n"
+" - 使用此擴充功能需要在 OpenAI 註冊並收取費用。 \r\n"
+" - API 金鑰儲存在環境變數 %1 中。"
+
+msgid "Environment variable name for OpenAI API key"
+msgstr "OpenAI API 金鑰的環境變數名稱"
+
+msgid "OpenAI API key"
+msgstr "OpenAI API 金鑰"
+
+msgid "Temperature"
+msgstr "成熟度"
+
+msgid "Maximum length"
+msgstr "最大長度"
+
+msgid "Model"
+msgstr "模型"
+
+msgid "OpenAI API key changed. Restart to apply."
+msgstr "OpenAI API 金鑰已變更。請重新啟動 WinMerge 以應用變更。"

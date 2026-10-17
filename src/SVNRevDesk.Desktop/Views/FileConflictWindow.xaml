@@ -1,0 +1,24 @@
+<Window x:Class="SVNRevDesk.Desktop.Views.FileConflictWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="存在同名文件" Icon="../Assets/AppIcon.ico" Width="620"
+        SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+  <Border Padding="22" Background="{StaticResource PageBackground}">
+    <StackPanel>
+      <TextBlock x:Name="TargetPath" Foreground="{StaticResource MutedText}" TextTrimming="CharacterEllipsis" Margin="0,0,0,12" />
+      <Border Style="{StaticResource Panel}" Padding="12">
+        <ScrollViewer MaxHeight="180" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+          <TextBlock x:Name="FileNames" TextWrapping="Wrap" />
+        </ScrollViewer>
+      </Border>
+      <TextBlock x:Name="Explanation" TextWrapping="Wrap" Margin="0,12,0,0" />
+      <CheckBox x:Name="BackupBeforeOverwriteBox" Content="覆盖前备份目标文件" IsChecked="False" Margin="0,16,0,18"
+                ToolTip="勾选后在覆盖前保存目标文件备份；不勾选则直接覆盖。" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button x:Name="OverwriteButton" Content="覆盖同名文件" Style="{StaticResource PrimaryButton}" MinWidth="110" Click="Overwrite_Click" />
+        <Button x:Name="SkipButton" Content="跳过同名项目" IsDefault="True" MinWidth="110" Click="Skip_Click" />
+        <Button Content="取消" IsCancel="True" MinWidth="85" />
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</Window>
