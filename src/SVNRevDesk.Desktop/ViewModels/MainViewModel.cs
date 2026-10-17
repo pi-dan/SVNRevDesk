@@ -331,6 +331,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         if (disposed) return;
         // Publish a complete initial view only after all queries succeed.
         Session = session;
+        if (sessionCacheDirectory != null) UseDedicatedSessionCache(session.LocalRoot ?? session.Url, session.LocalRoot != null);
         Snapshot = snapshot;
         LastFullRefreshAt = snapshot.CheckedAt;
         cacheGeneration++;
@@ -347,6 +348,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         root.IsExpanded = true;
         root.IsSelected = true;
         RememberSession();
+        if (session.LocalRoot != null) Settings.RememberWorkingCopy(session.LocalRoot, session.Url, session.RepositoryId);
         Settings.Remember(Address);
         NotifyLocation();
     }

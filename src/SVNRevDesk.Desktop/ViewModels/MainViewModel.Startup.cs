@@ -8,6 +8,23 @@ namespace SVNRevDesk.Desktop.ViewModels;
 
 public sealed partial class MainViewModel
 {
+    private string? sessionCacheDirectory;
+
+    public void UseDedicatedSessionCache(string location, bool isLocal) =>
+        sessionCacheDirectory = RepositoryLocation.CacheDirectory(Settings.CacheDirectory, location, isLocal);
+
+    public SavedRepositoryTab? CaptureSession() => Session == null ? null : new(Session.LocalRoot ?? Session.Url,
+        Session.LocalRoot != null, currentRelative, AllNodes().Where(node => !node.IsPlaceholder && node.IsExpanded)
+            .Select(node => node.RelativePath).ToList());
+
+    public Task RestoreTabInBackgroundAsync(SavedRepositoryTab saved)
+    {
+        if (IsBusy || disposed) return Task.CompletedTask;
+        CancelBackgroundReads();
+        return StartBackgroundRead("正在恢复仓库会话", token => OpenCachedSessionAsync(saved.Location, saved.IsLocal,
+            saved.RelativeDirectory, saved.ExpandedDirectories, token), navigation: false);
+    }
+
     public Task RestoreInBackgroundAsync() => string.IsNullOrWhiteSpace(Settings.LastLocation)
         ? Task.CompletedTask : OpenInBackgroundAsync(Settings.LastLocation, Settings.LastLocationIsLocal, restoreNavigation: true);
 
@@ -28,7 +45,8 @@ public sealed partial class MainViewModel
         try
         {
             // Disk reads and JSON parsing also run off the dispatcher for large working copies.
-            saved = await Task.Run(() => new BrowsingCacheStore(Settings.CacheDirectory).Load(location, isLocal), token);
+            saved = await Task.Run(() => new BrowsingCacheStore(sessionCacheDirectory ?? Settings.CacheDirectory).Load(location, isLocal)
+                ?? (sessionCacheDirectory == null ? null : new BrowsingCacheStore(Settings.CacheDirectory).Load(location, isLocal)), token);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException)
         {
@@ -74,6 +92,7 @@ public sealed partial class MainViewModel
             await OpenAsync(location, isLocal, token);
             return;
         }
+        if (verified.LocalRoot != null) Settings.RememberWorkingCopy(verified.LocalRoot, verified.Url, verified.RepositoryId);
         await RefreshAllAsync(token);
     }
 
@@ -177,7 +196,7 @@ public sealed partial class MainViewModel
         var directories = directoryCache.ToDictionary(pair => pair.Key,
             pair => new SavedDirectory(pair.Value.Snapshot.Revision, pair.Value.Snapshot.CheckedAt,
                 pair.Value.Entries, nodes.GetValueOrDefault(pair.Key)?.Summary ?? "未检查") { HasServerListing = pair.Value.HasServerListing }, StringComparer.Ordinal);
-        new BrowsingCacheStore(Settings.CacheDirectory).Save(new(1, Session, Snapshot, LastFullRefreshAt, directories));
+        new BrowsingCacheStore(sessionCacheDirectory ?? Settings.CacheDirectory).Save(new(1, Session, Snapshot, LastFullRefreshAt, directories));
     }
 
     private Task<RepositorySession> FetchSessionAsync(string location, bool isLocal, CancellationToken token) =>

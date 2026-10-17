@@ -15,8 +15,8 @@ namespace SVNRevDesk.Desktop;
 
 public partial class MainWindow : Window
 {
-    private readonly MainViewModel model;
-    private readonly ClientActions actions;
+    private MainViewModel model;
+    private ClientActions actions;
     private readonly DispatcherTimer refreshTimer = new() { Interval = TimeSpan.FromSeconds(2) };
     private FileSystemWatcher? localWatcher;
     private DateTimeOffset lastAutomaticRefresh = DateTimeOffset.Now;
@@ -38,20 +38,9 @@ public partial class MainWindow : Window
         actions = new ClientActions(this, model);
         if (settings.LoadNotice != null) model.AddLog(settings.LoadNotice);
         DataContext = model;
-        model.Preview.PropertyChanged += (_, e) =>
-        {
-            if (e.PropertyName == nameof(FilePreviewViewModel.IsEnabled)) UpdatePreviewLayout();
-        };
-        model.EntriesUpdating += CaptureFileSelection;
-        model.EntriesUpdated += RestoreFileSelection;
-        model.EntryCreated += SelectCreatedEntry;
-        model.LocalItemCreationStarted += creationChanges.Begin;
-        model.LocalItemCreationFinished += creationChanges.Complete;
-        model.PropertyChanged += (_, e) =>
-        {
-            if (e.PropertyName == nameof(MainViewModel.HasSession)) UpdateWatcher();
-            if (e.PropertyName == nameof(MainViewModel.CurrentRelativePathText)) UpdateBreadcrumbs();
-        };
+        sessionRepository = repository;
+        AttachSessionEvents();
+        InitializeSessions();
         refreshTimer.Tick += RefreshTimer_Tick;
         UpdatePreviewLayout();
         UpdateBreadcrumbs();
@@ -72,7 +61,7 @@ public partial class MainWindow : Window
         StartAutomaticBackupCleanup();
         var argument = Environment.GetCommandLineArgs().Skip(1).FirstOrDefault();
         if (argument != null) await OpenLocationAsync(argument);
-        else await model.RestoreInBackgroundAsync();
+        else await RestoreWorkspaceAsync();
         if (model.LastFullRefreshAt > lastAutomaticRefresh) lastAutomaticRefresh = model.LastFullRefreshAt;
     }
 
@@ -95,11 +84,14 @@ public partial class MainWindow : Window
 
     private async Task OpenLocationAsync(string location)
     {
-        location = location.Trim();
-        if (location.Length == 0) return;
-        var local = Directory.Exists(location);
-        await model.OpenInBackgroundAsync(location, local);
-        if (model.LastFullRefreshAt > lastAutomaticRefresh) lastAutomaticRefresh = model.LastFullRefreshAt;
+        if (string.IsNullOrWhiteSpace(location) || !CanChangeSession) return;
+        try
+        {
+            var parsed = RepositoryLocation.Parse(location);
+            await OpenTabAsync(parsed.Location, parsed.IsLocal);
+        }
+        catch (Exception ex) when (ex is ArgumentException or IOException or UnauthorizedAccessException)
+        { MessageBox.Show(this, ex.Message, "打开仓库", MessageBoxButton.OK, MessageBoxImage.Warning); }
     }
 
     private async void OpenLocal_Click(object sender, RoutedEventArgs e)
@@ -125,6 +117,14 @@ public partial class MainWindow : Window
 
     private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if ((Keyboard.Modifiers == ModifierKeys.Control || Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift)) && e.Key == Key.Tab)
+        {
+            e.Handled = true;
+            CycleSession(Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) ? -1 : 1);
+            return;
+        }
+        if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.W)
+        { e.Handled = true; CloseActiveSession(); return; }
         if (e.Key == Key.Escape && fileDrag is { Started: true, Preparing: true } gesture)
         {
             gesture.Cancelled = true;
@@ -234,6 +234,8 @@ public partial class MainWindow : Window
         var description = operation switch
         {
             "update" => "更新所选", "update-directory" => "更新当前目录", "checkout" => "检出到本地",
+            "update-revision" or "update-directory-revision" => "更新到指定修订号",
+            "reverse-merge" or "reverse-merge-directory" => "回滚指定提交",
             "delete" => "删除所选",
             "ignore" => "忽略所选", "unignore" => "取消忽略",
             "move" or "move-to" => "移动文件",
@@ -246,14 +248,14 @@ public partial class MainWindow : Window
 
     private async void DirectoryTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
     {
-        if (model.IsBusy || model.IsUpdatingTree || selectingDirectoryForMenu || e.NewValue is not DirectoryNode { IsPlaceholder: false } node
+        if (switchingSession || model.IsBusy || model.IsUpdatingTree || selectingDirectoryForMenu || e.NewValue is not DirectoryNode { IsPlaceholder: false } node
             || node.RelativePath == model.CurrentRelative) return;
         await model.BrowseDirectoryAsync(node.RelativePath);
     }
 
     private async void DirectoryTree_Expanded(object sender, RoutedEventArgs e)
     {
-        if (model.IsBusy || model.IsUpdatingTree || e.OriginalSource is not TreeViewItem { DataContext: DirectoryNode node } || node.Loaded) return;
+        if (switchingSession || model.IsBusy || model.IsUpdatingTree || e.OriginalSource is not TreeViewItem { DataContext: DirectoryNode node } || node.Loaded) return;
         await model.ExpandDirectoryAsync(node);
     }
 
@@ -385,9 +387,12 @@ public partial class MainWindow : Window
         model.Settings.AutoBackupCleanup = dialog.AutoBackupCleanup;
         model.Settings.BackupRetentionDays = dialog.BackupRetentionDays;
         model.Settings.CloseBehavior = dialog.CloseBehavior;
-        model.NotifySettingsChanged();
-        model.Runner.Executable = model.Settings.SvnExecutable;
-        try { model.SaveSession(); }
+        foreach (var tab in repositoryTabs)
+        {
+            tab.Model.NotifySettingsChanged();
+            tab.Model.Runner.Executable = model.Settings.SvnExecutable;
+        }
+        try { SaveWorkspace(); }
         catch (Exception ex) { MessageBox.Show(this, ex.Message, "保存设置失败"); return; }
         if (cleanupChanged)
         {
@@ -437,7 +442,7 @@ public partial class MainWindow : Window
             NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastWrite | NotifyFilters.Size };
         localWatcher.Changed += LocalFile_Changed; localWatcher.Created += LocalFile_Changed;
         localWatcher.Deleted += LocalFile_Changed; localWatcher.Renamed += LocalFile_Changed;
-        localWatcher.Error += (_, _) => Dispatcher.BeginInvoke(() => localChangeAt = DateTimeOffset.Now);
+        localWatcher.Error += (watcher, _) => Dispatcher.BeginInvoke(() => { if (watcher == localWatcher) localChangeAt = DateTimeOffset.Now; });
         localWatcher.EnableRaisingEvents = true;
     }
 
@@ -447,6 +452,7 @@ public partial class MainWindow : Window
         if (creationChanges.ShouldIgnore(e.FullPath)) return;
         Dispatcher.BeginInvoke(() =>
         {
+            if (sender != localWatcher) return;
             if (model.Session?.LocalRoot is not { } root
                 || !RepositoryService.IsDescendant(e.FullPath, root)) return;
             changedLocalPaths.Add(e.FullPath);

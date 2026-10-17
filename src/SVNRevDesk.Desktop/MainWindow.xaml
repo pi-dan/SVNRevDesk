@@ -37,6 +37,8 @@
       <MenuItem Header="在资源管理器中显示" Tag="show-in-explorer" Click="Operation_Click" />
       <MenuItem Header="导出所选到文件夹…" Tag="export" Click="Operation_Click" />
       <MenuItem Header="更新到最新" Tag="update" Click="Operation_Click" />
+      <MenuItem Header="更新到指定修订号…" Tag="update-revision" Click="Operation_Click" />
+      <MenuItem Header="回滚指定提交（反向合并）…" Tag="reverse-merge" Click="Operation_Click" />
       <MenuItem Header="提交所选…" Tag="commit" Click="Operation_Click" />
       <Separator />
       <MenuItem Header="与服务器比较" Tag="compare-server" Click="Operation_Click" />
@@ -63,6 +65,8 @@
       <MenuItem Header="在资源管理器中显示" Tag="show-in-explorer" Click="DirectoryOperation_Click" />
       <MenuItem Header="刷新此目录" Tag="tree-refresh" Click="DirectoryOperation_Click" />
       <MenuItem Header="更新到最新（含子目录）" Tag="update" Click="DirectoryOperation_Click" />
+      <MenuItem Header="更新到指定修订号…" Tag="update-revision" Click="DirectoryOperation_Click" />
+      <MenuItem Header="回滚指定提交（反向合并）…" Tag="reverse-merge" Click="DirectoryOperation_Click" />
       <MenuItem Header="提交此目录…" Tag="commit" Click="DirectoryOperation_Click" />
       <MenuItem Header="导出到文件夹…" Tag="export" Click="DirectoryOperation_Click" />
       <Separator />
@@ -149,14 +153,18 @@
         <MenuItem Header="打开仓库地址…" Click="OpenUrl_Click" />
         <MenuItem Header="检出到本地…" Tag="checkout" Click="Operation_Click" />
         <MenuItem Header="关联本地工作副本…" Tag="associate" Click="Operation_Click" />
+        <MenuItem Header="工作副本与 URL 关联列表…" Click="WorkingCopyLinks_Click" />
         <Separator />
         <MenuItem Header="设置…" Click="Settings_Click" />
         <MenuItem Header="本次会话登录…" Click="Login_Click" />
+        <MenuItem Header="关闭当前仓库会话" InputGestureText="Ctrl+W" Click="CloseSession_Click" />
         <Separator />
         <MenuItem Header="退出软件" Click="Exit_Click" />
       </MenuItem>
       <MenuItem Header="工作副本" SubmenuOpened="MainMenu_SubmenuOpened">
         <MenuItem Header="更新当前目录（含子目录）" Tag="update-directory" Click="Operation_Click" />
+        <MenuItem Header="当前目录更新到指定修订号…" Tag="update-directory-revision" Click="Operation_Click" />
+        <MenuItem Header="回滚指定提交（当前目录）…" Tag="reverse-merge-directory" Click="Operation_Click" />
         <MenuItem Header="提交当前目录…" Tag="commit-directory" Click="Operation_Click" />
         <MenuItem Header="清理工作副本" Tag="cleanup" Click="Operation_Click" />
         <MenuItem Header="目录差异" Tag="directory-diff" Click="Operation_Click" />
@@ -170,6 +178,8 @@
         <MenuItem Header="打开" Tag="open" Click="Operation_Click" />
         <MenuItem Header="在资源管理器中显示" Tag="show-in-explorer" Click="Operation_Click" />
         <MenuItem Header="更新到最新" Tag="update" Click="Operation_Click" />
+        <MenuItem Header="更新到指定修订号…" Tag="update-revision" Click="Operation_Click" />
+        <MenuItem Header="回滚指定提交（反向合并）…" Tag="reverse-merge" Click="Operation_Click" />
         <MenuItem Header="提交…" Tag="commit" Click="Operation_Click" />
         <MenuItem Header="添加到版本控制" Tag="add" Click="Operation_Click" />
         <MenuItem Header="忽略（仅本机）" Tag="ignore" Click="Operation_Click" />
@@ -190,6 +200,9 @@
         <MenuItem Header="设置属性 / 忽略规则…" Tag="set-property" Click="Operation_Click" />
         <MenuItem Header="导出所选到文件夹…" Tag="export" Click="Operation_Click" />
       </MenuItem>
+      <MenuItem x:Name="FavoritesMenu" Header="收藏" SubmenuOpened="Favorites_SubmenuOpened">
+        <MenuItem Header="尚无收藏" IsEnabled="False" />
+      </MenuItem>
     </Menu>
     <Border DockPanel.Dock="Top" Background="White" BorderBrush="{StaticResource PanelBorder}" BorderThickness="0,0,0,1" Padding="16,8">
       <DockPanel>
@@ -209,6 +222,31 @@
         </DockPanel>
       </DockPanel>
     </Border>
+
+    <DockPanel DockPanel.Dock="Top" Margin="16,8,16,0" IsEnabled="{Binding CanOperate}">
+      <Button DockPanel.Dock="Right" Content="关闭会话" Click="CloseSession_Click" ToolTip="Ctrl+W：关闭当前会话，保留工作副本文件" />
+      <ListBox x:Name="SessionTabs" SelectionChanged="SessionTabs_SelectionChanged" BorderThickness="0" Background="Transparent"
+               ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+               ToolTip="打开其他工作副本或 URL 会新建会话；Ctrl+Tab / Ctrl+Shift+Tab 切换">
+        <ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ListBox.ItemsPanel>
+        <ListBox.ItemContainerStyle>
+          <Style TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="12,7" /><Setter Property="Margin" Value="0,0,6,0" />
+            <Setter Property="Background" Value="White" /><Setter Property="ToolTip" Value="{Binding ToolTip}" />
+            <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+              <Border x:Name="TabBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource PanelBorder}" BorderThickness="1" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                <ContentPresenter />
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsSelected" Value="True"><Setter TargetName="TabBorder" Property="Background" Value="{StaticResource SelectionBackground}" /><Setter Property="FontWeight" Value="SemiBold" /></Trigger>
+                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="TabBorder" Property="BorderBrush" Value="{StaticResource AccentBrush}" /></Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate></Setter.Value></Setter>
+          </Style>
+        </ListBox.ItemContainerStyle>
+        <ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Title}" MaxWidth="260" TextTrimming="CharacterEllipsis" /></DataTemplate></ListBox.ItemTemplate>
+      </ListBox>
+    </DockPanel>
 
     <Border DockPanel.Dock="Top" Style="{StaticResource Panel}" Margin="16,10,16,10" Padding="10,6">
       <DockPanel>

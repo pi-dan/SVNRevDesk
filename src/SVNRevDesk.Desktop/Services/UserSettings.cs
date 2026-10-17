@@ -17,6 +17,10 @@ public sealed class UserSettings
     public int BackupRetentionDays { get; set; } = BackupManager.DefaultRetentionDays;
     public WindowCloseBehavior CloseBehavior { get; set; } = WindowCloseBehavior.Ask;
     public List<string> RecentLocations { get; set; } = [];
+    public List<FavoriteLocation> Favorites { get; set; } = [];
+    public List<SavedRepositoryTab> OpenTabs { get; set; } = [];
+    public string ActiveTabKey { get; set; } = "";
+    public List<WorkingCopyLink> WorkingCopyLinks { get; set; } = [];
     public bool UseCardView { get; set; }
     public bool PreviewEnabled { get; set; }
     public string LastLocation { get; set; } = "";
@@ -71,6 +75,11 @@ public sealed class UserSettings
                 settings.SettingsVersion = CurrentSettingsVersion;
             }
             settings.settingsPath = path;
+            settings.Favorites ??= [];
+            settings.WorkingCopyLinks ??= [];
+            settings.OpenTabs ??= [];
+            settings.RecentLocations ??= [];
+            settings.ExpandedDirectories ??= [];
             if (settings.BackupRetentionDays is < 1 or > BackupManager.MaximumRetentionDays)
                 settings.BackupRetentionDays = BackupManager.DefaultRetentionDays;
             if (!Enum.IsDefined(settings.CloseBehavior)) settings.CloseBehavior = WindowCloseBehavior.Ask;
@@ -116,5 +125,13 @@ public sealed class UserSettings
         RecentLocations.Insert(0, location);
         if (RecentLocations.Count > 10) RecentLocations.RemoveRange(10, RecentLocations.Count - 10);
         Save();
+    }
+
+    public void RememberWorkingCopy(string localPath, string url, string repositoryId)
+    {
+        var key = RepositoryLocation.Key(localPath, true);
+        var index = WorkingCopyLinks.FindIndex(link => RepositoryLocation.Key(link.LocalPath, true) == key);
+        var link = new WorkingCopyLink(localPath, url, repositoryId);
+        if (index < 0) WorkingCopyLinks.Add(link); else WorkingCopyLinks[index] = link;
     }
 }

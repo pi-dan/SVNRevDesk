@@ -80,6 +80,7 @@ internal static class PortableCiTests
         var ignored = (await filtered.ReadDirectoryAsync(session, await filtered.RefreshAsync(session, token), "", token)).Single(entry => entry.Name == "new.txt");
         check(ignored.State == FileState.Ignored && !ignored.HasDifferences, "Machine-local ignored files stay visible without counting as differences");
         await OfficeDocumentTests.RunAsync(Path.Combine(root, "office"), check);
+        await RevisionOperationsTests.RunAsync(Path.Combine(root, "revisions"), check);
         await BackupManagerTests.RunAsync(Path.Combine(root, "backup-management"), check);
         await EmbeddedSvnTests.RunAsync(Path.Combine(root, "embedded-svn"), check);
         await EmbeddedWinMergeTests.RunAsync(Path.Combine(root, "embedded-winmerge"), check);

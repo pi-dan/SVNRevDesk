@@ -7,6 +7,14 @@ using SVNRevDesk.Core.Svn;
 
 // No test framework dependency: this exercises a real, disposable file:// repository with svnadmin.
 if (args.FirstOrDefault() == "--probe-bundled-svn") return await SvnExecutableTests.ProbeAsync(args.ElementAtOrDefault(1));
+if (args.FirstOrDefault() == "--revisions")
+{
+    var count = 0;
+    try { await RevisionOperationsTests.RunAsync(Path.GetFullPath(args.ElementAtOrDefault(1) ?? Path.Combine(".build", "revisions", Guid.NewGuid().ToString("N"))),
+        (condition, description) => { if (!condition) throw new InvalidOperationException("FAIL: " + description); count++; Console.WriteLine("PASS: " + description); }); }
+    catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }
+    Console.WriteLine($"All {count} revision assertions passed."); return 0;
+}
 if (args.FirstOrDefault() == "--portable-ci")
 {
     var root = Path.GetFullPath(args.ElementAtOrDefault(1) ?? Path.Combine(".build", "portable-ci", Guid.NewGuid().ToString("N")));
@@ -443,6 +451,7 @@ try
     await SvnExecutableTests.RunAsync(Path.Combine(testRoot, "bundled-svn"), Assert);
     await EmbeddedSvnTests.RunAsync(Path.Combine(testRoot, "embedded-svn"), Assert);
     await ScopedRefreshTests.RunAsync(Path.Combine(testRoot, "scoped-refresh"), Assert);
+    await RevisionOperationsTests.RunAsync(Path.Combine(testRoot, "revisions"), Assert);
     await CommitSelectionTests.RunAsync(Path.Combine(testRoot, "commit-selection"), Assert);
     await LocalCreationTests.RunAsync(Path.Combine(testRoot, "local-creation"), Assert);
     await LocalDeletionTests.RunAsync(Path.Combine(testRoot, "local-deletion"), Assert);

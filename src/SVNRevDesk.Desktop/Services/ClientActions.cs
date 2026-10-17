@@ -47,6 +47,10 @@ public sealed class ClientActions(Window owner, MainViewModel model)
                 model.SetProgressTarget(CurrentLocal());
                 model.AddLog(await model.Operations.UpdateAsync(CurrentLocal(), true, token));
                 await model.RefreshPathsAsync([CurrentLocal()], token); break;
+            case "update-revision": await UpdateRevisionAsync(Selected(selection), token); break;
+            case "update-directory-revision": await UpdateRevisionAsync([], token); break;
+            case "reverse-merge": await ReverseMergeAsync(One(selection), token); break;
+            case "reverse-merge-directory": await ReverseMergeAsync(null, token); break;
             case "commit": await CommitAsync(Selected(selection).Select(Local).ToList(), token); break;
             case "commit-directory": await CommitAsync([CurrentLocal()], token); break;
             case "add":
@@ -404,6 +408,69 @@ public sealed class ClientActions(Window owner, MainViewModel model)
     {
         var history = await model.Operations.LogAsync(url, token);
         ShowOutput("最近 100 次提交", string.Join("\n\n", history.Select(h => $"r{h.Revision}  {h.Author}  {h.DateText}\n{h.Message}")));
+    }
+
+    private async Task UpdateRevisionAsync(IReadOnlyList<BrowserEntry> entries, CancellationToken token)
+    {
+        var selectedRevision = PickRevision("更新到指定修订号", "选择或输入目标修订号。目录包含子目录。SVN 会尝试保留本地修改，冲突留待手动处理。更新不会创建服务器提交。",
+            entries.Count == 0 ? [CurrentUrl()] : entries.Select(RevisionHistoryUrl).ToArray(), SnapshotRevision(), true, token);
+        if (selectedRevision == null) return;
+        var revision = selectedRevision.Value;
+        var targets = entries.Count == 0 ? new[] { (Path: CurrentLocal(), Directory: true) }
+            : entries.Select(entry => (Path: Local(entry), Directory: entry.IsDirectory)).ToArray();
+        if (!Confirm("确认更新版本", $"将以下项目更新到 r{revision}：\n\n{string.Join("\n", targets.Select(target => target.Path))}\n\n此操作会改变本地工作文件。是否继续？")) return;
+        await RunRevisionChangeAsync(targets.Select(target => target.Path), async () =>
+        {
+            foreach (var target in targets)
+            {
+                model.SetProgressTarget(target.Path);
+                model.AddLog(await model.Operations.UpdateToRevisionAsync(target.Path, target.Directory, revision, token));
+            }
+        }, token);
+    }
+
+    private async Task ReverseMergeAsync(BrowserEntry? entry, CancellationToken token)
+    {
+        var path = entry == null ? CurrentLocal() : Local(entry);
+        var selectedRevision = PickRevision("回滚指定提交", "选择或输入要撤销的单次提交修订号。反向合并生成本地修改，不会删除历史或自动提交。请先将目标更新到最新，并处理未提交修改。下一步会显示预览。",
+            [entry == null ? CurrentUrl() : RevisionHistoryUrl(entry)], "", false, token);
+        if (selectedRevision == null) return;
+        var revision = selectedRevision.Value;
+        model.SetProgressTarget(path);
+        var preview = await model.Operations.ReverseMergeAsync(path, revision, true, token);
+        if (!model.WaitForUserInput(() => new ReverseMergePreviewWindow(owner, path, revision, preview).ShowDialog() == true, result => !result)) return;
+        token.ThrowIfCancellationRequested();
+        await RunRevisionChangeAsync([path], async () => model.AddLog(await model.Operations.ReverseMergeAsync(path, revision, false, token)), token);
+        dialogs.Inform("反向合并完成", "回滚结果已保存在本地工作副本。请检查差异及冲突，再使用“提交”上传回滚结果。");
+    }
+
+    private string RevisionHistoryUrl(BrowserEntry entry) => entry.LocalPath != null && model.Snapshot != null
+        && model.Snapshot.LocalInfo.TryGetValue(entry.LocalPath, out var info) ? info.Url : entry.Url;
+
+    private long? PickRevision(string title, string explanation, IReadOnlyList<string> historyUrls, string initialRevision, bool allowZero, CancellationToken token) =>
+        model.WaitForUserInput<long?>(() =>
+        {
+            var scope = string.Join("；", historyUrls.Distinct(StringComparer.Ordinal));
+            var picker = new RevisionPickerWindow(owner, title, explanation, scope, initialRevision, allowZero,
+                (start, peg, readToken) => model.Operations.LogPageAsync(historyUrls, start, peg, token: readToken), token);
+            return picker.ShowDialog() == true ? picker.SelectedRevision : null;
+        }, result => result == null);
+
+    private async Task RunRevisionChangeAsync(IEnumerable<string> paths, Func<Task> change, CancellationToken token)
+    {
+        try { await change(); }
+        catch
+        {
+            // A failed merge/update can have applied part of its changes. Refresh if possible,
+            // retaining the original error; cancellation must not start an uncancellable read.
+            if (!token.IsCancellationRequested)
+            {
+                try { await model.RefreshPathsAsync(paths, token); }
+                catch (Exception ex) { model.AddLog($"操作后的状态刷新失败，请手动刷新：{ex.Message}"); }
+            }
+            throw;
+        }
+        await model.RefreshPathsAsync(paths, token);
     }
 
     private string CurrentLocal() => RepositoryService.GetLocalPath(model.Session!, model.CurrentRelative)

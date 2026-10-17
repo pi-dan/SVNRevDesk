@@ -58,14 +58,15 @@ public partial class MainWindow
 
             if (remember) model.Settings.CloseBehavior = behavior;
             SaveSessionBeforeClose();
-            model.Cancel();
+            foreach (var tab in repositoryTabs) tab.Model.Cancel();
             refreshTimer.Stop();
             localWatcher?.Dispose(); localWatcher = null;
             backupCleanupTimer.Stop();
             backupLifetime.Cancel();
             trayIcon?.Dispose(); trayIcon = null;
             // A cancelled SVN operation may still be unwinding when the process exits.
-            if (!model.IsBusy) model.Dispose();
+            DetachSessionEvents();
+            foreach (var tab in repositoryTabs.Where(tab => !tab.Model.IsBusy)) tab.Dispose();
         }
         finally { decidingClose = false; }
     }
@@ -105,7 +106,7 @@ public partial class MainWindow
 
     private void SaveSessionBeforeClose()
     {
-        try { model.SaveSession(); }
+        try { SaveWorkspace(); }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             if (systemShutdown) model.AddLog(ex.Message);

@@ -44,6 +44,7 @@ public sealed partial class MainViewModel
         var path = RepositoryService.GetLocalPath(Session, currentRelative)!;
         // Switching the opened root changes its URL. Read only its local mapping, not the whole working copy.
         Session = await repository.OpenWorkingCopyAsync(Session.LocalRoot, token);
+        Settings.RememberWorkingCopy(Session.LocalRoot!, Session.Url, Session.RepositoryId);
         await RefreshPathsAsync([path], token);
         Address = Session.LocalRoot!;
         NotifyLocation();
