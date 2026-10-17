@@ -15,3 +15,6 @@ artifacts/
 /Tools/
 /local-ignores.json
 *.log
+
+# Bundled distributions contain bin/ directories and must remain complete.
+!/vendor/**
