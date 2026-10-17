@@ -50,10 +50,8 @@ jobs:
         run: |
           dotnet build SVNRevDesk.slnx -c Release --nologo
           if ($LASTEXITCODE -ne 0) { throw 'Build failed.' }
-          dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- .build/release-tests/integration
+          dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- --portable-ci .build/release-tests/integration
           if ($LASTEXITCODE -ne 0) { throw 'Integration tests failed.' }
-          dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- --ignore .build/release-tests/ignore
-          if ($LASTEXITCODE -ne 0) { throw 'Ignore tests failed.' }
       - name: Package both runtime variants
         shell: pwsh
         env:

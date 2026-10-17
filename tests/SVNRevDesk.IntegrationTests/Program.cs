@@ -7,6 +7,19 @@ using SVNRevDesk.Core.Svn;
 
 // No test framework dependency: this exercises a real, disposable file:// repository with svnadmin.
 if (args.FirstOrDefault() == "--probe-bundled-svn") return await SvnExecutableTests.ProbeAsync(args.ElementAtOrDefault(1));
+if (args.FirstOrDefault() == "--portable-ci")
+{
+    var root = Path.GetFullPath(args.ElementAtOrDefault(1) ?? Path.Combine(".build", "portable-ci", Guid.NewGuid().ToString("N")));
+    var count = 0;
+    try { await PortableCiTests.RunAsync(root, (condition, description) =>
+    {
+        if (!condition) throw new InvalidOperationException("FAIL: " + description);
+        count++; Console.WriteLine("PASS: " + description);
+    }); }
+    catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }
+    Console.WriteLine($"All {count} portable CI assertions passed.");
+    return 0;
+}
 if (args.FirstOrDefault() == "--ignore")
 {
     var root = Path.GetFullPath(args.ElementAtOrDefault(1) ?? Path.Combine(".build", "ignore", Guid.NewGuid().ToString("N")));

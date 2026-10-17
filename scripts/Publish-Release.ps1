@@ -39,6 +39,26 @@ try {
         }
         Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageDirectory
         Copy-Item -LiteralPath (Join-Path $repositoryRoot 'THIRD-PARTY-NOTICES.md') -Destination $packageDirectory
+        if ($item.SelfContained -eq 'true') {
+            $runtimeConfigPath = Join-Path $buildRoot 'bin/SVNRevDesk.Desktop/release_win-x64/SVNRevDesk.runtimeconfig.json'
+            $assetsPath = Join-Path $buildRoot 'obj/SVNRevDesk.Desktop/project.assets.json'
+            $runtimeConfig = Get-Content -LiteralPath $runtimeConfigPath -Raw | ConvertFrom-Json
+            $assets = Get-Content -LiteralPath $assetsPath -Raw | ConvertFrom-Json
+            foreach ($framework in $runtimeConfig.runtimeOptions.includedFrameworks) {
+                $packageId = "$($framework.name).Runtime.win-x64".ToLowerInvariant()
+                $runtimePackage = $null
+                foreach ($folder in $assets.packageFolders.PSObject.Properties.Name) {
+                    $candidate = Join-Path $folder "$packageId/$($framework.version)"
+                    if (Test-Path -LiteralPath $candidate) { $runtimePackage = $candidate; break }
+                }
+                if (!$runtimePackage) { throw "Cannot find runtime license package: $packageId/$($framework.version)" }
+                $licenseDirectory = Join-Path $packageDirectory "Licenses/$($framework.name)"
+                New-Item -ItemType Directory -Path $licenseDirectory -Force | Out-Null
+                foreach ($licenseName in @('LICENSE.TXT', 'THIRD-PARTY-NOTICES.TXT')) {
+                    Copy-Item -LiteralPath (Join-Path $runtimePackage $licenseName) -Destination $licenseDirectory
+                }
+            }
+        }
         $readme = @"
 SVNRevDesk v$Version — $($item.Label)
 
@@ -48,6 +68,7 @@ $($item.Requirement)
 首次使用 SVN / WinMerge 时，会自动在程序旁释放 Tools 文件。
 设置、缓存、备份及 SVN 配置保存在程序目录，请在升级时保留。
 本机忽略规则单独保存在当前 Windows 用户配置中。
+内置 SVN 的文件路径受 Windows 系统代码页限制，英文系统建议使用英文目录和文件名。
 
 项目：https://github.com/pi-dan/SVNRevDesk
 使用说明：https://github.com/pi-dan/SVNRevDesk/blob/main/docs/使用说明.md

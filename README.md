@@ -59,6 +59,8 @@
 
 支持 Windows 10 / 11 x64。首次使用会在程序旁释放内置工具，因此请先解压，不要在 ZIP 内直接启动。升级时退出程序，再用新版文件覆盖；保留原有设置、缓存和备份目录。详细流程见 [使用说明](docs/使用说明.md)。
 
+当前内置 SVN 的非 ASCII 路径处理受 Windows 系统代码页影响；中文路径已在中文区域环境验证，英文 Windows 建议使用英文目录和文件名。
+
 ## 从源码编译
 
 安装 [.NET 10 SDK](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0)，在 Windows x64 上运行：

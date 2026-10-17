@@ -29,10 +29,4 @@ jobs:
       - name: Build
         run: dotnet build SVNRevDesk.slnx -c Release --nologo
       - name: Integration tests against a real local SVN repository
-        run: dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- .build/ci/integration
-      - name: Local ignore regression tests
-        run: dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- --ignore .build/ci/ignore
-      - name: File move regression tests
-        run: dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- --file-move .build/ci/file-move
-      - name: File transfer regression tests
-        run: dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- --file-transfer .build/ci/file-transfer
+        run: dotnet run --project tests/SVNRevDesk.IntegrationTests -c Release --no-build -- --portable-ci .build/ci/integration
