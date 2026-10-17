@@ -54,8 +54,11 @@ try {
                 if (!$runtimePackage) { throw "Cannot find runtime license package: $packageId/$($framework.version)" }
                 $licenseDirectory = Join-Path $packageDirectory "Licenses/$($framework.name)"
                 New-Item -ItemType Directory -Path $licenseDirectory -Force | Out-Null
-                foreach ($licenseName in @('LICENSE.TXT', 'THIRD-PARTY-NOTICES.TXT')) {
-                    Copy-Item -LiteralPath (Join-Path $runtimePackage $licenseName) -Destination $licenseDirectory
+                $licenseFiles = @(Get-ChildItem -LiteralPath $runtimePackage -File |
+                    Where-Object { $_.Name -match '^(LICENSE|THIRD-PARTY-NOTICES)(\.TXT)?$' })
+                if (!($licenseFiles | Where-Object Name -Match '^LICENSE')) { throw "Runtime license missing: $runtimePackage" }
+                foreach ($licenseFile in $licenseFiles) {
+                    Copy-Item -LiteralPath $licenseFile.FullName -Destination $licenseDirectory
                 }
             }
         }
