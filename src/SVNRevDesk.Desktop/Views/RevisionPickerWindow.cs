@@ -9,7 +9,7 @@ using SVNRevDesk.Core.Models;
 
 namespace SVNRevDesk.Desktop.Views;
 
-public sealed class RevisionPickerWindow : Window
+public class RevisionPickerWindow : Window
 {
     private readonly Func<long?, long?, CancellationToken, Task<HistoryPage>> loadPage;
     private readonly CancellationTokenSource lifetime;
@@ -28,28 +28,29 @@ public sealed class RevisionPickerWindow : Window
     private bool loading;
     private bool closed;
     private bool synchronizing;
+    private readonly bool browseOnly;
 
     public long SelectedRevision { get; private set; }
 
     public RevisionPickerWindow(Window owner, string title, string explanation, string historyScope,
         string initialRevision, bool allowZero,
-        Func<long?, long?, CancellationToken, Task<HistoryPage>> loadPage, CancellationToken token)
+        Func<long?, long?, CancellationToken, Task<HistoryPage>> loadPage, CancellationToken token, bool browseOnly = false)
     {
         Owner = owner; Title = title; Width = 960; Height = 680; MinWidth = 700; MinHeight = 640;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        this.loadPage = loadPage; minimumRevision = allowZero ? 0 : 1;
+        this.loadPage = loadPage; this.browseOnly = browseOnly; minimumRevision = allowZero ? 0 : 1;
         lifetime = CancellationTokenSource.CreateLinkedTokenSource(token);
         var panel = new DockPanel();
         var top = new StackPanel(); DockPanel.SetDock(top, Dock.Top); panel.Children.Add(top);
         top.Children.Add(new TextBlock { Text = explanation, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 12) });
-        top.Children.Add(new TextBlock { Text = "目标修订号（下拉选择或直接输入数字）", Margin = new Thickness(0, 0, 0, 5) });
+        top.Children.Add(new TextBlock { Text = "目标修订号（下拉选择或直接输入数字）", Margin = new Thickness(0, 0, 0, 5), Visibility = browseOnly ? Visibility.Collapsed : Visibility.Visible });
         revisionInput = new ComboBox { Name = "RevisionInput", IsEditable = true, IsTextSearchEnabled = false,
             ItemsSource = revisions, MaxDropDownHeight = 260, MinWidth = 210, HorizontalAlignment = HorizontalAlignment.Left,
-            Text = long.TryParse(initialRevision, out _) ? initialRevision : "" };
+            Text = long.TryParse(initialRevision, out _) ? initialRevision : "", Visibility = browseOnly ? Visibility.Collapsed : Visibility.Visible };
         top.Children.Add(revisionInput);
-        validation = new TextBlock { Foreground = Brushes.Firebrick, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 6) };
+        validation = new TextBlock { Foreground = Brushes.Firebrick, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 6), Visibility = browseOnly ? Visibility.Collapsed : Visibility.Visible };
         top.Children.Add(validation);
-        top.Children.Add(new TextBlock { Text = "目标提交历史 · 点击记录可填入修订号", FontWeight = FontWeights.SemiBold });
+        top.Children.Add(new TextBlock { Text = browseOnly ? "提交历史 · 选择记录查看完整说明" : "目标提交历史 · 点击记录可填入修订号", FontWeight = FontWeights.SemiBold });
         top.Children.Add(new TextBlock { Name = "RevisionHistoryScope", Text = historyScope, ToolTip = historyScope, TextTrimming = TextTrimming.CharacterEllipsis,
             Foreground = Brushes.SlateGray, Margin = new Thickness(0, 3, 0, 5) });
         top.Children.Add(new TextBlock { Text = "仅列出影响目标文件或文件夹（含子项）的可见提交，多选时合并去重。修订号为仓库统一编号，可能不连续。",
@@ -73,7 +74,8 @@ public sealed class RevisionPickerWindow : Window
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 10, 0, 0) };
         var accept = new Button { Name = "AcceptRevision", Content = "下一步", IsDefault = true, MinWidth = 90 };
         accept.Click += (_, _) => Accept();
-        buttons.Children.Add(accept); buttons.Children.Add(new Button { Content = "取消", IsCancel = true, MinWidth = 85 });
+        if (!browseOnly) buttons.Children.Add(accept);
+        buttons.Children.Add(new Button { Content = browseOnly ? "关闭" : "取消", IsCancel = true, MinWidth = 85 });
         bottom.Children.Add(buttons);
 
         historyGrid = new DataGrid { Name = "RevisionHistory", ItemsSource = CollectionViewSource.GetDefaultView(history),
@@ -87,11 +89,11 @@ public sealed class RevisionPickerWindow : Window
         Content = new Border { Background = Brushes.White, Padding = new Thickness(20), Child = panel };
         var view = CollectionViewSource.GetDefaultView(history);
         view.Filter = item => item is HistoryEntry entry && Matches(entry, search.Text.Trim());
-        search.TextChanged += (_, _) => { view.Refresh(); UpdateStatus(); };
+        search.TextChanged += (_, _) => { view.Refresh(); if (browseOnly) SyncSelection(); UpdateStatus(); };
         historyGrid.SelectionChanged += (_, _) =>
         {
             if (synchronizing || historyGrid.SelectedItem is not HistoryEntry entry) return;
-            revisionInput.Text = entry.Revision.ToString(CultureInfo.InvariantCulture);
+            if (!browseOnly) revisionInput.Text = entry.Revision.ToString(CultureInfo.InvariantCulture);
             ShowDetails(entry);
         };
         revisionInput.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler((_, _) =>
@@ -100,14 +102,14 @@ public sealed class RevisionPickerWindow : Window
             validation.Text = "";
             SyncSelection();
         }));
-        Loaded += async (_, _) => { revisionInput.Focus(); await LoadMoreAsync(); };
+        Loaded += async (_, _) => { if (browseOnly) search.Focus(); else revisionInput.Focus(); await LoadMoreAsync(); };
         Closed += (_, _) => { closed = true; lifetime.Cancel(); if (!loading) lifetime.Dispose(); };
 
         void AddColumn(string header, string property, DataGridLength width)
         {
             var style = new Style(typeof(TextBlock));
             style.Setters.Add(new Setter(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis));
-            historyGrid.Columns.Add(new DataGridTextColumn { Header = header, Binding = new Binding(property), Width = width, ElementStyle = style });
+            historyGrid.Columns.Add(new DataGridTextColumn { Header = header, Binding = new Binding(property), Width = width, MinWidth = width.IsStar ? 200 : 40, ElementStyle = style });
         }
     }
 
@@ -124,7 +126,7 @@ public sealed class RevisionPickerWindow : Window
     private async Task LoadMoreAsync()
     {
         if (loading || closed || peg != null && nextStart == null) return;
-        loading = true; more.IsEnabled = false; status.Text = "正在读取提交历史…（仍可手动输入修订号）";
+        loading = true; more.IsEnabled = false; status.Text = browseOnly ? "正在读取提交历史…" : "正在读取提交历史…（仍可手动输入修订号）";
         status.ToolTip = null;
         try
         {
@@ -143,7 +145,7 @@ public sealed class RevisionPickerWindow : Window
         catch (Exception ex)
         {
             if (closed || lifetime.IsCancellationRequested) return;
-            status.Text = $"读取失败，可重试或手动输入修订号。{ex.Message}";
+            status.Text = (browseOnly ? "读取失败，可重试。" : "读取失败，可重试或手动输入修订号。") + ex.Message;
             status.ToolTip = ex.Message;
             more.Content = "重试读取历史";
         }
@@ -157,6 +159,13 @@ public sealed class RevisionPickerWindow : Window
 
     private void SyncSelection()
     {
+        if (browseOnly)
+        {
+            if (historyGrid.SelectedItem is not HistoryEntry) historyGrid.SelectedItem = historyGrid.Items.Cast<HistoryEntry>().FirstOrDefault();
+            if (historyGrid.SelectedItem is HistoryEntry selected) ShowDetails(selected);
+            else details.Text = "选择记录后查看完整提交说明。";
+            return;
+        }
         synchronizing = true;
         try
         {

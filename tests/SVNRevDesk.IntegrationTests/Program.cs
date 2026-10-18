@@ -7,6 +7,14 @@ using SVNRevDesk.Core.Svn;
 
 // No test framework dependency: this exercises a real, disposable file:// repository with svnadmin.
 if (args.FirstOrDefault() == "--probe-bundled-svn") return await SvnExecutableTests.ProbeAsync(args.ElementAtOrDefault(1));
+if (args.FirstOrDefault() == "--file-management")
+{
+    var count = 0;
+    try { await FileManagementTests.RunAsync(Path.GetFullPath(args.ElementAtOrDefault(1) ?? Path.Combine(".build", "file-management", Guid.NewGuid().ToString("N"))),
+        (condition, description) => { if (!condition) throw new InvalidOperationException("FAIL: " + description); count++; Console.WriteLine("PASS: " + description); }); }
+    catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }
+    Console.WriteLine($"All {count} file management assertions passed."); return 0;
+}
 if (args.FirstOrDefault() == "--revisions")
 {
     var count = 0;

@@ -65,7 +65,8 @@ public sealed class ClientActions(Window owner, MainViewModel model)
             case "compare-history": await CompareHistoryAsync(One(selection), token); break;
             case "directory-diff":
                 ShowOutput("目录差异（服务器 → 本地）", await model.Operations.DirectoryDiffAsync(CurrentLocal(), token)); break;
-            case "log": await ShowHistoryAsync(selection.Count == 0 ? CurrentUrl() : One(selection).Url, token); break;
+            case "log": ShowHistory(selection.Count == 0 ? [CurrentUrl()] : selection.Select(RevisionHistoryUrl).ToArray(), token); break;
+            case "batch-rename": await BatchRenameAsync(selection, token); break;
             case "blame":
                 ShowOutput("逐行追溯", await model.Operations.BlameAsync(FileEntry(One(selection)).Url, token)); break;
             case "lock": await LockAsync(One(selection), token); break;
@@ -404,10 +405,23 @@ public sealed class ClientActions(Window owner, MainViewModel model)
         if (!preview) await model.RefreshPathsAsync([local], token);
     }
 
-    private async Task ShowHistoryAsync(string url, CancellationToken token)
+    private void ShowHistory(IReadOnlyList<string> urls, CancellationToken token)
     {
-        var history = await model.Operations.LogAsync(url, token);
-        ShowOutput("最近 100 次提交", string.Join("\n\n", history.Select(h => $"r{h.Revision}  {h.Author}  {h.DateText}\n{h.Message}")));
+        model.WaitForUserInput(() => new HistoryWindow(owner, string.Join("；", urls.Distinct(StringComparer.Ordinal)),
+            (start, peg, readToken) => model.Operations.LogPageAsync(urls, start, peg, token: readToken), token).ShowDialog());
+    }
+
+    private async Task BatchRenameAsync(IReadOnlyList<BrowserEntry> selection, CancellationToken token)
+    {
+        var sources = selection.OrderBy(entry => entry.Name, StringComparer.CurrentCultureIgnoreCase)
+            .Select(entry => new BatchRenameSource(Local(entry), entry.IsDirectory)).ToArray();
+        var plan = model.WaitForUserInput(() =>
+        {
+            var window = new BatchRenameWindow(owner, sources,
+                (rows, readToken) => Task.Run(() => model.Operations.PrepareBatchRenameAsync(rows, model.Session!.LocalRoot!, readToken), readToken), token);
+            return window.ShowDialog() == true ? window.Plan : null;
+        }, result => result == null);
+        if (plan != null) await model.MoveLocalFilesAsync(plan, new FileMoveOptions(), token);
     }
 
     private async Task UpdateRevisionAsync(IReadOnlyList<BrowserEntry> entries, CancellationToken token)

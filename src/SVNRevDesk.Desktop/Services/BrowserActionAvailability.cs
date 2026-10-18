@@ -22,7 +22,7 @@ public static class BrowserActionAvailability
         {
             "associate" => !local,
             "branch" => true,
-            "log" => selection.Count <= 1,
+            "log" => selection.All(entry => entry.ServerRevision != null || entry.BaseRevision >= 0),
             "update-directory" or "commit-directory" or "cleanup" or "directory-diff"
                 or "switch" or "merge" or "merge-preview" or "update-directory-revision" or "reverse-merge-directory" => local,
             "update-revision" => selectedLocal && selection.All(entry => entry.BaseRevision != null || entry.ServerRevision != null),
@@ -40,7 +40,7 @@ public static class BrowserActionAvailability
             "compare-base" => one?.LocalPath != null && one.ExistsLocally && one.BaseRevision >= 0,
             "compare-history" or "blame" => one is { IsDirectory: false, ServerRevision: not null },
             "move" => one?.LocalPath != null && one.ExistsLocally && !containsRoot && one.State is not (FileState.LocalDeleted or FileState.Conflict),
-            "move-to" => selectedLocal && !containsRoot && selection.All(entry => entry.ExistsLocally
+            "move-to" or "batch-rename" => selectedLocal && !containsRoot && selection.All(entry => entry.ExistsLocally
                 && entry.State is not (FileState.LocalDeleted or FileState.Conflict)),
             "set-property" => one?.LocalPath != null && one.ExistsLocally && one.State != FileState.LocalDeleted,
             "lock" => one is { IsDirectory: false, ServerRevision: not null, Lock: null }

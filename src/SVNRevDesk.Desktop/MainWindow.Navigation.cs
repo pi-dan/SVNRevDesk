@@ -1,12 +1,35 @@
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Controls;
+using SVNRevDesk.Desktop.Views;
 using SVNRevDesk.Desktop.ViewModels;
 
 namespace SVNRevDesk.Desktop;
 
 public partial class MainWindow
 {
+    private async void Search_Click(object sender, RoutedEventArgs e)
+    {
+        if (!model.CanOperate || model.Session == null) return;
+        await HandleAsync("跨目录搜索", async token =>
+        {
+            var entry = model.WaitForUserInput(() =>
+            {
+                var window = new RepositorySearchWindow(this, model.Session.Url, model.CurrentRelative, model.SearchAsync, token);
+                return window.ShowDialog() == true ? window.SelectedResult : null;
+            });
+            if (entry == null) return;
+            var slash = entry.RelativePath.LastIndexOf('/');
+            await model.NavigateAsync(slash < 0 ? "" : entry.RelativePath[..slash], token);
+            model.FilterText = ""; model.DifferencesOnly = false; model.SelectedState = "全部状态";
+            var actual = model.Entries.FirstOrDefault(item => item.RelativePath == entry.RelativePath)
+                ?? throw new InvalidOperationException("此项目已变化或删除，请重新搜索。");
+            if (model.IsCardView) { FileCards.SelectedItem = actual; FileCards.ScrollIntoView(actual); }
+            else { FileGrid.SelectedItem = actual; FileGrid.ScrollIntoView(actual); }
+        });
+    }
+
     private void UpdateBreadcrumbs()
     {
         CurrentRelativePath.Inlines.Clear();

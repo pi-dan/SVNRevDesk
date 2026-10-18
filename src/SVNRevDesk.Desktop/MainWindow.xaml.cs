@@ -117,6 +117,8 @@ public partial class MainWindow : Window
 
     private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && e.Key == Key.F && model.CanOperate && model.HasSession)
+        { e.Handled = true; Search_Click(this, new RoutedEventArgs()); return; }
         if ((Keyboard.Modifiers == ModifierKeys.Control || Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift)) && e.Key == Key.Tab)
         {
             e.Handled = true;
@@ -239,6 +241,8 @@ public partial class MainWindow : Window
             "delete" => "删除所选",
             "ignore" => "忽略所选", "unignore" => "取消忽略",
             "move" or "move-to" => "移动文件",
+            "batch-rename" => "批量重命名",
+            "log" => "查看提交历史",
             "commit" or "commit-directory" => "提交修改", "show-in-explorer" => "在资源管理器中显示",
             "compare-server" or "compare-base" or "compare-history" => "文件比较", "export" => "导出所选", _ => "SVN 操作"
         };
