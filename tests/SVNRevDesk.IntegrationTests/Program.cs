@@ -7,6 +7,21 @@ using SVNRevDesk.Core.Svn;
 
 // No test framework dependency: this exercises a real, disposable file:// repository with svnadmin.
 if (args.FirstOrDefault() == "--probe-bundled-svn") return await SvnExecutableTests.ProbeAsync(args.ElementAtOrDefault(1));
+if (args.FirstOrDefault() == "--text-merge-tool")
+{
+    try { await TextConflictTests.VerifyWinMergeAsync(Path.GetFullPath(args[1]), (condition, description) =>
+    { if (!condition) throw new InvalidOperationException("FAIL: " + description); Console.WriteLine("PASS: " + description); }, interactive: true); }
+    catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }
+    return 0;
+}
+if (args.FirstOrDefault() == "--text-conflict")
+{
+    var count = 0;
+    try { await TextConflictTests.RunAsync(Path.GetFullPath(args[1]), (condition, description) =>
+    { if (!condition) throw new InvalidOperationException("FAIL: " + description); count++; Console.WriteLine("PASS: " + description); }); }
+    catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }
+    Console.WriteLine($"All {count} text conflict assertions passed."); return 0;
+}
 if (args.FirstOrDefault() == "--search-index")
 {
     var count = 0;

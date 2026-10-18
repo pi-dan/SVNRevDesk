@@ -10,7 +10,7 @@ using SVNRevDesk.Desktop.Views;
 namespace SVNRevDesk.Desktop.Services;
 
 // User workflows live here; SVN command construction and state classification live in Core.
-public sealed class ClientActions(Window owner, MainViewModel model, Action<string>? launchFile = null)
+public sealed partial class ClientActions(Window owner, MainViewModel model, Action<string>? launchFile = null)
 {
     private readonly OperationDialogs dialogs = new(owner, model);
 
@@ -318,6 +318,13 @@ public sealed class ClientActions(Window owner, MainViewModel model, Action<stri
 
     private async Task ResolveAsync(BrowserEntry entry, CancellationToken token)
     {
+        if (!entry.IsDirectory)
+        {
+            var method = dialogs.Choose("解决文件冲突", "文本内容冲突可使用 WinMerge 三方合并；手工处理或选择单侧版本仍可使用原有方式。",
+                "用 WinMerge 合并文本…", "其他处理方式…");
+            if (method < 0) return;
+            if (method == 0) { await MergeTextConflictAsync(entry, token); return; }
+        }
         var choice = dialogs.Choose("解决冲突", "“标记已解决”应在手工编辑完成后使用。选择本地或服务器内容会改变冲突文件；目录树冲突需要先人工处理文件布局。",
             "标记已解决（保留当前工作文件）", "使用本地内容（mine-full）", "使用服务器内容（theirs-full）");
         if (choice < 0) return;

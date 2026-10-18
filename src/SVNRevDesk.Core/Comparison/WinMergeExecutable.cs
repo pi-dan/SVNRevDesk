@@ -62,4 +62,26 @@ public static class WinMergeExecutable
         start.ArgumentList.Add(leftPath); start.ArgumentList.Add(rightPath);
         return start;
     }
+
+    public static ProcessStartInfo CreateMergeStartInfo(string executable, string localPath, string basePath, string incomingPath,
+        string resultPath, string applicationDirectory)
+    {
+        if (!Path.GetFileName(executable).Equals(DefaultName, StringComparison.OrdinalIgnoreCase))
+            throw new ArgumentException("文本三方合并需要 WinMerge。", nameof(executable));
+        var start = CreateStartInfo(executable, localPath, incomingPath, "本地修改（只读）", "服务器修改（只读）", applicationDirectory);
+        start.ArgumentList.RemoveAt(start.ArgumentList.Count - 1);
+        start.ArgumentList.RemoveAt(start.ArgumentList.Count - 1);
+        var resume = File.Exists(resultPath);
+        start.ArgumentList.Add("/dm"); start.ArgumentList.Add(resume ? "合并结果（继续编辑已保存草稿）" : "合并结果（基础版本 + 双方修改）");
+        // WinMerge's three-way merge uses the middle buffer as the common ancestor.
+        // Only that buffer is editable; /o saves it to a separate draft, never to an input.
+        if (!resume) start.ArgumentList.Add("/am");
+        start.ArgumentList.Add("/fm");
+        start.ArgumentList.Add("/t"); start.ArgumentList.Add("text");
+        foreach (var option in new[] { "/ignorews:0", "/ignoreblanklines:0", "/ignorecase:0", "/ignoreeol:0", "/ignorecodepage:0", "/ignorecomments:0" })
+            start.ArgumentList.Add(option);
+        start.ArgumentList.Add(localPath); start.ArgumentList.Add(resume ? resultPath : basePath); start.ArgumentList.Add(incomingPath);
+        start.ArgumentList.Add("/o"); start.ArgumentList.Add(resultPath);
+        return start;
+    }
 }
