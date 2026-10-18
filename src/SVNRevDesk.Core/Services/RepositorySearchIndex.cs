@@ -45,6 +45,16 @@ public sealed partial class RepositorySearchIndex : IDisposable, IAsyncDisposabl
     public static bool HasSavedIndex(string cacheDirectory, RepositorySession session, string? username = null) =>
         File.Exists(SearchIndexStore.CachePath(cacheDirectory, session, username));
 
+    public (BrowserEntry Entry, long Revision)? FindEntry(string relative)
+    {
+        SearchIndexStore.ValidateRelative(relative);
+        var current = Volatile.Read(ref published);
+        if (current?.Status.HasIndex != true) return null;
+        var comparison = session.LocalRoot == null ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+        var entry = current.Entries.FirstOrDefault(entry => entry.RelativePath.Equals(relative, comparison));
+        return entry == null ? null : (entry, current.Status.Revision);
+    }
+
     public async Task LoadAsync(CancellationToken token = default)
     {
         if (Volatile.Read(ref loaded)) return;

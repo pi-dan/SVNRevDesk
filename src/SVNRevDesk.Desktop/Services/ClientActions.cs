@@ -10,7 +10,7 @@ using SVNRevDesk.Desktop.Views;
 namespace SVNRevDesk.Desktop.Services;
 
 // User workflows live here; SVN command construction and state classification live in Core.
-public sealed class ClientActions(Window owner, MainViewModel model)
+public sealed class ClientActions(Window owner, MainViewModel model, Action<string>? launchFile = null)
 {
     private readonly OperationDialogs dialogs = new(owner, model);
 
@@ -102,7 +102,17 @@ public sealed class ClientActions(Window owner, MainViewModel model)
     public static bool CanOpenLocalFileDirectly(BrowserEntry entry) => !entry.IsDirectory && entry.ExistsLocally
         && entry.State is not (FileState.ServerChanged or FileState.BothChanged or FileState.Conflict);
 
-    private async Task OpenAsync(BrowserEntry entry, CancellationToken token)
+    public async Task OpenSearchResultAsync(BrowserEntry entry, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        if (TryOpenLocalFile(entry)) return;
+        var current = await model.ReadSearchResultAsync(entry.RelativePath, token);
+        if (current.Entry.IsDirectory != entry.IsDirectory) throw new InvalidOperationException("项目类型已变化，请刷新索引后重试。");
+        if (!current.Entry.ExistsLocally && current.Entry.ServerRevision == null) throw new InvalidOperationException("服务器和本地均不存在此文件，请刷新索引后重试。");
+        await OpenAsync(current.Entry, token, current.Revision.ToString(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    private async Task OpenAsync(BrowserEntry entry, CancellationToken token, string? revision = null)
     {
         if (entry.IsDirectory) { await model.NavigateAsync(entry.RelativePath, token); return; }
         model.SetProgressTarget(entry.LocalPath ?? entry.Url);
@@ -112,7 +122,7 @@ public sealed class ClientActions(Window owner, MainViewModel model)
             var choice = dialogs.Choose("文件存在冲突", "请先检查冲突。查看服务器版本会下载到临时目录，不覆盖工作副本。",
                 "打开当前本地文件", "查看服务器版本（临时文件）", "处理冲突…");
             if (choice == 0 && entry.ExistsLocally) OpenFile(Local(entry));
-            else if (choice == 1) await OpenTemporaryAsync(entry, token);
+            else if (choice == 1) await OpenTemporaryAsync(entry, token, revision);
             else if (choice == 2) await ResolveAsync(entry, token);
             return;
         }
@@ -124,7 +134,7 @@ public sealed class ClientActions(Window owner, MainViewModel model)
             throw new InvalidOperationException("服务器上没有对应文件，本地文件也不存在。");
         if (entry.LocalPath == null)
         {
-            await OpenTemporaryAsync(entry, token); return;
+            await OpenTemporaryAsync(entry, token, revision); return;
         }
 
         var choices = entry.ExistsLocally
@@ -133,7 +143,7 @@ public sealed class ClientActions(Window owner, MainViewModel model)
         var answer = dialogs.Choose("选择打开版本", $"{entry.Name}\n状态：{entry.StateText}\n本地最后修改：{entry.LocalRevisionText}，服务器最后修改：{entry.ServerRevisionText}", choices);
         if (answer < 0) return;
         if (entry.ExistsLocally && answer == 0) { OpenFile(Local(entry)); return; }
-        if (answer == choices.Length - 1) { await OpenTemporaryAsync(entry, token); return; }
+        if (answer == choices.Length - 1) { await OpenTemporaryAsync(entry, token, revision); return; }
 
         if (entry.ExistsLocally || entry.State is FileState.LocalModified or FileState.BothChanged)
         {
@@ -144,15 +154,16 @@ public sealed class ClientActions(Window owner, MainViewModel model)
         else model.AddLog(await model.Operations.UpdateAsync(Local(entry), false, token));
         await model.RefreshPathsAsync([Local(entry)], token);
         var refreshed = model.Entries.FirstOrDefault(item => item.RelativePath == entry.RelativePath);
+        if (revision != null) refreshed = (await model.ReadSearchResultAsync(entry.RelativePath, token)).Entry;
         if (refreshed?.State == FileState.Conflict) throw new InvalidOperationException("更新产生冲突，请解决冲突后打开。");
         if (!File.Exists(Local(entry))) throw new InvalidOperationException("文件未下载成功，或刚刚被服务器删除，请刷新检查。");
         OpenFile(Local(entry));
     }
 
-    private async Task OpenTemporaryAsync(BrowserEntry entry, CancellationToken token)
+    private async Task OpenTemporaryAsync(BrowserEntry entry, CancellationToken token, string? revision = null)
     {
         model.SetProgressTarget(entry.Url);
-        var path = await model.Operations.DownloadForViewingAsync(entry.Url, SnapshotRevision(), model.Settings.CacheDirectory, token);
+        var path = await model.Operations.DownloadForViewingAsync(entry.Url, revision ?? SnapshotRevision(), model.Settings.CacheDirectory, token);
         File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.ReadOnly);
         model.AddLog($"服务器版本已下载到只读临时文件：{path}");
         OpenFile(path);
@@ -501,5 +512,9 @@ public sealed class ClientActions(Window owner, MainViewModel model)
     private static BrowserEntry FileEntry(BrowserEntry entry) => !entry.IsDirectory ? entry : throw new InvalidOperationException("请选择文件。");
     private bool Confirm(string title, string message) => dialogs.Confirm(title, message);
     private void ShowOutput(string title, string text) => new OutputWindow(owner, title, string.IsNullOrWhiteSpace(text) ? "没有变化。" : text).Show();
-    private static void OpenFile(string path) => Process.Start(new ProcessStartInfo(path) { UseShellExecute = true })?.Dispose();
+    private void OpenFile(string path)
+    {
+        if (launchFile != null) launchFile(path);
+        else Process.Start(new ProcessStartInfo(path) { UseShellExecute = true })?.Dispose();
+    }
 }

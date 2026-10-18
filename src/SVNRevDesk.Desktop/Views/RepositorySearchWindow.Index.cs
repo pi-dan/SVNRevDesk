@@ -41,6 +41,7 @@ public sealed partial class RepositorySearchWindow
     private void ScheduleSearch()
     {
         if (closed) return;
+        if (performingAction) { searchAfterAction = true; return; }
         running?.Cancel(); debounce.Stop();
         if (query.Text.Trim().Length == 0) { results.Clear(); status.Text = "输入名称或路径即可搜索本地索引。"; return; }
         debounce.Start();
@@ -72,17 +73,17 @@ public sealed partial class RepositorySearchWindow
 
     private async Task RefreshIndexAsync(bool rebuild)
     {
-        if (closed || index == null || indexRefresh != null) return;
+        if (closed || performingAction || index == null || indexRefresh != null) return;
         using var source = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
-        indexRefresh = source; refreshIndex!.IsEnabled = rebuildIndex!.IsEnabled = false; cancel.IsEnabled = true;
+        indexRefresh = source; UpdateControls();
         ShowIndexStatus();
         try { await Task.Run(() => index.RefreshAsync(rebuild, token: source.Token), source.Token); }
-        catch (OperationCanceledException) when (source.IsCancellationRequested) { if (!closed) status.Text = "索引更新已停止，保留上次清单。"; }
-        catch (Exception ex) { if (!closed) { status.Text = "索引更新失败，可搜索已有缓存：" + ex.Message; status.ToolTip = ex.Message; } }
+        catch (OperationCanceledException) when (source.IsCancellationRequested) { if (!closed && !performingAction) status.Text = "索引更新已停止，保留上次清单。"; }
+        catch (Exception ex) { if (!closed && !performingAction) { status.Text = "索引更新失败，可搜索已有缓存：" + ex.Message; status.ToolTip = ex.Message; } }
         finally
         {
             indexRefresh = null;
-            if (!closed) { refreshIndex.IsEnabled = rebuildIndex.IsEnabled = true; cancel.IsEnabled = running != null; ShowIndexStatus(); }
+            if (!closed) { UpdateControls(); ShowIndexStatus(); }
         }
     }
 }

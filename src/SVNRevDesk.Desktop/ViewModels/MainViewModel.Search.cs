@@ -36,6 +36,20 @@ public sealed partial class MainViewModel
         return Task.Run(() => index.SearchAsync(scope, query, includeIgnored, progress, token), token);
     }
 
+    // Refresh the index's own snapshot, including switched/sparse mappings, without moving the main browser.
+    public async Task<(BrowserEntry Entry, long Revision)> ReadSearchResultAsync(string relative, CancellationToken token)
+    {
+        var session = Session ?? throw new InvalidOperationException("请先打开仓库。");
+        if (relative.Length == 0 || !IsValidRelativeDirectory(relative) || relative.Split('/').Any(part => part.Length == 0 || part.Equals(".svn", StringComparison.OrdinalIgnoreCase)))
+            throw new ArgumentException("搜索结果必须位于当前打开范围内。");
+        var index = GetSearchIndex();
+        await Task.Run(() => index.RefreshAsync(token: token), token);
+        token.ThrowIfCancellationRequested();
+        if (session != Session || disposed) throw new OperationCanceledException("仓库会话已变化。");
+        return index.FindEntry(relative)
+            ?? throw new InvalidOperationException("此项目已变化或删除，请刷新索引后重试。");
+    }
+
     private async Task UpdateSearchIndexAsync(RepositorySession session, CancellationToken token)
     {
         if (disposed || session != Session || searchIndex == null

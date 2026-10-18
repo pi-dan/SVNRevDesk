@@ -14,7 +14,7 @@ using SVNRevDesk.Desktop.Views;
 
 namespace SVNRevDesk.UiSmokeTests;
 
-internal static class FileManagementUiTests
+internal static partial class FileManagementUiTests
 {
     public static async Task RunAsync(string output, Action<Window, string, int, int> render)
     {
@@ -142,6 +142,7 @@ internal static class FileManagementUiTests
         latePlan.SetResult(new(renameRoot, renameRoot, [])); await Task.Delay(30);
         Check(rename.Plan == null && File.Exists(a), "A late rename validation result cannot execute after the preview closes");
         await CachedIndexWindow(owner, output, render);
+        await SearchResultActions(owner, output);
         owner.Close();
         await RealNavigationAndRename(output, render);
     }
@@ -293,6 +294,17 @@ internal static class FileManagementUiTests
                 && Find<Button>(typePreview, "RefreshIndex").IsEnabled);
             await Task.Delay(80); render(typePreview, Path.Combine(output, "cross-directory-search-types.png"), 1040, 731);
         });
+        await RealSearchOpening(window, model, ops, wc, output);
+        drive = DriveNext<RepositorySearchWindow>(window, async search =>
+        {
+            Find<TextBox>(search, "SearchQuery").Text = "type-preview";
+            var grid = Find<DataGrid>(search, "SearchResults"); await Until(() => grid.Items.Count == 8);
+            grid.SelectedItem = grid.Items.Cast<BrowserEntry>().Single(entry => entry.IsDirectory);
+            DoubleClickResult(grid, (BrowserEntry)grid.SelectedItem);
+        });
+        ((Button)window.FindName("CrossDirectorySearchButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        await drive; await Until(() => !model.IsBusy);
+        Check(model.CurrentRelative == "docs/type-preview", "Double-clicking a folder in the real search window enters that folder rather than selecting it in its parent");
         window.Close();
     }
 

@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Controls;
 using SVNRevDesk.Desktop.Views;
 using SVNRevDesk.Desktop.ViewModels;
+using SVNRevDesk.Desktop.Services;
 
 namespace SVNRevDesk.Desktop;
 
@@ -14,10 +15,24 @@ public partial class MainWindow
         if (!model.CanOperate || model.Session == null) return;
         await HandleAsync("跨目录搜索", async token =>
         {
+            var selectedAction = SearchResultAction.Locate;
             var entry = model.WaitForUserInput(() =>
             {
                 var window = new RepositorySearchWindow(this, model.Session.Url, model.CurrentRelative, model.GetSearchIndex(), token);
-                return window.ShowDialog() == true ? window.SelectedResult : null;
+                var searchActions = new ClientActions(window, model);
+                window.ExecuteResultAction = async (operation, target, stop) =>
+                {
+                    using var linked = CancellationTokenSource.CreateLinkedTokenSource(token, stop);
+                    try
+                    {
+                        if (operation == "open") await searchActions.OpenSearchResultAsync(target, linked.Token);
+                        else await searchActions.ExecuteAsync(operation, [target], linked.Token);
+                    }
+                    catch (Exception ex) { model.AddLog(ex.Message); throw; }
+                };
+                if (window.ShowDialog() != true) return null;
+                selectedAction = window.SelectedAction;
+                return window.SelectedResult;
             });
             if (entry == null) return;
             var slash = entry.RelativePath.LastIndexOf('/');
@@ -27,6 +42,11 @@ public partial class MainWindow
                 await model.RefreshCurrentDirectoryAsync(token);
             var actual = model.Entries.FirstOrDefault(item => item.RelativePath == entry.RelativePath)
                 ?? throw new InvalidOperationException("此项目已变化或删除，请重新搜索。");
+            if (selectedAction == SearchResultAction.Open && actual.IsDirectory)
+            {
+                await model.NavigateAsync(actual.RelativePath, token);
+                return;
+            }
             if (model.IsCardView) { FileCards.SelectedItem = actual; FileCards.ScrollIntoView(actual); }
             else { FileGrid.SelectedItem = actual; FileGrid.ScrollIntoView(actual); }
         });

@@ -24,8 +24,11 @@ public sealed partial class RepositorySearchWindow : Window
     private readonly TextBlock status;
     private readonly DataGrid grid;
     private readonly StackPanel header;
+    private readonly Button openResult, locateResult;
     private bool closed;
     public BrowserEntry? SelectedResult { get; private set; }
+    public SearchResultAction SelectedAction { get; private set; } = SearchResultAction.Locate;
+    public Func<string, BrowserEntry, CancellationToken, Task>? ExecuteResultAction { get; set; }
 
     public RepositorySearchWindow(Window owner, string openedUrl, string currentRelative,
         Func<string, string, bool, IProgress<RepositorySearchProgress>, CancellationToken, Task<RepositorySearchResult>> search,
@@ -38,7 +41,7 @@ public sealed partial class RepositorySearchWindow : Window
         var panel = new DockPanel();
         var top = header = new StackPanel(); DockPanel.SetDock(top, Dock.Top); panel.Children.Add(top);
         top.Children.Add(new TextBlock { Text = openedUrl, ToolTip = openedUrl, TextTrimming = TextTrimming.CharacterEllipsis, Foreground = Brushes.SlateGray });
-        top.Children.Add(new TextBlock { Text = "按名称或相对路径查找文件和文件夹，包含尚未下载的仓库项目。双击结果可定位到所在目录。",
+        top.Children.Add(new TextBlock { Text = "按名称或相对路径查找文件和文件夹，包含尚未下载的仓库项目。双击打开；右键可打开、定位所在目录或复制路径。",
             TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 8, 0, 10) });
         var row = new DockPanel { Margin = new Thickness(0, 0, 0, 8) };
         start = new Button { Name = "StartSearch", Content = "开始搜索", IsDefault = true }; DockPanel.SetDock(start, Dock.Right); row.Children.Add(start);
@@ -57,20 +60,32 @@ public sealed partial class RepositorySearchWindow : Window
         status = new TextBlock { Name = "SearchStatus", Text = "输入关键词后开始搜索。最多显示 5000 项；可随时停止并保留已有结果。",
             TextWrapping = TextWrapping.Wrap, MaxHeight = 80, Margin = new Thickness(0, 10, 0, 8) }; bottom.Children.Add(status);
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
-        var locate = new Button { Name = "LocateResult", Content = "定位到所在目录", IsEnabled = false };
-        locate.Click += (_, _) => Locate(); buttons.Children.Add(locate); buttons.Children.Add(new Button { Content = "关闭", IsCancel = true }); bottom.Children.Add(buttons);
+        openResult = new Button { Name = "OpenResult", Content = "打开", IsEnabled = false };
+        buttons.Children.Add(openResult);
+        locateResult = new Button { Name = "LocateResult", Content = "定位到所在目录", IsEnabled = false };
+        locateResult.Click += (_, _) => Locate(); buttons.Children.Add(locateResult); buttons.Children.Add(new Button { Content = "关闭", IsCancel = true }); bottom.Children.Add(buttons);
         grid = new DataGrid { Name = "SearchResults", ItemsSource = results, IsReadOnly = true, AutoGenerateColumns = false,
             CanUserAddRows = false, SelectionMode = DataGridSelectionMode.Single };
         grid.Columns.Add(new DataGridTemplateColumn { Header = "名称", Width = 230, MinWidth = 120, SortMemberPath = nameof(BrowserEntry.Name),
             ClipboardContentBinding = new Binding(nameof(BrowserEntry.Name)), CellTemplate = (DataTemplate)FindResource("FileNameWithIconTemplate") });
         AddColumn("相对路径", nameof(BrowserEntry.RelativePath), new DataGridLength(1, DataGridLengthUnitType.Star));
         AddColumn("类型", nameof(BrowserEntry.Kind), 75); AddColumn("状态", nameof(BrowserEntry.StateText), 130);
-        grid.SelectionChanged += (_, _) => locate.IsEnabled = grid.SelectedItem is BrowserEntry;
-        grid.MouseDoubleClick += (_, e) => { if (ItemsControl.ContainerFromElement(grid, e.OriginalSource as DependencyObject) is DataGridRow) Locate(); };
-        grid.PreviewKeyDown += (_, e) => { if (e.Key == Key.Enter) { e.Handled = true; Locate(); } };
+        grid.SelectionChanged += (_, _) => UpdateControls();
+        grid.MouseDoubleClick += async (_, e) =>
+        {
+            if (e.ChangedButton != MouseButton.Left || ItemsControl.ContainerFromElement(grid, e.OriginalSource as DependencyObject) is not DataGridRow { Item: BrowserEntry entry }) return;
+            e.Handled = true; await OpenResultAsync(entry);
+        };
+        grid.PreviewKeyDown += async (_, e) =>
+        {
+            if (e.Key != Key.Enter || Keyboard.Modifiers != ModifierKeys.None) return;
+            e.Handled = true; if (grid.SelectedItem is BrowserEntry entry) await OpenResultAsync(entry);
+        };
+        ConfigureResultMenu();
+        openResult.Click += async (_, _) => { if (grid.SelectedItem is BrowserEntry entry) await OpenResultAsync(entry); };
         panel.Children.Add(grid); Content = new Border { Background = Brushes.White, Padding = new Thickness(20), Child = panel };
-        start.Click += async (_, _) => await SearchAsync(); cancel.Click += (_, _) => { debounce.Stop(); running?.Cancel(); indexRefresh?.Cancel(); };
-        Loaded += (_, _) => query.Focus();
+        start.Click += async (_, _) => await SearchAsync(); cancel.Click += (_, _) => { debounce.Stop(); running?.Cancel(); indexRefresh?.Cancel(); resultAction?.Cancel(); };
+        Loaded += (_, _) => { UpdateControls(); query.Focus(); };
         Closed += (_, _) => { closed = true; debounce.Stop(); if (index != null) index.Changed -= IndexChanged; lifetime.Cancel(); lifetime.Dispose(); };
 
         void AddColumn(string header, string property, DataGridLength width) => grid.Columns.Add(new DataGridTextColumn { Header = header, Binding = new Binding(property), Width = width, MinWidth = width.IsStar ? 240 : 40 });
@@ -78,43 +93,41 @@ public sealed partial class RepositorySearchWindow : Window
 
     private void Locate()
     {
-        if (grid.SelectedItem is not BrowserEntry entry) return;
-        SelectedResult = entry; DialogResult = true;
+        if (grid.SelectedItem is BrowserEntry entry) NavigateResult(entry, SearchResultAction.Locate);
     }
 
     private async Task SearchAsync()
     {
-        if (closed || index == null && running != null) return;
+        if (closed || performingAction || index == null && running != null) return;
         if (index != null && !index.Status.HasIndex) return;
         running?.Cancel();
         if (query.Text.Trim().Length == 0) { status.Text = "请输入要查找的名称或路径。"; query.Focus(); return; }
         var source = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token); running = source;
-        if (index == null) start.IsEnabled = query.IsEnabled = scope.IsEnabled = ignored.IsEnabled = false;
-        cancel.IsEnabled = true;
+        UpdateControls();
         results.Clear(); status.Text = index == null ? "正在读取仓库范围和本地状态…" : "正在搜索本地索引…";
         var progress = new Progress<RepositorySearchProgress>(value =>
         {
-            if (closed || running != source || source.IsCancellationRequested) return;
+            if (closed || performingAction || running != source || source.IsCancellationRequested) return;
             foreach (var entry in value.Matches) results.Add(entry);
             status.Text = index == null ? $"已读取 {value.DirectoriesRead} 个目录，找到 {results.Count} 项。正在搜索：{value.Directory}" : $"本地索引：找到 {results.Count} 项。";
         });
         try
         {
             var result = await search(scope.SelectedIndex == 0 ? currentRelative : "", query.Text.Trim(), ignored.IsChecked == true, progress, source.Token);
-            if (closed || running != source) return;
+            if (closed || performingAction || running != source) return;
             source.Token.ThrowIfCancellationRequested();
             status.Text = (result.FromIndex ? $"搜索完成：{result.MatchCount} 项，从 {result.IndexedCount} 项本地索引中匹配，服务器快照 r{result.Revision}。"
                 : $"搜索完成：{result.MatchCount} 项，已读取 {result.DirectoriesRead} 个目录，仓库快照 r{result.Revision}。")
                 + (result.LimitReached ? "已达到 5000 项上限，结果可能不完整，请缩小搜索范围。" : "");
         }
-        catch (OperationCanceledException) when (source.IsCancellationRequested) { if (!closed && running == source) status.Text = $"搜索已停止，保留 {results.Count} 项结果。"; }
-        catch (Exception ex) { if (!closed && running == source) { status.Text = $"搜索未完成，保留 {results.Count} 项结果：{ex.Message}"; status.ToolTip = ex.Message; } }
+        catch (OperationCanceledException) when (source.IsCancellationRequested) { if (!closed && !performingAction && running == source) status.Text = $"搜索已停止，保留 {results.Count} 项结果。"; }
+        catch (Exception ex) { if (!closed && !performingAction && running == source) { status.Text = $"搜索未完成，保留 {results.Count} 项结果：{ex.Message}"; status.ToolTip = ex.Message; } }
         finally
         {
             if (running == source)
             {
                 running = null;
-                if (!closed) { start.IsEnabled = query.IsEnabled = scope.IsEnabled = ignored.IsEnabled = true; cancel.IsEnabled = indexRefresh != null; }
+                if (!closed) UpdateControls();
             }
             source.Dispose();
         }
