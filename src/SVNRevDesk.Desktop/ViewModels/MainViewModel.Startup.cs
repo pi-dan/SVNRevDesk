@@ -98,6 +98,7 @@ public sealed partial class MainViewModel
 
     private void ApplySavedSession(SavedBrowsingSession saved, string relative, IReadOnlyList<string> expanded)
     {
+        ResetSearchIndex();
         Session = saved.Session;
         Snapshot = LocalIgnores.Apply(saved.Snapshot);
         var refreshSummaries = Session.LocalRoot != null && (LocalIgnores.HasRules

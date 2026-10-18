@@ -138,6 +138,7 @@ public sealed partial class MainViewModel
         ShowDirectory(currentRelative, FindNode(currentRelative), directoryCache[currentRelative].Entries);
         NotifyLocation();
         RememberSession();
+        await UpdateSearchIndexAsync(session, token);
     }
 
     private static RepositorySnapshot MergeSnapshot(RepositorySession session, RepositorySnapshot previous,

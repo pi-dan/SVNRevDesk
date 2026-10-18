@@ -163,6 +163,7 @@ public sealed partial class MainViewModel
         navigationVersion++;
         NotifyLocation();
         RememberSession();
+        await UpdateLocalSearchIndexAsync(session, targets.Concat(movedSources));
         if (!preserveFilters && targets.FirstOrDefault(path => File.Exists(path) || Directory.Exists(path)) is { } first)
             EntryCreated?.Invoke(Path.GetRelativePath(session.LocalRoot!, first).Replace('\\', '/'));
     }

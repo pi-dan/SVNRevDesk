@@ -36,13 +36,13 @@ internal static class FileManagementTests
         File.WriteAllText(Path.Combine(localFolder, "report-local.txt"), "unversioned\n");
         File.WriteAllText(Path.Combine(wc, "~$report.docx"), "office temporary\n");
         var ignores = new LocalIgnoreStore(Path.Combine(root, "ignores.json")); ignores.Set(localFolder, true);
-        var filtered = new LocalIgnoreRepositoryService(service, ignores);
-        var search = new RepositorySearch(filtered);
 
         async Task<(RepositorySearchResult Summary, BrowserEntry[] Entries)> Search(RepositorySession target, string scope, string query, bool ignored = false, int limit = 5000)
         {
             var entries = new List<BrowserEntry>();
-            var summary = await search.SearchAsync(target, scope, query, ignored, new InlineProgress<RepositorySearchProgress>(p => entries.AddRange(p.Matches)), token, limit);
+            await using var search = new RepositorySearchIndex(target, new SvnSearchIndexSource(runner), Path.Combine(root, "Cache"), ignores);
+            await search.RefreshAsync();
+            var summary = await search.SearchAsync(scope, query, ignored, new InlineProgress<RepositorySearchProgress>(p => entries.AddRange(p.Matches)), token, limit);
             return (summary, entries.ToArray());
         }
 
@@ -68,9 +68,11 @@ internal static class FileManagementTests
         using (var cancelled = new CancellationTokenSource())
         {
             var pages = 0;
-            await Reject<OperationCanceledException>(() => search.SearchAsync(session, "", "report", true,
+            await using var search = new RepositorySearchIndex(session, new SvnSearchIndexSource(runner), Path.Combine(root, "Cache"), ignores);
+            await search.RefreshAsync();
+            await Reject<OperationCanceledException>(() => search.SearchAsync("", "report", true,
                 new InlineProgress<RepositorySearchProgress>(_ => { pages++; cancelled.Cancel(); }), cancelled.Token));
-            check(pages == 1, "Search cancellation stops traversal after the current directory");
+            check(pages == 1, "Search cancellation stops after the current indexed result batch");
         }
         await Reject<ArgumentException>(() => Search(session, "../other", "report"));
         await Reject<ArgumentException>(() => Search(session, "", "  "));

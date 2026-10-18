@@ -126,6 +126,7 @@ public sealed partial class MainViewModel
             RememberSession();
             NotifyLocation();
             EntryCreated?.Invoke(RepositoryService.JoinRelative(relative, request.Name));
+            await UpdateLocalSearchIndexAsync(session, [path]);
             if (addError != null)
                 throw new InvalidOperationException($"项目已创建并保留在本地，但添加到 SVN 未完成：\n{path}\n\n{addError.Message}", addError);
         }

@@ -82,6 +82,7 @@ internal static class PortableCiTests
         await OfficeDocumentTests.RunAsync(Path.Combine(root, "office"), check);
         await RevisionOperationsTests.RunAsync(Path.Combine(root, "revisions"), check);
         await FileManagementTests.RunAsync(Path.Combine(root, "file-management"), check);
+        await SearchIndexTests.RunAsync(Path.Combine(root, "search-index"), check);
         await BackupManagerTests.RunAsync(Path.Combine(root, "backup-management"), check);
         await EmbeddedSvnTests.RunAsync(Path.Combine(root, "embedded-svn"), check);
         await EmbeddedWinMergeTests.RunAsync(Path.Combine(root, "embedded-winmerge"), check);

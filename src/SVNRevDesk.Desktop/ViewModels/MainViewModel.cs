@@ -330,6 +330,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         token.ThrowIfCancellationRequested();
         if (disposed) return;
         // Publish a complete initial view only after all queries succeed.
+        ResetSearchIndex();
         Session = session;
         if (sessionCacheDirectory != null) UseDedicatedSessionCache(session.LocalRoot ?? session.Url, session.LocalRoot != null);
         Snapshot = snapshot;
@@ -421,6 +422,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         ShowDirectory(currentRelative, FindNode(currentRelative), directoryCache[currentRelative].Entries);
         NotifyLocation();
         RememberSession();
+        await UpdateSearchIndexAsync(session, token);
     }
 
     public async Task NavigateAsync(string relative, CancellationToken token)
@@ -584,6 +586,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
     {
         if (disposed) return;
         disposed = true;
+        ResetSearchIndex();
         Preview.Dispose();
         Cancel();
         progressTimer.Stop();

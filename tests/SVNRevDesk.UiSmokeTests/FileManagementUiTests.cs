@@ -141,8 +141,67 @@ internal static class FileManagementUiTests
         Check(closeToken.IsCancellationRequested, "Closing batch preview cancels pending SVN validation");
         latePlan.SetResult(new(renameRoot, renameRoot, [])); await Task.Delay(30);
         Check(rename.Plan == null && File.Exists(a), "A late rename validation result cannot execute after the preview closes");
+        await CachedIndexWindow(owner, output, render);
         owner.Close();
         await RealNavigationAndRename(output, render);
+    }
+
+    private sealed class DelayedIndexSource : ISearchIndexSource
+    {
+        public bool Delay, Fail, Entered;
+        public int Lists;
+        public CancellationToken LastToken;
+        public TaskCompletionSource Release = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public async Task<long> ReadRevisionAsync(RepositorySession session, CancellationToken token)
+        {
+            LastToken = token; Entered = true;
+            if (Delay) await Release.Task.WaitAsync(token);
+            if (Fail) throw new IOException("offline UI fixture");
+            return 7;
+        }
+        public Task<IReadOnlyList<ServerEntry>> ReadEntriesAsync(string url, long revision, bool recursive, CancellationToken token)
+        { Lists++; return Task.FromResult<IReadOnlyList<ServerEntry>>([new("cached-report.txt", false, 12, 7, "alice", DateTimeOffset.Now, null)]); }
+        public Task<SvnInfo?> ReadNodeAsync(string url, long revision, CancellationToken token) => Task.FromResult<SvnInfo?>(null);
+        public Task<IReadOnlyList<SearchPathChange>> ReadChangesAsync(string url, long from, long to, CancellationToken token) => Task.FromResult<IReadOnlyList<SearchPathChange>>([]);
+        public Task<RepositorySnapshot> ReadLocalAsync(RepositorySession session, DirectoryRefresh scope, CancellationToken token) =>
+            Task.FromResult(new RepositorySnapshot(0, DateTimeOffset.Now, new Dictionary<string, WorkingStatus>(), new Dictionary<string, SvnInfo>()));
+        public void Dispose() { }
+    }
+
+    private static async Task CachedIndexWindow(Window owner, string output, Action<Window, string, int, int> render)
+    {
+        var source = new DelayedIndexSource();
+        await using var index = new RepositorySearchIndex(new("https://svn.example.test/repo", "https://svn.example.test/repo", "cached-ui", null),
+            source, Path.Combine(output, "index-cache"), new LocalIgnoreStore(Path.Combine(output, "index-ignores.json")));
+        await index.RefreshAsync(); source.Delay = true; source.Entered = false;
+        var window = new RepositorySearchWindow(owner, "https://svn.example.test/repo", "", index, CancellationToken.None);
+        await Drive(window, async () =>
+        {
+            await Until(() => source.Entered);
+            Find<TextBox>(window, "SearchQuery").Text = "report";
+            var grid = Find<DataGrid>(window, "SearchResults"); await Until(() => grid.Items.Count == 1);
+            Check(!Find<Button>(window, "RefreshIndex").IsEnabled && Find<TextBlock>(window, "IndexStatus").Text.Contains("仍可搜索缓存"),
+                "Cached results remain searchable while a slow background server check is blocked");
+            Find<TextBox>(window, "SearchQuery").Text = "missing"; Find<TextBox>(window, "SearchQuery").Text = "cached-report";
+            await Until(() => Find<TextBlock>(window, "SearchStatus").Text.StartsWith("搜索完成") && grid.Items.Count == 1);
+            source.Fail = true; source.Release.SetResult();
+            await Until(() => Find<Button>(window, "RefreshIndex").IsEnabled);
+            await Until(() => grid.Items.Count == 1);
+            Check(Find<TextBlock>(window, "IndexStatus").Text.Contains("使用缓存") && index.Status.Revision == 7,
+                "Offline index checks visibly preserve cached results and the last verified snapshot");
+            await Task.Delay(80); render(window, Path.Combine(output, "search-index-offline.png"), 1040, 611);
+            source.Delay = source.Fail = false; var lists = source.Lists;
+            Click(window, "RebuildIndex"); await Until(() => Find<Button>(window, "RebuildIndex").IsEnabled);
+            Check(source.Lists == lists + 1 && !Find<TextBlock>(window, "IndexStatus").Text.Contains("使用缓存"),
+                "The rebuild button reloads the complete server list and clears the offline warning");
+        });
+        source.Delay = true; source.Entered = false; source.Release = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        window = new RepositorySearchWindow(owner, "https://svn.example.test/repo", "", index, CancellationToken.None);
+        await Drive(window, async () => { await Until(() => source.Entered); window.Close(); });
+        Check(source.LastToken.IsCancellationRequested, "Closing indexed search cancels its window-owned server maintenance");
+        source.Release.TrySetResult();
+        source.Delay = false; await index.RefreshAsync();
+        Check(index.Status.HasIndex, "Closing a search window leaves its shared session index usable");
     }
 
     private static async Task RealNavigationAndRename(string output, Action<Window, string, int, int> render)
@@ -169,6 +228,16 @@ internal static class FileManagementUiTests
         {
             Find<TextBox>(search, "SearchQuery").Text = "report-a"; Click(search, "StartSearch");
             var grid = Find<DataGrid>(search, "SearchResults"); await Until(() => grid.Items.Count == 1 && Find<Button>(search, "StartSearch").IsEnabled);
+            Check(Find<TextBlock>(search, "IndexStatus").Text.Contains("服务器核对") && Find<TextBox>(search, "SearchQuery").IsEnabled,
+                "Indexed search shows verification timestamps and keeps keyword input enabled");
+            Find<TextBox>(search, "SearchQuery").Text = "report-b";
+            await Until(() => grid.Items.Count == 1 && ((BrowserEntry)grid.Items[0]).Name == "report-b.txt");
+            Check(true, "Typing a new keyword automatically replaces indexed results");
+            Find<TextBox>(search, "SearchQuery").Text = "report-a";
+            await Until(() => grid.Items.Count == 1 && ((BrowserEntry)grid.Items[0]).Name == "report-a.txt");
+            await Task.Delay(80); render(search, Path.Combine(output, "cross-directory-search-index.png"), 1040, 611);
+            Click(search, "RebuildIndex"); await Until(() => Find<Button>(search, "RebuildIndex").IsEnabled);
+            Check(grid.Items.Count == 1, "Rebuilding the index retains the active query");
             grid.SelectedIndex = 0; Click(search, "LocateResult");
         });
         ((Button)window.FindName("CrossDirectorySearchButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -198,10 +267,29 @@ internal static class FileManagementUiTests
         await model.RunAsync("Batch UI rename", token => action.ExecuteAsync("batch-rename", selected, token)); await drive;
         Check(model.Entries.Count(e => e.Name.StartsWith("ready-")) == 2 && File.Exists(Path.Combine(docs, "ready-report-a.txt")),
             "The real batch action executes SVN moves and refreshes the current directory immediately");
+        var index = model.GetSearchIndex();
+        Check((await IndexMatches(index, "ready-report")).Length == 2, "SVN batch rename refreshes the existing local search index");
+        var created = Path.Combine(docs, "created-index.txt");
+        await model.RunAsync("Create indexed item", token => model.CreateLocalItemAsync("docs", new NewItemRequest("created-index.txt", NewItemKind.Text), false, token));
+        Check((await IndexMatches(index, "created-index")).Single().LocalPath == created, "Application file creation updates the search index immediately");
+        await ops.CopyBranchAsync(url + "/docs", url + "/remote-only", "new remote directory", CancellationToken.None);
+        await model.RefreshAllInBackgroundAsync();
+        Check((await IndexMatches(index, "remote-only/report")).Length == 2, "The same full refresh used by the hourly timer updates unbrowsed indexed paths");
+        await ops.CopyBranchAsync(url + "/docs", url + "/manual-only", "manual refresh directory", CancellationToken.None);
+        await model.RunAsync("Manual refresh", model.RefreshCurrentDirectoryAsync);
+        Check((await IndexMatches(index, "manual-only/report")).Length == 2, "Manual scoped refresh also updates the complete existing search index");
         Check(!BrowserActionAvailability.CanExecute("batch-rename", model.Session, []) && BrowserActionAvailability.CanExecute("batch-rename", new(url, url, "repo", null), selected) == false,
             "Batch rename is disabled without a local working copy or selected files");
         window.Close();
     }
+
+    private static async Task<BrowserEntry[]> IndexMatches(RepositorySearchIndex index, string query)
+    {
+        var matches = new List<BrowserEntry>();
+        await index.SearchAsync("", query, false, new InlineProgress<RepositorySearchProgress>(value => matches.AddRange(value.Matches)));
+        return matches.ToArray();
+    }
+    private sealed class InlineProgress<T>(Action<T> report) : IProgress<T> { public void Report(T value) => report(value); }
 
     private static Task DriveNext<T>(Window owner, Func<T, Task> action) where T : Window
     {

@@ -364,7 +364,7 @@
         </Border>
         <DockPanel Grid.Row="1" Margin="0,0,0,10" IsEnabled="{Binding CanOperate}">
           <Button DockPanel.Dock="Left" Content="↑ 上一级" Click="Parent_Click" IsEnabled="{Binding CanGoParent}" ToolTip="Alt+↑：返回上一级" Margin="0,0,8,0" />
-          <Button x:Name="CrossDirectorySearchButton" DockPanel.Dock="Left" Content="跨目录搜索…" Click="Search_Click" IsEnabled="{Binding HasSession}" Margin="0,0,8,0" ToolTip="Ctrl+Shift+F：在独立窗口递归查找名称或路径，包含尚未下载的项目" />
+          <Button x:Name="CrossDirectorySearchButton" DockPanel.Dock="Left" Content="跨目录搜索…" Click="Search_Click" IsEnabled="{Binding HasSession}" Margin="0,0,8,0" ToolTip="Ctrl+Shift+F：通过本地索引查找名称或路径，包含尚未下载的项目" />
           <ComboBox DockPanel.Dock="Right" ItemsSource="{Binding ViewModes}" SelectedItem="{Binding ViewMode}" Width="108" Margin="8,0,0,0" ToolTip="切换详细列表或卡片视图" />
           <ComboBox DockPanel.Dock="Right" ItemsSource="{Binding StateFilters}" SelectedItem="{Binding SelectedState}" Width="142" Margin="8,0,0,0" ToolTip="按状态筛选当前目录" />
           <CheckBox DockPanel.Dock="Right" Content="只显示差异" IsChecked="{Binding DifferencesOnly}" Margin="10,0,0,0" VerticalAlignment="Center" />

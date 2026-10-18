@@ -9,7 +9,7 @@ using SVNRevDesk.Core.Services;
 
 namespace SVNRevDesk.Desktop.Views;
 
-public sealed class RepositorySearchWindow : Window
+public sealed partial class RepositorySearchWindow : Window
 {
     private readonly Func<string, string, bool, IProgress<RepositorySearchProgress>, CancellationToken, Task<RepositorySearchResult>> search;
     private readonly string currentRelative;
@@ -23,6 +23,7 @@ public sealed class RepositorySearchWindow : Window
     private readonly Button cancel;
     private readonly TextBlock status;
     private readonly DataGrid grid;
+    private readonly StackPanel header;
     private bool closed;
     public BrowserEntry? SelectedResult { get; private set; }
 
@@ -35,7 +36,7 @@ public sealed class RepositorySearchWindow : Window
         this.currentRelative = currentRelative; this.search = search;
         lifetime = CancellationTokenSource.CreateLinkedTokenSource(token);
         var panel = new DockPanel();
-        var top = new StackPanel(); DockPanel.SetDock(top, Dock.Top); panel.Children.Add(top);
+        var top = header = new StackPanel(); DockPanel.SetDock(top, Dock.Top); panel.Children.Add(top);
         top.Children.Add(new TextBlock { Text = openedUrl, ToolTip = openedUrl, TextTrimming = TextTrimming.CharacterEllipsis, Foreground = Brushes.SlateGray });
         top.Children.Add(new TextBlock { Text = "按名称或相对路径查找文件和文件夹，包含尚未下载的仓库项目。双击结果可定位到所在目录。",
             TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 8, 0, 10) });
@@ -66,9 +67,9 @@ public sealed class RepositorySearchWindow : Window
         grid.MouseDoubleClick += (_, e) => { if (ItemsControl.ContainerFromElement(grid, e.OriginalSource as DependencyObject) is DataGridRow) Locate(); };
         grid.PreviewKeyDown += (_, e) => { if (e.Key == Key.Enter) { e.Handled = true; Locate(); } };
         panel.Children.Add(grid); Content = new Border { Background = Brushes.White, Padding = new Thickness(20), Child = panel };
-        start.Click += async (_, _) => await SearchAsync(); cancel.Click += (_, _) => running?.Cancel();
+        start.Click += async (_, _) => await SearchAsync(); cancel.Click += (_, _) => { debounce.Stop(); running?.Cancel(); indexRefresh?.Cancel(); };
         Loaded += (_, _) => query.Focus();
-        Closed += (_, _) => { closed = true; lifetime.Cancel(); lifetime.Dispose(); };
+        Closed += (_, _) => { closed = true; debounce.Stop(); if (index != null) index.Changed -= IndexChanged; lifetime.Cancel(); lifetime.Dispose(); };
 
         void AddColumn(string header, string property, DataGridLength width) => grid.Columns.Add(new DataGridTextColumn { Header = header, Binding = new Binding(property), Width = width, MinWidth = width.IsStar ? 240 : 40 });
     }
@@ -81,31 +82,39 @@ public sealed class RepositorySearchWindow : Window
 
     private async Task SearchAsync()
     {
-        if (running != null || closed) return;
+        if (closed || index == null && running != null) return;
+        if (index != null && !index.Status.HasIndex) return;
+        running?.Cancel();
         if (query.Text.Trim().Length == 0) { status.Text = "请输入要查找的名称或路径。"; query.Focus(); return; }
         var source = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token); running = source;
-        start.IsEnabled = query.IsEnabled = scope.IsEnabled = ignored.IsEnabled = false; cancel.IsEnabled = true;
-        results.Clear(); status.Text = "正在读取仓库范围和本地状态…";
+        if (index == null) start.IsEnabled = query.IsEnabled = scope.IsEnabled = ignored.IsEnabled = false;
+        cancel.IsEnabled = true;
+        results.Clear(); status.Text = index == null ? "正在读取仓库范围和本地状态…" : "正在搜索本地索引…";
         var progress = new Progress<RepositorySearchProgress>(value =>
         {
             if (closed || running != source || source.IsCancellationRequested) return;
             foreach (var entry in value.Matches) results.Add(entry);
-            status.Text = $"已读取 {value.DirectoriesRead} 个目录，找到 {results.Count} 项。正在搜索：{value.Directory}";
+            status.Text = index == null ? $"已读取 {value.DirectoriesRead} 个目录，找到 {results.Count} 项。正在搜索：{value.Directory}" : $"本地索引：找到 {results.Count} 项。";
         });
         try
         {
             var result = await search(scope.SelectedIndex == 0 ? currentRelative : "", query.Text.Trim(), ignored.IsChecked == true, progress, source.Token);
-            if (closed) return;
+            if (closed || running != source) return;
             source.Token.ThrowIfCancellationRequested();
-            status.Text = $"搜索完成：{result.MatchCount} 项，已读取 {result.DirectoriesRead} 个目录，仓库快照 r{result.Revision}。"
+            status.Text = (result.FromIndex ? $"搜索完成：{result.MatchCount} 项，从 {result.IndexedCount} 项本地索引中匹配，服务器快照 r{result.Revision}。"
+                : $"搜索完成：{result.MatchCount} 项，已读取 {result.DirectoriesRead} 个目录，仓库快照 r{result.Revision}。")
                 + (result.LimitReached ? "已达到 5000 项上限，结果可能不完整，请缩小搜索范围。" : "");
         }
-        catch (OperationCanceledException) when (source.IsCancellationRequested) { if (!closed) status.Text = $"搜索已停止，保留 {results.Count} 项结果（未搜索完整范围）。"; }
-        catch (Exception ex) { if (!closed) { status.Text = $"搜索未完成，保留 {results.Count} 项结果：{ex.Message}"; status.ToolTip = ex.Message; } }
+        catch (OperationCanceledException) when (source.IsCancellationRequested) { if (!closed && running == source) status.Text = $"搜索已停止，保留 {results.Count} 项结果。"; }
+        catch (Exception ex) { if (!closed && running == source) { status.Text = $"搜索未完成，保留 {results.Count} 项结果：{ex.Message}"; status.ToolTip = ex.Message; } }
         finally
         {
-            running = null; source.Dispose();
-            if (!closed) { start.IsEnabled = query.IsEnabled = scope.IsEnabled = ignored.IsEnabled = true; cancel.IsEnabled = false; }
+            if (running == source)
+            {
+                running = null;
+                if (!closed) { start.IsEnabled = query.IsEnabled = scope.IsEnabled = ignored.IsEnabled = true; cancel.IsEnabled = indexRefresh != null; }
+            }
+            source.Dispose();
         }
     }
 }
