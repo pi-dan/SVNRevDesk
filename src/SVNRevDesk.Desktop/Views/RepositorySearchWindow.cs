@@ -49,10 +49,10 @@ public sealed partial class RepositorySearchWindow : Window
         query = new TextBox { Name = "SearchQuery", ToolTip = "输入名称或路径的一部分，不区分大小写；不搜索文件内容，不使用通配符。" }; row.Children.Add(query); top.Children.Add(row);
         var options = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 10) };
         options.Children.Add(new TextBlock { Text = "范围：", VerticalAlignment = VerticalAlignment.Center });
-        scope = new ComboBox { Name = "SearchScope", Width = 200, ItemsSource = new[] { "当前目录及子目录", "整个已打开范围" }, SelectedIndex = 0 };
+        scope = new ComboBox { Name = "SearchScope", Width = 200, ItemsSource = new[] { "当前目录及子目录", "整个已打开范围" }, SelectedIndex = 1 };
         options.Children.Add(scope);
-        var scopeLabel = new TextBlock { Text = currentRelative.Length == 0 ? "根目录" : currentRelative,
-            ToolTip = currentRelative, MaxWidth = 340, TextTrimming = TextTrimming.CharacterEllipsis, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
+        var scopeLabel = new TextBlock { Text = "根目录",
+            ToolTip = "根目录", MaxWidth = 340, TextTrimming = TextTrimming.CharacterEllipsis, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
         scope.SelectionChanged += (_, _) => { scopeLabel.Text = scope.SelectedIndex == 1 || currentRelative.Length == 0 ? "根目录" : currentRelative; scopeLabel.ToolTip = scopeLabel.Text; };
         options.Children.Add(scopeLabel);
         ignored = new CheckBox { Name = "IncludeIgnored", Content = "包含忽略项", VerticalAlignment = VerticalAlignment.Center }; options.Children.Add(ignored); top.Children.Add(options);

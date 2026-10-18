@@ -70,10 +70,10 @@ internal static partial class FileManagementUiTests
             Find<TextBox>(search, "SearchQuery").Text = "report"; Click(search, "StartSearch");
             await Until(() => Find<TextBlock>(search, "SearchStatus").Text.StartsWith("搜索完成"));
             var grid = Find<DataGrid>(search, "SearchResults");
-            Check(selectedScope == "docs" && grid.Items.Count == 1, "Search defaults to the current directory subtree and displays incremental results");
-            Find<ComboBox>(search, "SearchScope").SelectedIndex = 1; Click(search, "StartSearch");
+            Check(selectedScope == "" && grid.Items.Count == 1, "Search defaults to the opened root even when browsing a subdirectory and displays incremental results");
+            Find<ComboBox>(search, "SearchScope").SelectedIndex = 0; Click(search, "StartSearch");
             await Until(() => calls == 2 && Find<Button>(search, "StartSearch").IsEnabled);
-            Check(selectedScope == "" && grid.Items.Count == 1, "Searching the opened root replaces the previous result set");
+            Check(selectedScope == "docs" && grid.Items.Count == 1, "Switching to the current directory subtree replaces the previous result set");
             grid.SelectedItem = sample; render(search, Path.Combine(output, "cross-directory-search.png"), 1040, 611);
             Click(search, "LocateResult");
         });
