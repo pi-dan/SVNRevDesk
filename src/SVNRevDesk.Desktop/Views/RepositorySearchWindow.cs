@@ -61,7 +61,9 @@ public sealed partial class RepositorySearchWindow : Window
         locate.Click += (_, _) => Locate(); buttons.Children.Add(locate); buttons.Children.Add(new Button { Content = "关闭", IsCancel = true }); bottom.Children.Add(buttons);
         grid = new DataGrid { Name = "SearchResults", ItemsSource = results, IsReadOnly = true, AutoGenerateColumns = false,
             CanUserAddRows = false, SelectionMode = DataGridSelectionMode.Single };
-        AddColumn("名称", nameof(BrowserEntry.Name), 210); AddColumn("相对路径", nameof(BrowserEntry.RelativePath), new DataGridLength(1, DataGridLengthUnitType.Star));
+        grid.Columns.Add(new DataGridTemplateColumn { Header = "名称", Width = 230, MinWidth = 120, SortMemberPath = nameof(BrowserEntry.Name),
+            ClipboardContentBinding = new Binding(nameof(BrowserEntry.Name)), CellTemplate = (DataTemplate)FindResource("FileNameWithIconTemplate") });
+        AddColumn("相对路径", nameof(BrowserEntry.RelativePath), new DataGridLength(1, DataGridLengthUnitType.Star));
         AddColumn("类型", nameof(BrowserEntry.Kind), 75); AddColumn("状态", nameof(BrowserEntry.StateText), 130);
         grid.SelectionChanged += (_, _) => locate.IsEnabled = grid.SelectedItem is BrowserEntry;
         grid.MouseDoubleClick += (_, e) => { if (ItemsControl.ContainerFromElement(grid, e.OriginalSource as DependencyObject) is DataGridRow) Locate(); };

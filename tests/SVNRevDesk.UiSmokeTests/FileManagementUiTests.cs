@@ -280,6 +280,19 @@ internal static class FileManagementUiTests
         Check((await IndexMatches(index, "manual-only/report")).Length == 2, "Manual scoped refresh also updates the complete existing search index");
         Check(!BrowserActionAvailability.CanExecute("batch-rename", model.Session, []) && BrowserActionAvailability.CanExecute("batch-rename", new(url, url, "repo", null), selected) == false,
             "Batch rename is disabled without a local working copy or selected files");
+        foreach (var (name, directory) in new[] { ("type-preview", true), ("type-preview.docx", false), ("type-preview.xlsx", false), ("type-preview.pptx", false),
+            ("type-preview.pdf", false), ("type-preview.png", false), ("type-preview.zip", false), ("type-preview.custom", false) })
+            await LocalItemCreator.CreateAsync(wc, docs, new(name, directory ? NewItemKind.Folder : NewItemKind.EmptyFile), CancellationToken.None);
+        await index.RefreshLocalAsync();
+        var typePreview = new RepositorySearchWindow(window, model.Session!.Url, "docs", index, CancellationToken.None);
+        await Drive(typePreview, async () =>
+        {
+            typePreview.Height = 770;
+            Find<TextBox>(typePreview, "SearchQuery").Text = "type-preview";
+            await Until(() => Find<DataGrid>(typePreview, "SearchResults").Items.Count == 8 && Find<TextBlock>(typePreview, "SearchStatus").Text.StartsWith("搜索完成")
+                && Find<Button>(typePreview, "RefreshIndex").IsEnabled);
+            await Task.Delay(80); render(typePreview, Path.Combine(output, "cross-directory-search-types.png"), 1040, 731);
+        });
         window.Close();
     }
 
