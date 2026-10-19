@@ -43,6 +43,11 @@ public sealed partial class ClientActions(Window owner, MainViewModel model, Act
                 }
                 await model.RefreshPathsAsync(updates.Select(Local), token);
                 break;
+            case "update-directory-files":
+                model.SetProgressTarget(CurrentLocal());
+                model.AddLog(await model.Operations.UpdateDirectoryFilesAsync(CurrentLocal(), token));
+                await model.RefreshCurrentDirectoryAsync(token);
+                break;
             case "update-directory":
                 model.SetProgressTarget(CurrentLocal());
                 model.AddLog(await model.Operations.UpdateAsync(CurrentLocal(), true, token));

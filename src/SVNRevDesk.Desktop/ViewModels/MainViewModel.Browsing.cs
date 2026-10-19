@@ -20,6 +20,9 @@ public sealed partial class MainViewModel
 
     private readonly Dictionary<string, CachedDirectory> directoryCache = new(StringComparer.Ordinal);
     private readonly List<BackgroundRead> backgroundReads = [];
+    // Only index maintenance is fire-and-forget: unlike navigation reads nothing re-triggers it,
+    // so an explicit operation that cancels it must requeue it afterwards.
+    private BackgroundRead? queuedIndexRead;
     private long navigationVersion;
     private long readStatusVersion;
     private bool disposed;
@@ -74,38 +77,50 @@ public sealed partial class MainViewModel
         return StartBackgroundRead("后台检查变化所在目录，可继续浏览", token => RefreshPathsAsync(changed, token), navigation: false);
     }
 
-    private Task StartBackgroundRead(string description, Func<CancellationToken, Task> action, bool navigation)
+    private Task StartBackgroundRead(string description, Func<CancellationToken, Task> action, bool navigation,
+        bool reportCompletion = true, bool indexMaintenance = false)
     {
         var read = new BackgroundRead(description, navigation);
-        var version = ++readStatusVersion;
+        var version = reportCompletion ? ++readStatusVersion : readStatusVersion;
         backgroundReads.Add(read);
+        if (indexMaintenance) queuedIndexRead = read;
         NotifyReading();
-        read.Task = ExecuteBackgroundReadAsync(read, version, action);
+        read.Task = ExecuteBackgroundReadAsync(read, version, action, reportCompletion);
         return read.Task;
     }
 
-    private async Task ExecuteBackgroundReadAsync(BackgroundRead read, long version, Func<CancellationToken, Task> action)
+    // StopBackgroundReadsAsync cancels queued index maintenance; nothing else re-triggers it. An explicit
+    // operation that cancels it must requeue it, or the background index label disappears for good.
+    internal void RequeueInterruptedIndexMaintenance()
+    {
+        if (queuedIndexRead != null) return;
+        QueueSearchIndexUpdate(Session!);
+    }
+
+    private async Task ExecuteBackgroundReadAsync(BackgroundRead read, long version, Func<CancellationToken, Task> action,
+        bool reportCompletion)
     {
         try
         {
             await action(read.Cancellation.Token);
-            if (version == readStatusVersion && !disposed && !read.Cancellation.IsCancellationRequested)
+            if (reportCompletion && version == readStatusVersion && !disposed && !read.Cancellation.IsCancellationRequested)
                 StatusMessage = read.Navigation ? "目录已载入并缓存" : "后台刷新完成";
         }
         catch (OperationCanceledException)
         {
-            if (version == readStatusVersion && !disposed && !IsBusy)
+            if (reportCompletion && version == readStatusVersion && !disposed && !IsBusy)
                 StatusMessage = "后台读取已取消，保留已载入的缓存。";
         }
         catch (Exception ex)
         {
-            if (version == readStatusVersion && !disposed)
+            if (reportCompletion && version == readStatusVersion && !disposed)
                 StatusMessage = $"后台读取失败，保留目录缓存：{ex.Message.Split('\n')[0]}";
             if (!disposed) AddLog(ex.Message);
         }
         finally
         {
             backgroundReads.Remove(read);
+            if (queuedIndexRead == read) queuedIndexRead = null;
             read.Cancellation.Dispose();
             if (!disposed) NotifyReading();
         }

@@ -87,6 +87,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
     public bool IsOnlineOnly => Session is { LocalRoot: null };
     public bool CanRefresh => CanOperate && HasSession;
     public bool CanUpdateSelection => CanExecute("update");
+    public bool CanUpdateCurrentFiles => CanExecute("update-directory-files");
     public bool CanCommitSelection => CanExecute("commit");
     public bool CanCompareSelection => CanExecute("compare-server");
     public bool CanGoParent => CanOperate && CurrentRelative.Length > 0;
@@ -179,6 +180,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
     private void NotifyActionAvailability()
     {
         Notify(nameof(CanRefresh)); Notify(nameof(CanUpdateSelection));
+        Notify(nameof(CanUpdateCurrentFiles));
         Notify(nameof(CanCommitSelection)); Notify(nameof(CanCompareSelection)); Notify(nameof(CanGoParent));
     }
 
@@ -214,6 +216,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         using var cancellation = new CancellationTokenSource();
         // A large transfer can legitimately take more than 30 minutes; the user can cancel it.
         operationCancellation = cancellation;
+        var interruptedIndexSession = queuedIndexRead is { Cancellation.IsCancellationRequested: false } ? Session : null;
         try
         {
             // Reads yield to an explicit operation. Wait for their processes to finish before a write.
@@ -240,6 +243,10 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
             operationTime.Stop();
             Notify(nameof(ProgressElapsedText));
             IsBusy = false;
+            // StopBackgroundReadsAsync cancelled queued index maintenance above; requeue it unless
+            // the operation itself refreshed directories, which queues its own update on completion.
+            if (interruptedIndexSession != null && Session == interruptedIndexSession && !disposed)
+                RequeueInterruptedIndexMaintenance();
         }
     }
 
@@ -422,7 +429,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         ShowDirectory(currentRelative, FindNode(currentRelative), directoryCache[currentRelative].Entries);
         NotifyLocation();
         RememberSession();
-        await UpdateSearchIndexAsync(session, token);
+        QueueSearchIndexUpdate(session);
     }
 
     public async Task NavigateAsync(string relative, CancellationToken token)

@@ -7,10 +7,13 @@ namespace SVNRevDesk.Desktop.ViewModels;
 public sealed partial class MainViewModel
 {
     private RepositorySearchIndex? searchIndex;
+    private long searchIndexUpdateVersion;
     private (RepositorySession Session, string Executable, string? User, string? Password, string? Config, string? Template)? searchIdentity;
 
     private void ResetSearchIndex()
     {
+        // A replacement index must not merge its requests into the disposed index's task.
+        queuedIndexRead?.Cancellation.Cancel();
         searchIndex?.Dispose(); searchIndex = null; searchIdentity = null;
     }
 
@@ -50,15 +53,37 @@ public sealed partial class MainViewModel
             ?? throw new InvalidOperationException("此项目已变化或删除，请刷新索引后重试。");
     }
 
-    private async Task UpdateSearchIndexAsync(RepositorySession session, CancellationToken token)
+    private void QueueSearchIndexUpdate(RepositorySession session)
     {
         if (disposed || session != Session || searchIndex == null
             && !RepositorySearchIndex.HasSavedIndex(Settings.CacheDirectory, session, Runner.Username)) return;
         var index = GetSearchIndex();
-        var knownRevision = Snapshot?.Revision;
-        try { await Task.Run(() => index.RefreshAsync(knownRevision: knownRevision, token: token), token); }
-        catch (OperationCanceledException) when (token.IsCancellationRequested) { throw; }
-        catch (Exception ex) { if (!disposed && Session == session) AddLog("搜索索引更新未完成，保留缓存：" + ex.Message); }
+        searchIndexUpdateVersion++;
+        if (queuedIndexRead is { Cancellation.IsCancellationRequested: false }) return;
+        // Index maintenance reconciles the entire working copy, which can be slow on network drives.
+        // Track it as a cancellable read so completed writes release the UI and later writes take priority.
+        _ = StartBackgroundRead("后台更新搜索索引，可继续操作", async token =>
+        {
+            try
+            {
+                // Merge requests while maintenance is running. If a refresh arrives during a pass,
+                // reconcile again with the latest revision instead of queuing another waiting task.
+                long version;
+                do
+                {
+                    token.ThrowIfCancellationRequested();
+                    version = searchIndexUpdateVersion;
+                    var knownRevision = Snapshot?.Revision;
+                    await Task.Run(() => index.RefreshAsync(knownRevision: knownRevision, token: token), token);
+                } while (version != searchIndexUpdateVersion && !disposed && Session == session && searchIndex == index);
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception ex)
+            {
+                if (!disposed && Session == session && searchIndex == index)
+                    AddLog("搜索索引更新未完成，保留缓存：" + ex.Message);
+            }
+        }, navigation: false, reportCompletion: false, indexMaintenance: true);
     }
 
     private async Task UpdateLocalSearchIndexAsync(RepositorySession session, IEnumerable<string> paths)

@@ -255,6 +255,7 @@
         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
           <Button Content="刷新状态" Click="Refresh_Click" IsEnabled="{Binding CanRefresh}" ToolTip="F5：重新检查本地和服务器；不会下载或更新文件" />
           <Button x:Name="UpdateSelectionButton" Content="更新所选" Tag="update" Click="Operation_Click" IsEnabled="{Binding CanUpdateSelection}" ToolTip="下载所选文件或目录的最新版本" />
+          <Button x:Name="UpdateCurrentFilesButton" Content="更新当前层文件" Tag="update-directory-files" Click="Operation_Click" IsEnabled="{Binding CanUpdateCurrentFiles}" ToolTip="将当前目录中的文件更新到服务器最新版本，不更新子目录；无需选择文件，不受列表筛选影响。保留本地修改，冲突留待处理。" />
           <Button x:Name="CommitSelectionButton" Content="提交所选…" Tag="commit" Click="Operation_Click" IsEnabled="{Binding CanCommitSelection}" />
           <Button x:Name="CompareSelectionButton" Content="文件比较" Tag="compare-server" Click="Operation_Click" IsEnabled="{Binding CanCompareSelection}" ToolTip="Ctrl+D：默认用 WinMerge 与服务器比较；目录显示差异摘要" />
         </StackPanel>
@@ -358,7 +359,7 @@
             </DockPanel>
             <DockPanel x:Name="BackgroundReadIndicator" Margin="0,6,0,0" Visibility="{Binding IsReading, Converter={StaticResource BooleanToVisibility}}">
               <ProgressBar DockPanel.Dock="Left" IsIndeterminate="True" Foreground="{StaticResource AccentBrush}" Background="#E3EBF8" BorderThickness="0" Width="38" Height="4" Margin="0,0,8,0" />
-              <TextBlock Text="后台读取中，可继续浏览" ToolTip="{Binding ReadStatusMessage, Converter={StaticResource ToolTipTextConverter}}" Foreground="#356AC4" FontSize="11" />
+              <TextBlock x:Name="BackgroundReadStatus" Text="{Binding ReadStatusMessage}" TextTrimming="CharacterEllipsis" ToolTip="{Binding ReadStatusMessage, Converter={StaticResource ToolTipTextConverter}}" Foreground="#356AC4" FontSize="11" />
             </DockPanel>
           </StackPanel>
         </Border>

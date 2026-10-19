@@ -151,6 +151,8 @@ internal static class DirectoryActionTests
             && !Item(onlineTree.ContextMenu, "commit").IsEnabled && !Item(onlineTree.ContextMenu, "delete").IsEnabled,
             "Online tree menus expose server reads while disabling local writes");
         Console.WriteLine("PASS: scheduled deletion labels/colors/filter/summaries/persistence, tree context targeting without reads, actual Add/Update/scoped refresh, root/deleted/online availability and selection restoration.");
+        await UpdateCompletionTests.RunAsync(output, render);
+        await CurrentFilesUpdateTests.RunAsync(output, render);
 
         ContextMenu OpenMenu(string relative)
         {

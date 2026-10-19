@@ -275,9 +275,12 @@ internal static partial class FileManagementUiTests
         Check((await IndexMatches(index, "created-index")).Single().LocalPath == created, "Application file creation updates the search index immediately");
         await ops.CopyBranchAsync(url + "/docs", url + "/remote-only", "new remote directory", CancellationToken.None);
         await model.RefreshAllInBackgroundAsync();
+        // Index maintenance is queued at the end of the refresh and runs as its own background read.
+        await Until(() => !model.IsReading);
         Check((await IndexMatches(index, "remote-only/report")).Length == 2, "The same full refresh used by the hourly timer updates unbrowsed indexed paths");
         await ops.CopyBranchAsync(url + "/docs", url + "/manual-only", "manual refresh directory", CancellationToken.None);
         await model.RunAsync("Manual refresh", model.RefreshCurrentDirectoryAsync);
+        await Until(() => !model.IsReading);
         Check((await IndexMatches(index, "manual-only/report")).Length == 2, "Manual scoped refresh also updates the complete existing search index");
         Check(!BrowserActionAvailability.CanExecute("batch-rename", model.Session, []) && BrowserActionAvailability.CanExecute("batch-rename", new(url, url, "repo", null), selected) == false,
             "Batch rename is disabled without a local working copy or selected files");

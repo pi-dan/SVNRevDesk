@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 using SVNRevDesk.Core.Models;
 using SVNRevDesk.Core.Svn;
 
@@ -7,6 +8,19 @@ public sealed partial class SvnOperations(SvnRunner runner, string? temporaryDir
 {
     public Task<string> UpdateAsync(string path, bool directory, CancellationToken token) => runner.RunAsync(
         ["update", "--parents", "--set-depth", directory ? "infinity" : "empty", "--accept", "postpone", SvnRunner.Target(path)], token);
+
+    public async Task<string> UpdateDirectoryFilesAsync(string path, CancellationToken token)
+    {
+        // A sparse directory at depth=empty needs to be expanded to files before SVN can
+        // download its immediate children. Existing deeper working copies must keep their
+        // ambient depth, so use a non-depth-changing update in that case.
+        var info = XDocument.Parse(await runner.RunAsync(["info", "--xml", "--depth", "empty", SvnRunner.Target(path)], token));
+        var depth = info.Descendants("depth").SingleOrDefault()?.Value;
+        var arguments = depth == "empty"
+            ? new[] { "update", "--parents", "--set-depth", "files", "--ignore-externals", "--accept", "postpone", SvnRunner.Target(path) }
+            : new[] { "update", "--parents", "--depth", "files", "--ignore-externals", "--accept", "postpone", SvnRunner.Target(path) };
+        return await runner.RunAsync(arguments, token);
+    }
 
     public async Task<string> CheckoutAsync(string url, string directory, bool sparse, CancellationToken token)
     {

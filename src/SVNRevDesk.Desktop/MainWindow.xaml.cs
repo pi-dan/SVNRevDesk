@@ -236,6 +236,7 @@ public partial class MainWindow : Window
         var description = operation switch
         {
             "update" => "更新所选", "update-directory" => "更新当前目录", "checkout" => "检出到本地",
+            "update-directory-files" => "更新当前层文件",
             "update-revision" or "update-directory-revision" => "更新到指定修订号",
             "reverse-merge" or "reverse-merge-directory" => "回滚指定提交",
             "delete" => "删除所选",

@@ -23,7 +23,7 @@ public static class BrowserActionAvailability
             "associate" => !local,
             "branch" => true,
             "log" => selection.All(entry => entry.ServerRevision != null || entry.BaseRevision >= 0),
-            "update-directory" or "commit-directory" or "cleanup" or "directory-diff"
+            "update-directory" or "update-directory-files" or "commit-directory" or "cleanup" or "directory-diff"
                 or "switch" or "merge" or "merge-preview" or "update-directory-revision" or "reverse-merge-directory" => local,
             "update-revision" => selectedLocal && selection.All(entry => entry.BaseRevision != null || entry.ServerRevision != null),
             "reverse-merge" => one?.LocalPath != null && one.ExistsLocally && one.BaseRevision >= 0 && one.State != FileState.Conflict,

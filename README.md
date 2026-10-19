@@ -69,7 +69,7 @@ SVNRevDesk 侧重 SVN 仓库中的日常文件管理，适合管理文档、办�
 | 便携使用 | 内置 SVN 与 WinMerge；设置、缓存、备份和工具存放在程序目录，支持系统托盘。 |
 
 <details>
-<summary>跨目录搜索、历史浏览与批量重命名（开发版）</summary>
+<summary>跨目录搜索、历史浏览与批量重命名（v1.2.0）</summary>
 
 ![跨目录搜索，双击打开或右键定位到所在目录](docs/images/cross-directory-search.png)
 
