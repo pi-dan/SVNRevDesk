@@ -8,11 +8,10 @@
     <Title>SVNRevDesk</Title>
     <Product>SVNRevDesk</Product>
     <Description>SVN 版本工作台</Description>
-    <!-- Stamp each build in China Standard Time so code updates receive a new visible version. -->
-    <BuildTimestamp Condition="'$(BuildTimestamp)' == ''">$([System.DateTime]::UtcNow.AddHours(8).ToString('VyyMMdd.HHmmss'))</BuildTimestamp>
+    <!-- Increment the patch for local iterations; release packaging overrides this with its tag version. -->
+    <Version>1.2.4</Version>
     <Version Condition="'$(ReleaseVersion)' != ''">$(ReleaseVersion)</Version>
-    <InformationalVersion Condition="'$(ReleaseVersion)' == ''">$(BuildTimestamp)</InformationalVersion>
-    <InformationalVersion Condition="'$(ReleaseVersion)' != ''">$(ReleaseVersion)</InformationalVersion>
+    <InformationalVersion>$(Version)</InformationalVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets/AppIcon.ico</ApplicationIcon>

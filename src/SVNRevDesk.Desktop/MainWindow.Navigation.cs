@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -10,6 +12,47 @@ namespace SVNRevDesk.Desktop;
 
 public partial class MainWindow
 {
+    private void CopyCurrentDirectoryAddress_Click(object sender, RoutedEventArgs e)
+    {
+        if (!model.HasSession) return;
+        try
+        {
+            var path = model.CurrentLocalPath;
+            if (path == null || !Directory.Exists(path))
+            {
+                var message = path == null
+                    ? "当前文件夹尚未映射到本地磁盘，请先关联本地工作副本或检出到本地。"
+                    : "当前文件夹的本地目录不存在或无法访问，请先下载该目录或检查磁盘连接。";
+                model.StatusMessage = message;
+                MessageBox.Show(this, message, "复制本地路径", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            Clipboard.SetText(path);
+            model.StatusMessage = "已复制当前目录的本地路径";
+        }
+        catch (Exception ex)
+        {
+            model.StatusMessage = "复制地址未完成，请重试。";
+            model.AddLog("复制当前目录地址失败：" + ex.Message);
+        }
+    }
+
+    private void OpenCurrentDirectory_Click(object sender, RoutedEventArgs e)
+    {
+        if (model.CurrentLocalPath is not { } path) return;
+        try
+        {
+            if (!Directory.Exists(path)) throw new DirectoryNotFoundException("当前目录尚未下载、本地目录已删除或磁盘不可用。");
+            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true })?.Dispose();
+            model.StatusMessage = "已在资源管理器中打开当前目录";
+        }
+        catch (Exception ex)
+        {
+            model.StatusMessage = "打开当前目录未完成：" + ex.Message;
+            model.AddLog(model.StatusMessage);
+        }
+    }
+
     private async void Search_Click(object sender, RoutedEventArgs e)
     {
         if (!model.CanOperate || model.Session == null) return;

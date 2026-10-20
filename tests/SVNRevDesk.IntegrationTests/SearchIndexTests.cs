@@ -9,6 +9,7 @@ internal static class SearchIndexTests
     private sealed class CountingSource(ISearchIndexSource inner) : ISearchIndexSource
     {
         public int RemoteCalls, Lists, LocalCalls;
+        public int LocalFailures;
         public bool Offline;
         private void Remote() { RemoteCalls++; if (Offline) throw new IOException("offline fixture"); }
         public Task<long> ReadRevisionAsync(RepositorySession session, CancellationToken token) { Remote(); return inner.ReadRevisionAsync(session, token); }
@@ -18,7 +19,11 @@ internal static class SearchIndexTests
         public Task<IReadOnlyList<SearchPathChange>> ReadChangesAsync(string url, long from, long to, CancellationToken token)
         { Remote(); return inner.ReadChangesAsync(url, from, to, token); }
         public Task<RepositorySnapshot> ReadLocalAsync(RepositorySession session, DirectoryRefresh scope, CancellationToken token)
-        { LocalCalls++; return inner.ReadLocalAsync(session, scope, token); }
+        {
+            LocalCalls++;
+            if (LocalFailures > 0) { LocalFailures--; throw new IOException("local scan fixture failure"); }
+            return inner.ReadLocalAsync(session, scope, token);
+        }
         public void Dispose() => inner.Dispose();
     }
 
@@ -89,6 +94,39 @@ internal static class SearchIndexTests
         var localSource = new CountingSource(new SvnSearchIndexSource(runner));
         await using var local = new RepositorySearchIndex(session, localSource, cache, ignores);
         await local.RefreshAsync(); var remoteCalls = localSource.RemoteCalls;
+        check(localSource.LocalCalls == 1, "Initial refresh reconciles the complete working copy exactly once");
+        var restartAdded = Path.Combine(wc, "restart-added.txt");
+        File.WriteAllText(restartAdded, "created while the reopened index was closed");
+        var reopenedLocalSource = new CountingSource(new SvnSearchIndexSource(runner));
+        await using (var reopenedLocal = new RepositorySearchIndex(session, reopenedLocalSource, cache, ignores))
+        {
+            await reopenedLocal.RefreshAsync();
+            check(reopenedLocalSource.LocalCalls == 1 && reopenedLocalSource.Lists == 0
+                && (await Search(reopenedLocal, "docs", "report")).Entries.Length == 1
+                && reopenedLocal.FindEntry("restart-added.txt")?.Entry.LocalPath == restartAdded,
+                "Restarting with a saved index reconciles local files once and reuses the server listing");
+            await reopenedLocal.RefreshAsync();
+            check(reopenedLocalSource.LocalCalls == 2,
+                "A later explicit refresh still performs a fresh local reconciliation");
+        }
+        var retrySource = new CountingSource(new SvnSearchIndexSource(runner)) { LocalFailures = 1 };
+        await using (var retryIndex = new RepositorySearchIndex(session, retrySource, cache, ignores))
+        {
+            await retryIndex.RefreshAsync();
+            check(retrySource.LocalCalls == 2 && retryIndex.Status.Error.Length == 0
+                && retryIndex.FindEntry("restart-added.txt")?.Entry.LocalPath == restartAdded,
+                "A failed initial scan is retried instead of reusing an incomplete local snapshot");
+        }
+        var loadSource = new CountingSource(new SvnSearchIndexSource(runner));
+        await using (var loadedIndex = new RepositorySearchIndex(session, loadSource, cache, ignores))
+        {
+            await loadedIndex.LoadAsync();
+            check(loadSource.LocalCalls == 1 && loadedIndex.FindEntry("restart-added.txt") != null,
+                "Standalone cache loading still reconciles local changes for offline searches");
+            await loadedIndex.RefreshAsync();
+            check(loadSource.LocalCalls == 2, "An explicit refresh after standalone loading does not skip reconciliation");
+        }
+        File.Delete(restartAdded);
         var added = Path.Combine(wc, "local-report.txt"); File.WriteAllText(added, "uncommitted");
         await Until(async () => (await Search(local, "", "local-report")).Entries.Length == 1);
         check(localSource.RemoteCalls == remoteCalls, "Filesystem watcher indexes new uncommitted files without checking the server");

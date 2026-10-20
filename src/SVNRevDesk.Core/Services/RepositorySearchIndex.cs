@@ -60,42 +60,47 @@ public sealed partial class RepositorySearchIndex : IDisposable, IAsyncDisposabl
         if (Volatile.Read(ref loaded)) return;
         using var linked = CancellationTokenSource.CreateLinkedTokenSource(stopToken, token);
         await maintenance.WaitAsync(linked.Token);
+        try { await LoadUnderLockAsync(linked.Token); }
+        finally { maintenance.Release(); }
+    }
+
+    // The caller owns maintenance so loading and a first refresh can share one local snapshot.
+    private async Task LoadUnderLockAsync(CancellationToken token)
+    {
+        if (loaded) return;
+        token.ThrowIfCancellationRequested();
         try
         {
-            if (loaded) return;
-            linked.Token.ThrowIfCancellationRequested();
-            try
+            var saved = await store.LoadAsync(token);
+            if (saved != null)
             {
-                var saved = await store.LoadAsync(linked.Token);
-                if (saved != null)
-                {
-                    serverNodes = saved.Nodes.ToDictionary(node => node.RelativePath, StringComparer.Ordinal);
-                    mounts = saved.Mounts; revision = saved.Revision; hasIndex = true;
-                    serverCheckedAt = saved.ServerCheckedAt; localCheckedAt = saved.LocalCheckedAt;
-                    Publish(saved.Entries);
-                }
+                serverNodes = saved.Nodes.ToDictionary(node => node.RelativePath, StringComparer.Ordinal);
+                mounts = saved.Mounts; revision = saved.Revision; hasIndex = true;
+                serverCheckedAt = saved.ServerCheckedAt; localCheckedAt = saved.LocalCheckedAt;
+                Publish(saved.Entries);
             }
-            catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException)
-            { cacheWarning = "缓存不可用，将重新建立索引：" + ex.Message; }
-            StartWatcher();
-            try { await ReadLocalScopesAsync([new("", true)], linked.Token); }
-            catch (Exception ex) when (ex is not OperationCanceledException) { localError = "本地清单核对失败：" + ex.Message; }
-            linked.Token.ThrowIfCancellationRequested();
-            loaded = true;
-            Publish(localKnown || !hasIndex ? Project(serverNodes, mounts) : published!.Entries);
         }
-        finally { maintenance.Release(); }
+        catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException)
+        { cacheWarning = "缓存不可用，将重新建立索引：" + ex.Message; }
+        StartWatcher();
+        try { await ReadLocalScopesAsync([new("", true)], token); }
+        catch (Exception ex) when (ex is not OperationCanceledException) { localError = "本地清单核对失败：" + ex.Message; }
+        token.ThrowIfCancellationRequested();
+        loaded = true;
+        Publish(localKnown || !hasIndex ? Project(serverNodes, mounts) : published!.Entries);
     }
 
     public async Task<SearchIndexStatus> RefreshAsync(bool rebuild = false, long? knownRevision = null, CancellationToken token = default)
     {
-        await LoadAsync(token);
         using var linked = CancellationTokenSource.CreateLinkedTokenSource(stopToken, token);
         await maintenance.WaitAsync(linked.Token);
         try
         {
-            // A complete local reconciliation also detects external SVN operations and missed watcher events.
-            await ReadLocalScopesAsync([new("", true)], linked.Token);
+            var alreadyLoaded = loaded;
+            await LoadUnderLockAsync(linked.Token);
+            // A first load already reconciled the whole working copy. Later refreshes still scan
+            // to detect external SVN operations and missed watcher events; retry a failed initial scan.
+            if (alreadyLoaded || !localKnown) await ReadLocalScopesAsync([new("", true)], linked.Token);
             var nextMounts = FindMounts();
             var head = knownRevision is { } known && known >= revision ? known : await source.ReadRevisionAsync(session, linked.Token);
             var replace = rebuild || !hasIndex || head < revision || !nextMounts.SequenceEqual(mounts);

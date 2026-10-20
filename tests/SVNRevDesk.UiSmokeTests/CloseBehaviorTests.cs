@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -62,8 +61,8 @@ internal static class CloseBehaviorTests
             var notification = (Forms.NotifyIcon)GetField(tray!, "notification")!;
             Check(notification.Visible, "The tray icon is visible as soon as the window opens");
             var version = typeof(MainWindow).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
-            Check(DateTime.TryParseExact(version, "'V'yyMMdd.HHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out _),
-                "The assembly version records the build time to the second");
+            Check(Version.TryParse(version, out var parsedVersion) && parsedVersion.Build >= 0 && parsedVersion.Revision < 0,
+                "The assembly version uses the three-part local or release version");
             Check(((TextBlock)window.FindName("VersionText")).Text == $"版本 {version}"
                 && window.Title == "SVNRevDesk" && notification.Text.Contains(version, StringComparison.Ordinal),
                 "The header and tray tooltip show the embedded version while the window title shows only the app name");

@@ -348,11 +348,23 @@
                 <Button Content="检出到本地…" Tag="checkout" Click="Operation_Click" MinHeight="28" Padding="10,4" FontSize="12" />
               </StackPanel>
               <Grid VerticalAlignment="Center">
-                <Grid.ColumnDefinitions><ColumnDefinition Width="3*" /><ColumnDefinition Width="2*" MaxWidth="340" /></Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="3*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="2*" MaxWidth="340" /></Grid.ColumnDefinitions>
                 <TextBlock x:Name="CurrentRelativePath"
                            ToolTip="{Binding CurrentRelativePathText, Converter={StaticResource ToolTipTextConverter}}"
                            FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="1" Text="{Binding DirectoryCacheText}" Margin="16,0,0,0"
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="6,0,0,0">
+                  <Button x:Name="CopyCurrentDirectoryAddressButton" Click="CopyCurrentDirectoryAddress_Click" IsEnabled="{Binding HasSession}"
+                          Width="28" MinHeight="28" Padding="5" Margin="0" AutomationProperties.Name="复制当前目录的本地路径"
+                          ToolTip="{Binding CurrentLocalPath, StringFormat=复制当前目录的本地路径：{0}, TargetNullValue=当前目录尚未映射到本地磁盘}">
+                    <TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                  </Button>
+                  <Button x:Name="OpenCurrentDirectoryButton" Click="OpenCurrentDirectory_Click" IsEnabled="{Binding CanOpenCurrentDirectory}"
+                          Width="28" MinHeight="28" Padding="5" Margin="4,0,0,0" AutomationProperties.Name="在资源管理器中打开当前目录"
+                          ToolTip="{Binding CurrentLocalPath, StringFormat=在资源管理器中打开当前目录：{0}, TargetNullValue=请先关联或检出到本地}">
+                    <Image Width="16" Height="16" Source="{StaticResource FileIconFolderOpen}" />
+                  </Button>
+                </StackPanel>
+                <TextBlock Grid.Column="2" Text="{Binding DirectoryCacheText}" Margin="12,0,0,0"
                            ToolTip="{Binding DirectoryCacheText, Converter={StaticResource ToolTipTextConverter}}"
                            Foreground="{StaticResource MutedText}" FontSize="11" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
               </Grid>
@@ -393,18 +405,18 @@
             <DataGridTemplateColumn Header="状态" Width="126" SortMemberPath="StateText"><DataGridTemplateColumn.CellTemplate><DataTemplate>
               <Border Style="{StaticResource StateBadge}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource IgnoredSymbolStyle}" /><TextBlock Text="{Binding StateText}" FontSize="12" FontWeight="SemiBold" /></StackPanel></Border>
             </DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+            <DataGridTextColumn Header="服务器修改时间" Binding="{Binding ChangedAtText}" SortMemberPath="ChangedAt" Width="152" />
+            <DataGridTextColumn Header="大小" Binding="{Binding SizeText}" SortMemberPath="Size" Width="90">
+              <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock"><Setter Property="ToolTip" Value="{Binding SizeDetail}" /></Style></DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
             <DataGridTextColumn Header="本地最后修改" Binding="{Binding LocalRevisionText}" SortMemberPath="LocalRevision" Width="112" />
             <DataGridTextColumn Header="服务器最后修改" Binding="{Binding ServerRevisionText}" SortMemberPath="ServerRevision" Width="124" />
             <DataGridTemplateColumn Header="锁定人" Width="90" SortMemberPath="LockOwner"><DataGridTemplateColumn.CellTemplate><DataTemplate>
               <TextBlock Text="{Binding LockOwner}" ToolTip="{Binding LockDetail}" VerticalAlignment="Center" Foreground="#8253B7" />
             </DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
             <DataGridTextColumn Header="目录差异（已检查项）" Binding="{Binding Summary}" Width="195" />
-            <DataGridTextColumn Header="大小" Binding="{Binding SizeText}" SortMemberPath="Size" Width="90">
-              <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock"><Setter Property="ToolTip" Value="{Binding SizeDetail}" /></Style></DataGridTextColumn.ElementStyle>
-            </DataGridTextColumn>
             <DataGridTextColumn Header="提交人" Binding="{Binding Author}" Width="100" />
             <DataGridTextColumn Header="本地基础版本" Binding="{Binding BaseRevisionText}" SortMemberPath="BaseRevision" Width="112" />
-            <DataGridTextColumn Header="服务器修改时间" Binding="{Binding ChangedAtText}" SortMemberPath="ChangedAt" Width="152" />
             <DataGridTextColumn Header="说明" Binding="{Binding Detail}" Width="260" />
           </DataGrid.Columns>
         </DataGrid>

@@ -191,6 +191,7 @@ public sealed partial class MainViewModel
         foreach (var other in AllNodes().Where(other => !other.IsPlaceholder)) other.IsSelected = other == node;
         Notify(nameof(CurrentRelativePathText));
         Notify(nameof(CurrentPath));
+        Notify(nameof(CurrentLocalPath)); Notify(nameof(CanOpenCurrentDirectory));
         Notify(nameof(DirectoryCacheText));
         Notify(nameof(SnapshotText));
         Notify(nameof(CanGoParent));

@@ -100,6 +100,8 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
     public string Address { get => address; set => SetProperty(ref address, value); }
     public string StatusMessage { get => statusMessage; set => SetProperty(ref statusMessage, value); }
     public string CurrentRelative => currentRelative;
+    public string? CurrentLocalPath => Session == null ? null : RepositoryService.GetLocalPath(Session, currentRelative);
+    public bool CanOpenCurrentDirectory => CurrentLocalPath is { } path && Directory.Exists(path);
     public string CurrentRelativePathText => Session == null ? "尚未打开仓库"
         : currentRelative.Length == 0 ? "根目录" : $"根目录 / {currentRelative.Replace("/", " / ")}";
     public string CurrentPath
@@ -572,6 +574,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         UpdatePreview();
         Notify(nameof(CurrentRelativePathText));
         Notify(nameof(CurrentPath)); Notify(nameof(SnapshotText)); Notify(nameof(RecentLocations)); Notify(nameof(DirectoryCacheText));
+        Notify(nameof(CurrentLocalPath)); Notify(nameof(CanOpenCurrentDirectory));
         Notify(nameof(HasSession)); Notify(nameof(IsOnlineOnly));
         NotifyActionAvailability();
         NotifyEntryOverview();
