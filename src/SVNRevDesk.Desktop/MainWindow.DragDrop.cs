@@ -1,8 +1,10 @@
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using SVNRevDesk.Core.Models;
+using SVNRevDesk.Core.Services;
 using SVNRevDesk.Desktop.Services;
 using SVNRevDesk.Desktop.ViewModels;
 
@@ -10,7 +12,11 @@ namespace SVNRevDesk.Desktop;
 
 public partial class MainWindow
 {
+    private const string InternalMoveFormat = "SVNRevDesk.InternalFileMove";
     private FileDragGesture? fileDrag;
+    private string? internalDragToken;
+    private IReadOnlyList<string>? internalDragSources;
+    private RepositorySession? internalDragSession;
 
     private sealed class FileDragGesture(Control browser, BrowserEntry entry, RepositorySession? session, Point start, bool deferSelection)
     {
@@ -77,6 +83,7 @@ public partial class MainWindow
         }
         gesture.Started = true;
         gesture.Preparing = true;
+        var canMove = CanCutFiles(selection);
         e.Handled = true;
         preparingClipboard = true;
         using var cancellation = new CancellationTokenSource();
@@ -91,9 +98,18 @@ public partial class MainWindow
             { model.StatusMessage = "已取消拖出。"; return; }
             if (data == null) return;
             if (Mouse.Captured == this) Mouse.Capture(null);
-            var effect = DragDrop.DoDragDrop(this, data, DragDropEffects.Copy);
-            model.StatusMessage = effect == DragDropEffects.Copy
-                ? $"已拖出 {selection.Count} 项（复制），源文件保留。" : "已取消拖出。";
+            if (canMove && gesture.Session == model.Session)
+            {
+                internalDragToken = Guid.NewGuid().ToString("N");
+                internalDragSources = selection.Select(entry => entry.LocalPath!).ToArray();
+                internalDragSession = gesture.Session;
+                data.SetData(InternalMoveFormat, internalDragToken);
+            }
+            preparingClipboard = false;
+            var effect = DragDrop.DoDragDrop(this, data, canMove ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.Copy);
+            if (effect == DragDropEffects.Copy)
+                model.StatusMessage = $"已拖出 {selection.Count} 项（复制），源文件保留。";
+            else if (effect == DragDropEffects.None) model.StatusMessage = "已取消拖出。";
         }
         catch (OperationCanceledException) { model.StatusMessage = "已取消拖出。"; }
         catch (Exception ex) { MessageBox.Show(this, ex.Message, "拖出未完成", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -101,6 +117,9 @@ public partial class MainWindow
         {
             gesture.Preparing = false;
             fileDrag = null;
+            internalDragToken = null;
+            internalDragSources = null;
+            internalDragSession = null;
             if (Mouse.Captured == this) Mouse.Capture(null);
             preparingClipboard = false;
         }
@@ -158,7 +177,7 @@ public partial class MainWindow
         }
     }
 
-    private string? FileDropDirectory(object sender, DependencyObject? source)
+    private string? FileDropDirectory(object sender, DependencyObject? source, bool requireFolder = false)
     {
         if (FindParent<ScrollBar>(source) != null || FindParent<DataGridColumnHeader>(source) != null) return null;
         if (sender == DirectoryTree)
@@ -167,32 +186,73 @@ public partial class MainWindow
         if (sender != FileGrid && sender != FileCards) return null;
         var entry = sender == FileGrid ? FindParent<DataGridRow>(source)?.Item as BrowserEntry
             : FindParent<ListBoxItem>(source)?.DataContext as BrowserEntry;
-        return entry is { IsDirectory: true } ? entry.RelativePath : model.CurrentRelative;
+        return entry is { IsDirectory: true } ? entry.RelativePath : requireFolder ? null : model.CurrentRelative;
     }
 
-    private string? AllowedFileDropDirectory(object sender, DragEventArgs e)
+    private (string? Relative, DragDropEffects Effect) AllowedFileDrop(object sender, DragEventArgs e)
     {
-        if (preparingClipboard || (e.AllowedEffects & DragDropEffects.Copy) == 0
-            || !e.Data.GetDataPresent(DataFormats.FileDrop)) return null;
+        if (preparingClipboard) return (null, DragDropEffects.None);
+        var internalMove = internalDragToken != null && internalDragSession == model.Session
+            && e.Data.GetData(InternalMoveFormat) is string token && token == internalDragToken;
+        if (internalMove)
+        {
+            if ((e.AllowedEffects & DragDropEffects.Move) == 0 || internalDragSources == null)
+                return (null, DragDropEffects.None);
+            var target = FileDropDirectory(sender, e.OriginalSource as DependencyObject, requireFolder: true);
+            if (target == null || !model.CanCreateInDirectory(target)) return (null, DragDropEffects.None);
+            var directory = RepositoryService.GetLocalPath(model.Session!, target)!;
+            if (internalDragSources.All(source => Path.GetDirectoryName(source)!.Equals(directory, StringComparison.OrdinalIgnoreCase))
+                || internalDragSources.Any(source => Directory.Exists(source) &&
+                    (source.Equals(directory, StringComparison.OrdinalIgnoreCase)
+                    || RepositoryService.IsDescendant(directory, source)))) return (null, DragDropEffects.None);
+            return (target, DragDropEffects.Move);
+        }
+        if ((e.AllowedEffects & DragDropEffects.Copy) == 0 || !e.Data.GetDataPresent(DataFormats.FileDrop))
+            return (null, DragDropEffects.None);
         var relative = FileDropDirectory(sender, e.OriginalSource as DependencyObject);
-        return relative != null && model.CanCreateInDirectory(relative) ? relative : null;
+        return relative != null && model.CanCreateInDirectory(relative)
+            ? (relative, DragDropEffects.Copy) : (null, DragDropEffects.None);
     }
 
     private void FileBrowser_PreviewDragOver(object sender, DragEventArgs e)
     {
         e.Handled = true;
         // Handle preview events so cell text controls cannot consume Explorer's file data.
-        e.Effects = AllowedFileDropDirectory(sender, e) != null ? DragDropEffects.Copy : DragDropEffects.None;
+        e.Effects = AllowedFileDrop(sender, e).Effect;
     }
 
     private async void FileBrowser_PreviewDrop(object sender, DragEventArgs e)
     {
         e.Handled = true;
         e.Effects = DragDropEffects.None;
-        var relative = AllowedFileDropDirectory(sender, e);
+        var (relative, effect) = AllowedFileDrop(sender, e);
         if (relative == null) return;
-        e.Effects = DragDropEffects.Copy;
+        e.Effects = effect;
+        if (effect == DragDropEffects.Move)
+        {
+            var sources = internalDragSources!.ToArray();
+            await MoveDroppedFilesAsync(relative, sources, internalDragSession!);
+            return;
+        }
         // The shared paste flow reads the OLE data before its first await; it never writes the clipboard.
         await PasteFileDataAsync(relative, e.Data, fromDrop: true);
+    }
+
+    private async Task MoveDroppedFilesAsync(string relative, IReadOnlyList<string> sources, RepositorySession session)
+    {
+        if (preparingClipboard || session != model.Session || !model.CanCreateInDirectory(relative)) return;
+        preparingClipboard = true;
+        try
+        {
+            var directory = RepositoryService.GetLocalPath(session, relative)!;
+            await HandleAsync("移动文件", async token =>
+            {
+                var plan = await Task.Run(() => model.Operations.PrepareFileMoveAsync(sources, directory, session.LocalRoot!, token), token);
+                if (session != model.Session) return;
+                var options = new OperationDialogs(this, model).ResolveMoveConflicts(plan);
+                if (options != null) await model.MoveLocalFilesAsync(plan, options, token, stayInCurrentDirectory: true);
+            });
+        }
+        finally { preparingClipboard = false; }
     }
 }

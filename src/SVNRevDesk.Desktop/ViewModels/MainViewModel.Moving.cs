@@ -8,7 +8,8 @@ public sealed partial class MainViewModel
     public Task MoveLocalFilesAsync(FileMovePlan plan, bool skipExisting, CancellationToken token) =>
         MoveLocalFilesAsync(plan, new FileMoveOptions(skipExisting ? FileMoveConflictBehavior.Skip : FileMoveConflictBehavior.Stop), token);
 
-    public async Task MoveLocalFilesAsync(FileMovePlan plan, FileMoveOptions options, CancellationToken token)
+    public async Task MoveLocalFilesAsync(FileMovePlan plan, FileMoveOptions options, CancellationToken token,
+        bool stayInCurrentDirectory = false)
     {
         var session = Session ?? throw new InvalidOperationException("请先打开本地工作副本。");
         if (session.LocalRoot == null || !string.Equals(session.LocalRoot, plan.LocalRoot, StringComparison.OrdinalIgnoreCase)
@@ -42,7 +43,8 @@ public sealed partial class MainViewModel
             try
             {
                 var directories = await Task.Run(() => targets.Where(Directory.Exists).SelectMany(EnumerateMovedDirectories).ToArray());
-                await RefreshLocalTransfersAsync(session, relative, plan.DestinationDirectory, targets, directories, sources);
+                await RefreshLocalTransfersAsync(session, stayInCurrentDirectory ? CurrentRelative : relative,
+                    plan.DestinationDirectory, targets, directories, sources, preserveFilters: stayInCurrentDirectory);
             }
             catch (Exception ex) { AddLog($"移动后本地状态读取失败，请刷新：{ex.Message}"); }
             foreach (var path in sources.Concat(targets)) LocalItemCreationFinished?.Invoke(path);

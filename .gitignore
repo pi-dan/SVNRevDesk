@@ -5,6 +5,7 @@
 *.user
 *.suo
 artifacts/
+AGENTS.md
 
 # Portable application data (may contain local paths or SVN credentials).
 /settings.json

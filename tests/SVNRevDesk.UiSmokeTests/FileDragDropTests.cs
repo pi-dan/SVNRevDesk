@@ -95,6 +95,7 @@ internal static class FileDragDropTests
             "Receiving dropped files leaves the Windows clipboard unchanged");
         await model.BrowseDirectoryAsync("");
         await VerifyConflictsAsync(window, cards, file, local);
+        await VerifyInternalMoveAsync(window, grid, local, Path.GetFileName(secondFile));
         model.ViewMode = originalView;
         Check(!model.IsBusy && ((FrameworkElement)window.FindName("OperationProgress")).Visibility == Visibility.Collapsed,
             "Drop completion ends progress and releases the transfer guard");
@@ -104,7 +105,49 @@ internal static class FileDragDropTests
         var emptyGrid = (DataGrid)emptyWindow.FindName("FileGrid");
         Check(Raise(emptyGrid, emptyGrid, data, DragDrop.PreviewDragOverEvent).Effects == DragDropEffects.None,
             "Files cannot be dropped before a local working copy is opened");
-        Console.WriteLine("PASS: Explorer drag enter/over/drop, list/card/tree destinations, empty surfaces, Copy effect/source retention, conflict overwrite/skip/cancel/backup, busy/text/move-only rejection, clipboard preservation and local refresh.");
+        Console.WriteLine("PASS: Explorer copy drops and internal folder moves, list/card/tree destinations, invalid targets, conflict choices, clipboard preservation and local refresh.");
+    }
+
+    private static async Task VerifyInternalMoveAsync(MainWindow window, DataGrid grid, string local, string name)
+    {
+        var model = (MainViewModel)window.DataContext;
+        model.ViewMode = MainViewModel.DetailsViewName;
+        var source = Path.Combine(local, name);
+        grid.UpdateLayout();
+        var fileRow = (DataGridRow)grid.ItemContainerGenerator.ContainerFromItem(model.Entries.Single(entry => entry.Name == name));
+        var folderRow = (DataGridRow)grid.ItemContainerGenerator.ContainerFromItem(model.Entries.Single(entry => entry.Name == "已有目录"));
+        Check(fileRow != null && folderRow != null, "Internal move source and folder target are realized");
+        var tokenField = typeof(MainWindow).GetField("internalDragToken", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        var sourcesField = typeof(MainWindow).GetField("internalDragSources", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        var sessionField = typeof(MainWindow).GetField("internalDragSession", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        var token = Guid.NewGuid().ToString("N");
+        var data = SVNRevDesk.Desktop.Services.FileClipboard.CreateData([source]);
+        data.SetData("SVNRevDesk.InternalFileMove", token);
+        tokenField.SetValue(window, token);
+        sourcesField.SetValue(window, new[] { source });
+        sessionField.SetValue(window, model.Session);
+        try
+        {
+            Check(Raise(grid, grid, data, DragDrop.PreviewDragOverEvent).Effects == DragDropEffects.None
+                && Raise(grid, fileRow!, data, DragDrop.PreviewDragOverEvent).Effects == DragDropEffects.None,
+                "Internal drags cannot move onto whitespace or a file row");
+            Check(Raise(grid, folderRow!, data, DragDrop.PreviewDragOverEvent).Effects == DragDropEffects.Move,
+                "A folder row advertises Move for an internal drag");
+            await DropAsync(grid, folderRow!, data, window, DragDropEffects.Move);
+            Check(!File.Exists(source) && File.ReadAllText(Path.Combine(local, "已有目录", name)) == "second selected file"
+                && model.CurrentRelative == "" && model.Entries.All(entry => entry.Name != name),
+                "Dropping inside the browser moves the source while keeping the current directory open");
+            await model.BrowseDirectoryAsync("已有目录");
+            Check(model.Entries.Single(entry => entry.Name == name).State == FileState.LocalAdded,
+                "The destination listing is refreshed without a server read");
+            await model.BrowseDirectoryAsync("");
+        }
+        finally
+        {
+            tokenField.SetValue(window, null);
+            sourcesField.SetValue(window, null);
+            sessionField.SetValue(window, null);
+        }
     }
 
     private static async Task VerifyConflictsAsync(MainWindow window, Control surface, string file, string local)
@@ -163,10 +206,11 @@ internal static class FileDragDropTests
         return args;
     }
 
-    private static async Task DropAsync(Control surface, DependencyObject source, IDataObject data, MainWindow window)
+    private static async Task DropAsync(Control surface, DependencyObject source, IDataObject data, MainWindow window,
+        DragDropEffects expected = DragDropEffects.Copy)
     {
-        Check(Raise(surface, source, data, DragDrop.PreviewDropEvent).Effects == DragDropEffects.Copy,
-            "Accepted drops report Copy to the source application");
+        Check(Raise(surface, source, data, DragDrop.PreviewDropEvent).Effects == expected,
+            "Accepted drops report the actual operation to the source application");
         var guard = typeof(MainWindow).GetField("preparingClipboard", BindingFlags.Instance | BindingFlags.NonPublic)!;
         var deadline = DateTime.UtcNow.AddSeconds(20);
         while ((bool)guard.GetValue(window)! && DateTime.UtcNow < deadline) await Task.Delay(25);
