@@ -21,9 +21,9 @@ internal static class Program
     [STAThread]
     private static int Main(string[] args)
     {
-        if (args.Length is not (2 or 3) || (args.Length == 3 && args[2] is not ("--startup-cache" or "--backup-management" or "--window-close" or "--file-preview" or "--file-clipboard" or "--directory-actions" or "--winmerge" or "--ignore" or "--creation" or "--sessions" or "--revision-picker" or "--file-management" or "--text-conflict")))
+        if (args.Length is not (2 or 3) || (args.Length == 3 && args[2] is not ("--open-address" or "--startup-cache" or "--backup-management" or "--window-close" or "--file-preview" or "--file-clipboard" or "--directory-actions" or "--winmerge" or "--ignore" or "--creation" or "--sessions" or "--revision-picker" or "--file-management" or "--text-conflict")))
         {
-            Console.Error.WriteLine("Usage: UiSmokeTests WORKING_COPY OUTPUT_DIRECTORY [--startup-cache|--backup-management|--window-close|--file-preview|--file-clipboard|--directory-actions|--winmerge|--ignore|--creation|--sessions|--revision-picker]");
+            Console.Error.WriteLine("Usage: UiSmokeTests WORKING_COPY OUTPUT_DIRECTORY [--open-address|--startup-cache|--backup-management|--window-close|--file-preview|--file-clipboard|--directory-actions|--winmerge|--ignore|--creation|--sessions|--revision-picker]");
             return 1;
         }
         var output = Path.GetFullPath(args[1]);
@@ -52,6 +52,12 @@ internal static class Program
         {
             try
             {
+                if (args.Length == 3 && args[2] == "--open-address")
+                {
+                    await AddressOpeningTests.RunAsync(output, RenderContent);
+                    if (bindingErrors.ToString().Length > 0) throw new InvalidOperationException("WPF binding errors:\n" + bindingErrors);
+                    return;
+                }
                 if (args.Length == 3 && args[2] == "--text-conflict")
                 {
                     await TextConflictUiTests.RunAsync(output, RenderContent);

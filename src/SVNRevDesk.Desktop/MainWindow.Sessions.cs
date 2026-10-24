@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using SVNRevDesk.Core.Models;
 using SVNRevDesk.Core.Services;
+using SVNRevDesk.Core.Svn;
 using SVNRevDesk.Desktop.Services;
 using SVNRevDesk.Desktop.ViewModels;
 using SVNRevDesk.Desktop.Views;
@@ -110,7 +111,18 @@ public partial class MainWindow
             tab.RefreshTitle();
         }
         tab ??= CreateTab(location, isLocal);
+        var opening = !tab.Model.HasSession;
         await ActivateTabAsync(tab);
+        // Background reads retain caches and log failures. An explicit open also needs a visible
+        // authentication flow, especially on first launch when no SVN credentials are cached.
+        if (opening && tab == activeTab && tab.Model.OpenError is SvnException { IsAuthenticationError: true })
+        {
+            if (AskForSessionCredentials(tab.Model, "仓库需要身份认证。输入账号密码后将自动重试打开。"))
+                await tab.Model.OpenInBackgroundAsync(location, isLocal);
+        }
+        if (opening && tab == activeTab && tab.Model.OpenError is { } error
+            && error is not SvnException { IsAuthenticationError: true })
+            MessageBox.Show(this, error.Message, "打开仓库失败", MessageBoxButton.OK, MessageBoxImage.Warning);
         if (relative != null && tab == activeTab && model.HasSession) await model.BrowseDirectoryAsync(relative);
         PersistWorkspace();
     }

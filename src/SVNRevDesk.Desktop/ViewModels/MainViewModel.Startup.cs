@@ -9,6 +9,7 @@ namespace SVNRevDesk.Desktop.ViewModels;
 public sealed partial class MainViewModel
 {
     private string? sessionCacheDirectory;
+    public Exception? OpenError { get; private set; }
 
     public void UseDedicatedSessionCache(string location, bool isLocal) =>
         sessionCacheDirectory = RepositoryLocation.CacheDirectory(Settings.CacheDirectory, location, isLocal);
@@ -39,6 +40,18 @@ public sealed partial class MainViewModel
     }
 
     private async Task OpenCachedSessionAsync(string location, bool isLocal, string relative,
+        IReadOnlyList<string> expanded, CancellationToken token)
+    {
+        OpenError = null;
+        try { await OpenCachedSessionCoreAsync(location, isLocal, relative, expanded, token); }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            OpenError = ex;
+            throw;
+        }
+    }
+
+    private async Task OpenCachedSessionCoreAsync(string location, bool isLocal, string relative,
         IReadOnlyList<string> expanded, CancellationToken token)
     {
         SavedBrowsingSession? saved = null;

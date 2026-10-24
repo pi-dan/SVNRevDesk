@@ -114,7 +114,7 @@ public sealed partial class MainViewModel
         catch (Exception ex)
         {
             if (reportCompletion && version == readStatusVersion && !disposed)
-                StatusMessage = $"后台读取失败，保留目录缓存：{ex.Message.Split('\n')[0]}";
+                StatusMessage = (HasSession ? "后台读取失败，保留目录缓存：" : "仓库打开失败：") + ex.Message.Split('\n')[0];
             if (!disposed) AddLog(ex.Message);
         }
         finally

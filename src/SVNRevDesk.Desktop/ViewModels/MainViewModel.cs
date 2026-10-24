@@ -125,10 +125,14 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
     private string RefreshIntervalText => Settings.RefreshSeconds >= 3600 && Settings.RefreshSeconds % 3600 == 0
         ? $"{Settings.RefreshSeconds / 3600} 小时"
         : $"{Settings.RefreshSeconds / 60m:0.##} 分钟";
-    public string EmptyStateTitle => !HasSession ? IsReading ? "正在载入仓库…" : "打开仓库，开始浏览" : IsReading ? "正在读取目录…"
+    public string EmptyStateTitle => !HasSession ? IsReading ? "正在载入仓库…"
+        : OpenError is SvnException { IsAuthenticationError: true } ? "仓库需要登录"
+        : OpenError != null ? "仓库打开失败" : "打开仓库，开始浏览" : IsReading ? "正在读取目录…"
         : IsOnlineOnly && DifferencesOnly ? "关联本地后查看差异"
         : Entries.Count == 0 ? "当前目录没有项目" : "没有符合筛选条件的项目";
     public string EmptyStateDescription => !HasSession ? IsReading ? "正在后台读取服务器信息，可取消读取或打开其他仓库。"
+        : OpenError is SvnException { IsAuthenticationError: true } ? "请输入本次会话的账号密码后重新打开地址。可从“文件 → 本次会话登录”设置。"
+        : OpenError != null ? OpenError.Message
         : "选择本地 SVN 工作副本，或输入服务器地址。"
         : IsReading ? "读取在后台进行，可以继续切换目录。"
         : IsOnlineOnly && DifferencesOnly ? "在线浏览尚未检查本地状态。请关联工作副本或关闭“只显示差异”。"

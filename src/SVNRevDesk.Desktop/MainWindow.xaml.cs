@@ -366,18 +366,21 @@ public partial class MainWindow : Window
         return null;
     }
 
-    private void Login_Click(object sender, RoutedEventArgs e)
+    private void Login_Click(object sender, RoutedEventArgs e) => AskForSessionCredentials(model);
+
+    private bool AskForSessionCredentials(MainViewModel target, string explanation = "")
     {
-        var values = InputDialog.Ask(this, "本次会话登录", "账号密码仅保留在本次进程内；密码不写入配置、日志或命令行。留空密码可使用 SVN 已有认证缓存。服务器证书需有效或已由 SVN 信任。",
-            new InputField("用户名", model.Runner.Username ?? ""), new InputField("密码", Password: true));
-        if (values == null) return;
+        var values = InputDialog.Ask(this, "本次会话登录", explanation + "\n账号密码仅保留在本次进程内；密码不写入配置、日志或命令行。留空密码可使用 SVN 已有认证缓存。服务器证书需有效或已由 SVN 信任。",
+            new InputField("用户名", target.Runner.Username ?? ""), new InputField("密码", Password: true));
+        if (values == null) return false;
         if (values[1].Contains('\r') || values[1].Contains('\n'))
         {
-            MessageBox.Show(this, "密码不能包含换行符。", "登录"); return;
+            MessageBox.Show(this, "密码不能包含换行符。", "登录"); return false;
         }
-        model.Runner.Username = values[0];
-        model.Runner.Password = values[1].Length == 0 ? null : values[1];
-        model.StatusMessage = "本次会话凭据已设置，请重新打开仓库或刷新。";
+        target.Runner.Username = values[0];
+        target.Runner.Password = values[1].Length == 0 ? null : values[1];
+        target.StatusMessage = "本次会话凭据已设置，请重新打开仓库或刷新。";
+        return true;
     }
 
     private async void Settings_Click(object sender, RoutedEventArgs e)

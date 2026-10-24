@@ -9,7 +9,7 @@
     <Product>SVNRevDesk</Product>
     <Description>SVN 版本工作台</Description>
     <!-- Increment the patch for local iterations; release packaging overrides this with its tag version. -->
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
     <Version Condition="'$(ReleaseVersion)' != ''">$(ReleaseVersion)</Version>
     <InformationalVersion>$(Version)</InformationalVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
