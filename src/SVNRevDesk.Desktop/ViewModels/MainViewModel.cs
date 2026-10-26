@@ -450,6 +450,21 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         directoryCache.TryGetValue(relative, out var cached);
         // Change the path and clear unrelated rows immediately, before any network await.
         ShowDirectory(relative, existing, cached?.Entries);
+        if (cached?.HasServerListing != true && session.LocalRoot != null)
+        {
+            var generation = cacheGeneration;
+            var localEntries = await Task.Run(() => RepositoryService.ReadLocalDirectory(session, snapshot,
+                relative, cached?.Entries ?? [], hasServerListing: false), token);
+            token.ThrowIfCancellationRequested();
+            if (version != navigationVersion || session != Session || disposed) return;
+            // A concurrent local operation or refresh owns any newer cache contents.
+            if (generation == cacheGeneration)
+            {
+                localEntries = LocalIgnores.Apply(snapshot, localEntries).ToList();
+                directoryCache[relative] = new(snapshot, localEntries) { HasServerListing = false };
+                ShowDirectory(relative, existing, localEntries);
+            }
+        }
         var node = await FindNearestDirectoryAsync(relative, token);
         if (node.RelativePath != relative) throw new InvalidOperationException("所选目录不存在，请刷新后重试。");
         var entries = await ReadCachedDirectoryAsync(session, snapshot, relative, token);

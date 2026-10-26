@@ -19,7 +19,28 @@ internal static class BrowsingTests
         var window = new MainWindow(new UserSettings(Path.Combine(fixture, "settings")), repository);
         using var model = (MainViewModel)window.DataContext;
         await model.RunAsync("Open browsing fixture", token => model.OpenAsync(fixture, true, token));
+        var localFile = Path.Combine(fixture, "alpha", "alpha.txt");
+        File.WriteAllText(localFile, "Already downloaded");
+        var localPause = new ReadPause();
+        repository.RefreshPause = localPause;
+        var localNavigation = model.BrowseDirectoryAsync("alpha");
+        await localPause.Started;
+        var preview = model.Entries.Single();
+        Check(preview.LocalPath == localFile && preview.State == FileState.Unchecked
+            && model.IsReading && model.CanOperate && !model.FindNode("alpha")!.Loaded
+            && BrowserActionAvailability.CanExecute("open", model.Session, [preview])
+            && BrowserActionAvailability.CanExecute("move", model.Session, [preview]),
+            "Downloaded files are available for local operations before even the server status request completes");
+        repository.FailDirectory = "alpha";
+        localPause.Release();
+        await localNavigation;
+        Check(model.Entries.Single().LocalPath == localFile && model.DirectoryCacheText.Contains("本地目录预览")
+            && model.StatusMessage.StartsWith("后台读取失败", StringComparison.Ordinal),
+            "A network failure retains the usable local preview without claiming a complete server cache");
+        repository.FailDirectory = null;
         await model.BrowseDirectoryAsync("alpha");
+        Check(model.Entries.Single().ServerRevision != null && model.FindNode("alpha")!.Loaded,
+            "Revisiting a local preview retries the server and publishes the complete listing");
         await model.BrowseDirectoryAsync("");
         await model.BrowseDirectoryAsync("beta");
         var calls = repository.ReadCount;
@@ -28,12 +49,14 @@ internal static class BrowsingTests
         Check(repository.ReadCount == calls && !model.IsReading, "Repeated navigation uses the cache without a server call");
 
         // Intentionally deliver an old result even after cancellation to verify the publication guard.
+        File.WriteAllText(Path.Combine(fixture, "gamma", "gamma.txt"), "Downloaded before first visit");
         var slow = new ReadPause(ignoreCancellation: true);
         repository.DirectoryPauses["gamma"] = slow;
         var oldNavigation = model.BrowseDirectoryAsync("gamma");
         await slow.Started;
-        Check(model.CurrentRelative == "gamma" && model.Entries.Count == 0 && model.IsReading && !model.IsBusy,
-            "An uncached directory changes path immediately and clears unrelated rows");
+        Check(model.CurrentRelative == "gamma" && model.Entries.Single().Name == "gamma.txt"
+            && model.Entries.Single().State == FileState.Unchecked && model.IsReading && !model.IsBusy,
+            "An uncached directory shows its local files while the server listing is blocked");
         var cachedSwitch = model.BrowseDirectoryAsync("alpha");
         Check(cachedSwitch.IsCompletedSuccessfully && model.CurrentRelative == "alpha" && model.Entries.Single().Name == "alpha.txt",
             "A cached switch completes while an old server request is still blocked");
@@ -89,11 +112,11 @@ internal static class BrowsingTests
         repository.RefreshPause = refreshPause;
         refresh = model.RefreshAllInBackgroundAsync();
         await refreshPause.Started;
-        await model.BrowseDirectoryAsync("gamma");
+        await model.BrowseDirectoryAsync("epsilon");
         var navigatedSnapshot = model.Snapshot;
         refreshPause.Release();
         await refresh;
-        Check(model.CurrentRelative == "gamma" && ReferenceEquals(model.Snapshot, navigatedSnapshot),
+        Check(model.CurrentRelative == "epsilon" && ReferenceEquals(model.Snapshot, navigatedSnapshot),
             "A cancelled refresh cannot publish a late snapshot over a new navigation");
 
         refreshPause = new ReadPause();
@@ -117,7 +140,7 @@ internal static class BrowsingTests
         await refreshPause.Started;
         model.Cancel();
         await refresh;
-        Check(!model.IsReading && model.Entries.Single().Name == "gamma.txt", "Manual cancellation retains the browsed cache");
+        Check(!model.IsReading && model.Entries.Single().Name == "epsilon.txt", "Manual cancellation retains the browsed cache");
 
         await model.BrowseDirectoryAsync("alpha");
         repository.MissingDirectories.Add("alpha");
@@ -273,7 +296,7 @@ internal static class BrowsingTests
             if (FailDirectory == relativePath) throw new IOException("Controlled network failure");
             if (MissingDirectories.Contains(relativePath)) throw new SvnException("list", 1, "E160013: directory removed");
             var names = relativePath.Length == 0
-                ? new[] { "alpha", "beta", "gamma", "delta" }.Where(name => !MissingDirectories.Contains(name))
+                ? new[] { "alpha", "beta", "gamma", "delta", "epsilon" }.Where(name => !MissingDirectories.Contains(name))
                 : [relativePath + ".txt"];
             return names.Select(name => CreateEntry(session, snapshot, relativePath, name)).ToList();
         }

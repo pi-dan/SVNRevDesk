@@ -187,7 +187,11 @@ public sealed partial class MainViewModel
     {
         currentRelative = relative;
         SetEntries(entries ?? []);
-        if (updateChildren && node != null && entries != null) UpdateChildren(node, entries);
+        if (updateChildren && node != null && entries != null)
+        {
+            UpdateChildren(node, entries);
+            if (directoryCache.TryGetValue(relative, out var cached)) node.Loaded = cached.HasServerListing;
+        }
         foreach (var other in AllNodes().Where(other => !other.IsPlaceholder)) other.IsSelected = other == node;
         Notify(nameof(CurrentRelativePathText));
         Notify(nameof(CurrentPath));
