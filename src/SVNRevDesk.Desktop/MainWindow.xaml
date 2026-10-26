@@ -157,7 +157,7 @@
         <MenuItem Header="工作副本与 URL 关联列表…" Click="WorkingCopyLinks_Click" />
         <Separator />
         <MenuItem Header="设置…" Click="Settings_Click" />
-        <MenuItem Header="本次会话登录…" Click="Login_Click" />
+        <MenuItem Header="SVN 登录…" Click="Login_Click" />
         <MenuItem Header="关闭当前仓库会话" InputGestureText="Ctrl+W" Click="CloseSession_Click" />
         <Separator />
         <MenuItem Header="退出软件" Click="Exit_Click" />
@@ -376,7 +376,7 @@
           </StackPanel>
         </Border>
         <DockPanel Grid.Row="1" Margin="0,0,0,10" IsEnabled="{Binding CanOperate}">
-          <Button DockPanel.Dock="Left" Content="↑ 上一级" Click="Parent_Click" IsEnabled="{Binding CanGoParent}" ToolTip="Alt+↑：返回上一级" Margin="0,0,8,0" />
+          <Button DockPanel.Dock="Left" Content="↑ 上一级" Click="Parent_Click" IsEnabled="{Binding CanGoParent}" ToolTip="Backspace / Alt+↑：返回上一级（输入框除外）" Margin="0,0,8,0" />
           <Button x:Name="CrossDirectorySearchButton" DockPanel.Dock="Left" Content="跨目录搜索…" Click="Search_Click" IsEnabled="{Binding HasSession}" Margin="0,0,8,0" ToolTip="Ctrl+Shift+F：通过本地索引查找名称或路径，包含尚未下载的项目" />
           <ComboBox DockPanel.Dock="Right" ItemsSource="{Binding ViewModes}" SelectedItem="{Binding ViewMode}" Width="108" Margin="8,0,0,0" ToolTip="切换详细列表或卡片视图" />
           <ComboBox DockPanel.Dock="Right" ItemsSource="{Binding StateFilters}" SelectedItem="{Binding SelectedState}" Width="142" Margin="8,0,0,0" ToolTip="按状态筛选当前目录" />
@@ -406,17 +406,15 @@
               <Border Style="{StaticResource StateBadge}"><StackPanel Orientation="Horizontal"><TextBlock Style="{StaticResource IgnoredSymbolStyle}" /><TextBlock Text="{Binding StateText}" FontSize="12" FontWeight="SemiBold" /></StackPanel></Border>
             </DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
             <DataGridTextColumn Header="服务器修改时间" Binding="{Binding ChangedAtText}" SortMemberPath="ChangedAt" Width="152" />
+            <DataGridTextColumn Header="提交人" Binding="{Binding Author}" Width="100" />
             <DataGridTextColumn Header="大小" Binding="{Binding SizeText}" SortMemberPath="Size" Width="90">
               <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock"><Setter Property="ToolTip" Value="{Binding SizeDetail}" /></Style></DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
-            <DataGridTextColumn Header="本地最后修改" Binding="{Binding LocalRevisionText}" SortMemberPath="LocalRevision" Width="112" />
             <DataGridTextColumn Header="服务器最后修改" Binding="{Binding ServerRevisionText}" SortMemberPath="ServerRevision" Width="124" />
             <DataGridTemplateColumn Header="锁定人" Width="90" SortMemberPath="LockOwner"><DataGridTemplateColumn.CellTemplate><DataTemplate>
               <TextBlock Text="{Binding LockOwner}" ToolTip="{Binding LockDetail}" VerticalAlignment="Center" Foreground="#8253B7" />
             </DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
             <DataGridTextColumn Header="目录差异（已检查项）" Binding="{Binding Summary}" Width="195" />
-            <DataGridTextColumn Header="提交人" Binding="{Binding Author}" Width="100" />
-            <DataGridTextColumn Header="本地基础版本" Binding="{Binding BaseRevisionText}" SortMemberPath="BaseRevision" Width="112" />
             <DataGridTextColumn Header="说明" Binding="{Binding Detail}" Width="260" />
           </DataGrid.Columns>
         </DataGrid>

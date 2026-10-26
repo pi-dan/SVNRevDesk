@@ -14,11 +14,36 @@ internal static class BrowsingTests
 {
     public static async Task RunAsync(string output, Action<Window, string> render)
     {
+        foreach (var scenario in new[] { "success", "failure", "cancel" })
+        {
+            var local = Path.Combine(output, "local-startup-" + scenario);
+            Directory.CreateDirectory(Path.Combine(local, "alpha"));
+            File.WriteAllText(Path.Combine(local, "alpha", "alpha.txt"), "Downloaded file");
+            var controlled = new ControlledRepository(local);
+            var blocked = new ReadPause();
+            controlled.RefreshPause = blocked;
+            using var startupModel = new MainViewModel(new UserSettings(Path.Combine(local, "settings")), controlled);
+            var restoration = startupModel.RestoreTabInBackgroundAsync(new(local, true, "alpha", []));
+            await blocked.Started;
+            Check(startupModel.CurrentRelative == "alpha" && startupModel.Entries.Single().Name == "alpha.txt"
+                && startupModel.Entries.Single().State == FileState.Unchecked && startupModel.CanOperate
+                && startupModel.DirectoryCacheText.Contains("本地目录预览") && controlled.ReadCount == 0,
+                "Cacheless startup displays usable local files before any remote status or directory listing completes");
+            if (scenario == "failure") controlled.FailDirectory = "";
+            if (scenario == "cancel") startupModel.Cancel();
+            blocked.Release();
+            await restoration;
+            Check(startupModel.CurrentRelative == "alpha" && startupModel.Entries.Single().Name == "alpha.txt"
+                && (scenario == "success" ? startupModel.Entries.Single().ServerRevision != null
+                    : startupModel.DirectoryCacheText.Contains("本地目录预览")),
+                "Startup publishes server results on success and preserves local files on failure or cancellation: " + scenario);
+        }
         var fixture = Path.Combine(output, "browsing-fixture");
         var repository = new ControlledRepository(fixture);
         var window = new MainWindow(new UserSettings(Path.Combine(fixture, "settings")), repository);
         using var model = (MainViewModel)window.DataContext;
         await model.RunAsync("Open browsing fixture", token => model.OpenAsync(fixture, true, token));
+        render(window, Path.Combine(output, "browsing-before-navigation.png"));
         var localFile = Path.Combine(fixture, "alpha", "alpha.txt");
         File.WriteAllText(localFile, "Already downloaded");
         var localPause = new ReadPause();
@@ -26,6 +51,7 @@ internal static class BrowsingTests
         var localNavigation = model.BrowseDirectoryAsync("alpha");
         await localPause.Started;
         var preview = model.Entries.Single();
+        render(window, Path.Combine(output, "browsing-local-preview.png"));
         Check(preview.LocalPath == localFile && preview.State == FileState.Unchecked
             && model.IsReading && model.CanOperate && !model.FindNode("alpha")!.Loaded
             && BrowserActionAvailability.CanExecute("open", model.Session, [preview])
@@ -38,6 +64,17 @@ internal static class BrowsingTests
             && model.StatusMessage.StartsWith("后台读取失败", StringComparison.Ordinal),
             "A network failure retains the usable local preview without claiming a complete server cache");
         repository.FailDirectory = null;
+        var previewGrid = (DataGrid)window.FindName("FileGrid");
+        previewGrid.SelectedItem = model.Entries.Single();
+        var cacheLabelUpdated = false;
+        model.PropertyChanged += (_, args) =>
+        {
+            if (args.PropertyName == nameof(MainViewModel.DirectoryCacheText)) cacheLabelUpdated = true;
+        };
+        await model.ExpandDirectoryAsync(model.FindNode("alpha")!);
+        Check(model.Entries.Single().ServerRevision != null && !model.DirectoryCacheText.Contains("本地目录预览")
+            && cacheLabelUpdated && ((BrowserEntry)previewGrid.SelectedItem).RelativePath == preview.RelativePath,
+            "A tree background read completing the current preview publishes server entries to the file list");
         await model.BrowseDirectoryAsync("alpha");
         Check(model.Entries.Single().ServerRevision != null && model.FindNode("alpha")!.Loaded,
             "Revisiting a local preview retries the server and publishes the complete listing");
@@ -47,6 +84,12 @@ internal static class BrowsingTests
         await model.BrowseDirectoryAsync("alpha");
         await model.BrowseDirectoryAsync("");
         Check(repository.ReadCount == calls && !model.IsReading, "Repeated navigation uses the cache without a server call");
+        Check(model.FindNode("alpha")!.IsExpanded && model.FindNode("beta")!.IsExpanded,
+            "Visited child directories retain their expansion before a tree selection");
+        await model.SelectTreeDirectoryAsync(model.Roots.Single());
+        Check(model.Roots.Single().IsExpanded && model.Roots.Single().Children.All(child => !child.IsExpanded)
+            && repository.ReadCount == calls && model.FindNode("alpha")!.Loaded,
+            "Selecting a tree directory expands only itself and collapses children without discarding caches or querying the server");
 
         // Intentionally deliver an old result even after cancellation to verify the publication guard.
         File.WriteAllText(Path.Combine(fixture, "gamma", "gamma.txt"), "Downloaded before first visit");

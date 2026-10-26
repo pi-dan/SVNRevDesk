@@ -68,15 +68,26 @@ public sealed partial class MainViewModel
         token.ThrowIfCancellationRequested();
 
         RepositorySession? localSession = null;
-        if (saved != null && isLocal)
+        if (isLocal)
         {
             // Local svn info needs no server. A switched or replaced working copy must not reuse old URLs.
             localSession = await FetchSessionAsync(location, true, token);
-            if (!SameRepository(saved.Session, localSession)) saved = null;
+            if (saved != null && !SameRepository(saved.Session, localSession)) saved = null;
         }
         token.ThrowIfCancellationRequested();
         if (saved == null)
         {
+            if (localSession != null)
+            {
+                // Local svn info establishes identity without contacting the server. Build usable
+                // rows before any HEAD/status/list request, including when the disk cache is absent.
+                var preview = await Task.Run(() => CreateLocalStartupPreview(localSession, relative, token), token);
+                token.ThrowIfCancellationRequested();
+                ApplySavedSession(preview, relative, []);
+                StatusMessage = "已显示本地文件，正在后台恢复服务器状态";
+                await RefreshAllAsync(token);
+                return;
+            }
             await OpenAsync(location, isLocal, token);
             await RestoreNavigationAsync(relative, expanded, token);
             return;
@@ -107,6 +118,28 @@ public sealed partial class MainViewModel
         }
         if (verified.LocalRoot != null) Settings.RememberWorkingCopy(verified.LocalRoot, verified.Url, verified.RepositoryId);
         await RefreshAllAsync(token);
+    }
+
+    private static SavedBrowsingSession CreateLocalStartupPreview(RepositorySession session, string relative, CancellationToken token)
+    {
+        if (!IsValidRelativeDirectory(relative)) relative = "";
+        while (relative.Length > 0 && !Directory.Exists(RepositoryService.GetLocalPath(session, relative)))
+            relative = ParentDirectory(relative);
+        var paths = new HashSet<string>(StringComparer.Ordinal) { "", relative };
+        for (var parent = relative; parent.Length > 0;)
+        {
+            parent = ParentDirectory(parent);
+            paths.Add(parent);
+        }
+        var snapshot = new RepositorySnapshot(0, default, new Dictionary<string, WorkingStatus>(), new Dictionary<string, SvnInfo>());
+        var directories = new Dictionary<string, SavedDirectory>(StringComparer.Ordinal);
+        foreach (var path in paths)
+        {
+            token.ThrowIfCancellationRequested();
+            var entries = RepositoryService.ReadLocalDirectory(session, snapshot, path, [], hasServerListing: false);
+            directories[path] = new(0, default, entries, "未检查") { HasServerListing = false };
+        }
+        return new(1, session, snapshot, default, directories);
     }
 
     private void ApplySavedSession(SavedBrowsingSession saved, string relative, IReadOnlyList<string> expanded)
@@ -213,8 +246,14 @@ public sealed partial class MainViewModel
         new BrowsingCacheStore(sessionCacheDirectory ?? Settings.CacheDirectory).Save(new(1, Session, Snapshot, LastFullRefreshAt, directories));
     }
 
-    private Task<RepositorySession> FetchSessionAsync(string location, bool isLocal, CancellationToken token) =>
-        Task.Run(() => isLocal ? repository.OpenWorkingCopyAsync(location, token) : repository.OpenUrlAsync(location, token), token);
+    private async Task<RepositorySession> FetchSessionAsync(string location, bool isLocal, CancellationToken token)
+    {
+        RestoreLogin(location);
+        var session = await Task.Run(() => isLocal ? repository.OpenWorkingCopyAsync(location, token)
+            : repository.OpenUrlAsync(location, token), token);
+        if (isLocal) RestoreLogin(session.Url);
+        return session;
+    }
 
     private static bool SameRepository(RepositorySession left, RepositorySession right) =>
         left.RepositoryId == right.RepositoryId && new Uri(left.Url).Equals(new Uri(right.Url))

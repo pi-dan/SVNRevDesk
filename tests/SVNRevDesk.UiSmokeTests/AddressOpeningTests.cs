@@ -22,10 +22,98 @@ internal static class AddressOpeningTests
 
     public static async Task RunAsync(string output, Action<Window, string, int, int> render)
     {
+        const string savedUrl = "https://example.invalid/svn/test";
+        var credentialsSettings = new UserSettings(Path.Combine(output, "saved-credentials"));
+        var credentials = new SavedCredentials(credentialsSettings.StorageDirectory);
+        credentials.Save(savedUrl, new("saved-user", "saved-secret"));
+        Check(credentials.Load(savedUrl + "/")?.Password == "saved-secret" && credentials.Load(savedUrl + "/other") == null,
+            "Saved credentials round-trip and remain scoped to the repository address");
+        var encrypted = File.ReadAllBytes(Directory.GetFiles(Path.Combine(credentialsSettings.StorageDirectory, "Credentials")).Single());
+        Check(!System.Text.Encoding.UTF8.GetString(encrypted).Contains("saved-secret"), "Saved password is encrypted on disk");
+        using (var restored = new MainViewModel(credentialsSettings, new AuthenticatedRepository(output)))
+        {
+            // The fixture's local mapping resolves to Url, as a real local svn info does.
+            await restored.OpenInBackgroundAsync(output, true);
+            Check(restored.Runner.Username == "saved-user" && restored.Runner.Password == "saved-secret",
+                "Reopening a local working copy restores its URL credentials before the remote read");
+            restored.SetLogin("saved-user", "saved-secret", remember: false);
+        }
+        Check(credentials.Load(savedUrl) == null, "Disabling remember clears the saved credentials");
+        credentials.Save(savedUrl, new("saved-user", "saved-secret"));
+        File.WriteAllBytes(Directory.GetFiles(Path.Combine(credentialsSettings.StorageDirectory, "Credentials")).Single(), [1, 2, 3]);
+        Check(credentials.Load(savedUrl) == null, "Unreadable credentials fall back to login without crashing");
         await VerifyOpenAsync("button", cancel: false, wrongPassword: false, enter: false);
         await VerifyOpenAsync("enter", cancel: false, wrongPassword: false, enter: true);
         await VerifyOpenAsync("cancel", cancel: true, wrongPassword: false, enter: false);
         await VerifyOpenAsync("wrong-password", cancel: false, wrongPassword: true, enter: false);
+        await VerifyLocalLoginAsync(false);
+        await VerifyLocalLoginAsync(true);
+        foreach (var outcome in new[] { "success", "cancel", "wrong" })
+        {
+            var fixture = Path.Combine(output, "background-login-" + outcome);
+            var repository = new AuthenticatedRepository(fixture);
+            using var model = new MainViewModel(new UserSettings(Path.Combine(fixture, "settings")), repository);
+            await model.OpenInBackgroundAsync(fixture, true);
+            repository.RequireRefreshCredentials = true;
+            repository.HasCredentials = () => model.Runner.Username == "test-user" && model.Runner.Password == "test-secret";
+            var prompts = 0;
+            model.RequestBackgroundLogin = () =>
+            {
+                prompts++;
+                model.Runner.Username = "test-user";
+                model.Runner.Password = outcome == "success" ? "test-secret" : "wrong";
+                return outcome != "cancel";
+            };
+            await model.RefreshInBackgroundAsync();
+            Check(prompts == 1 && (outcome == "success" ? model.StatusMessage == "后台刷新完成"
+                : model.StatusMessage.Contains("SVN 认证失败")), "Background authentication prompts once and retries only accepted credentials: " + outcome);
+            await model.RefreshInBackgroundAsync();
+            Check(prompts == 1, "Repeated background failure does not repeatedly prompt: " + outcome);
+        }
+
+        async Task VerifyLocalLoginAsync(bool wrongPassword)
+        {
+            var fixture = Path.Combine(output, wrongPassword ? "local-login-wrong" : "local-login");
+            var repository = new AuthenticatedRepository(fixture);
+            var window = new MainWindow(new UserSettings(Path.Combine(fixture, "settings"))
+                { CloseBehavior = WindowCloseBehavior.Exit, AutoRefresh = false }, repository)
+                { Left = -8000, Top = -8000, ShowActivated = false };
+            typeof(MainWindow).GetField("windowLoaded", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(window, true);
+            using var model = (MainViewModel)window.DataContext;
+            model.RequestBackgroundLogin = null;
+            await model.OpenInBackgroundAsync(fixture, true);
+            repository.RequireRefreshCredentials = true;
+            repository.HasCredentials = () => model.Runner.Username == "test-user" && model.Runner.Password == "test-secret";
+            await model.RefreshInBackgroundAsync();
+            Check(model.StatusMessage.Contains("SVN 认证失败"), "Local cache refresh reports an actionable authentication failure");
+            var previous = model.Snapshot;
+            var prompted = false;
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(30) };
+            timer.Tick += (_, _) =>
+            {
+                var dialog = Application.Current.Windows.OfType<InputDialog>().FirstOrDefault();
+                if (dialog == null || prompted) return;
+                prompted = true;
+                Descendants<TextBox>(dialog).Single().Text = "test-user";
+                Descendants<PasswordBox>(dialog).Single().Password = wrongPassword ? "wrong-secret" : "test-secret";
+                dialog.DialogResult = true;
+            };
+            try
+            {
+                window.Show();
+                timer.Start();
+                typeof(MainWindow).GetMethod("Login_Click", BindingFlags.Instance | BindingFlags.NonPublic)!
+                    .Invoke(window, [window, new RoutedEventArgs()]);
+                await Until(() => prompted && !model.IsReading);
+                if (wrongPassword)
+                    Check(ReferenceEquals(previous, model.Snapshot) && model.StatusMessage.Contains("SVN 认证失败"),
+                        "Rejected manual login preserves the cache and reports failure");
+                else
+                    Check(!ReferenceEquals(previous, model.Snapshot) && model.StatusMessage == "后台刷新完成",
+                        "Manual login automatically validates credentials and refreshes the local working copy without another click");
+            }
+            finally { timer.Stop(); window.Close(); }
+        }
 
         using var failed = new MainViewModel(new UserSettings(Path.Combine(output, "network-error")),
             new AuthenticatedRepository(output) { Failure = new IOException("测试网络不可用") });
@@ -83,7 +171,7 @@ internal static class AddressOpeningTests
                     Check(!model.HasSession && model.EmptyStateTitle == "仓库需要登录" && model.EmptyStateDescription.Contains("账号密码"),
                         "Cancelling or rejecting credentials retains an actionable login message");
                 else
-                    Check(model.Session?.Url == Url && model.Entries.Count == 4 && repository.OpenCount == 2,
+                    Check(model.Session?.Url == Url && model.Entries.Count == 5 && repository.OpenCount == 2,
                         "First open automatically retries with session credentials and displays repository entries");
                 Check(((ListBox)window.FindName("SessionTabs")).Items.Count == 1, "Retry reuses the initial repository tab");
                 render(window, Path.Combine(output, name + "-result.png"), 1360, 780);
@@ -91,7 +179,7 @@ internal static class AddressOpeningTests
             finally { timer.Stop(); window.Close(); }
             var json = File.ReadAllText(Path.Combine(settings.StorageDirectory, "settings.json"));
             Check(!json.Contains("test-secret") && !json.Contains("wrong-secret") && !json.Contains("test-user"),
-                "Authentication retry does not persist session credentials");
+                "Login never writes plaintext credentials to settings.json");
         }
     }
 
@@ -101,6 +189,7 @@ internal static class AddressOpeningTests
         public Func<bool> HasCredentials { get; set; } = () => false;
         public Exception? Failure { get; init; }
         public int OpenCount { get; private set; }
+        public bool RequireRefreshCredentials { get; set; }
         public Task<RepositorySession> OpenUrlAsync(string url, CancellationToken token)
         {
             OpenCount++;
@@ -110,7 +199,11 @@ internal static class AddressOpeningTests
         }
         public Task<RepositorySession> OpenWorkingCopyAsync(string path, CancellationToken token) => inner.OpenWorkingCopyAsync(path, token);
         public Task<RepositorySnapshot> RefreshAsync(RepositorySession session, CancellationToken token) => inner.RefreshAsync(session, token);
-        public Task<RepositorySnapshot> RefreshDirectoryAsync(RepositorySession session, DirectoryRefresh scope, CancellationToken token) => inner.RefreshDirectoryAsync(session, scope, token);
+        public Task<RepositorySnapshot> RefreshDirectoryAsync(RepositorySession session, DirectoryRefresh scope, CancellationToken token)
+        {
+            if (RequireRefreshCredentials && !HasCredentials()) throw new SvnException("info", 1, "E215004: Authentication failed");
+            return inner.RefreshDirectoryAsync(session, scope, token);
+        }
         public Task<IReadOnlyList<BrowserEntry>> ReadDirectoryAsync(RepositorySession session, RepositorySnapshot snapshot, string relative, CancellationToken token) => inner.ReadDirectoryAsync(session, snapshot, relative, token);
     }
 

@@ -70,6 +70,7 @@ $($item.Requirement)
 支持 Windows 10 / 11 x64。将本目录完整解压到可写文件夹后运行 SVNRevDesk.exe。
 首次使用 SVN / WinMerge 时，会自动在程序旁释放 Tools 文件。
 设置、缓存、备份及 SVN 配置保存在程序目录，请在升级时保留。
+记住的登录凭据加密保存在 Credentials 目录，升级时一并保留；仅原 Windows 用户可解密。
 本机忽略规则单独保存在当前 Windows 用户配置中。
 内置 SVN 的文件路径受 Windows 系统代码页限制，英文系统建议使用英文目录和文件名。
 

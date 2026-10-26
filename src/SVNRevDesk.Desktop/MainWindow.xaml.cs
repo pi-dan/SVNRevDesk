@@ -145,7 +145,10 @@ public partial class MainWindow : Window
             e.Handled = true;
             await RefreshInBackgroundAsync();
         }
-        else if (e.SystemKey == Key.Up && Keyboard.Modifiers == ModifierKeys.Alt && model.CanGoParent)
+        else if (model.CanGoParent && (e.SystemKey == Key.Up && Keyboard.Modifiers == ModifierKeys.Alt
+            || e.Key == Key.Back && Keyboard.Modifiers == ModifierKeys.None
+                && FindParent<System.Windows.Controls.Primitives.TextBoxBase>(e.OriginalSource as DependencyObject) == null
+                && FindParent<PasswordBox>(e.OriginalSource as DependencyObject) == null))
         {
             e.Handled = true;
             await model.BrowseDirectoryAsync(model.CurrentRelative.Contains('/')
@@ -255,7 +258,7 @@ public partial class MainWindow : Window
     {
         if (switchingSession || model.IsBusy || model.IsUpdatingTree || selectingDirectoryForMenu || e.NewValue is not DirectoryNode { IsPlaceholder: false } node
             || node.RelativePath == model.CurrentRelative) return;
-        await model.BrowseDirectoryAsync(node.RelativePath);
+        await model.SelectTreeDirectoryAsync(node);
     }
 
     private async void DirectoryTree_Expanded(object sender, RoutedEventArgs e)
@@ -366,20 +369,28 @@ public partial class MainWindow : Window
         return null;
     }
 
-    private void Login_Click(object sender, RoutedEventArgs e) => AskForSessionCredentials(model);
+    private async void Login_Click(object sender, RoutedEventArgs e)
+    {
+        var target = model;
+        if (!AskForSessionCredentials(target, "确认后将使用这些凭据重新读取当前目录。")) return;
+        if (target.HasSession) await target.RefreshInBackgroundAsync();
+    }
 
     private bool AskForSessionCredentials(MainViewModel target, string explanation = "")
     {
-        var values = InputDialog.Ask(this, "本次会话登录", explanation + "\n账号密码仅保留在本次进程内；密码不写入配置、日志或命令行。留空密码可使用 SVN 已有认证缓存。服务器证书需有效或已由 SVN 信任。",
-            new InputField("用户名", target.Runner.Username ?? ""), new InputField("密码", Password: true));
+        var dialog = new InputDialog(this, "SVN 登录", explanation + "\n记住密码后，重启会自动登录。密码使用 Windows 用户加密保存；取消勾选可清除该地址已保存的密码。",
+            new InputField("用户名", target.Runner.Username ?? ""), new InputField("密码", target.Runner.Password ?? "", Password: true));
+        dialog.ShowRememberPassword();
+        var values = dialog.ShowDialog() == true ? dialog.Values : null;
         if (values == null) return false;
         if (values[1].Contains('\r') || values[1].Contains('\n'))
         {
             MessageBox.Show(this, "密码不能包含换行符。", "登录"); return false;
         }
-        target.Runner.Username = values[0];
-        target.Runner.Password = values[1].Length == 0 ? null : values[1];
-        target.StatusMessage = "本次会话凭据已设置，请重新打开仓库或刷新。";
+        try { target.SetLogin(values[0], values[1], dialog.RememberPassword); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.Security.Cryptography.CryptographicException)
+        { MessageBox.Show(this, "无法保存登录信息，请检查程序目录的写入权限。", "登录失败"); return false; }
+        target.StatusMessage = "登录信息已设置，正在准备读取服务器。";
         return true;
     }
 

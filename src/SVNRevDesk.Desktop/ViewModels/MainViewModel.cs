@@ -131,7 +131,7 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         : IsOnlineOnly && DifferencesOnly ? "关联本地后查看差异"
         : Entries.Count == 0 ? "当前目录没有项目" : "没有符合筛选条件的项目";
     public string EmptyStateDescription => !HasSession ? IsReading ? "正在后台读取服务器信息，可取消读取或打开其他仓库。"
-        : OpenError is SvnException { IsAuthenticationError: true } ? "请输入本次会话的账号密码后重新打开地址。可从“文件 → 本次会话登录”设置。"
+        : OpenError is SvnException { IsAuthenticationError: true } ? "请输入本次会话的账号密码后重新打开地址。可从“文件 → SVN 登录”设置。"
         : OpenError != null ? OpenError.Message
         : "选择本地 SVN 工作副本，或输入服务器地址。"
         : IsReading ? "读取在后台进行，可以继续切换目录。"
@@ -458,7 +458,8 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
             token.ThrowIfCancellationRequested();
             if (version != navigationVersion || session != Session || disposed) return;
             // A concurrent local operation or refresh owns any newer cache contents.
-            if (generation == cacheGeneration)
+            if (generation == cacheGeneration
+                && (!directoryCache.TryGetValue(relative, out var latest) || !latest.HasServerListing))
             {
                 localEntries = LocalIgnores.Apply(snapshot, localEntries).ToList();
                 directoryCache[relative] = new(snapshot, localEntries) { HasServerListing = false };

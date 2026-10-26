@@ -1,5 +1,6 @@
 using SVNRevDesk.Core.Models;
 using SVNRevDesk.Core.Services;
+using SVNRevDesk.Core.Svn;
 
 namespace SVNRevDesk.Desktop.ViewModels;
 
@@ -26,6 +27,8 @@ public sealed partial class MainViewModel
     private long navigationVersion;
     private long readStatusVersion;
     private bool disposed;
+    private bool backgroundLoginOffered;
+    public Func<bool>? RequestBackgroundLogin { get; set; }
     public bool IsUpdatingTree { get; private set; }
     public bool IsReading => backgroundReads.Count > 0;
     public string ReadStatusMessage => backgroundReads.LastOrDefault()?.Description ?? "";
@@ -47,6 +50,27 @@ public sealed partial class MainViewModel
         }
         CancelBackgroundReads();
         return StartBackgroundRead("后台读取服务器目录，可继续切换目录", token => NavigateAsync(relative, token), navigation: true);
+    }
+
+    public Task SelectTreeDirectoryAsync(DirectoryNode node)
+    {
+        if (IsBusy || disposed || Session == null || Snapshot == null || node.IsPlaceholder)
+            return Task.CompletedTask;
+        var wasUpdating = IsUpdatingTree;
+        IsUpdatingTree = true;
+        try
+        {
+            // Keep only the selected level open, even if descendants were expanded on an earlier visit.
+            var descendants = new Stack<DirectoryNode>(node.Children);
+            while (descendants.TryPop(out var child))
+            {
+                child.IsExpanded = false;
+                foreach (var descendant in child.Children) descendants.Push(descendant);
+            }
+            node.IsExpanded = true;
+        }
+        finally { IsUpdatingTree = wasUpdating; }
+        return BrowseDirectoryAsync(node.RelativePath);
     }
 
     public Task ExpandDirectoryAsync(DirectoryNode node)
@@ -102,7 +126,21 @@ public sealed partial class MainViewModel
     {
         try
         {
-            await action(read.Cancellation.Token);
+            try
+            {
+                await action(read.Cancellation.Token);
+            }
+            catch (SvnException ex) when (ex.IsAuthenticationError && HasSession
+                && !backgroundLoginOffered && RequestBackgroundLogin != null
+                && version == readStatusVersion && !read.Cancellation.IsCancellationRequested && !disposed)
+            {
+                // Restored tabs retain directory caches but never retain session passwords.
+                // Ask once instead of silently failing each newly visited directory.
+                backgroundLoginOffered = true;
+                if (!RequestBackgroundLogin()) throw;
+                read.Cancellation.Token.ThrowIfCancellationRequested();
+                await action(read.Cancellation.Token);
+            }
             if (reportCompletion && version == readStatusVersion && !disposed && !read.Cancellation.IsCancellationRequested)
                 StatusMessage = read.Navigation ? "目录已载入并缓存" : "后台刷新完成";
         }
@@ -114,7 +152,9 @@ public sealed partial class MainViewModel
         catch (Exception ex)
         {
             if (reportCompletion && version == readStatusVersion && !disposed)
-                StatusMessage = (HasSession ? "后台读取失败，保留目录缓存：" : "仓库打开失败：") + ex.Message.Split('\n')[0];
+                StatusMessage = ex is SvnException { IsAuthenticationError: true }
+                    ? "SVN 认证失败，尚未读取服务器状态。请通过“文件 → SVN 登录”重新输入账号密码；本地文件仍可操作。"
+                    : (HasSession ? "后台读取失败，保留目录缓存：" : "仓库打开失败：") + ex.Message.Split('\n')[0];
             if (!disposed) AddLog(ex.Message);
         }
         finally
@@ -170,6 +210,14 @@ public sealed partial class MainViewModel
             if (generation != cacheGeneration) continue;
             Snapshot = MergeSnapshot(session, Snapshot!, partial, scope);
             directoryCache[relative] = new(snapshot, entries);
+            // Tree expansion can finish a preview independently of its original navigation.
+            // Publish the rows and cache label as well, without navigating or changing selection.
+            if (currentRelative == relative)
+            {
+                SetEntries(entries);
+                Notify(nameof(DirectoryCacheText));
+                Notify(nameof(SnapshotText));
+            }
             return entries;
         }
         return [];

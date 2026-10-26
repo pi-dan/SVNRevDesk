@@ -61,6 +61,8 @@ public partial class MainWindow
 
     private void AttachSessionEvents()
     {
+        model.RequestBackgroundLogin = () => AskForSessionCredentials(model,
+            "服务器认证失败。请输入账号密码；勾选记住密码后可在重启后自动登录。");
         model.Preview.PropertyChanged += SessionPreviewChanged;
         model.EntriesUpdating += CaptureFileSelection;
         model.EntriesUpdated += RestoreFileSelection;
@@ -72,6 +74,7 @@ public partial class MainWindow
 
     private void DetachSessionEvents()
     {
+        model.RequestBackgroundLogin = null;
         model.Preview.PropertyChanged -= SessionPreviewChanged;
         model.EntriesUpdating -= CaptureFileSelection;
         model.EntriesUpdated -= RestoreFileSelection;

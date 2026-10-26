@@ -13,6 +13,7 @@ AGENTS.md
 /Backups/
 /Temp/
 /SvnConfig/
+/Credentials/
 /Tools/
 /local-ignores.json
 *.log

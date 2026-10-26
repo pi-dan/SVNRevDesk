@@ -9,6 +9,9 @@ public sealed record InputField(string Label, string Value = "", bool Multiline 
 public sealed class InputDialog : Window
 {
     private readonly List<Control> inputs = [];
+    private readonly CheckBox remember = new() { Content = "记住密码（仅当前 Windows 用户可解密）", IsChecked = true, Margin = new Thickness(0, 12, 0, 0), Visibility = Visibility.Collapsed };
+    public bool RememberPassword => remember.IsChecked == true;
+    public void ShowRememberPassword() => remember.Visibility = Visibility.Visible;
     public IReadOnlyList<string> Values => inputs.Select(input => input is PasswordBox password ? password.Password : ((TextBox)input).Text).ToList();
 
     public InputDialog(Window owner, string title, string explanation, params InputField[] fields)
@@ -36,6 +39,7 @@ public sealed class InputDialog : Window
         ok.Click += (_, _) => { DialogResult = true; };
         buttons.Children.Add(ok);
         buttons.Children.Add(new Button { Content = "取消", IsCancel = true, MinWidth = 85 });
+        panel.Children.Add(remember);
         panel.Children.Add(buttons);
         Content = new ScrollViewer { Content = panel, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
         Loaded += (_, _) => inputs.FirstOrDefault()?.Focus();
