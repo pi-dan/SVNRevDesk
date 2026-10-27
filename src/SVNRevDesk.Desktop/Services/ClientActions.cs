@@ -246,8 +246,9 @@ public sealed partial class ClientActions(Window owner, MainViewModel model, Act
     {
         var paths = Selected(selection).Select(Local).ToList();
         return Confirm("确认删除", "将删除以下本地文件 / 文件夹，本地文件不会进入回收站。\n\n"
-            + "本地新增项目会先备份到程序的 Backups 目录；未加入版本控制的直接删除，已添加但未提交的会同时取消添加，不影响服务器。\n\n"
-            + "已有版本控制的项目会安排 SVN 删除，服务器内容将在提交后删除。为保护未提交内容，SVN 仍会拒绝删除有本地修改或含未版本控制内容的这类项目。\n\n"
+            + "现有文件内容会先备份到程序的 Backups 目录，再强制删除，包括本地修改、冲突及目录内未加入版本控制的文件。备份不包含 SVN 属性和调度信息。\n\n"
+            + "未加入版本控制的项目直接删除；已添加但未提交的项目取消添加。已有版本控制的项目会安排 SVN 删除，服务器内容将在提交后删除。\n\n"
+            + "未下载项目也可删除：需要连接服务器准备 SVN 信息，文件可能临时下载，文件夹不会下载整棵目录。\n\n"
             + string.Join("\n", paths));
     }
 
@@ -255,7 +256,8 @@ public sealed partial class ClientActions(Window owner, MainViewModel model, Act
     {
         var paths = Selected(selection).Select(Local).ToList();
         model.SetProgressTarget(string.Join("、", paths.Select(Path.GetFileName)));
-        model.AddLog(await Task.Run(() => model.Operations.DeleteSelectedAsync(paths, model.Session!.LocalRoot!, token), token));
+        var serverPaths = selection.Where(entry => entry.ServerRevision != null).Select(Local).ToList();
+        model.AddLog(await Task.Run(() => model.Operations.DeleteSelectedAsync(paths, model.Session!.LocalRoot!, token, serverPaths), token));
         await model.RefreshPathsAsync(paths, token);
     }
 
